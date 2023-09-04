@@ -1,14 +1,14 @@
-//ÎÄ¼şÃû:exp8-10.cpp
-#include "graph.cpp"	//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
-int visited[MAXV];		//È«¾ÖÊı×é
+//æ–‡ä»¶å:exp8-10.cpp
+#include "graph.cpp"	//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
+int visited[MAXV];		//å…¨å±€æ•°ç»„
 void PathAll1(AdjGraph *G,int u,int v,int path[],int d)
-//Êä³öÍ¼GÖĞ´Ó¶¥µãuµ½vµÄËùÓĞ¼òµ¥Â·¾¶
+//è¾“å‡ºå›¾Gä¸­ä»é¡¶ç‚¹uåˆ°vçš„æ‰€æœ‰ç®€å•è·¯å¾„
 {
 	ArcNode *p;
 	int j,w;
-	d++; path[d]=u;						//Â·¾¶³¤¶ÈdÔö1,½«µ±Ç°¶¥µãÌí¼Óµ½Â·¾¶ÖĞ
+	d++; path[d]=u;						//è·¯å¾„é•¿åº¦då¢1,å°†å½“å‰é¡¶ç‚¹æ·»åŠ åˆ°è·¯å¾„ä¸­
 	visited[u]=1;
-	if (u==v && d>0)					//ÕÒµ½ÖÕµã
+	if (u==v && d>0)					//æ‰¾åˆ°ç»ˆç‚¹
 	{
 		for (j=0;j<=d;j++)
 			printf("%3d",path[j]);
@@ -16,24 +16,24 @@ void PathAll1(AdjGraph *G,int u,int v,int path[],int d)
 		visited[u]=0;
 		return;
 	}
-	p=G->adjlist[u].firstarc;  			//pÖ¸Ïò¶¥µãuµÄµÚÒ»¸öÏàÁÚµã
+	p=G->adjlist[u].firstarc;  			//pæŒ‡å‘é¡¶ç‚¹uçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 	while (p!=NULL)
 	{
-		w=p->adjvex;					//wÎªuµÄÏàÁÚµã±àºÅ
-		if (visited[w]==0 ) 			//Èô¸Ã¶¥µãÎ´±ê¼Ç·ÃÎÊ,Ôòµİ¹é·ÃÎÊÖ®
+		w=p->adjvex;					//wä¸ºuçš„ç›¸é‚»ç‚¹ç¼–å·
+		if (visited[w]==0 ) 			//è‹¥è¯¥é¡¶ç‚¹æœªæ ‡è®°è®¿é—®,åˆ™é€’å½’è®¿é—®ä¹‹
 			PathAll1(G,w,v,path,d);
-		p=p->nextarc;					//ÕÒuµÄÏÂÒ»¸öÏàÁÚµã
+		p=p->nextarc;					//æ‰¾uçš„ä¸‹ä¸€ä¸ªç›¸é‚»ç‚¹
 	}
 	visited[u]=0;
 }
 void PathAll2(AdjGraph *G,int u,int v,int l,int path[],int d)
-//Êä³öÍ¼GÖĞ´Ó¶¥µãuµ½vµÄ³¤¶ÈÎªlµÄËùÓĞ¼òµ¥Â·¾¶,dÊÇµ½µ±Ç°ÎªÖ¹ÒÑ×ß¹ıµÄÂ·¾¶³¤¶È,µ÷ÓÃÊ±³õÖµÎª-1
+//è¾“å‡ºå›¾Gä¸­ä»é¡¶ç‚¹uåˆ°vçš„é•¿åº¦ä¸ºlçš„æ‰€æœ‰ç®€å•è·¯å¾„,dæ˜¯åˆ°å½“å‰ä¸ºæ­¢å·²èµ°è¿‡çš„è·¯å¾„é•¿åº¦,è°ƒç”¨æ—¶åˆå€¼ä¸º-1
 {
 	int w,i;
 	ArcNode *p;
 	visited[u]=1;
-	d++; path[d]=u;					//Â·¾¶³¤¶ÈdÔö1,½«µ±Ç°¶¥µãÌí¼Óµ½Â·¾¶ÖĞ
-	if (u==v && d==l)				//Âú×ãÌõ¼ş£¬Êä³öÒ»ÌõÂ·¾¶
+	d++; path[d]=u;					//è·¯å¾„é•¿åº¦då¢1,å°†å½“å‰é¡¶ç‚¹æ·»åŠ åˆ°è·¯å¾„ä¸­
+	if (u==v && d==l)				//æ»¡è¶³æ¡ä»¶ï¼Œè¾“å‡ºä¸€æ¡è·¯å¾„
 	{
 		for (i=0;i<=d;i++)
 			printf("%3d",path[i]);
@@ -41,57 +41,57 @@ void PathAll2(AdjGraph *G,int u,int v,int l,int path[],int d)
 		visited[u]=0;
 		return; 
 	}
-	p=G->adjlist[u].firstarc;  		//pÖ¸Ïò¶¥µãuµÄµÚÒ»¸öÏàÁÚµã
+	p=G->adjlist[u].firstarc;  		//pæŒ‡å‘é¡¶ç‚¹uçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 	while (p!=NULL)
 	{
-		w=p->adjvex;				//wÎª¶¥µãuµÄÏàÁÚµã
-		if (visited[w]==0)			//Èô¸Ã¶¥µãÎ´±ê¼Ç·ÃÎÊ,Ôòµİ¹é·ÃÎÊÖ®
+		w=p->adjvex;				//wä¸ºé¡¶ç‚¹uçš„ç›¸é‚»ç‚¹
+		if (visited[w]==0)			//è‹¥è¯¥é¡¶ç‚¹æœªæ ‡è®°è®¿é—®,åˆ™é€’å½’è®¿é—®ä¹‹
 			PathAll2(G,w,v,l,path,d);
-		p=p->nextarc;				//ÕÒuµÄÏÂÒ»¸öÏàÁÚµã
+		p=p->nextarc;				//æ‰¾uçš„ä¸‹ä¸€ä¸ªç›¸é‚»ç‚¹
 	}
-	visited[u]=0;					//È¡Ïû·ÃÎÊ±ê¼Ç,ÒÔÊ¹¸Ã¶¥µã¿ÉÖØĞÂÊ¹ÓÃ
+	visited[u]=0;					//å–æ¶ˆè®¿é—®æ ‡è®°,ä»¥ä½¿è¯¥é¡¶ç‚¹å¯é‡æ–°ä½¿ç”¨
 }
 int ShortPath(AdjGraph *G,int u,int v,int path[])
-//Çó¶¥µãuµ½¶¥µãv(u¡Ùv)µÄ×î¶ÌÂ·¾¶
+//æ±‚é¡¶ç‚¹uåˆ°é¡¶ç‚¹v(uâ‰ v)çš„æœ€çŸ­è·¯å¾„
 {	struct 
-	{	int vno;						//µ±Ç°¶¥µã±àºÅ
-		int level;					//µ±Ç°¶¥µãµÄ²ã´Î
-		int parent;					//µ±Ç°¶¥µãµÄµ±Ò»¸ö½Úµã±àºÅ
-	} qu[MAXV];						//¶¨ÒåË³Ğò·ÇÑ­»·¶ÓÁĞ
+	{	int vno;						//å½“å‰é¡¶ç‚¹ç¼–å·
+		int level;					//å½“å‰é¡¶ç‚¹çš„å±‚æ¬¡
+		int parent;					//å½“å‰é¡¶ç‚¹çš„å½“ä¸€ä¸ªèŠ‚ç‚¹ç¼–å·
+	} qu[MAXV];						//å®šä¹‰é¡ºåºéå¾ªç¯é˜Ÿåˆ—
 	int front=-1,rear=-1,k,lev,i,j;
 	ArcNode *p;
 	visited[u]=1;
-	rear++;							//¶¥µãuÒÑ·ÃÎÊ,½«ÆäÈë¶Ó
+	rear++;							//é¡¶ç‚¹uå·²è®¿é—®,å°†å…¶å…¥é˜Ÿ
 	qu[rear].vno=u;
-	qu[rear].level=0;					//¸ù½Úµã²ã´ÎÖÃÎª1
+	qu[rear].level=0;					//æ ¹èŠ‚ç‚¹å±‚æ¬¡ç½®ä¸º1
 	qu[rear].parent=-1;
-	while (front<rear)					//¶Ó·Ç¿ÕÔòÖ´ĞĞ
+	while (front<rear)					//é˜Ÿéç©ºåˆ™æ‰§è¡Œ
 	{	front++;
-		k=qu[front].vno;				//³ö¶Ó¶¥µãk
+		k=qu[front].vno;				//å‡ºé˜Ÿé¡¶ç‚¹k
 		lev=qu[front].level;
-		if (k==v) 					//Èô¶¥µãkÎªÖÕµã
-		{	i=0;						//ÔÚ¶ÓÁĞÖĞÇ°ÍÆ´ÓÒ»ÌõÕıÏòÂ·¾¶
-			j=front;					//¸ÃÂ·¾¶´æ·ÅÔÚpathÖĞ
+		if (k==v) 					//è‹¥é¡¶ç‚¹kä¸ºç»ˆç‚¹
+		{	i=0;						//åœ¨é˜Ÿåˆ—ä¸­å‰æ¨ä»ä¸€æ¡æ­£å‘è·¯å¾„
+			j=front;					//è¯¥è·¯å¾„å­˜æ”¾åœ¨pathä¸­
 			while (j!=-1)
-			{	path[lev-i]=qu[j].vno;	//½«×î¶ÌÂ·¾¶´æÈëpathÖĞ
+			{	path[lev-i]=qu[j].vno;	//å°†æœ€çŸ­è·¯å¾„å­˜å…¥pathä¸­
 				j=qu[j].parent;
 				i++;
 			}
-			return lev;				//ÕÒµ½¶¥µãv,·µ»ØÆä²ã´Î
+			return lev;				//æ‰¾åˆ°é¡¶ç‚¹v,è¿”å›å…¶å±‚æ¬¡
 		}
-		p=G->adjlist[k].firstarc;		//pÖ¸Ïò¶¥µãkµÄµÚÒ»¸öÏàÁÚµã           
-		while (p!=NULL)                 	//ÒÀ´ÎËÑË÷kµÄÏàÁÚµã
-		{	if (visited[p->adjvex]==0)  //ÈôÎ´·ÃÎÊ¹ı
+		p=G->adjlist[k].firstarc;		//pæŒ‡å‘é¡¶ç‚¹kçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹           
+		while (p!=NULL)                 	//ä¾æ¬¡æœç´¢kçš„ç›¸é‚»ç‚¹
+		{	if (visited[p->adjvex]==0)  //è‹¥æœªè®¿é—®è¿‡
 			{	visited[p->adjvex]=1;
 				rear++;
-				qu[rear].vno=p->adjvex;	//·ÃÎÊ¹ıµÄÏàÁÚµã½ø¶Ó
+				qu[rear].vno=p->adjvex;	//è®¿é—®è¿‡çš„ç›¸é‚»ç‚¹è¿›é˜Ÿ
 				qu[rear].level=lev+1;
 				qu[rear].parent=front;
 			}
-			p=p->nextarc;				//ÕÒ¶¥µãkµÄÏÂÒ»ÏàÁÚµã
+			p=p->nextarc;				//æ‰¾é¡¶ç‚¹kçš„ä¸‹ä¸€ç›¸é‚»ç‚¹
 		}
 	}
-	return -1;     			//Èç¹ûÎ´ÕÒµ½¶¥µãv,·µ»ØÒ»ÌØÊâÖµ-1
+	return -1;     			//å¦‚æœæœªæ‰¾åˆ°é¡¶ç‚¹v,è¿”å›ä¸€ç‰¹æ®Šå€¼-1
 }
 int main()
 { 
@@ -107,16 +107,16 @@ int main()
 		{0,0,0,1,0,0},
 		{1,1,0,1,1,0}};
 	int n=6, e=10;
-	CreateAdj(G,A,n,e);		//½¨Á¢Í¼8.21µÄÁÚ½Ó±í
-	printf("Í¼GµÄÁÚ½Ó±í:\n"); DispAdj(G);
-	printf("(1)´Ó¶¥µã%dµ½%dµÄËùÓĞÂ·¾¶:\n",u,v);
+	CreateAdj(G,A,n,e);		//å»ºç«‹å›¾8.21çš„é‚»æ¥è¡¨
+	printf("å›¾Gçš„é‚»æ¥è¡¨:\n"); DispAdj(G);
+	printf("(1)ä»é¡¶ç‚¹%dåˆ°%dçš„æ‰€æœ‰è·¯å¾„:\n",u,v);
 	for (i=0;i<n;i++) visited[i]=0;
 	PathAll1(G,u,v,path,-1);
 
-	printf("(2)´Ó¶¥µã%dµ½%dµÄËùÓĞ³¤¶ÈÎª%dÂ·¾¶:\n",u,v,l);
+	printf("(2)ä»é¡¶ç‚¹%dåˆ°%dçš„æ‰€æœ‰é•¿åº¦ä¸º%dè·¯å¾„:\n",u,v,l);
 	PathAll2(G,u,v,l,path,-1);
 
-	printf("(3)´Ó¶¥µã%dµ½%dµÄ×î¶ÌÂ·¾¶:\n",u,v);
+	printf("(3)ä»é¡¶ç‚¹%dåˆ°%dçš„æœ€çŸ­è·¯å¾„:\n",u,v);
 	for (i=0;i<n;i++) visited[i]=0;
 	j=ShortPath(G,u,v,path);
 	for (i=0;i<=j;i++)

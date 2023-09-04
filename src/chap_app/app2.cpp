@@ -2,25 +2,25 @@
 #include<string.h>
 #define N 8
 int grid[N][N];	
-int dx[]={-2,-1,1,2,2,1,-1,-2};			//x·½ÏòµÄÆ«ÒÆÁ¿ 
-int dy[]={1,2,2,1,-1,-2,-2,-1};			//y·½ÏòµÄÆ«ÒÆÁ¿
-bool DFS(int i,int j,int x,int y,int step)	//ËÑË÷(i,j)->(x,y)µÄÂ·¾¶ 
+int dx[]={-2,-1,1,2,2,1,-1,-2};			//xæ–¹å‘çš„åç§»é‡ 
+int dy[]={1,2,2,1,-1,-2,-2,-1};			//yæ–¹å‘çš„åç§»é‡
+bool DFS(int i,int j,int x,int y,int step)	//æœç´¢(i,j)->(x,y)çš„è·¯å¾„ 
 {
 	int ni,nj;
-	if(i==x && j==y)						//ÕÒµ½Ò»ÌõÂ·¾¶ 
+	if(i==x && j==y)						//æ‰¾åˆ°ä¸€æ¡è·¯å¾„ 
 		return true;
 	for(int di=0;di<8;di++)
 	{
-		ni=i+dx[di];						//di·½Î»µÄÏàÁÚ¸ñ×ÓÊÇ(ni,nj) 
+		ni=i+dx[di];						//diæ–¹ä½çš„ç›¸é‚»æ ¼å­æ˜¯(ni,nj) 
 		nj=j+dy[di];
 		if(ni<0 || nj<0 || ni>=N || nj>=N) 
-			continue;						//Èç¹ûÊÇ±ß½çÔò²»¿É×ß
-		if(grid[ni][nj]==0)					//Èç¹ûÕâ¸ö·½Î»¿É×ß
+			continue;						//å¦‚æœæ˜¯è¾¹ç•Œåˆ™ä¸å¯èµ°
+		if(grid[ni][nj]==0)					//å¦‚æœè¿™ä¸ªæ–¹ä½å¯èµ°
 		{
-			grid[ni][nj]=step+1;			//´Ó(i,j)×ßµ½(ni,nj) 
-			if (DFS(ni,nj,x,y,step+1))			//µİ¹éµ÷ÓÃ
+			grid[ni][nj]=step+1;			//ä»(i,j)èµ°åˆ°(ni,nj) 
+			if (DFS(ni,nj,x,y,step+1))			//é€’å½’è°ƒç”¨
 				return true; 
-			grid[ni][nj]=0;					//´Ó(ni,nj)»ØÍË 
+			grid[ni][nj]=0;					//ä»(ni,nj)å›é€€ 
 		}
 	}
 	return false;
@@ -28,25 +28,25 @@ bool DFS(int i,int j,int x,int y,int step)	//ËÑË÷(i,j)->(x,y)µÄÂ·¾¶
 int main()
 {
 	int sx,sy,tx,ty;
-	memset(grid,0,sizeof(grid));			//³õÊ¼Ê±gridËùÓĞÔªËØÎª0 
-	printf("ÊäÈëÆğÊ¼µã£º");
+	memset(grid,0,sizeof(grid));			//åˆå§‹æ—¶gridæ‰€æœ‰å…ƒç´ ä¸º0 
+	printf("è¾“å…¥èµ·å§‹ç‚¹ï¼š");
 	scanf("%d %d", &sx, &sy);
 	if(sx<0 || sx>=N || sy<0 || sy>=N)
 	{
-		printf("  ÆğÊ¼Î»ÖÃ´íÎó!\n");
+		printf("  èµ·å§‹ä½ç½®é”™è¯¯!\n");
 		return 0;
 	}
-	printf("ÊäÈëÖÕÖ¹µã£º");
+	printf("è¾“å…¥ç»ˆæ­¢ç‚¹ï¼š");
 	scanf("%d %d", &tx, &ty);
 	if(tx<0 || tx>=N || ty<0 || ty>=N)
 	{
-		printf("  ÖÕÖ¹Î»ÖÃ´íÎó!\n");
+		printf("  ç»ˆæ­¢ä½ç½®é”™è¯¯!\n");
 		return 0;
 	}
-	printf("\nÇó(%d,%d)->(%d,%d)µÄÂ·¾¶\n",sx,sy,tx,ty);
-	grid[sx][sy]=1;							//(sx,sy)¸ñ×ÓÊÇµÚ1²½ 
+	printf("\næ±‚(%d,%d)->(%d,%d)çš„è·¯å¾„\n",sx,sy,tx,ty);
+	grid[sx][sy]=1;							//(sx,sy)æ ¼å­æ˜¯ç¬¬1æ­¥ 
 	if (DFS(sx,sy,tx,ty,1))
-	{	printf("ÕÒµ½Ò»ÌõÂ·¾¶ÈçÏÂ\n"); 
+	{	printf("æ‰¾åˆ°ä¸€æ¡è·¯å¾„å¦‚ä¸‹\n"); 
 		for(int i=0;i<N;i++)
 		{ 
 			for(int j=0;j<N;j++)
@@ -55,7 +55,7 @@ int main()
 		}
 	}
 	else
-		printf("Ã»ÓĞÕÒµ½ÕâÑùµÄÂ·¾¶\n");
+		printf("æ²¡æœ‰æ‰¾åˆ°è¿™æ ·çš„è·¯å¾„\n");
 	return 1;
 }
 

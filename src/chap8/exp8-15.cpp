@@ -1,27 +1,27 @@
-//ÊµÑéÌâ15
-//ÎÄ¼ş:exp8-15.cpp 
+//å®éªŒé¢˜15
+//æ–‡ä»¶:exp8-15.cpp 
 #include <stdio.h>
 #define MAXV 105
 #define INF 0x3f3f3f3f
 int N,M;
-void Dijkstra(int g[MAXV][MAXV],int v,int dist[MAXV])	//DijkstraËã·¨
+void Dijkstra(int g[MAXV][MAXV],int v,int dist[MAXV])	//Dijkstraç®—æ³•
 {
-	int S[MAXV];					//S[i]=1±íÊ¾¶¥µãiÔÚSÖĞ, S[i]=0±íÊ¾¶¥µãiÔÚUÖĞ
+	int S[MAXV];					//S[i]=1è¡¨ç¤ºé¡¶ç‚¹iåœ¨Sä¸­, S[i]=0è¡¨ç¤ºé¡¶ç‚¹iåœ¨Uä¸­
 	int mindist,i,j,u;
 	for (i=1;i<=N;i++)
-	{	dist[i]=g[v][i];			//¾àÀë³õÊ¼»¯
-		S[i]=0;						//S[]ÖÃ¿Õ
+	{	dist[i]=g[v][i];			//è·ç¦»åˆå§‹åŒ–
+		S[i]=0;						//S[]ç½®ç©º
 	}
-	S[v]=1;							//Ô´µã±àºÅv·ÅÈëSÖĞ
-	for (i=1;i<N;i++)				//Ñ­»·Ö±µ½ËùÓĞ¶¥µãµÄ×î¶ÌÂ·¾¶¶¼Çó³ö
-	{	mindist=INF;				//mindistÖÃ×î´ó³¤¶È³õÖµ
-		for (j=1;j<=N;j++)			//Ñ¡È¡²»ÔÚSÖĞ£¨¼´UÖĞ£©µÄ×îĞ¡¾àÀëµÄ¶¥µãu
+	S[v]=1;							//æºç‚¹ç¼–å·væ”¾å…¥Sä¸­
+	for (i=1;i<N;i++)				//å¾ªç¯ç›´åˆ°æ‰€æœ‰é¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„éƒ½æ±‚å‡º
+	{	mindist=INF;				//mindistç½®æœ€å¤§é•¿åº¦åˆå€¼
+		for (j=1;j<=N;j++)			//é€‰å–ä¸åœ¨Sä¸­ï¼ˆå³Uä¸­ï¼‰çš„æœ€å°è·ç¦»çš„é¡¶ç‚¹u
 			if (S[j]==0 && dist[j]<mindist) 
 			{	u=j;
 				mindist=dist[j];
 			}
-		S[u]=1;						//¶¥µãu¼ÓÈëSÖĞ
-		for (j=1;j<=N;j++)			//ĞŞ¸Ä²»ÔÚSÖĞ£¨¼´UÖĞ£©µÄ¶¥µãµÄ×î¶ÌÂ·¾¶
+		S[u]=1;						//é¡¶ç‚¹uåŠ å…¥Sä¸­
+		for (j=1;j<=N;j++)			//ä¿®æ”¹ä¸åœ¨Sä¸­ï¼ˆå³Uä¸­ï¼‰çš„é¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„
 		{
 			if (S[j]==0)
 				if (g[u][j]<INF && dist[u]+g[u][j]<dist[j])
@@ -29,16 +29,16 @@ void Dijkstra(int g[MAXV][MAXV],int v,int dist[MAXV])	//DijkstraËã·¨
 		}
 	}
 }
-int solve()								//Çó½âËã·¨ 
+int solve()								//æ±‚è§£ç®—æ³• 
 {
-	freopen("data15.txt","r",stdin);	//ÊäÈëÖØ¶¨Ïò 
-	int A[MAXV][MAXV];					//ÕıÏòÁÚ½Ó¾ØÕó
-	int B[MAXV][MAXV];					//·´ÏòÁÚ½Ó¾ØÕó
+	freopen("data15.txt","r",stdin);	//è¾“å…¥é‡å®šå‘ 
+	int A[MAXV][MAXV];					//æ­£å‘é‚»æ¥çŸ©é˜µ
+	int B[MAXV][MAXV];					//åå‘é‚»æ¥çŸ©é˜µ
 	int dist1[MAXV],dist2[MAXV];
 	int a,b,c;
 	scanf("%d%d",&N,&M);
 	printf("N=%d,M=%d\n",N,M);
-	for (int i=1;i<=N;i++)				//³õÊ¼»¯ÁÚ½Ó¾ØÕó 
+	for (int i=1;i<=N;i++)				//åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ 
 		for(int j=1;j<=N;j++)
 		{
 			if(i==j)
@@ -47,17 +47,17 @@ int solve()								//Çó½âËã·¨
 				A[i][j]=B[i][j]=INF;
 		}
 	for(int i=0;i<M;i++)
-	{	scanf("%d%d%d",&a,&b,&c);		//¶ÁÈëÒ»Ìõ±ß<a,b>:c 
+	{	scanf("%d%d%d",&a,&b,&c);		//è¯»å…¥ä¸€æ¡è¾¹<a,b>:c 
 		printf("<%d,%d>:%d\n",a,b,c);
 		A[a][b]=B[b][a]=c;
 	}
 	Dijkstra(A,1,dist1);
-	printf("Çó³ödist1:  [");
+	printf("æ±‚å‡ºdist1:  [");
 	for(int i=2;i<=N;i++)
 		printf("%4d",dist1[i]);
 	printf("]\n");
 	Dijkstra(B,1,dist2);
-	printf("Çó³ödist2:  [");
+	printf("æ±‚å‡ºdist2:  [");
 	for(int i=2;i<=N;i++)
 		printf("%4d",dist2[i]);
 	printf("]\n");

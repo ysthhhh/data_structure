@@ -1,53 +1,53 @@
-//ÎÄ¼şÃû:exp7-12.cpp
-#include "preseq.cpp"				//°üº¬ĞòÁĞ»¯ºÍ·´ĞòÁĞ»¯Ëã·¨
-void GetNext(SqString t,int next[])	//ÓÉÄ£Ê½´®tÇó³önextÖµ
+//æ–‡ä»¶å:exp7-12.cpp
+#include "preseq.cpp"				//åŒ…å«åºåˆ—åŒ–å’Œååºåˆ—åŒ–ç®—æ³•
+void GetNext(SqString t,int next[])	//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextå€¼
 {	int j,k;
 	j=0;k=-1;next[0]=-1;
 	while (j<t.length-1)
-	{	if (k==-1 || t.data[j]==t.data[k]) 	//kÎª-1»ò±È½ÏµÄ×Ö·ûÏàµÈÊ±
+	{	if (k==-1 || t.data[j]==t.data[k]) 	//kä¸º-1æˆ–æ¯”è¾ƒçš„å­—ç¬¦ç›¸ç­‰æ—¶
 		{	j++;k++;
 			next[j]=k;
 		}
 		else  k=next[k];
 	}
 }
-int KMPIndex(SqString s,SqString t)	//KMPËã·¨
+int KMPIndex(SqString s,SqString t)	//KMPç®—æ³•
 {
 	int next[MaxSize],i=0,j=0;
 	GetNext(t,next);
 	while (i<s.length && j<t.length) 
 	{	if (j==-1 || s.data[i]==t.data[j]) 
 		{	i++;
-			j++;				//i,j¸÷Ôö1
+			j++;				//i,jå„å¢1
 		}
-		else j=next[j]; 		//i²»±ä,jºóÍË
+		else j=next[j]; 		//iä¸å˜,jåé€€
 	}
 	if (j>=t.length)
-		return(i-t.length);		//·µ»ØÆ¥ÅäÄ£Ê½´®µÄÊ××Ö·ûÏÂ±ê
+		return(i-t.length);		//è¿”å›åŒ¹é…æ¨¡å¼ä¸²çš„é¦–å­—ç¬¦ä¸‹æ ‡
 	else
-		return(-1);				//·µ»Ø²»Æ¥Åä±êÖ¾
+		return(-1);				//è¿”å›ä¸åŒ¹é…æ ‡å¿—
 }
-bool isSubtree(BTNode *b1,BTNode *b2)	//ÅĞ¶Ïb2ÊÇ·ñÊÇb1µÄ×ÓÊ÷
+bool isSubtree(BTNode *b1,BTNode *b2)	//åˆ¤æ–­b2æ˜¯å¦æ˜¯b1çš„å­æ ‘
 {
-	SqString s1=PreOrderSeq(b1);	//Çób1µÄÏÈĞòĞòÁĞ»¯ĞòÁĞs1
-	SqString s2=PreOrderSeq(b2);	//Çób2µÄÏÈĞòĞòÁĞ»¯ĞòÁĞs2
-	if (KMPIndex(s1,s2)!=-1)		//Èôs2ÊÇs1µÄ×Ó´®£¬·µ»ØÕæ
+	SqString s1=PreOrderSeq(b1);	//æ±‚b1çš„å…ˆåºåºåˆ—åŒ–åºåˆ—s1
+	SqString s2=PreOrderSeq(b2);	//æ±‚b2çš„å…ˆåºåºåˆ—åŒ–åºåˆ—s2
+	if (KMPIndex(s1,s2)!=-1)		//è‹¥s2æ˜¯s1çš„å­ä¸²ï¼Œè¿”å›çœŸ
 		return true;
-	else							//Èôs2²»ÊÇs1µÄ×Ó´®£¬·µ»Ø¼Ù
+	else							//è‹¥s2ä¸æ˜¯s1çš„å­ä¸²ï¼Œè¿”å›å‡
 		return false;
 }
 int main()
 {
 	BTNode *b1,*b2;
 	CreateBTree(b1,"A(B(D,E(,G)),C(,F(H,I)))"); 
-	printf("¶ş²æÊ÷b1:");DispBTree(b1);printf("\n");
+	printf("äºŒå‰æ ‘b1:");DispBTree(b1);printf("\n");
 	CreateBTree(b2,"C(,F(H,I))"); 
-	printf("¶ş²æÊ÷b2:");DispBTree(b2);printf("\n");
+	printf("äºŒå‰æ ‘b2:");DispBTree(b2);printf("\n");
 
 	if (isSubtree(b1,b2))
-		printf("½á¹û£ºb2ÊÇb1µÄ×ÓÊ÷\n");
+		printf("ç»“æœï¼šb2æ˜¯b1çš„å­æ ‘\n");
 	else
-		printf("½á¹û£ºb2²»ÊÇb1µÄ×ÓÊ÷\n");
+		printf("ç»“æœï¼šb2ä¸æ˜¯b1çš„å­æ ‘\n");
 	DestroyBTree(b1); DestroyBTree(b2);
 	return 1;
 }

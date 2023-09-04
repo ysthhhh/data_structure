@@ -1,24 +1,24 @@
-//ÎÄ¼şÃû:exp9-4.cpp
-#include "bst.cpp"		//°üº¬¶ş²æÅÅĞòÊ÷µÄÔËËãËã·¨
+//æ–‡ä»¶å:exp9-4.cpp
+#include "bst.cpp"		//åŒ…å«äºŒå‰æ’åºæ ‘çš„è¿ç®—ç®—æ³•
 int main()
 {
 	BSTNode *bt;
 	int path[MaxSize];
 	KeyType k=6;
 	int a[]={4,9,0,1,8,6,3,5,2,7},n=10;
-	printf("(1)´´½¨Ò»¿ÃBSTÊ÷:");
+	printf("(1)åˆ›å»ºä¸€æ£µBSTæ ‘:");
 	printf("\n");
 	bt=CreateBST(a,n);
 	printf("(2)BST:");DispBST(bt);printf("\n");
-	printf("(3)bt%s\n",(JudgeBST(bt)?"ÊÇÒ»¿ÃBST":"²»ÊÇÒ»¿ÃBST"));
-	printf("(4)²éÕÒ%d¹Ø¼ü×Ö(µİ¹é,Ë³Ğò):",k);SearchBST1(bt,k,path,-1);
-	printf("(5)²éÕÒ%d¹Ø¼ü×Ö(·Çµİ¹é,ÄæĞò):",k);SearchBST2(bt,k);
-	printf("\n(6)É¾³ı²Ù×÷:\n");
-	printf("   Ô­BST:");DispBST(bt);printf("\n");
-	printf("   É¾³ı½Úµã4:");
+	printf("(3)bt%s\n",(JudgeBST(bt)?"æ˜¯ä¸€æ£µBST":"ä¸æ˜¯ä¸€æ£µBST"));
+	printf("(4)æŸ¥æ‰¾%då…³é”®å­—(é€’å½’,é¡ºåº):",k);SearchBST1(bt,k,path,-1);
+	printf("(5)æŸ¥æ‰¾%då…³é”®å­—(éé€’å½’,é€†åº):",k);SearchBST2(bt,k);
+	printf("\n(6)åˆ é™¤æ“ä½œ:\n");
+	printf("   åŸBST:");DispBST(bt);printf("\n");
+	printf("   åˆ é™¤èŠ‚ç‚¹4:");
 	DeleteBST(bt,4); DispBST(bt); printf("\n");
-	printf("   É¾³ı½Úµã5:");
+	printf("   åˆ é™¤èŠ‚ç‚¹5:");
 	DeleteBST(bt,5); DispBST(bt); printf("\n");
-	printf("(7)Ïú»ÙBST\n"); DestroyBST(bt);
+	printf("(7)é”€æ¯BST\n"); DestroyBST(bt);
 	return 1;
 }

@@ -1,13 +1,13 @@
-//ÎÄ¼şÃû:exp8-3.cpp
-#include "graph.cpp"		//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp8-3.cpp
+#include "graph.cpp"		//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
 int visited[MAXV];
 void DFSALL(AdjGraph *G,int v,int path[],int d)  
 {
 	ArcNode *p;
-	visited[v]=1;                   //ÖÃÒÑ·ÃÎÊ±ê¼Ç
+	visited[v]=1;                   //ç½®å·²è®¿é—®æ ‡è®°
 	path[d]=v;
 	d++;
-	if (d==G->n)					//Èç¹ûÒÑ·ÃÎÊËùÓĞ¶¥µã£¬ÔòÊä³ö·ÃÎÊĞòÁĞ
+	if (d==G->n)					//å¦‚æœå·²è®¿é—®æ‰€æœ‰é¡¶ç‚¹ï¼Œåˆ™è¾“å‡ºè®¿é—®åºåˆ—
 	{
 		for (int k=0;k<d;k++)
 			printf("%2d",path[k]);
@@ -15,12 +15,12 @@ void DFSALL(AdjGraph *G,int v,int path[],int d)
 		visited[v]=0;
 		return;		
 	}
-	p=G->adjlist[v].firstarc;      	//pÖ¸Ïò¶¥µãvµÄµÚÒ»¸öÏàÁÚµã
+	p=G->adjlist[v].firstarc;      	//pæŒ‡å‘é¡¶ç‚¹vçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 	while (p!=NULL) 
 	{
-		if (visited[p->adjvex]==0)	//Èôp->adjvex¶¥µãÎ´·ÃÎÊ,µİ¹é·ÃÎÊËü
+		if (visited[p->adjvex]==0)	//è‹¥p->adjvexé¡¶ç‚¹æœªè®¿é—®,é€’å½’è®¿é—®å®ƒ
 			DFSALL(G,p->adjvex,path,d);    
-		p=p->nextarc;              	//ÕÒ¶¥µãvµÄÏÂÒ»¸öÏàÁÚµã
+		p=p->nextarc;              	//æ‰¾é¡¶ç‚¹vçš„ä¸‹ä¸€ä¸ªç›¸é‚»ç‚¹
 	}
 	visited[v]=0;
 }
@@ -33,12 +33,12 @@ int main()
 		{0,1,0,1,1},
 		{1,1,1,0,1},
 		{1,0,1,1,0}};	
-	int n=5,e=8;			//¡¶½Ì³Ì¡·ÖĞÍ¼8.1ÖĞµÄÊı¾İ
+	int n=5,e=8;			//ã€Šæ•™ç¨‹ã€‹ä¸­å›¾8.1ä¸­çš„æ•°æ®
 	CreateAdj(G,A,n,e);
-	printf("Í¼GµÄÁÚ½Ó±í:\n"); DispAdj(G);
+	printf("å›¾Gçš„é‚»æ¥è¡¨:\n"); DispAdj(G);
 	
 	int path[MAXV],v=1;
-	printf("´Ó¶¥µã%d³ö·¢µÄËùÓĞÉî¶ÈÓÅÏÈĞòÁĞ:\n",v);
+	printf("ä»é¡¶ç‚¹%då‡ºå‘çš„æ‰€æœ‰æ·±åº¦ä¼˜å…ˆåºåˆ—:\n",v);
 	DFSALL(G,v,path,0);
 	printf("\n");
 

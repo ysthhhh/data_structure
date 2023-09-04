@@ -1,7 +1,7 @@
-//ÎÄ¼şÃû:exp5-2.cpp
+//æ–‡ä»¶å:exp5-2.cpp
 #include <stdio.h>
 #define MaxSize 100
-int pathnum(int m,int n)		//Çó½â´Ó(m,n)µ½(1,1)µÄÂ·¾¶ÌõÊı
+int pathnum(int m,int n)		//æ±‚è§£ä»(m,n)åˆ°(1,1)çš„è·¯å¾„æ¡æ•°
 {
 	if (m<1 || n<1) return 0;
 	if (m==1 && n==1) return 1;
@@ -10,32 +10,32 @@ int pathnum(int m,int n)		//Çó½â´Ó(m,n)µ½(1,1)µÄÂ·¾¶ÌõÊı
 typedef struct
 {
 	int i,j;
-} PathType;							//Â·¾¶ÔªËØÀàĞÍ
-int count=0;						//Â·¾¶±àºÅ
-void disppath(int m,int n,PathType path[],int d) //Êä³ö´Ó(m,n)µ½(1,1)µÄËùÓĞÂ·¾¶
+} PathType;							//è·¯å¾„å…ƒç´ ç±»å‹
+int count=0;						//è·¯å¾„ç¼–å·
+void disppath(int m,int n,PathType path[],int d) //è¾“å‡ºä»(m,n)åˆ°(1,1)çš„æ‰€æœ‰è·¯å¾„
 {	
 	if (m<1 || n<1) return;
-	if (m==1 && n==1)				//ÕÒµ½Ä¿µÄµØ£¬Êä³öÒ»ÌõÂ·¾¶
+	if (m==1 && n==1)				//æ‰¾åˆ°ç›®çš„åœ°ï¼Œè¾“å‡ºä¸€æ¡è·¯å¾„
 	{
-		d++;						//½«µ±Ç°Î»ÖÃ·ÅÈëpathÖĞ
+		d++;						//å°†å½“å‰ä½ç½®æ”¾å…¥pathä¸­
 		path[d].i=m; path[d].j=n;
-		printf("Â·¾¶%d: ",++count);
+		printf("è·¯å¾„%d: ",++count);
 		for (int k=0;k<=d;k++)
 			printf("(%d,%d) ",path[k].i,path[k].j);
 		printf("\n");
 	}
 	else
 	{
-		d++;						//½«µ±Ç°Î»ÖÃ·ÅÈëpathÖĞ
+		d++;						//å°†å½“å‰ä½ç½®æ”¾å…¥pathä¸­
 		path[d].i=m; path[d].j=n;
-		disppath(m-1,n,path,d);		//ÏòÏÂ×ßÒ»²½
-		disppath(m,n-1,path,d);		//ÍË»ØÀ´£¬ÏòÓÒ×ßÒ»²½
+		disppath(m-1,n,path,d);		//å‘ä¸‹èµ°ä¸€æ­¥
+		disppath(m,n-1,path,d);		//é€€å›æ¥ï¼Œå‘å³èµ°ä¸€æ­¥
 	}
 }
 int main()
 {
 	int m=2,n=5;
-	printf("m=%d,n=%dµÄÂ·¾¶ÌõÊı:%d\n",m,n,pathnum(m,n));
+	printf("m=%d,n=%dçš„è·¯å¾„æ¡æ•°:%d\n",m,n,pathnum(m,n));
 	PathType path[MaxSize];
 	int d=-1;
 	disppath(m,n,path,d);

@@ -1,43 +1,43 @@
-//ÎÄ¼şÃû:exp9-13.cpp
+//æ–‡ä»¶å:exp9-13.cpp
 #include <stdio.h>
-#define MAXL 100					//¶¨Òå±íÖĞ×î¶à¼ÇÂ¼¸öÊı
-typedef int KeyType;				//¶¨Òå¹Ø¼ü×ÖÀàĞÍÎªint
+#define MAXL 100					//å®šä¹‰è¡¨ä¸­æœ€å¤šè®°å½•ä¸ªæ•°
+typedef int KeyType;				//å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºint
 typedef char InfoType;
 typedef struct
-{	KeyType key;					//¹Ø¼ü×ÖÏî
-	InfoType data;					//ÆäËûÊı¾İÏî£¬ÀàĞÍÎªInfoType
-} RecType;							//²éÕÒÔªËØµÄÀàĞÍ
-int FindElem(RecType R[],int n,KeyType k)	//(1)Ğ¡Ìâ¶ÔÓ¦µÄËã·¨
+{	KeyType key;					//å…³é”®å­—é¡¹
+	InfoType data;					//å…¶ä»–æ•°æ®é¡¹ï¼Œç±»å‹ä¸ºInfoType
+} RecType;							//æŸ¥æ‰¾å…ƒç´ çš„ç±»å‹
+int FindElem(RecType R[],int n,KeyType k)	//(1)å°é¢˜å¯¹åº”çš„ç®—æ³•
 {
 	int i=4,j;
 	if (k<R[1].key || k>R[4*n].key) 
-		return 0;				//²»ÔÚ·¶Î§ÄÚ·µ»Ø0
+		return 0;				//ä¸åœ¨èŒƒå›´å†…è¿”å›0
 	while(i<=4*n)
 	{
 		if (R[i].key==k)
-			return i;			//²éÕÒ³É¹¦·µ»Ø
+			return i;			//æŸ¥æ‰¾æˆåŠŸè¿”å›
 		else if (R[i].key<k)
 			i+=4;
-		else					//ÕÒµ½´óÓÚkµÄÎ»ÖÃi
+		else					//æ‰¾åˆ°å¤§äºkçš„ä½ç½®i
 			break;
 	}
 	j=i-3;
 	while (j<i && R[j].key!=k)
-		j++;					//ÔÚR[i-3..i-1]ÖĞ²éÕÒ
-	if (j<i)					//²éÕÒ³É¹¦·µ»Ø
+		j++;					//åœ¨R[i-3..i-1]ä¸­æŸ¥æ‰¾
+	if (j<i)					//æŸ¥æ‰¾æˆåŠŸè¿”å›
 		return j;
 	else
 		return 0;
 }
 
-int ImproveFindElem(RecType R[],int n,KeyType k)	//(2)Ğ¡Ìâ¶ÔÓ¦µÄËã·¨
+int ImproveFindElem(RecType R[],int n,KeyType k)	//(2)å°é¢˜å¯¹åº”çš„ç®—æ³•
 {
 	int low,high,mid;
 	int i,j;
 	if (k<R[1].key || k>R[4*n].key) 
-		return 0;				//²»ÔÚ·¶Î§ÄÚ·µ»Ø0
+		return 0;				//ä¸åœ¨èŒƒå›´å†…è¿”å›0
 	low=4; high=4*n;
-	while (low<=high)			//¶ş·Ö²éÕÒ
+	while (low<=high)			//äºŒåˆ†æŸ¥æ‰¾
 	{		
 		mid=(low+high)/2;
 		if (k<R[mid].key)
@@ -46,14 +46,14 @@ int ImproveFindElem(RecType R[],int n,KeyType k)	//(2)Ğ¡Ìâ¶ÔÓ¦µÄËã·¨
 			low=mid+4;
 		else 
 			return mid;
-	}							//²éÕÒÊ§°ÜÊ±¸ÕºÃÓĞk>R[high].key²¢ÇÒk<=R[high+4].key
+	}							//æŸ¥æ‰¾å¤±è´¥æ—¶åˆšå¥½æœ‰k>R[high].keyå¹¶ä¸”k<=R[high+4].key
 	i=high+4;
 	j=high+1;
 	while (j<i && R[j].key!=k)
-		j++;					//ÔÚR[high+1..high+4]ÖĞ²éÕÒ
-	if (j<i)					//²éÕÒ³É¹¦·µ»Øj
+		j++;					//åœ¨R[high+1..high+4]ä¸­æŸ¥æ‰¾
+	if (j<i)					//æŸ¥æ‰¾æˆåŠŸè¿”å›j
 		return j;
-	else						//²éÕÒ²»³É¹¦·µ»Ø0
+	else						//æŸ¥æ‰¾ä¸æˆåŠŸè¿”å›0
 		return 0;
 }
 
@@ -68,18 +68,18 @@ int main()
 		printf("%3d",R[i].key);
 	printf("\n");
 	KeyType k=8;
-	printf("ÓÃËã·¨(1)²éÕÒ¹Ø¼ü×Ö%d:\n",k);
+	printf("ç”¨ç®—æ³•(1)æŸ¥æ‰¾å…³é”®å­—%d:\n",k);
 	i=FindElem(R,n,k);
 	if (i>=1)
-		printf("  ½á¹û:R[%d]=%d\n",i,k);
+		printf("  ç»“æœ:R[%d]=%d\n",i,k);
 	else
-		printf("  Î´ÕÒµ½%d\n",k);
+		printf("  æœªæ‰¾åˆ°%d\n",k);
 	k=20;
-	printf("ÓÃËã·¨(2)²éÕÒ¹Ø¼ü×Ö%d:\n",k);
+	printf("ç”¨ç®—æ³•(2)æŸ¥æ‰¾å…³é”®å­—%d:\n",k);
 	i=ImproveFindElem(R,n,k);
 	if (i>=1)
-		printf("  ½á¹û:R[%d]=%d\n",i,k);
+		printf("  ç»“æœ:R[%d]=%d\n",i,k);
 	else
-		printf("  Î´ÕÒµ½%d\n",k);
+		printf("  æœªæ‰¾åˆ°%d\n",k);
 	return 1;
 }

@@ -1,24 +1,24 @@
-//ÎÄ¼şÃû:exp4-6.cpp
-#include "sqstring.cpp"				//°üº¬Ë³Ğò´®µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp4-6.cpp
+#include "sqstring.cpp"				//åŒ…å«é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—ç®—æ³•
 
-void GetNext(SqString t,int next[])	//ÓÉÄ£Ê½´®tÇó³önextÖµ
+void GetNext(SqString t,int next[])	//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextå€¼
 {	int j,k;
 	j=0;k=-1;next[0]=-1;
 	while (j<t.length-1)
-	{	if (k==-1 || t.data[j]==t.data[k]) 	//kÎª-1»ò±È½ÏµÄ×Ö·ûÏàµÈÊ±
+	{	if (k==-1 || t.data[j]==t.data[k]) 	//kä¸º-1æˆ–æ¯”è¾ƒçš„å­—ç¬¦ç›¸ç­‰æ—¶
 		{	j++;k++;
 			next[j]=k;
 		}
 		else  k=next[k];
 	}
 }
-void display(SqString s,SqString t,int i,int j) //ÏÔÊ¾Æ¥Åä×´Ì¬
+void display(SqString s,SqString t,int i,int j) //æ˜¾ç¤ºåŒ¹é…çŠ¶æ€
 {
 	int k;
 	printf("  ");
 	for (k=0;k<i;k++)
 		printf("  ");
-	printf("¡ı i=%d,j=%d\n",i,j);
+	printf("â†“ i=%d,j=%d\n",i,j);
 	printf("s:");
 	for (k=0;k<s.length;k++)
 		printf("%c ",s.data[k]);
@@ -33,10 +33,10 @@ void display(SqString s,SqString t,int i,int j) //ÏÔÊ¾Æ¥Åä×´Ì¬
 		printf("  ");
 	for (k=0;k<=j;k++)
 		printf("  ");
-	printf("¡ü\n");
+	printf("â†‘\n");
 
 }
-int Count(SqString s,SqString t)	//ÀûÓÃKMPËã·¨ÇótÔÚsÖĞ³öÏÖµÄ´ÎÊı
+int Count(SqString s,SqString t)	//åˆ©ç”¨KMPç®—æ³•æ±‚tåœ¨sä¸­å‡ºç°çš„æ¬¡æ•°
 {
 	int next[MaxSize],i=0,j=0,count=0;
 	GetNext(t,next);
@@ -46,17 +46,17 @@ int Count(SqString s,SqString t)	//ÀûÓÃKMPËã·¨ÇótÔÚsÖĞ³öÏÖµÄ´ÎÊı
 		if (j==-1 || s.data[i]==t.data[j])
 		{
 			i++;
-			j++;				//i,j¸÷Ôö1
+			j++;				//i,jå„å¢1
 		}
 		else
 		{
-			j=next[j]; 			//i²»±ä,jºóÍË
+			j=next[j]; 			//iä¸å˜,jåé€€
 			display(s,t,i,j);
 		}
 		if (j==t.length)
 		{
 			display(s,t,i,j);
-			printf("\t³É¹¦Æ¥Åä1´Î\n");
+			printf("\tæˆåŠŸåŒ¹é…1æ¬¡\n");
 			count++;
 			j=0;
 		}
@@ -69,7 +69,7 @@ int main()
 	SqString s,t;
 	StrAssign(s,"aaaaa");
 	StrAssign(t,"aa");
-	printf("tÔÚsÖĞ³öÏÖ´ÎÊı:%d\n",Count(s,t));
+	printf("tåœ¨sä¸­å‡ºç°æ¬¡æ•°:%d\n",Count(s,t));
 	DestroyStr(s); DestroyStr(t); 
 	return 1;
 }

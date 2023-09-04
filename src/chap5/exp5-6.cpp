@@ -1,9 +1,9 @@
-//ÎÄ¼þÃû:exp5-6.cpp
-#include "linklist.cpp"		//°üº¬µ¥Á´±íµÄ»ù±¾ÔËËãËã·¨
-LinkNode *kthNode(LinkNode *L,int k,int &i)  //Çóµ¹ÊýµÚk¸ö½Úµã
+//æ–‡ä»¶å:exp5-6.cpp
+#include "linklist.cpp"		//åŒ…å«å•é“¾è¡¨çš„åŸºæœ¬è¿ç®—ç®—æ³•
+LinkNode *kthNode(LinkNode *L,int k,int &i)  //æ±‚å€’æ•°ç¬¬kä¸ªèŠ‚ç‚¹
 {
 	LinkNode *p;
-    if(L==NULL) return NULL;	//¿Õ±í·µ»ØNULL
+    if(L==NULL) return NULL;	//ç©ºè¡¨è¿”å›žNULL
 	p=kthNode(L->next,k,i);
 	i++;
 	if (i==k) return L;
@@ -19,9 +19,9 @@ int main()
 	printf("L:"); DispList(L);
 	p=kthNode(L->next,k,i);
 	if (p!=NULL)
-		printf("µ¹ÊýµÚ%d¸ö½Úµã:%c\n",k,p->data);
+		printf("å€’æ•°ç¬¬%dä¸ªèŠ‚ç‚¹:%c\n",k,p->data);
 	else
-		printf("Ã»ÓÐÕÒµ½\n");
+		printf("æ²¡æœ‰æ‰¾åˆ°\n");
 	DestroyList(L);
 	return 1;
 }

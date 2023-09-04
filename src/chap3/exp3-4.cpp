@@ -1,33 +1,33 @@
-//ÎÄ¼şÃû:exp3-4.cpp
-#include "liqueue.cpp"		//°üº¬Á´¶ÓµÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp3-4.cpp
+#include "liqueue.cpp"		//åŒ…å«é“¾é˜Ÿçš„åŸºæœ¬è¿ç®—ç®—æ³•
 
 int main()
 {
 	ElemType e;
 	LinkQuNode *q;
-	printf("Á´¶ÓµÄ»ù±¾ÔËËãÈçÏÂ:\n");
-	printf("  (1)³õÊ¼»¯Á´¶Óq\n");
+	printf("é“¾é˜Ÿçš„åŸºæœ¬è¿ç®—å¦‚ä¸‹:\n");
+	printf("  (1)åˆå§‹åŒ–é“¾é˜Ÿq\n");
 	InitQueue(q);
-	printf("  (2)ÒÀ´Î½øÁ´¶ÓÔªËØa,b,c\n");
+	printf("  (2)ä¾æ¬¡è¿›é“¾é˜Ÿå…ƒç´ a,b,c\n");
 	enQueue(q,'a');
 	enQueue(q,'b');
 	enQueue(q,'c');
-	printf("  (3)Á´¶ÓÎª%s\n",(QueueEmpty(q)?"¿Õ":"·Ç¿Õ"));
+	printf("  (3)é“¾é˜Ÿä¸º%s\n",(QueueEmpty(q)?"ç©º":"éç©º"));
 	if (deQueue(q,e)==0) 
-		printf("\tÌáÊ¾:¶Ó¿Õ,²»ÄÜ³ö¶Ó\n");
+		printf("\tæç¤º:é˜Ÿç©º,ä¸èƒ½å‡ºé˜Ÿ\n");
 	else
-		printf("  (4)³ö¶ÓÒ»¸öÔªËØ%c\n",e);
-	printf("  (5)ÒÀ´Î½øÁ´¶ÓÔªËØd,e,f\n");
+		printf("  (4)å‡ºé˜Ÿä¸€ä¸ªå…ƒç´ %c\n",e);
+	printf("  (5)ä¾æ¬¡è¿›é“¾é˜Ÿå…ƒç´ d,e,f\n");
 	enQueue(q,'d');
 	enQueue(q,'e');
 	enQueue(q,'f');
-	printf("  (6)³öÁ´¶ÓĞòÁĞ:");
+	printf("  (6)å‡ºé“¾é˜Ÿåºåˆ—:");
 	while (!QueueEmpty(q))
 	{	deQueue(q,e);
 		printf("%c ",e);
 	}
 	printf("\n");
-	printf("  (7)ÊÍ·ÅÁ´¶Ó\n");
+	printf("  (7)é‡Šæ”¾é“¾é˜Ÿ\n");
 	DestroyQueue(q);
 	return 1;
 }

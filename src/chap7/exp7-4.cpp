@@ -1,31 +1,31 @@
-//ÎÄ¼şÃû:exp7-4.cpp
+//æ–‡ä»¶å:exp7-4.cpp
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
 typedef char ElemType;
 typedef struct node
 {	ElemType data;
-	int ltag,rtag;			//Ôö¼ÓµÄÏßË÷±ê¼Ç
-	struct node *lchild;	//×óº¢×ÓÖ¸Õë
-	struct node *rchild;	//ÓÒº¢×ÓÖ¸Õë
+	int ltag,rtag;			//å¢åŠ çš„çº¿ç´¢æ ‡è®°
+	struct node *lchild;	//å·¦å­©å­æŒ‡é’ˆ
+	struct node *rchild;	//å³å­©å­æŒ‡é’ˆ
 } TBTNode;
-void CreateTBTree(TBTNode * &b,char *str)	//ÓÉstr´®½¨Á¢º¬¿ÕÏßË÷ÓòµÄ¶ş²æÁ´b
+void CreateTBTree(TBTNode * &b,char *str)	//ç”±strä¸²å»ºç«‹å«ç©ºçº¿ç´¢åŸŸçš„äºŒå‰é“¾b
 {	TBTNode *St[MaxSize],*p=NULL;
 	int top=-1,k,j=0;  
 	char ch;
-	b=NULL;				//½¨Á¢µÄ¶ş²æÊ÷³õÊ¼Ê±Îª¿Õ
+	b=NULL;				//å»ºç«‹çš„äºŒå‰æ ‘åˆå§‹æ—¶ä¸ºç©º
 	ch=str[j];
-	while (ch!='\0')	//strÎ´É¨ÃèÍêÊ±Ñ­»·
+	while (ch!='\0')	//stræœªæ‰«æå®Œæ—¶å¾ªç¯
 	{	switch(ch) 
 		{
-		case '(':top++;St[top]=p;k=1; break;		//Îª×ó½áµã
+		case '(':top++;St[top]=p;k=1; break;		//ä¸ºå·¦ç»“ç‚¹
 		case ')':top--;break;
-		case ',':k=2; break;					//ÎªÓÒ½áµã
+		case ',':k=2; break;					//ä¸ºå³ç»“ç‚¹
 		default:p=(TBTNode *)malloc(sizeof(TBTNode));
 				p->data=ch;p->lchild=p->rchild=NULL;
-				if (b==NULL)					//pÎª¶ş²æÊ÷µÄ¸ù½áµã
+				if (b==NULL)					//pä¸ºäºŒå‰æ ‘çš„æ ¹ç»“ç‚¹
 					b=p;
-				else							//ÒÑ½¨Á¢¶ş²æÊ÷¸ù½áµã
+				else							//å·²å»ºç«‹äºŒå‰æ ‘æ ¹ç»“ç‚¹
 				{	switch(k) 
 					{
 					case 1:St[top]->lchild=p;break;
@@ -37,7 +37,7 @@ void CreateTBTree(TBTNode * &b,char *str)	//ÓÉstr´®½¨Á¢º¬¿ÕÏßË÷ÓòµÄ¶ş²æÁ´b
 		ch=str[j];
 	}
 }
-void DispTBTree(TBTNode *b)			//Êä³öº¬¿ÕÏßË÷ÓòµÄ¶ş²æÊ÷b
+void DispTBTree(TBTNode *b)			//è¾“å‡ºå«ç©ºçº¿ç´¢åŸŸçš„äºŒå‰æ ‘b
 {	if (b!=NULL)
 	{	printf("%c",b->data);
 		if (b->lchild!=NULL || b->rchild!=NULL)
@@ -49,77 +49,77 @@ void DispTBTree(TBTNode *b)			//Êä³öº¬¿ÕÏßË÷ÓòµÄ¶ş²æÊ÷b
 		}
 	}
 }
-TBTNode *pre;						//È«¾Ö±äÁ¿
-void Thread(TBTNode *&p)			//ÖĞĞòÏßË÷»¯¶ş²æÊ÷£¬±»CreateThreadµ÷ÓÃ
+TBTNode *pre;						//å…¨å±€å˜é‡
+void Thread(TBTNode *&p)			//ä¸­åºçº¿ç´¢åŒ–äºŒå‰æ ‘ï¼Œè¢«CreateThreadè°ƒç”¨
 {	if (p!=NULL)
-	{	Thread(p->lchild);			//×ó×ÓÊ÷ÏßË÷»¯
-		if (p->lchild==NULL)		//Èôp½áµãµÄ×óÖ¸ÕëÎª¿Õ
-		{	p->lchild=pre;			//½¨Á¢µ±Ç°½áµãµÄÇ°ÇıÏßË÷
+	{	Thread(p->lchild);			//å·¦å­æ ‘çº¿ç´¢åŒ–
+		if (p->lchild==NULL)		//è‹¥pç»“ç‚¹çš„å·¦æŒ‡é’ˆä¸ºç©º
+		{	p->lchild=pre;			//å»ºç«‹å½“å‰ç»“ç‚¹çš„å‰é©±çº¿ç´¢
 			p->ltag=1;
 		}
 		else p->ltag=0;
-		if (pre->rchild==NULL)		//Èôp½áµãµÄÓÒÖ¸ÕëÎª¿Õ
-		{	pre->rchild=p;			//½¨Á¢Ç°Çı½áµãµÄºó¼ÌÏßË÷
+		if (pre->rchild==NULL)		//è‹¥pç»“ç‚¹çš„å³æŒ‡é’ˆä¸ºç©º
+		{	pre->rchild=p;			//å»ºç«‹å‰é©±ç»“ç‚¹çš„åç»§çº¿ç´¢
 			pre->rtag=1;
 		}
 		else pre->rtag=0;
 		pre=p;
-		Thread(p->rchild);			//ÓÒ×ÓÊ÷ÏßË÷»¯
+		Thread(p->rchild);			//å³å­æ ‘çº¿ç´¢åŒ–
 	}
 }
-TBTNode *CreateThread(TBTNode *b)	//´´½¨ÖĞĞòÏßË÷»¯¶ş²æÊ÷
+TBTNode *CreateThread(TBTNode *b)	//åˆ›å»ºä¸­åºçº¿ç´¢åŒ–äºŒå‰æ ‘
 {	TBTNode *root;
-	root=(TBTNode *)malloc(sizeof(TBTNode));	//´´½¨¸ù½áµã
+	root=(TBTNode *)malloc(sizeof(TBTNode));	//åˆ›å»ºæ ¹ç»“ç‚¹
 	root->ltag=0;root->rtag=1;
 	root->rchild=b;
-	if (b==NULL)				//¿Õ¶ş²æÊ÷
+	if (b==NULL)				//ç©ºäºŒå‰æ ‘
 		root->lchild=root;
 	else
 	{	root->lchild=b;
-		pre=root;				//pre½áµãÊÇp½áµãµÄÇ°Çı½áµã,¹©¼ÓÏßË÷ÓÃ
-		Thread(b);				//ÖĞĞò±éÀúÏßË÷¶ş²æÊ÷
-		pre->rchild=root;		//×îºó´¦Àí,¼ÓÈëÖ¸Ïò¸ù½áµãµÄÏßË÷
+		pre=root;				//preç»“ç‚¹æ˜¯pç»“ç‚¹çš„å‰é©±ç»“ç‚¹,ä¾›åŠ çº¿ç´¢ç”¨
+		Thread(b);				//ä¸­åºéå†çº¿ç´¢äºŒå‰æ ‘
+		pre->rchild=root;		//æœ€åå¤„ç†,åŠ å…¥æŒ‡å‘æ ¹ç»“ç‚¹çš„çº¿ç´¢
 		pre->rtag=1;
-		root->rchild=pre;		//¸ù½áµãÓÒÏßË÷»¯
+		root->rchild=pre;		//æ ¹ç»“ç‚¹å³çº¿ç´¢åŒ–
 	}
 	return root;
 }
-void InOrder(TBTNode *tb)			//±»ThInOrderËã·¨µ÷ÓÃ
+void InOrder(TBTNode *tb)			//è¢«ThInOrderç®—æ³•è°ƒç”¨
 {
-	if (tb->lchild!=NULL && tb->ltag==0)	//ÓĞ×óº¢×Ó
+	if (tb->lchild!=NULL && tb->ltag==0)	//æœ‰å·¦å­©å­
 		InOrder(tb->lchild);
 	printf("%c ",tb->data);
-	if (tb->rchild!=NULL && tb->rtag==0)	//ÓĞÓÒº¢×Ó
+	if (tb->rchild!=NULL && tb->rtag==0)	//æœ‰å³å­©å­
 		InOrder(tb->rchild);
 }
-void ThInOrder(TBTNode *tb)		//ÖĞĞòÏßË÷¶ş²æÊ÷µÄÖĞĞò±éÀúµİ¹éËã·¨
+void ThInOrder(TBTNode *tb)		//ä¸­åºçº¿ç´¢äºŒå‰æ ‘çš„ä¸­åºéå†é€’å½’ç®—æ³•
 {
 	InOrder(tb->lchild);
 }
-void ThInOrder1(TBTNode *tb)	//ÖĞĞòÏßË÷¶ş²æÊ÷µÄÖĞĞò·Çµİ¹éËã·¨
-{	TBTNode *p=tb->lchild;		//Ö¸Ïò¸ù½áµã
+void ThInOrder1(TBTNode *tb)	//ä¸­åºçº¿ç´¢äºŒå‰æ ‘çš„ä¸­åºéé€’å½’ç®—æ³•
+{	TBTNode *p=tb->lchild;		//æŒ‡å‘æ ¹ç»“ç‚¹
 	while (p!=tb)
-	{	while (p->ltag==0) p=p->lchild;		//ÕÒÖĞĞò¿ªÊ¼½áµã
+	{	while (p->ltag==0) p=p->lchild;		//æ‰¾ä¸­åºå¼€å§‹ç»“ç‚¹
 		printf("%c ",p->data);
-		while (p->rtag==1 && p->rchild!=tb)	//ÓĞÓÒÏßË÷µÄÇé¿ö
+		while (p->rtag==1 && p->rchild!=tb)	//æœ‰å³çº¿ç´¢çš„æƒ…å†µ
 		{	p=p->rchild;
 			printf("%c ",p->data);
 		}
-		p=p->rchild;						//×ªÏò½áµãpµÄÓÒ×ÓÊ÷
+		p=p->rchild;						//è½¬å‘ç»“ç‚¹pçš„å³å­æ ‘
 	}
 }
-void DestroyTBTree1(TBTNode *tb)	//±»DestroyTBTreeËã·¨µ÷ÓÃ
+void DestroyTBTree1(TBTNode *tb)	//è¢«DestroyTBTreeç®—æ³•è°ƒç”¨
 {
 	if (tb!=NULL)
 	{
-		if (tb->lchild!=NULL && tb->ltag==0)  //ÓĞ×óº¢×Ó  
+		if (tb->lchild!=NULL && tb->ltag==0)  //æœ‰å·¦å­©å­  
 			DestroyTBTree1(tb->lchild);
-		if (tb->rchild!=NULL && tb->rtag==0)  //ÓĞÓÒº¢×Ó  
+		if (tb->rchild!=NULL && tb->rtag==0)  //æœ‰å³å­©å­  
 			DestroyTBTree1(tb->rchild);
 		free(tb);
 	}
 }
-void DestroyTBTree(TBTNode *tb)	//ÊÍ·ÅÖĞĞòÏßË÷¶ş²æÊ÷µÄËùÓĞ½áµã
+void DestroyTBTree(TBTNode *tb)	//é‡Šæ”¾ä¸­åºçº¿ç´¢äºŒå‰æ ‘çš„æ‰€æœ‰ç»“ç‚¹
 {
 	DestroyTBTree1(tb->lchild);
 	free(tb);
@@ -127,11 +127,11 @@ void DestroyTBTree(TBTNode *tb)	//ÊÍ·ÅÖĞĞòÏßË÷¶ş²æÊ÷µÄËùÓĞ½áµã
 int main()
 {	TBTNode *b,*tb;
 	CreateTBTree(b,"A(B(D,E(H(J,K(L,M(,N))))),C(F,G(,I)))"); 	
-	printf("¶ş²æÊ÷:");DispTBTree(b);printf("\n");
+	printf("äºŒå‰æ ‘:");DispTBTree(b);printf("\n");
 	tb=CreateThread(b);
-	printf("ÏßË÷ÖĞĞòĞòÁĞ:\n");
-	printf("    µİ¹éËã·¨:");ThInOrder(tb);printf("\n");
-	printf("  ·Çµİ¹éËã·¨:");ThInOrder1(tb);printf("\n");
+	printf("çº¿ç´¢ä¸­åºåºåˆ—:\n");
+	printf("    é€’å½’ç®—æ³•:");ThInOrder(tb);printf("\n");
+	printf("  éé€’å½’ç®—æ³•:");ThInOrder1(tb);printf("\n");
 	DestroyTBTree(tb);
 	return 1;
 }

@@ -1,14 +1,14 @@
-//ÎÄ¼şÃû:exp9-7.cpp
+//æ–‡ä»¶å:exp9-7.cpp
 #include <stdio.h>
-#define MAXL 100					//¶¨Òå±íÖĞ×î¶à¼ÇÂ¼¸öÊı
-typedef int KeyType;				//¶¨Òå¹Ø¼ü×ÖÀàĞÍÎªint
+#define MAXL 100					//å®šä¹‰è¡¨ä¸­æœ€å¤šè®°å½•ä¸ªæ•°
+typedef int KeyType;				//å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºint
 typedef char InfoType;
 typedef struct
-{	KeyType key;					//¹Ø¼ü×ÖÏî
-	InfoType data;					//ÆäËûÊı¾İÏî£¬ÀàĞÍÎªInfoType
-} RecType;							//²éÕÒÔªËØµÄÀàĞÍ
+{	KeyType key;					//å…³é”®å­—é¡¹
+	InfoType data;					//å…¶ä»–æ•°æ®é¡¹ï¼Œç±»å‹ä¸ºInfoType
+} RecType;							//æŸ¥æ‰¾å…ƒç´ çš„ç±»å‹
 
-KeyType M_Search(RecType A[],RecType B[],int n)	//ÇóA¡¢BµÄÖĞÎ»Êı
+KeyType M_Search(RecType A[],RecType B[],int n)	//æ±‚Aã€Bçš„ä¸­ä½æ•°
 {
 	int start1,end1,mid1,start2,end2,mid2;
 	start1=0; end1=n-1;
@@ -20,28 +20,28 @@ KeyType M_Search(RecType A[],RecType B[],int n)	//ÇóA¡¢BµÄÖĞÎ»Êı
 		if(A[mid1].key==B[mid2].key)
 			return A[mid1].key;
 		if(A[mid1].key<B[mid2].key)
-		{				//·Ö±ğ¿¼ÂÇÆæÊıºÍÅ¼Êı£¬±£³ÖÁ½¸ö×ÓĞòÁĞÔªËØ¸öÊıÏàµÈ
-			if((start1+end1)%2==0) //ÈôÔªËØÎªÆæÊı¸ö
+		{				//åˆ†åˆ«è€ƒè™‘å¥‡æ•°å’Œå¶æ•°ï¼Œä¿æŒä¸¤ä¸ªå­åºåˆ—å…ƒç´ ä¸ªæ•°ç›¸ç­‰
+			if((start1+end1)%2==0) //è‹¥å…ƒç´ ä¸ºå¥‡æ•°ä¸ª
 			{	
-				start1=mid1;		//ÉáÆúAÖĞ¼äµãÒÔÇ°µÄ²¿·ÖÇÒ±£ÁôÖĞ¼äµã
-				end2=mid2;			//ÉáÆúBÖĞ¼äµãÒÔºóµÄ²¿·ÖÇÒ±£ÁôÖĞ¼äµã
+				start1=mid1;		//èˆå¼ƒAä¸­é—´ç‚¹ä»¥å‰çš„éƒ¨åˆ†ä¸”ä¿ç•™ä¸­é—´ç‚¹
+				end2=mid2;			//èˆå¼ƒBä¸­é—´ç‚¹ä»¥åçš„éƒ¨åˆ†ä¸”ä¿ç•™ä¸­é—´ç‚¹
 			}
-			else					//ÈôÔªËØÎªÅ¼Êı¸ö
+			else					//è‹¥å…ƒç´ ä¸ºå¶æ•°ä¸ª
 			{	
-				start1=mid1+1;		//ÉáÆúAµÄÇ°°ë²¿·Ö
-				end2=mid2;			//ÉáÆúBµÄºó°ë²¿·Ö
+				start1=mid1+1;		//èˆå¼ƒAçš„å‰åŠéƒ¨åˆ†
+				end2=mid2;			//èˆå¼ƒBçš„ååŠéƒ¨åˆ†
 			}
 		}
 		else
-		{	if((start1+end1)%2==0)	//ÈôÔªËØÎªÆæÊı¸ö
+		{	if((start1+end1)%2==0)	//è‹¥å…ƒç´ ä¸ºå¥‡æ•°ä¸ª
 			{
-				end1 = mid1;		//ÉáÆúAÖĞ¼äµãÒÔºóµÄ²¿·ÖÇÒ±£ÁôÖĞ¼äµã
-				start2 = mid2;		//ÉáÆúBÖĞ¼äµãÒÔÇ°µÄ²¿·ÖÇÒ±£ÁôÖĞ¼äµã
+				end1 = mid1;		//èˆå¼ƒAä¸­é—´ç‚¹ä»¥åçš„éƒ¨åˆ†ä¸”ä¿ç•™ä¸­é—´ç‚¹
+				start2 = mid2;		//èˆå¼ƒBä¸­é—´ç‚¹ä»¥å‰çš„éƒ¨åˆ†ä¸”ä¿ç•™ä¸­é—´ç‚¹
 			}
-			else					//ÈôÔªËØÎªÅ¼Êı¸ö
+			else					//è‹¥å…ƒç´ ä¸ºå¶æ•°ä¸ª
 			{
-				end1=mid1;			//ÉáÆúAµÄºó°ë²¿·Ö
-				start2=mid2+1;		//ÉáÆúBµÄÇ°°ë²¿·Ö
+				end1=mid1;			//èˆå¼ƒAçš„ååŠéƒ¨åˆ†
+				start2=mid2+1;		//èˆå¼ƒBçš„å‰åŠéƒ¨åˆ†
 			}
 		}
 	}
@@ -65,7 +65,7 @@ int main()
 	printf("B:"); 
 	for (i=0;i<n;i++) printf("%3d",B[i].key);
 	printf("\n");
-	printf("AºÍBµÄÖĞÎ»Êı:%d\n",M_Search(A,B,n));
+	printf("Aå’ŒBçš„ä¸­ä½æ•°:%d\n",M_Search(A,B,n));
 
 	return 1;
 }

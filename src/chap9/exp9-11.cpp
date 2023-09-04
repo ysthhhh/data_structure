@@ -1,17 +1,17 @@
-//ÎÄ¼şÃû:exp9-11.cpp
-#include "bst.cpp"   //¶ş²æÅÅĞòÊ÷»ù±¾ÔËËãËã·¨
-bool Findseq(BSTNode *bt,int a[],int n)	//ÅĞ¶ÏaÊÇ·ñÎªbtÖĞµÄÒ»¸öºÏ·¨²éÕÒĞòÁĞ
+//æ–‡ä»¶å:exp9-11.cpp
+#include "bst.cpp"   //äºŒå‰æ’åºæ ‘åŸºæœ¬è¿ç®—ç®—æ³•
+bool Findseq(BSTNode *bt,int a[],int n)	//åˆ¤æ–­aæ˜¯å¦ä¸ºbtä¸­çš„ä¸€ä¸ªåˆæ³•æŸ¥æ‰¾åºåˆ—
 {	BSTNode *p=bt;
 	int i=0;
 	while (i<n && p!=NULL)
 	{
-		if (i==n-1 && a[i]==p->key)			//a²éÕÒÍê±Ï£¬·µ»Øtrue
+		if (i==n-1 && a[i]==p->key)			//aæŸ¥æ‰¾å®Œæ¯•ï¼Œè¿”å›true
 			return true;
-		if (p->key!=a[i])					//Èô²»µÈ£¬±íÊ¾a²»ÊÇ²éÕÒĞòÁĞ
-			return false;					//·µ»Øfalse
-		i++;								//²éÕÒĞòÁĞÖ¸ÏòÏÂÒ»¸ö¹Ø¼ü×Ö
-		if (a[i]<p->key) p=p->lchild;		//ÔÚ×ó×ÓÊ÷ÖĞ²éÕÒ
-		else if (a[i]>p->key) p=p->rchild;	//ÔÚÓÒ×ÓÊ÷ÖĞ²éÕÒ
+		if (p->key!=a[i])					//è‹¥ä¸ç­‰ï¼Œè¡¨ç¤ºaä¸æ˜¯æŸ¥æ‰¾åºåˆ—
+			return false;					//è¿”å›false
+		i++;								//æŸ¥æ‰¾åºåˆ—æŒ‡å‘ä¸‹ä¸€ä¸ªå…³é”®å­—
+		if (a[i]<p->key) p=p->lchild;		//åœ¨å·¦å­æ ‘ä¸­æŸ¥æ‰¾
+		else if (a[i]>p->key) p=p->rchild;	//åœ¨å³å­æ ‘ä¸­æŸ¥æ‰¾
 	}
 	return false;
 }
@@ -22,18 +22,18 @@ int main()
 	BSTNode *bt;
 	KeyType keys[]={5,2,3,4,1,6,8,7,9};
 	int m=9;
-	printf("(1)¹¹Ôì¶ş²æÅÅĞòÊ÷bt\n");
-	bt=CreateBST(keys,m);		//´´½¨¶ş²æÅÅĞòÊ÷
-	printf("(2)Êä³öBST:");DispBST(bt);printf("\n");
+	printf("(1)æ„é€ äºŒå‰æ’åºæ ‘bt\n");
+	bt=CreateBST(keys,m);		//åˆ›å»ºäºŒå‰æ’åºæ ‘
+	printf("(2)è¾“å‡ºBST:");DispBST(bt);printf("\n");
 	int n=4;
 	KeyType a[]={5,6,8,9};
-	printf("(3)¹Ø¼ü×ÖĞòÁĞ:");
+	printf("(3)å…³é”®å­—åºåˆ—:");
 	for (int i=0;i<n;i++)
 		printf("%d ",a[i]);
 	if (Findseq(bt,a,n))
-		printf("ÊÇÒ»¸ö²éÕÒĞòÁĞ\n");
+		printf("æ˜¯ä¸€ä¸ªæŸ¥æ‰¾åºåˆ—\n");
 	else
-		printf("²»ÊÇÒ»¸ö²éÕÒĞòÁĞ\n");
-	printf("(4)Ïú»Ùbt\n"); DestroyBST(bt);
+		printf("ä¸æ˜¯ä¸€ä¸ªæŸ¥æ‰¾åºåˆ—\n");
+	printf("(4)é”€æ¯bt\n"); DestroyBST(bt);
 	return 1;
 }

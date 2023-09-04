@@ -1,19 +1,19 @@
-//ÎÄ¼şÃû:exp7-11.cpp
-#include "preseq.cpp"				//°üº¬ĞòÁĞ»¯ºÍ·´ĞòÁĞ»¯Ëã·¨
+//æ–‡ä»¶å:exp7-11.cpp
+#include "preseq.cpp"				//åŒ…å«åºåˆ—åŒ–å’Œååºåˆ—åŒ–ç®—æ³•
 int main()
 {
 	BTNode *b,*b1;
 	SqString str;
-	printf("(1)´´½¨¶ş²æÁ´b\n");
+	printf("(1)åˆ›å»ºäºŒå‰é“¾b\n");
 	CreateBTree(b,"A(B(D,E(,G)),C(,F(H,I)))"); 
-	printf("(2)¶ş²æÊ÷b:");DispBTree(b);printf("\n");
-	printf("(3)¶Ôb½øĞĞÏÈĞò±éÀú£¬²úÉúÏÈĞòĞòÁĞ»¯ĞòÁĞstr\n");
+	printf("(2)äºŒå‰æ ‘b:");DispBTree(b);printf("\n");
+	printf("(3)å¯¹bè¿›è¡Œå…ˆåºéå†ï¼Œäº§ç”Ÿå…ˆåºåºåˆ—åŒ–åºåˆ—str\n");
 	str=PreOrderSeq(b);
 	printf("(4)str:"); DispStr(str);
-	printf("(5)ÓÉstr¹¹½¨¶ş²æÁ´b1\n");
+	printf("(5)ç”±stræ„å»ºäºŒå‰é“¾b1\n");
 	b1=CreatePreSeq(str);
-	printf("(6)¶ş²æÊ÷b1:");DispBTree(b1);printf("\n");
-	printf("(7)Ïú»ÙbºÍb1\n");
+	printf("(6)äºŒå‰æ ‘b1:");DispBTree(b1);printf("\n");
+	printf("(7)é”€æ¯bå’Œb1\n");
 	DestroyBTree(b);
 	DestroyBTree(b1);
 	return 1;

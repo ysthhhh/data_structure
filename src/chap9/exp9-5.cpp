@@ -1,99 +1,99 @@
-//ÎÄ¼şÃû:exp9-5.cpp
+//æ–‡ä»¶å:exp9-5.cpp
 #include <stdio.h>
-#define MaxSize 100			//¶¨Òå×î´ó¹şÏ£±í³¤¶È
-#define NULLKEY -1			//¶¨Òå¿Õ¹Ø¼ü×ÖÖµ
-typedef int KeyType;		//¹Ø¼ü×ÖÀàĞÍ
-typedef char InfoType;		//ÆäËûÊı¾İÀàĞÍ
+#define MaxSize 100			//å®šä¹‰æœ€å¤§å“ˆå¸Œè¡¨é•¿åº¦
+#define NULLKEY -1			//å®šä¹‰ç©ºå…³é”®å­—å€¼
+typedef int KeyType;		//å…³é”®å­—ç±»å‹
+typedef char InfoType;		//å…¶ä»–æ•°æ®ç±»å‹
 typedef struct
 {
-	KeyType key;			//¹Ø¼ü×ÖÓò
-	InfoType data;			//ÆäËûÊı¾İÓò
-	int count;				//Ì½²â´ÎÊıÓò
-} HashTable;				//¹şÏ£±íÔªËØÀàĞÍ
-void InsertHT(HashTable ha[],int &n,int m,int p,KeyType k)  //½«¹Ø¼ü×Ök²åÈëµ½¹şÏ£±íÖĞ
+	KeyType key;			//å…³é”®å­—åŸŸ
+	InfoType data;			//å…¶ä»–æ•°æ®åŸŸ
+	int count;				//æ¢æµ‹æ¬¡æ•°åŸŸ
+} HashTable;				//å“ˆå¸Œè¡¨å…ƒç´ ç±»å‹
+void InsertHT(HashTable ha[],int &n,int m,int p,KeyType k)  //å°†å…³é”®å­—kæ’å…¥åˆ°å“ˆå¸Œè¡¨ä¸­
 {
 	int cnt,adr;
-	adr=k % p;					//¼ÆËã¹şÏ£º¯ÊıÖµ
-	if (ha[adr].key==NULLKEY)	//k¿ÉÒÔÖ±½Ó·ÅÔÚ¹şÏ£±íÖĞ
+	adr=k % p;					//è®¡ç®—å“ˆå¸Œå‡½æ•°å€¼
+	if (ha[adr].key==NULLKEY)	//kå¯ä»¥ç›´æ¥æ”¾åœ¨å“ˆå¸Œè¡¨ä¸­
 	{
 		ha[adr].key=k;
 		ha[adr].count=1;
 	}
-	else						//·¢Éú³åÍ»Ê±²ÉÓÃÏßĞÔÌ½²â·¨½â¾ö³åÍ»
+	else						//å‘ç”Ÿå†²çªæ—¶é‡‡ç”¨çº¿æ€§æ¢æµ‹æ³•è§£å†³å†²çª
 	{
-		cnt=1;					//cnt¼ÇÂ¼k·¢Éú³åÍ»µÄ´ÎÊı
+		cnt=1;					//cntè®°å½•kå‘ç”Ÿå†²çªçš„æ¬¡æ•°
 		do 
 		{
-			adr=(adr+1) % m;	//ÏßĞÔÌ½²â
+			adr=(adr+1) % m;	//çº¿æ€§æ¢æµ‹
 			cnt++;
 		} while (ha[adr].key!=NULLKEY);
-		ha[adr].key=k;			//ÔÚadr´¦·ÅÖÃk
-		ha[adr].count=cnt;		//ÉèÖÃÌ½²â´ÎÊı
+		ha[adr].key=k;			//åœ¨adrå¤„æ”¾ç½®k
+		ha[adr].count=cnt;		//è®¾ç½®æ¢æµ‹æ¬¡æ•°
 	}
-	n++;						//×Ü¹Ø¼ü×Ö¸öÊıÔö1
+	n++;						//æ€»å…³é”®å­—ä¸ªæ•°å¢1
 }
-void CreateHT(HashTable ha[],int &n,int m,int p,KeyType keys[],int total)  //ÓÉkeysÖĞtotal¸ö¹Ø¼ü×Ö´´½¨¹şÏ£±í
+void CreateHT(HashTable ha[],int &n,int m,int p,KeyType keys[],int total)  //ç”±keysä¸­totalä¸ªå…³é”®å­—åˆ›å»ºå“ˆå¸Œè¡¨
 {
-	for (int i=0;i<m;i++)				//¹şÏ£±íÖÃ¿ÕµÄ³õÖµ
+	for (int i=0;i<m;i++)				//å“ˆå¸Œè¡¨ç½®ç©ºçš„åˆå€¼
     {
         ha[i].key=NULLKEY;
 	    ha[i].count=0;
     }
 	n=0;
 	for (int i=0;i<total;i++)
-		InsertHT(ha,n,m,p,keys[i]);		//²åÈën¸ö¹Ø¼ü×Ö
+		InsertHT(ha,n,m,p,keys[i]);		//æ’å…¥nä¸ªå…³é”®å­—
 }
-int SearchHT(HashTable ha[],int m,int p,KeyType k)  //ÔÚ¹şÏ£±íÖĞ²éÕÒ¹Ø¼ü×Ök
+int SearchHT(HashTable ha[],int m,int p,KeyType k)  //åœ¨å“ˆå¸Œè¡¨ä¸­æŸ¥æ‰¾å…³é”®å­—k
 {
-	int adr=k % p;					//¼ÆËã¹şÏ£º¯ÊıÖµ
+	int adr=k % p;					//è®¡ç®—å“ˆå¸Œå‡½æ•°å€¼
 	while (ha[adr].key!=NULLKEY && ha[adr].key!=k)
-		adr=(adr+1) % m;		//ÏßĞÔÌ½²â
-	if (ha[adr].key==k)			//²éÕÒ³É¹¦
+		adr=(adr+1) % m;		//çº¿æ€§æ¢æµ‹
+	if (ha[adr].key==k)			//æŸ¥æ‰¾æˆåŠŸ
 		return adr;
-	else						//²éÕÒÊ§°Ü
+	else						//æŸ¥æ‰¾å¤±è´¥
 		return -1;
 }
-bool DeleteHT(HashTable ha[],int &n,int m,int p,KeyType k)	//É¾³ı¹şÏ£±íÖĞ¹Ø¼ü×Ök
+bool DeleteHT(HashTable ha[],int &n,int m,int p,KeyType k)	//åˆ é™¤å“ˆå¸Œè¡¨ä¸­å…³é”®å­—k
 {
 	int adr;
-	adr=k % p;					//¼ÆËã¹şÏ£º¯ÊıÖµ
+	adr=k % p;					//è®¡ç®—å“ˆå¸Œå‡½æ•°å€¼
 	while (ha[adr].key!=NULLKEY && ha[adr].key!=k)
-		adr=(adr+1) % m;		//ÏßĞÔÌ½²â
-	if (ha[adr].key==k)			//²éÕÒ³É¹¦
+		adr=(adr+1) % m;		//çº¿æ€§æ¢æµ‹
+	if (ha[adr].key==k)			//æŸ¥æ‰¾æˆåŠŸ
 	{	
 		int j=(adr+1)%m;
-		while (ha[j].key!=NULLKEY && ha[j].key%p==k%p)	//²éÕÒadrÎ»ÖÃºóÃæµÄÍ¬Òå´Ê
+		while (ha[j].key!=NULLKEY && ha[j].key%p==k%p)	//æŸ¥æ‰¾adrä½ç½®åé¢çš„åŒä¹‰è¯
 		{
-			ha[(j-1+m)%m].key=ha[j].key;				//½«Í¬Òå´ÊÇ°ÒÆ¶¯ 
-			j=(j+1)%m;									//¼ÌĞøÊÔÌ½Ñ­»·ºó¼ÌÎ»ÖÃ 
+			ha[(j-1+m)%m].key=ha[j].key;				//å°†åŒä¹‰è¯å‰ç§»åŠ¨ 
+			j=(j+1)%m;									//ç»§ç»­è¯•æ¢å¾ªç¯åç»§ä½ç½® 
 		}
-		ha[(j-1+m)%m].key=NULLKEY;						//É¾³ı×îºóÒ»¸öÍ¬Òå´Ê
+		ha[(j-1+m)%m].key=NULLKEY;						//åˆ é™¤æœ€åä¸€ä¸ªåŒä¹‰è¯
 		ha[(j-1+m)%m].count=0;
-		n--;											//¹şÏ£±íÖĞÔªËØ¸öÊı¼õÉÙ1
-		return true;									//²éÕÒ³É¹¦·µ»Øtrue 
+		n--;											//å“ˆå¸Œè¡¨ä¸­å…ƒç´ ä¸ªæ•°å‡å°‘1
+		return true;									//æŸ¥æ‰¾æˆåŠŸè¿”å›true 
 	}
-	else												//²éÕÒÊ§°ÜµÄÇé¿ö 
-		return false;									//·µ»Øfalse
+	else												//æŸ¥æ‰¾å¤±è´¥çš„æƒ…å†µ 
+		return false;									//è¿”å›false
 }
-void DispHT(HashTable ha[],int n,int m)    //Êä³ö¹şÏ£±í
+void DispHT(HashTable ha[],int n,int m)    //è¾“å‡ºå“ˆå¸Œè¡¨
 {
 	float avg=0;
 	int i;
-	printf("    ¹şÏ£±íµØÖ·:   ");
+	printf("    å“ˆå¸Œè¡¨åœ°å€:   ");
 	for (i=0;i<m;i++) 
 		printf("%-4d",i);
 	printf(" \n");
-    printf("    ¹şÏ£±í¹Ø¼ü×Ö: ");
+    printf("    å“ˆå¸Œè¡¨å…³é”®å­—: ");
 	for (i=0;i<m;i++) 
 		if (ha[i].key==NULLKEY)
-			printf("    ");			//Êä³ö3¸ö¿Õ¸ñ
+			printf("    ");			//è¾“å‡º3ä¸ªç©ºæ ¼
 		else
 			printf("%-4d",ha[i].key);
 	printf("\n");
-	printf("    Ì½²â´ÎÊı:     ");
+	printf("    æ¢æµ‹æ¬¡æ•°:     ");
 	for (i=0;i<m;i++)
 		if (ha[i].key==NULLKEY)
-			printf("    ");			//Êä³ö3¸ö¿Õ¸ñ
+			printf("    ");			//è¾“å‡º3ä¸ªç©ºæ ¼
 		else
 			printf("%-4d",ha[i].count);
 	printf(" \n");
@@ -101,7 +101,7 @@ void DispHT(HashTable ha[],int n,int m)    //Êä³ö¹şÏ£±í
 		if (ha[i].key!=NULLKEY)
 			avg=avg+ha[i].count;
 	avg=avg/n;
-	printf("    Æ½¾ù²éÕÒ³¤¶ÈASL(%d)=%g\n",n,avg);
+	printf("    å¹³å‡æŸ¥æ‰¾é•¿åº¦ASL(%d)=%g\n",n,avg);
 }
 int main()
 {
@@ -110,28 +110,28 @@ int main()
 	int n,m=13,p=13;
 	int k=29;
 	HashTable ha[MaxSize];
-	printf("(1)´´½¨¹şÏ£±í\n");
+	printf("(1)åˆ›å»ºå“ˆå¸Œè¡¨\n");
 	CreateHT(ha,n,m,p,a,total);
-	printf("(2)Êä³ö¹şÏ£±í:\n"); DispHT(ha,n,m);
-	printf("(3)²éÕÒ¹Ø¼ü×ÖÎª%dµÄ¼ÇÂ¼Î»ÖÃ\n",k);
+	printf("(2)è¾“å‡ºå“ˆå¸Œè¡¨:\n"); DispHT(ha,n,m);
+	printf("(3)æŸ¥æ‰¾å…³é”®å­—ä¸º%dçš„è®°å½•ä½ç½®\n",k);
 	int i=SearchHT(ha,m,p,k);
 	if (i!=-1)
 		printf("   ha[%d].key=%d\n",i,k);
 	else
-		printf("   ÌáÊ¾:Î´ÕÒµ½%d\n",k);
+		printf("   æç¤º:æœªæ‰¾åˆ°%d\n",k);
 	k=77;
-	printf("(4)É¾³ı¹Ø¼ü×Ö%d\n",k);
+	printf("(4)åˆ é™¤å…³é”®å­—%d\n",k);
 	DeleteHT(ha,n,m,p,k);
-	printf("(5)É¾³ıºóµÄ¹şÏ£±í\n"); DispHT(ha,n,m);
+	printf("(5)åˆ é™¤åçš„å“ˆå¸Œè¡¨\n"); DispHT(ha,n,m);
 	printf("n=%d\n",n);
-	printf("(6)²éÕÒ¹Ø¼ü×ÖÎª%dµÄ¼ÇÂ¼Î»ÖÃ\n",k);
+	printf("(6)æŸ¥æ‰¾å…³é”®å­—ä¸º%dçš„è®°å½•ä½ç½®\n",k);
 	i=SearchHT(ha,m,p,k);
 	if (i!=-1)
 		printf("   ha[%d].key=%d\n",i,k);
 	else
-		printf("   ÌáÊ¾:Î´ÕÒµ½%d\n",k);
-	printf("(7)²åÈë¹Ø¼ü×Ö%d\n",k);
+		printf("   æç¤º:æœªæ‰¾åˆ°%d\n",k);
+	printf("(7)æ’å…¥å…³é”®å­—%d\n",k);
 	InsertHT(ha,n,m,p,k);
-	printf("(8)²åÈëºóµÄ¹şÏ£±í\n"); DispHT(ha,n,m);
+	printf("(8)æ’å…¥åçš„å“ˆå¸Œè¡¨\n"); DispHT(ha,n,m);
 	return 1;
 }

@@ -1,4 +1,4 @@
-//Ë³ĞòÕ»ÔËËãËã·¨
+//é¡ºåºæ ˆè¿ç®—ç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
@@ -6,40 +6,40 @@ typedef char ElemType;
 typedef struct 
 {	
 	ElemType data[MaxSize];
-	int top;				//Õ»Ö¸Õë
-} SqStack;					//ÉùÃ÷Ë³ĞòÕ»ÀàĞÍ
-void InitStack(SqStack *&s)   //³õÊ¼»¯Ë³ĞòÕ»
+	int top;				//æ ˆæŒ‡é’ˆ
+} SqStack;					//å£°æ˜é¡ºåºæ ˆç±»å‹
+void InitStack(SqStack *&s)   //åˆå§‹åŒ–é¡ºåºæ ˆ
 {
 	s=(SqStack *)malloc(sizeof(SqStack));
 	s->top=-1;
 } 
-void DestroyStack(SqStack *&s) //Ïú»ÙË³ĞòÕ»
+void DestroyStack(SqStack *&s) //é”€æ¯é¡ºåºæ ˆ
 {
 	free(s);
 }
-bool StackEmpty(SqStack *s)		//ÅĞ¶ÏÕ»¿Õ·ñ
+bool StackEmpty(SqStack *s)		//åˆ¤æ–­æ ˆç©ºå¦
 {
 	return(s->top==-1);
 }
-bool Push(SqStack *&s,ElemType e)	 //½øÕ»
+bool Push(SqStack *&s,ElemType e)	 //è¿›æ ˆ
 {
-	if (s->top==MaxSize-1)    //Õ»ÂúµÄÇé¿ö£¬¼´Õ»ÉÏÒç³ö
+	if (s->top==MaxSize-1)    //æ ˆæ»¡çš„æƒ…å†µï¼Œå³æ ˆä¸Šæº¢å‡º
 		return false;
 	s->top++;
 	s->data[s->top]=e;
 	return true;
 }
-bool Pop(SqStack *&s,ElemType &e)	 //³öÕ»
+bool Pop(SqStack *&s,ElemType &e)	 //å‡ºæ ˆ
 {
-	if (s->top==-1)		//Õ»Îª¿ÕµÄÇé¿ö£¬¼´Õ»ÏÂÒç³ö
+	if (s->top==-1)		//æ ˆä¸ºç©ºçš„æƒ…å†µï¼Œå³æ ˆä¸‹æº¢å‡º
 		return false;
 	e=s->data[s->top];
 	s->top--;
 	return true;
 } 
-bool GetTop(SqStack *s,ElemType &e)	 //È¡Õ»¶¥ÔªËØ
+bool GetTop(SqStack *s,ElemType &e)	 //å–æ ˆé¡¶å…ƒç´ 
 {
-	if (s->top==-1) 		//Õ»Îª¿ÕµÄÇé¿ö£¬¼´Õ»ÏÂÒç³ö
+	if (s->top==-1) 		//æ ˆä¸ºç©ºçš„æƒ…å†µï¼Œå³æ ˆä¸‹æº¢å‡º
 		return false;
 	e=s->data[s->top];
 	return true;

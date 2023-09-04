@@ -1,50 +1,50 @@
-//ÎÄ¼şÃû:exp7-10.cpp
+//æ–‡ä»¶å:exp7-10.cpp
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
 #include <stdlib.h>
-#define MaxSize 100			//×î¶à¼ÇÂ¼¸öÊı
-#define MaxSons 10			//×î¶àÏÂ¼¶µ¥Î»Êı
+#define MaxSize 100			//æœ€å¤šè®°å½•ä¸ªæ•°
+#define MaxSons 10			//æœ€å¤šä¸‹çº§å•ä½æ•°
 typedef struct
 {
-	char fname[20];			//µ¥Î»Ãû³Æ
-	char sname[20];			//ÏÂ¼¶µ¥Î»Ãû³Æ»òÕßÈËÊı
+	char fname[20];			//å•ä½åç§°
+	char sname[20];			//ä¸‹çº§å•ä½åç§°æˆ–è€…äººæ•°
 } RecType;
 
 typedef struct node
-{	char data[20];					//½áµãµÄÖµ£ºµ¥Î»Ãû³Æ»òÕßÈËÊı
-	struct node *sons[MaxSons];		//Ö¸Ïòº¢×Ó½áµã
-} TSonNode;							//ÉùÃ÷º¢×ÓÁ´´æ´¢½á¹¹½áµãÀàĞÍ
+{	char data[20];					//ç»“ç‚¹çš„å€¼ï¼šå•ä½åç§°æˆ–è€…äººæ•°
+	struct node *sons[MaxSons];		//æŒ‡å‘å­©å­ç»“ç‚¹
+} TSonNode;							//å£°æ˜å­©å­é“¾å­˜å‚¨ç»“æ„ç»“ç‚¹ç±»å‹
 
-void ReadFile(RecType R[],int &n)	//¶Áabc.txtÎÄ¼ş´æÈëRÊı×éÖĞ
+void ReadFile(RecType R[],int &n)	//è¯»abc.txtæ–‡ä»¶å­˜å…¥Ræ•°ç»„ä¸­
 {
 	FILE *fp;
 	n=0;
 	if ((fp=fopen("abc.txt","r"))==NULL) 
 	{
-		printf("²»ÄÜ´ò¿ªÎÄ¼şabc.txt");
+		printf("ä¸èƒ½æ‰“å¼€æ–‡ä»¶abc.txt");
 		return;
 	}
 	while (!feof(fp))
 	{
-		fscanf(fp,"%s",&R[n].fname);	//¶ÁfnameÓòÊı¾İ
-		fscanf(fp,"%s",&R[n].sname);	//¶ÁsnameÓòÊı¾İ
+		fscanf(fp,"%s",&R[n].fname);	//è¯»fnameåŸŸæ•°æ®
+		fscanf(fp,"%s",&R[n].sname);	//è¯»snameåŸŸæ•°æ®
 		n++;
 	}	
 	fclose(fp);
 }
-TSonNode *CreateTree(char root[],RecType R[],int n) //´´½¨Ò»¿ÃÊ÷
+TSonNode *CreateTree(char root[],RecType R[],int n) //åˆ›å»ºä¸€æ£µæ ‘
 {
 	int i,j,k;
 	TSonNode *t;
-	t=(TSonNode *)malloc(sizeof(TSonNode));		//´´½¨¸ù½áµã
+	t=(TSonNode *)malloc(sizeof(TSonNode));		//åˆ›å»ºæ ¹ç»“ç‚¹
 	strcpy(t->data,root);
-	for (k=0;k<MaxSons;k++)						//½áµãËùÓĞÖ¸ÕëÓòÖÃÎª¿Õ
+	for (k=0;k<MaxSons;k++)						//ç»“ç‚¹æ‰€æœ‰æŒ‡é’ˆåŸŸç½®ä¸ºç©º
 		t->sons[k]=NULL;
 	i=0; j=0;
 	while (i<n)
 	{
-		if (strcmp(R[i].fname,root)==0)			//ÕÒµ½fnameÎªrootµÄ¼ÇÂ¼
+		if (strcmp(R[i].fname,root)==0)			//æ‰¾åˆ°fnameä¸ºrootçš„è®°å½•
 		{
 			t->sons[j]=CreateTree(R[i].sname,R,n);
 			j++;
@@ -54,43 +54,43 @@ TSonNode *CreateTree(char root[],RecType R[],int n) //´´½¨Ò»¿ÃÊ÷
 	return t;
 }
 
-void DispTree(TSonNode *t)				//Êä³öº¢×ÓÁ´´æ´¢½á¹¹
+void DispTree(TSonNode *t)				//è¾“å‡ºå­©å­é“¾å­˜å‚¨ç»“æ„
 {
 	int i;
 	if (t!=NULL)
 	{	printf("%s",t->data);
-		if (t->sons[0]!=NULL)			//t½áµãÖÁÉÙÓĞÒ»¸öº¢×Ó
-		{	printf("(");				//Êä³öÒ»¸ö×óÀ¨ºÅ
+		if (t->sons[0]!=NULL)			//tç»“ç‚¹è‡³å°‘æœ‰ä¸€ä¸ªå­©å­
+		{	printf("(");				//è¾“å‡ºä¸€ä¸ªå·¦æ‹¬å·
 			for (i=0;i<MaxSons;i++)
 			{	DispTree(t->sons[i]);
-				if (t->sons[i+1]!=NULL)	//Èç¹ûÓĞÏÂÒ»¸öº¢×Ó
-					printf(",");		//Êä³öÒ»¸ö','
-				else					//Èç¹ûÃ»ÓĞÏÂÒ»¸öº¢×Ó
-					break;				//ÍË³öÑ­»·
+				if (t->sons[i+1]!=NULL)	//å¦‚æœæœ‰ä¸‹ä¸€ä¸ªå­©å­
+					printf(",");		//è¾“å‡ºä¸€ä¸ª','
+				else					//å¦‚æœæ²¡æœ‰ä¸‹ä¸€ä¸ªå­©å­
+					break;				//é€€å‡ºå¾ªç¯
 			}
-			printf(")");				//Êä³öÒ»¸öÓÒÀ¨ºÅ
+			printf(")");				//è¾“å‡ºä¸€ä¸ªå³æ‹¬å·
 		}
 	}
 }
-void DestroyTree(TSonNode *&t)				//Ïú»ÙÊ÷t
+void DestroyTree(TSonNode *&t)				//é”€æ¯æ ‘t
 {
 	int i;
 	if (t!=NULL)
 	{	for (i=0;i<MaxSons;i++)
-		{	if (t->sons[i]!=NULL)			//ÓĞ×ÓÊ÷
-				DestroyTree(t->sons[i]);	//Ïú»Ù¸Ã×ÓÊ÷
-			else							//ÔÙÃ»ÓĞ×ÓÊ÷
-				break;						//ÍË³öÑ­»·
+		{	if (t->sons[i]!=NULL)			//æœ‰å­æ ‘
+				DestroyTree(t->sons[i]);	//é”€æ¯è¯¥å­æ ‘
+			else							//å†æ²¡æœ‰å­æ ‘
+				break;						//é€€å‡ºå¾ªç¯
 		}
-		free(t);							//ÊÍ·Å¸ù½áµã
+		free(t);							//é‡Šæ”¾æ ¹ç»“ç‚¹
 	}
 }
-TSonNode *FindNode(TSonNode *t,char x[])	//Çóx½áµãµÄÖ¸Õë
+TSonNode *FindNode(TSonNode *t,char x[])	//æ±‚xç»“ç‚¹çš„æŒ‡é’ˆ
 {	int i;
 	TSonNode *p;
 	if (t==NULL)
 		return NULL;
-	else if (strcmp(t->data,x)==0)			//ÕÒµ½ÖµÎªxµÄ½áµã
+	else if (strcmp(t->data,x)==0)			//æ‰¾åˆ°å€¼ä¸ºxçš„ç»“ç‚¹
 		return t;
 	else
 	{	for (i=0;i<MaxSons;i++)
@@ -102,7 +102,7 @@ TSonNode *FindNode(TSonNode *t,char x[])	//Çóx½áµãµÄÖ¸Õë
 		return NULL;
 	}
 }
-int ChildCount(TSonNode *p)		//ÇópËùÖ¸½áµãµÄº¢×Ó¸öÊı
+int ChildCount(TSonNode *p)		//æ±‚pæ‰€æŒ‡ç»“ç‚¹çš„å­©å­ä¸ªæ•°
 {	int i,num=0;
 	for (i=0;i<MaxSons;i++)
 		if (p->sons[i]!=NULL)
@@ -111,7 +111,7 @@ int ChildCount(TSonNode *p)		//ÇópËùÖ¸½áµãµÄº¢×Ó¸öÊı
 			break;
 	return num;
 }
-int Sonnum(TSonNode *t,char x[])	//Çóxµ¥Î»µÄÏÂÒ»¼¶µ¥Î»Êı
+int Sonnum(TSonNode *t,char x[])	//æ±‚xå•ä½çš„ä¸‹ä¸€çº§å•ä½æ•°
 {
 	TSonNode *p;
 	p=FindNode(t,x);
@@ -120,15 +120,15 @@ int Sonnum(TSonNode *t,char x[])	//Çóxµ¥Î»µÄÏÂÒ»¼¶µ¥Î»Êı
 	else
 		return ChildCount(p);
 }
-int LeafCount(TSonNode *t)			//ÇóÊ÷ÖĞÒ¶×Ó½áµã¸öÊı
+int LeafCount(TSonNode *t)			//æ±‚æ ‘ä¸­å¶å­ç»“ç‚¹ä¸ªæ•°
 {
 	int i,num=0;
 	if (t==NULL)
 		return 0;
 	else
-	{	if (t->sons[0]==NULL)	//tÎªÒ¶×Ó½áµã
+	{	if (t->sons[0]==NULL)	//tä¸ºå¶å­ç»“ç‚¹
 			num++;
-		else					//t²»ÎªÒ¶×Ó½áµã
+		else					//tä¸ä¸ºå¶å­ç»“ç‚¹
 		{	for (i=0;i<MaxSons;i++)
 				if (t->sons[i]!=NULL)
 					num+=LeafCount(t->sons[i]);
@@ -137,7 +137,7 @@ int LeafCount(TSonNode *t)			//ÇóÊ÷ÖĞÒ¶×Ó½áµã¸öÊı
 		return num;
 	}
 }
-int Classnum(TSonNode *t,char x[])	//Çóxµ¥Î»µÄ°àÊı
+int Classnum(TSonNode *t,char x[])	//æ±‚xå•ä½çš„ç­æ•°
 {
 	TSonNode *p;
 	p=FindNode(t,x);
@@ -146,16 +146,16 @@ int Classnum(TSonNode *t,char x[])	//Çóxµ¥Î»µÄ°àÊı
 	else
 		return LeafCount(p);
 }
-int LeafSum(TSonNode *t)		//ÇóÊ÷ÖĞÒ¶×Ó½áµãµÄÊıÖµºÍ
+int LeafSum(TSonNode *t)		//æ±‚æ ‘ä¸­å¶å­ç»“ç‚¹çš„æ•°å€¼å’Œ
 {
 	int i,sum=0;
 	if (t==NULL)
 		return 0;
 	else
 	{
-		if (t->sons[0]==NULL)	//tÎªÒ¶×Ó½áµã
+		if (t->sons[0]==NULL)	//tä¸ºå¶å­ç»“ç‚¹
 			return atoi(t->data);
-		else					//t²»ÎªÒ¶×Ó½áµã
+		else					//tä¸ä¸ºå¶å­ç»“ç‚¹
 		{	for (i=0;i<MaxSons;i++)
 				if (t->sons[i]!=NULL)
 					sum+=LeafSum(t->sons[i]);
@@ -164,7 +164,7 @@ int LeafSum(TSonNode *t)		//ÇóÊ÷ÖĞÒ¶×Ó½áµãµÄÊıÖµºÍ
 		return sum;
 	}
 }
-int Studnum(TSonNode *t,char x[])	//Çóxµ¥Î»µÄ×ÜÑ§ÉúÈËÊı
+int Studnum(TSonNode *t,char x[])	//æ±‚xå•ä½çš„æ€»å­¦ç”Ÿäººæ•°
 {
 	TSonNode *p;
 	p=FindNode(t,x);
@@ -178,16 +178,16 @@ int main()
 	TSonNode *t;
 	RecType R[MaxSize];
 	int n;
-	printf("(1)´Óabc.txtÎÄ¼ş¶ÁÊı¾İµ½RÊı×éÖĞ\n");
+	printf("(1)ä»abc.txtæ–‡ä»¶è¯»æ•°æ®åˆ°Ræ•°ç»„ä¸­\n");
 	ReadFile(R,n);
-	if (n==0) return 1;				//¼ÇÂ¼¸öÊıÎª0Ê±Ö±½Ó·µ»Ø
-	printf("(2)ÓÉÊı×éR´´½¨Ê÷tµÄº¢×ÓÁ´´æ´¢½á¹¹\n");
-	t=CreateTree(R[0].fname,R,n);	//´´½¨Ò»¿ÃÊ÷
-	printf("(3)Êä³öÊ÷t:"); DispTree(t); printf("\n");
-	printf("(4)¼ÆËã»úÑ§ÔºµÄ×¨ÒµÊı:%d\n",Sonnum(t,"¼ÆËã»úÑ§Ôº"));
-	printf("(5)¼ÆËã»úÑ§ÔºµÄ°àÊı:%d\n",Classnum(t,"¼ÆËã»úÑ§Ôº"));
-	printf("(6)µçĞÅÑ§ÔºµÄÑ§ÉúÊı:%d\n",Studnum(t,"µçĞÅÑ§Ôº"));
-	printf("(7)Ïú»ÙÊ÷t\n");
+	if (n==0) return 1;				//è®°å½•ä¸ªæ•°ä¸º0æ—¶ç›´æ¥è¿”å›
+	printf("(2)ç”±æ•°ç»„Råˆ›å»ºæ ‘tçš„å­©å­é“¾å­˜å‚¨ç»“æ„\n");
+	t=CreateTree(R[0].fname,R,n);	//åˆ›å»ºä¸€æ£µæ ‘
+	printf("(3)è¾“å‡ºæ ‘t:"); DispTree(t); printf("\n");
+	printf("(4)è®¡ç®—æœºå­¦é™¢çš„ä¸“ä¸šæ•°:%d\n",Sonnum(t,"è®¡ç®—æœºå­¦é™¢"));
+	printf("(5)è®¡ç®—æœºå­¦é™¢çš„ç­æ•°:%d\n",Classnum(t,"è®¡ç®—æœºå­¦é™¢"));
+	printf("(6)ç”µä¿¡å­¦é™¢çš„å­¦ç”Ÿæ•°:%d\n",Studnum(t,"ç”µä¿¡å­¦é™¢"));
+	printf("(7)é”€æ¯æ ‘t\n");
 	DestroyTree(t);
 
 	return 1;

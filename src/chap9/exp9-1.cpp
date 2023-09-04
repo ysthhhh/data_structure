@@ -1,12 +1,12 @@
-//ÎÄ¼şÃû:exp9-1.cpp
-#include "seqlist.cpp"						//°üº¬Ë³Ğò±í»ù±¾ÔËËãËã·¨
-int SeqSearch(RecType R[],int n,KeyType k)	//Ë³Ğò²éÕÒËã·¨
+//æ–‡ä»¶å:exp9-1.cpp
+#include "seqlist.cpp"						//åŒ…å«é¡ºåºè¡¨åŸºæœ¬è¿ç®—ç®—æ³•
+int SeqSearch(RecType R[],int n,KeyType k)	//é¡ºåºæŸ¥æ‰¾ç®—æ³•
 {
     int i=0;
     while (i<n && R[i].key!=k) 
 	{
 		printf("%d ",R[i].key);
-		i++;					//´Ó±íÍ·ÍùºóÕÒ
+		i++;					//ä»è¡¨å¤´å¾€åæ‰¾
 	}
     if (i>=n) 
 		return 0;
@@ -22,12 +22,12 @@ int main()
 	int n=10,i;
 	KeyType k=5;
 	int a[]={3,6,2,10,1,8,5,7,4,9};
-	CreateList(R,a,n);			//½¨Á¢Ë³Ğò±í
-	printf("¹Ø¼ü×ÖĞòÁĞ:"); DispList(R,n);
-	printf("²éÕÒ%dËù±È½ÏµÄ¹Ø¼ü×Ö:\n\t",k);
+	CreateList(R,a,n);			//å»ºç«‹é¡ºåºè¡¨
+	printf("å…³é”®å­—åºåˆ—:"); DispList(R,n);
+	printf("æŸ¥æ‰¾%dæ‰€æ¯”è¾ƒçš„å…³é”®å­—:\n\t",k);
 	if ((i=SeqSearch(R,n,k))!=0)
-		printf("\nÔªËØ%dµÄÎ»ÖÃÊÇ%d\n",k,i);
+		printf("\nå…ƒç´ %dçš„ä½ç½®æ˜¯%d\n",k,i);
 	else
-		printf("\nÔªËØ%d²»ÔÚ±íÖĞ\n",k);
+		printf("\nå…ƒç´ %dä¸åœ¨è¡¨ä¸­\n",k);
 	return 1;
 }

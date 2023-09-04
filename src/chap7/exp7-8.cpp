@@ -1,13 +1,13 @@
-//ÎÄ¼şÃû:exp7-8.cpp
-#include "btree.cpp"   //°üº¬¶ş²æÊ÷µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp7-8.cpp
+#include "btree.cpp"   //åŒ…å«äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
 #include <stdlib.h>
 #include <string.h>
 typedef char ElemType;
-BTNode *CRTree(char s[],int i,int j) //½¨Á¢¼òµ¥ËãÊõ±í´ïÊ½s[i..j]¶ÔÓ¦µÄ¶ş²æÊ÷
+BTNode *CRTree(char s[],int i,int j) //å»ºç«‹ç®€å•ç®—æœ¯è¡¨è¾¾å¼s[i..j]å¯¹åº”çš„äºŒå‰æ ‘
 {
 	BTNode *p;
-	int k,plus=0,posi;			//plus¼ÇÂ¼ÔËËã·ûµÄ¸öÊı
-	if (i==j)					//´¦Àíi=jµÄÇé¿ö£¬ËµÃ÷Ö»ÓĞÒ»¸ö×Ö·û
+	int k,plus=0,posi;			//plusè®°å½•è¿ç®—ç¬¦çš„ä¸ªæ•°
+	if (i==j)					//å¤„ç†i=jçš„æƒ…å†µï¼Œè¯´æ˜åªæœ‰ä¸€ä¸ªå­—ç¬¦
 	{
 		p=(BTNode *)malloc(sizeof(BTNode));
 		p->data=s[i];
@@ -15,40 +15,40 @@ BTNode *CRTree(char s[],int i,int j) //½¨Á¢¼òµ¥ËãÊõ±í´ïÊ½s[i..j]¶ÔÓ¦µÄ¶ş²æÊ÷
 		p->rchild=NULL;
 		return p;
 	}
-	//ÒÔÏÂÎªi!=jµÄÇé¿ö
-	for (k=i;k<=j;k++)			//Ê×ÏÈ²éÕÒ+ºÍ-ÔËËã·û
+	//ä»¥ä¸‹ä¸ºi!=jçš„æƒ…å†µ
+	for (k=i;k<=j;k++)			//é¦–å…ˆæŸ¥æ‰¾+å’Œ-è¿ç®—ç¬¦
 		if (s[k]=='+' || s[k]=='-')
 		{
-			plus++;				//plus¼ÇÂ¼+»òÕß-µÄ¸öÊı
-			posi=k;             //posi¼ÇÂ¼×îºóÒ»¸ö+»ò-µÄÎ»ÖÃ
+			plus++;				//plusè®°å½•+æˆ–è€…-çš„ä¸ªæ•°
+			posi=k;             //posiè®°å½•æœ€åä¸€ä¸ª+æˆ–-çš„ä½ç½®
 		}
-	if (plus==0)                //Ã»ÓĞ+»ò-µÄÇé¿ö
+	if (plus==0)                //æ²¡æœ‰+æˆ–-çš„æƒ…å†µ
 		for (k=i;k<=j;k++)
 			if (s[k]=='*' || s[k]=='/')
 			{
-				plus++;			//plus¼ÇÂ¼*»òÕß/µÄ¸öÊı
-				posi=k;			//posi¼ÇÂ¼×îºóÒ»¸ö*»ò/µÄÎ»ÖÃ
+				plus++;			//plusè®°å½•*æˆ–è€…/çš„ä¸ªæ•°
+				posi=k;			//posiè®°å½•æœ€åä¸€ä¸ª*æˆ–/çš„ä½ç½®
 			}
-   if (plus!=0)					//ÓĞÔËËã·ûµÄÇé¿ö,´´½¨Ò»¸ö´æ·ÅËüµÄ½áµã
+   if (plus!=0)					//æœ‰è¿ç®—ç¬¦çš„æƒ…å†µ,åˆ›å»ºä¸€ä¸ªå­˜æ”¾å®ƒçš„ç»“ç‚¹
    {
 		p=(BTNode *)malloc(sizeof(BTNode));
 		p->data=s[posi];
-		p->lchild=CRTree(s,i,posi-1);	//µİ¹é´¦Àís[i..posi-1]¹¹Ôì×ó×ÓÊ÷
-		p->rchild=CRTree(s,posi+1,j);	//µİ¹é´¦Àís[posi+1..j]¹¹ÔìÓÒ×ÓÊ÷
+		p->lchild=CRTree(s,i,posi-1);	//é€’å½’å¤„ç†s[i..posi-1]æ„é€ å·¦å­æ ‘
+		p->rchild=CRTree(s,posi+1,j);	//é€’å½’å¤„ç†s[posi+1..j]æ„é€ å³å­æ ‘
 		return p;
 	}
-   else       //ÈôÃ»ÓĞÈÎºÎÔËËã·û£¬·µ»ØNULL
+   else       //è‹¥æ²¡æœ‰ä»»ä½•è¿ç®—ç¬¦ï¼Œè¿”å›NULL
 	   return NULL;
 }
-double Comp(BTNode *b)	//¼ÆËã¶ş²æÊ÷¶ÔÓ¦±í´ïÊ½µÄÖµ
+double Comp(BTNode *b)	//è®¡ç®—äºŒå‰æ ‘å¯¹åº”è¡¨è¾¾å¼çš„å€¼
 {
 	double v1,v2;
 	if (b==NULL) return 0;
 	if (b->lchild==NULL && b->rchild==NULL)
-		return b->data-'0';		//Ò¶×Ó½áµãÖ±½Ó·µ»Ø½áµãÖµ
-	v1=Comp(b->lchild);			//µİ¹éÇó³ö×ó×ÓÊ÷µÄÖµv1
-	v2=Comp(b->rchild);			//µİ¹éÇó³öÓÒ×ÓÊ÷µÄÖµv2
-	switch(b->data)				//¸ù¾İb½áµã×öÏàÓ¦ÔËËã
+		return b->data-'0';		//å¶å­ç»“ç‚¹ç›´æ¥è¿”å›ç»“ç‚¹å€¼
+	v1=Comp(b->lchild);			//é€’å½’æ±‚å‡ºå·¦å­æ ‘çš„å€¼v1
+	v2=Comp(b->rchild);			//é€’å½’æ±‚å‡ºå³å­æ ‘çš„å€¼v2
+	switch(b->data)				//æ ¹æ®bç»“ç‚¹åšç›¸åº”è¿ç®—
 	{
 	case '+':
 		return v1+v2;
@@ -60,7 +60,7 @@ double Comp(BTNode *b)	//¼ÆËã¶ş²æÊ÷¶ÔÓ¦±í´ïÊ½µÄÖµ
 		if (v2!=0)
 			return v1/v2;
 		else
-			abort();		//³ı0Òì³£ÍË³ö
+			abort();		//é™¤0å¼‚å¸¸é€€å‡º
 
 	}
 }
@@ -68,11 +68,11 @@ int main()
 {
 	BTNode *b;
 	char s[MaxSize]="1+2*3-4/5";
-    printf("ËãÊõ±í´ïÊ½%s\n",s);
+    printf("ç®—æœ¯è¡¨è¾¾å¼%s\n",s);
 	b=CRTree(s,0,strlen(s)-1);
-	printf("¶ÔÓ¦¶ş²æÊ÷:");
+	printf("å¯¹åº”äºŒå‰æ ‘:");
 	DispBTree(b);
-	printf("\nËãÊõ±í´ïÊ½µÄÖµ:%g\n",Comp(b));
+	printf("\nç®—æœ¯è¡¨è¾¾å¼çš„å€¼:%g\n",Comp(b));
 	DestroyBTree(b);
 	return 1;
 }

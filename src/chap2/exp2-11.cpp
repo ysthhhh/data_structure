@@ -1,19 +1,19 @@
-//ÎÄ¼þÃû:exp2-11.cpp
+//æ–‡ä»¶å:exp2-11.cpp
 #include <stdio.h>
 #include <malloc.h>
 typedef struct
 {
-	int no;						//Ö°¹¤ºÅ
-	char name[10];				//ÐÕÃû
-	int depno;					//²¿ÃÅºÅ
-	float salary;				//¹¤×ÊÊý
-} EmpType;						//Ö°¹¤ÀàÐÍ
+	int no;						//èŒå·¥å·
+	char name[10];				//å§“å
+	int depno;					//éƒ¨é—¨å·
+	float salary;				//å·¥èµ„æ•°
+} EmpType;						//èŒå·¥ç±»åž‹
 typedef struct node
 {
-	EmpType data;				//´æ·ÅÖ°¹¤ÐÅÏ¢
-	struct node *next;			//Ö¸ÏòÏÂÒ»¸ö½áµãµÄÖ¸Õë
-}  EmpList;						//Ö°¹¤µ¥Á´±í½áµãÀàÐÍ
-void DestroyEmp(EmpList *&L)	//ÊÍ·ÅÖ°¹¤µ¥Á´±íL
+	EmpType data;				//å­˜æ”¾èŒå·¥ä¿¡æ¯
+	struct node *next;			//æŒ‡å‘ä¸‹ä¸€ä¸ªç»“ç‚¹çš„æŒ‡é’ˆ
+}  EmpList;						//èŒå·¥å•é“¾è¡¨ç»“ç‚¹ç±»åž‹
+void DestroyEmp(EmpList *&L)	//é‡Šæ”¾èŒå·¥å•é“¾è¡¨L
 {
 	EmpList *pre=L,*p=pre->next;
 	while (p!=NULL)
@@ -24,37 +24,37 @@ void DestroyEmp(EmpList *&L)	//ÊÍ·ÅÖ°¹¤µ¥Á´±íL
 	}
 	free(pre);
 }
-void DelAll(EmpList *&L)		//É¾³ýÖ°¹¤ÎÄ¼þÖÐÈ«²¿¼ÇÂ¼
+void DelAll(EmpList *&L)		//åˆ é™¤èŒå·¥æ–‡ä»¶ä¸­å…¨éƒ¨è®°å½•
 {
 	FILE *fp;
-	if ((fp=fopen("emp.dat","wb"))==NULL)	//ÖØÐ´Çå¿Õemp.datÎÄ¼þ
+	if ((fp=fopen("emp.dat","wb"))==NULL)	//é‡å†™æ¸…ç©ºemp.datæ–‡ä»¶
 	{	
-		printf("  ÌáÊ¾:²»ÄÜ´ò¿ªÖ°¹¤ÎÄ¼þ\n");
+		printf("  æç¤º:ä¸èƒ½æ‰“å¼€èŒå·¥æ–‡ä»¶\n");
 		return;
 	}
 	fclose(fp);
-	DestroyEmp(L);						//ÊÍ·ÅÖ°¹¤µ¥Á´±íL
+	DestroyEmp(L);						//é‡Šæ”¾èŒå·¥å•é“¾è¡¨L
 	L=(EmpList *)malloc(sizeof(EmpList));	
-	L->next=NULL;						//½¨Á¢Ò»¸ö¿ÕµÄÖ°¹¤µ¥Á´±íL
-	printf("  ÌáÊ¾:Ö°¹¤Êý¾ÝÇå³ýÍê±Ï\n");
+	L->next=NULL;						//å»ºç«‹ä¸€ä¸ªç©ºçš„èŒå·¥å•é“¾è¡¨L
+	printf("  æç¤º:èŒå·¥æ•°æ®æ¸…é™¤å®Œæ¯•\n");
 }
-void ReadFile(EmpList *&L)		//¶Áemp.datÎÄ¼þ½¨Á¢Ö°¹¤µ¥¼ü±íL
+void ReadFile(EmpList *&L)		//è¯»emp.datæ–‡ä»¶å»ºç«‹èŒå·¥å•é”®è¡¨L
 {
 	FILE *fp;
 	EmpType emp;
 	EmpList *p,*r;
 	int n=0;
-	L=(EmpList *)malloc(sizeof(EmpList));	//½¨Á¢Í·½áµã
+	L=(EmpList *)malloc(sizeof(EmpList));	//å»ºç«‹å¤´ç»“ç‚¹
 	r=L;
-	if ((fp=fopen("emp.dat","rb"))==NULL) //²»´æÔÚemp.datÎÄ¼þ
+	if ((fp=fopen("emp.dat","rb"))==NULL) //ä¸å­˜åœ¨emp.datæ–‡ä»¶
 	{	
 		 if ((fp=fopen("emp.dat","wb"))==NULL) 
-			 printf("  ÌáÊ¾:²»ÄÜ´´½¨emp.datÎÄ¼þ\n");
+			 printf("  æç¤º:ä¸èƒ½åˆ›å»ºemp.datæ–‡ä»¶\n");
 	}
-	else		//Èô´æÔÚemp.datÎÄ¼þ
+	else		//è‹¥å­˜åœ¨emp.datæ–‡ä»¶
 	{
 		while (fread(&emp,sizeof(EmpType),1,fp)==1)
-		{	//²ÉÓÃÎ²²å·¨½¨Á¢µ¥Á´±íL
+		{	//é‡‡ç”¨å°¾æ’æ³•å»ºç«‹å•é“¾è¡¨L
 			p=(EmpList *)malloc(sizeof(EmpList));
 			p->data=emp;
 			r->next=p;
@@ -63,17 +63,17 @@ void ReadFile(EmpList *&L)		//¶Áemp.datÎÄ¼þ½¨Á¢Ö°¹¤µ¥¼ü±íL
 		}
 	}
 	r->next=NULL;
-	printf("  ÌáÊ¾:Ö°¹¤µ¥¼ü±íL½¨Á¢Íê±Ï,ÓÐ%d¸ö¼ÇÂ¼\n",n);
+	printf("  æç¤º:èŒå·¥å•é”®è¡¨Lå»ºç«‹å®Œæ¯•,æœ‰%dä¸ªè®°å½•\n",n);
 	fclose(fp);
 }
-void SaveFile(EmpList *L)	//½«Ö°¹¤µ¥Á´±íÊý¾Ý´æÈëÊý¾ÝÎÄ¼þ
+void SaveFile(EmpList *L)	//å°†èŒå·¥å•é“¾è¡¨æ•°æ®å­˜å…¥æ•°æ®æ–‡ä»¶
 {
 	EmpList *p=L->next;
 	int n=0;
 	FILE *fp;
 	if ((fp=fopen("emp.dat","wb"))==NULL) 
 	{	
-		printf("  ÌáÊ¾:²»ÄÜ´´½¨ÎÄ¼þemp.dat\n");
+		printf("  æç¤º:ä¸èƒ½åˆ›å»ºæ–‡ä»¶emp.dat\n");
 		return;
 	}
 	while (p!=NULL)
@@ -83,33 +83,33 @@ void SaveFile(EmpList *L)	//½«Ö°¹¤µ¥Á´±íÊý¾Ý´æÈëÊý¾ÝÎÄ¼þ
 		n++;
 	}
 	fclose(fp);
-	DestroyEmp(L);				//ÊÍ·ÅÖ°¹¤µ¥Á´±íL
+	DestroyEmp(L);				//é‡Šæ”¾èŒå·¥å•é“¾è¡¨L
 	if (n>0)
-		printf("  ÌáÊ¾:%d¸öÖ°¹¤¼ÇÂ¼Ð´Èëemp.datÎÄ¼þ\n",n);
+		printf("  æç¤º:%dä¸ªèŒå·¥è®°å½•å†™å…¥emp.datæ–‡ä»¶\n",n);
 	else
-		printf("  ÌáÊ¾:Ã»ÓÐÈÎºÎÖ°¹¤¼ÇÂ¼Ð´Èëemp.datÎÄ¼þ\n");
+		printf("  æç¤º:æ²¡æœ‰ä»»ä½•èŒå·¥è®°å½•å†™å…¥emp.datæ–‡ä»¶\n");
 }
-void InputEmp(EmpList *&L)	//Ìí¼ÓÒ»¸öÖ°¹¤¼ÇÂ¼
+void InputEmp(EmpList *&L)	//æ·»åŠ ä¸€ä¸ªèŒå·¥è®°å½•
 {
 	EmpType p;
 	EmpList *s;
-	printf("  >>ÊäÈëÖ°¹¤ºÅ(-1·µ»Ø):");
+	printf("  >>è¾“å…¥èŒå·¥å·(-1è¿”å›ž):");
 	scanf("%d",&p.no);
 	if (p.no==-1) return;
-	printf("  >>ÊäÈëÐÕÃû ²¿ÃÅºÅ ¹¤×Ê:");
+	printf("  >>è¾“å…¥å§“å éƒ¨é—¨å· å·¥èµ„:");
 	scanf("%s%d%f",&p.name,&p.depno,&p.salary);
 	s=(EmpList *)malloc(sizeof(EmpList));
 	s->data=p;
-	s->next=L->next;		//²ÉÓÃÍ·²å·¨²åÈë½áµãs
+	s->next=L->next;		//é‡‡ç”¨å¤´æ’æ³•æ’å…¥ç»“ç‚¹s
 	L->next=s;
-	printf("  ÌáÊ¾:Ìí¼Ó³É¹¦\n");
+	printf("  æç¤º:æ·»åŠ æˆåŠŸ\n");
 }
 
-void DelEmp(EmpList *&L)	//É¾³ýÒ»¸öÖ°¹¤¼ÇÂ¼
+void DelEmp(EmpList *&L)	//åˆ é™¤ä¸€ä¸ªèŒå·¥è®°å½•
 {
 	EmpList *pre=L,*p=L->next;
 	int no;
-	printf("  >>ÊäÈëÖ°¹¤ºÅ(-1·µ»Ø):");
+	printf("  >>è¾“å…¥èŒå·¥å·(-1è¿”å›ž):");
 	scanf("%d",&no);
 	if (no==-1) return;
 	while (p!=NULL && p->data.no!=no)
@@ -118,15 +118,15 @@ void DelEmp(EmpList *&L)	//É¾³ýÒ»¸öÖ°¹¤¼ÇÂ¼
 		p=p->next;
 	}
 	if (p==NULL)
-		printf("  ÌáÊ¾:Ö¸¶¨µÄÖ°¹¤¼ÇÂ¼²»´æÔÚ\n");
+		printf("  æç¤º:æŒ‡å®šçš„èŒå·¥è®°å½•ä¸å­˜åœ¨\n");
 	else
 	{
 		pre->next=p->next;
 		free(p);
-		printf("  ÌáÊ¾:É¾³ý³É¹¦\n");
+		printf("  æç¤º:åˆ é™¤æˆåŠŸ\n");
 	}
 }
-void Sortno(EmpList *&L)	//²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´noµÝÔöÓÐÐòÅÅÐò
+void Sortno(EmpList *&L)	//é‡‡ç”¨ç›´æŽ¥æ’å…¥æ³•å•é“¾è¡¨LæŒ‰noé€’å¢žæœ‰åºæŽ’åº
 {
 	EmpList *p,*pre,*q;
 	p=L->next->next;
@@ -144,9 +144,9 @@ void Sortno(EmpList *&L)	//²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´noµÝÔöÓÐÐòÅÅÐò
 			p=q;
 		}
 	}
-	printf("  ÌáÊ¾:°´noµÝÔöÅÅÐòÍê±Ï\n");
+	printf("  æç¤º:æŒ‰noé€’å¢žæŽ’åºå®Œæ¯•\n");
 }
-void Sortdepno(EmpList *&L) //²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´depnoµÝÔöÓÐÐòÅÅÐò
+void Sortdepno(EmpList *&L) //é‡‡ç”¨ç›´æŽ¥æ’å…¥æ³•å•é“¾è¡¨LæŒ‰depnoé€’å¢žæœ‰åºæŽ’åº
 {
 	EmpList *p,*pre,*q;
 	p=L->next->next;
@@ -164,9 +164,9 @@ void Sortdepno(EmpList *&L) //²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´depnoµÝÔöÓÐÐòÅÅÐò
 			p=q;
 		}
 	}
-	printf("  ÌáÊ¾:°´depnoµÝÔöÅÅÐòÍê±Ï\n");
+	printf("  æç¤º:æŒ‰depnoé€’å¢žæŽ’åºå®Œæ¯•\n");
 }
-void Sortsalary(EmpList *&L) //²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´salaryµÝÔöÓÐÐòÅÅÐò
+void Sortsalary(EmpList *&L) //é‡‡ç”¨ç›´æŽ¥æ’å…¥æ³•å•é“¾è¡¨LæŒ‰salaryé€’å¢žæœ‰åºæŽ’åº
 {
 	EmpList *p,*pre,*q;
 	p=L->next->next;
@@ -184,16 +184,16 @@ void Sortsalary(EmpList *&L) //²ÉÓÃÖ±½Ó²åÈë·¨µ¥Á´±íL°´salaryµÝÔöÓÐÐòÅÅÐò
 			p=q;
 		}
 	}
-	printf("  ÌáÊ¾:°´salaryµÝÔöÅÅÐòÍê±Ï\n");
+	printf("  æç¤º:æŒ‰salaryé€’å¢žæŽ’åºå®Œæ¯•\n");
 }
-void DispEmp(EmpList *L)	//Êä³öËùÓÐÖ°¹¤¼ÇÂ¼
+void DispEmp(EmpList *L)	//è¾“å‡ºæ‰€æœ‰èŒå·¥è®°å½•
 {
 	EmpList *p=L->next;
 	if (p==NULL)
-		printf("  ÌáÊ¾:Ã»ÓÐÈÎºÎÖ°¹¤¼ÇÂ¼\n");
+		printf("  æç¤º:æ²¡æœ‰ä»»ä½•èŒå·¥è®°å½•\n");
 	else
 	{
-		printf("    Ö°¹¤ºÅ  ÐÕÃû  ²¿ÃÅºÅ       ¹¤×Ê\n");
+		printf("    èŒå·¥å·  å§“å  éƒ¨é—¨å·       å·¥èµ„\n");
 		printf("   ----------------------------------\n");
 		while (p!=NULL)
 		{
@@ -207,12 +207,12 @@ int main()
 {
 	EmpList *L;
 	int sel;
-	printf("ÓÉemp.datÎÄ¼þ½¨Á¢Ö°¹¤µ¥¼ü±íL\n");
+	printf("ç”±emp.datæ–‡ä»¶å»ºç«‹èŒå·¥å•é”®è¡¨L\n");
 	ReadFile(L);
 	do
 	{	
-		printf(">1:Ìí¼Ó 2:ÏÔÊ¾ 3:°´Ö°¹¤ºÅÅÅÐò 4:°´²¿ÃÅºÅÅÅÐò 5:°´¹¤×ÊÊýÅÅÐò\n");
-		printf(">6:É¾³ý 9:È«É¾ 0:ÍË³ö ÇëÑ¡Ôñ:");
+		printf(">1:æ·»åŠ  2:æ˜¾ç¤º 3:æŒ‰èŒå·¥å·æŽ’åº 4:æŒ‰éƒ¨é—¨å·æŽ’åº 5:æŒ‰å·¥èµ„æ•°æŽ’åº\n");
+		printf(">6:åˆ é™¤ 9:å…¨åˆ  0:é€€å‡º è¯·é€‰æ‹©:");
 		scanf("%d",&sel);
 		switch(sel)
 		{

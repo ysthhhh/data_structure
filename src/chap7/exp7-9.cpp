@@ -1,40 +1,40 @@
-//ÎÄ¼şÃû:exp7-9.cpp
+//æ–‡ä»¶å:exp7-9.cpp
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define MaxSize 30			//Õ»µÄ×î´óÔªËØ¸öÊı
-#define NAMEWIDTH 10		//ĞÕÃûµÄ×î¶à×Ö·û¸öÊı
+#define MaxSize 30			//æ ˆçš„æœ€å¤§å…ƒç´ ä¸ªæ•°
+#define NAMEWIDTH 10		//å§“åçš„æœ€å¤šå­—ç¬¦ä¸ªæ•°
 typedef struct fnode
 {
-	char father[NAMEWIDTH];	//¸¸
-	char wife[NAMEWIDTH];	//Ä¸
-	char son[NAMEWIDTH];	//×Ó
-} FamType;					//¼ÒÆ×ÎÄ¼şµÄ¼ÇÂ¼ÀàĞÍ
+	char father[NAMEWIDTH];	//çˆ¶
+	char wife[NAMEWIDTH];	//æ¯
+	char son[NAMEWIDTH];	//å­
+} FamType;					//å®¶è°±æ–‡ä»¶çš„è®°å½•ç±»å‹
 typedef struct tnode
 {
 	char name[NAMEWIDTH];
 	struct tnode *lchild,*rchild;
-} BTree;					//¼ÒÆ×¶ş²æÊ÷½áµãÊ÷ÀàĞÍ
-int n;						//¼ÒÆ×¼ÇÂ¼¸öÊı
-FamType fam[MaxSize];		//¼ÒÆ×¼ÇÂ¼Êı×é
-//----¼ÒÆ×¶ş²æÊ÷²Ù×÷Ëã·¨-----------------------------------
-BTree *CreateBTree(char *root)	//´Ófam(º¬n¸ö¼ÇÂ¼)µİ¹é´´½¨Ò»¿Ã¶ş²æÊ÷
+} BTree;					//å®¶è°±äºŒå‰æ ‘ç»“ç‚¹æ ‘ç±»å‹
+int n;						//å®¶è°±è®°å½•ä¸ªæ•°
+FamType fam[MaxSize];		//å®¶è°±è®°å½•æ•°ç»„
+//----å®¶è°±äºŒå‰æ ‘æ“ä½œç®—æ³•-----------------------------------
+BTree *CreateBTree(char *root)	//ä»fam(å«nä¸ªè®°å½•)é€’å½’åˆ›å»ºä¸€æ£µäºŒå‰æ ‘
 {
 	int i=0,j;
 	BTree *b,*p;
-	b=(BTree *)malloc(sizeof(BTree));			//´´½¨¸¸Ç×½áµã
+	b=(BTree *)malloc(sizeof(BTree));			//åˆ›å»ºçˆ¶äº²ç»“ç‚¹
 	strcpy(b->name,root);
 	b->lchild=b->rchild=NULL;
 	while (i<n && strcmp(fam[i].father,root)!=0) 
 		i++;
-	if (i<n)									//ÕÒµ½ÁË¸ÃĞÕÃûµÄ¼ÇÂ¼
+	if (i<n)									//æ‰¾åˆ°äº†è¯¥å§“åçš„è®°å½•
 	{
-		p=(BTree *)malloc(sizeof(BTree));		//´´½¨Ä¸Ç×½áµã
+		p=(BTree *)malloc(sizeof(BTree));		//åˆ›å»ºæ¯äº²ç»“ç‚¹
 		p->lchild=p->rchild=NULL;
 		strcpy(p->name,fam[i].wife);
 		b->lchild=p;
-		for (j=0;j<n;j++)						//ÕÒËùÓĞ¶ù×Ó
-			if (strcmp(fam[j].father,root)==0)	//ÕÒµ½Ò»¸ö¶ù×Ó
+		for (j=0;j<n;j++)						//æ‰¾æ‰€æœ‰å„¿å­
+			if (strcmp(fam[j].father,root)==0)	//æ‰¾åˆ°ä¸€ä¸ªå„¿å­
 			{
 				p->rchild=CreateBTree(fam[j].son);
 				p=p->rchild;
@@ -42,7 +42,7 @@ BTree *CreateBTree(char *root)	//´Ófam(º¬n¸ö¼ÇÂ¼)µİ¹é´´½¨Ò»¿Ã¶ş²æÊ÷
 	}
 	return(b);
 }
-void DispTree(BTree *b)	//ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶ş²æÊ÷
+void DispTree(BTree *b)	//ä»¥æ‹¬å·è¡¨ç¤ºæ³•è¾“å‡ºäºŒå‰æ ‘
 {
 	if (b!=NULL)
 	{
@@ -58,7 +58,7 @@ void DispTree(BTree *b)	//ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶ş²æÊ÷
 		}
 	}
 }
-BTree *FindNode(BTree *b,char xm[]) //²ÉÓÃÏÈĞòµİ¹éËã·¨ÕÒnameÎªxmµÄ½áµã
+BTree *FindNode(BTree *b,char xm[]) //é‡‡ç”¨å…ˆåºé€’å½’ç®—æ³•æ‰¾nameä¸ºxmçš„ç»“ç‚¹
 {
 	BTree *p;
 	if (b==NULL) 
@@ -77,28 +77,28 @@ BTree *FindNode(BTree *b,char xm[]) //²ÉÓÃÏÈĞòµİ¹éËã·¨ÕÒnameÎªxmµÄ½áµã
 		}
 	}
 }
-void FindSon(BTree *b)		//Êä³öÄ³ÈËµÄËùÓĞ¶ù×Ó
+void FindSon(BTree *b)		//è¾“å‡ºæŸäººçš„æ‰€æœ‰å„¿å­
 {
 	char xm[NAMEWIDTH];
 	BTree *p;
-	printf("  >>¸¸Ç×ĞÕÃû:");
+	printf("  >>çˆ¶äº²å§“å:");
 	scanf("%s",xm);
 	p=FindNode(b,xm);
 	if (p==NULL)
-		printf("  >>²»´æÔÚ%sµÄ¸¸Ç×!\n",xm);
+		printf("  >>ä¸å­˜åœ¨%sçš„çˆ¶äº²!\n",xm);
 	else
 	{
 		p=p->lchild;
 		if (p==NULL)
-			printf("  >>%sÃ»ÓĞÆŞ×Ó\n",xm);
+			printf("  >>%sæ²¡æœ‰å¦»å­\n",xm);
 		else
 		{
 			p=p->rchild;
 			if (p==NULL)
-				printf("  >>%sÃ»ÓĞ¶ù×Ó!\n",xm);
+				printf("  >>%sæ²¡æœ‰å„¿å­!\n",xm);
 			else
 			{
-				printf("  >>%sµÄ¶ù×Ó:",xm);
+				printf("  >>%sçš„å„¿å­:",xm);
 				while (p!=NULL)
 				{
 					printf("%10s",p->name);
@@ -109,29 +109,29 @@ void FindSon(BTree *b)		//Êä³öÄ³ÈËµÄËùÓĞ¶ù×Ó
 		} 
 	}
 }
-int Path(BTree *b,BTree *s)		//²ÉÓÃºóĞò·Çµİ¹é±éÀú·½·¨Êä³ö´Ó¸ù½áµãµ½s½áµãµÄÂ·¾¶
+int Path(BTree *b,BTree *s)		//é‡‡ç”¨ååºéé€’å½’éå†æ–¹æ³•è¾“å‡ºä»æ ¹ç»“ç‚¹åˆ°sç»“ç‚¹çš„è·¯å¾„
 {
 	BTree *St[MaxSize];
 	BTree *p;
-	int i,top=-1;					//Õ»Ö¸ÕëÖÃ³õÖµ
+	int i,top=-1;					//æ ˆæŒ‡é’ˆç½®åˆå€¼
 	bool flag;
 	do
 	{
-		while (b)                 	//½«bµÄËùÓĞ×óÏÂ½áµã½øÕ»
+		while (b)                 	//å°†bçš„æ‰€æœ‰å·¦ä¸‹ç»“ç‚¹è¿›æ ˆ
 		{	
 			top++;
 			St[top]=b;
 			b=b->lchild;
 		}
-		p=NULL;                   	//pÖ¸Ïòµ±Ç°½áµãµÄÇ°Ò»¸öÒÑ·ÃÎÊµÄ½áµã
-		flag=true;					//flagÎªÕæ±íÊ¾ÕıÔÚ´¦ÀíÕ»¶¥½áµã
+		p=NULL;                   	//pæŒ‡å‘å½“å‰ç»“ç‚¹çš„å‰ä¸€ä¸ªå·²è®¿é—®çš„ç»“ç‚¹
+		flag=true;					//flagä¸ºçœŸè¡¨ç¤ºæ­£åœ¨å¤„ç†æ ˆé¡¶ç»“ç‚¹
 		while (top!=-1 && flag)
 		{	
-			b=St[top];          	//È¡³öµ±Ç°µÄÕ»¶¥ÔªËØ
-			if (b->rchild==p)		//ÓÒ×ÓÊ÷²»´æÔÚ»òÒÑ±»·ÃÎÊ,·ÃÎÊÖ®
-			{	if (b==s)			//µ±Ç°·ÃÎÊµÄ½áµãÎªÒªÕÒµÄ½áµã,Êä³öÂ·¾¶
+			b=St[top];          	//å–å‡ºå½“å‰çš„æ ˆé¡¶å…ƒç´ 
+			if (b->rchild==p)		//å³å­æ ‘ä¸å­˜åœ¨æˆ–å·²è¢«è®¿é—®,è®¿é—®ä¹‹
+			{	if (b==s)			//å½“å‰è®¿é—®çš„ç»“ç‚¹ä¸ºè¦æ‰¾çš„ç»“ç‚¹,è¾“å‡ºè·¯å¾„
 				{	
-					printf("  >>ËùÓĞ×æÏÈ:");
+					printf("  >>æ‰€æœ‰ç¥–å…ˆ:");
 					for (i=0;i<top;i++) 
 					   	printf("%s ",St[i]->name);
 					printf("\n");
@@ -140,31 +140,31 @@ int Path(BTree *b,BTree *s)		//²ÉÓÃºóĞò·Çµİ¹é±éÀú·½·¨Êä³ö´Ó¸ù½áµãµ½s½áµãµÄÂ·¾¶
 				else
 				{	
 					top--;
-				   	p=b;			//pÖ¸ÏòÔò±»·ÃÎÊµÄ½áµã
+				   	p=b;			//pæŒ‡å‘åˆ™è¢«è®¿é—®çš„ç»“ç‚¹
 				}
 			}
 			else
 			{	
-				b=b->rchild;		//bÖ¸ÏòÓÒ×ÓÊ÷
-				flag=false;         //±íÊ¾µ±Ç°²»ÊÇ´¦ÀíÕ»¶¥½áµã
+				b=b->rchild;		//bæŒ‡å‘å³å­æ ‘
+				flag=false;         //è¡¨ç¤ºå½“å‰ä¸æ˜¯å¤„ç†æ ˆé¡¶ç»“ç‚¹
 			}
 		}
-	} while (top!=-1);				//Õ»²»¿ÕÊ±Ñ­»·
-	return 0;						//ÆäËûÇé¿öÊ±·µ»Ø0
+	} while (top!=-1);				//æ ˆä¸ç©ºæ—¶å¾ªç¯
+	return 0;						//å…¶ä»–æƒ…å†µæ—¶è¿”å›0
 }
-void Ancestor(BTree *b)				//Êä³öÄ³ÈËµÄËùÓĞ×æÏÈ
+void Ancestor(BTree *b)				//è¾“å‡ºæŸäººçš„æ‰€æœ‰ç¥–å…ˆ
 {
 	BTree *p;
 	char xm[NAMEWIDTH];
-	printf("  >>ÊäÈëĞÕÃû:");
+	printf("  >>è¾“å…¥å§“å:");
 	scanf("%s",xm);
 	p=FindNode(b,xm);
 	if (p!=NULL)
 		Path(b,p);
 	else
-		printf("  >>²»´æÔÚ%s\n",xm);
+		printf("  >>ä¸å­˜åœ¨%s\n",xm);
 }
-void DestroyBTree(BTree *b)		//Ïú»Ù¼ÒÆ×¶ş²æÊ÷
+void DestroyBTree(BTree *b)		//é”€æ¯å®¶è°±äºŒå‰æ ‘
 {
 	if (b!=NULL)
 	{
@@ -174,19 +174,19 @@ void DestroyBTree(BTree *b)		//Ïú»Ù¼ÒÆ×¶ş²æÊ÷
 	}
 }
 		
-//----¼ÒÆ×ÎÄ¼ş²Ù×÷Ëã·¨---------------------------------------------
-void DelAll()					//Çå³ı¼ÒÆ×ÎÄ¼şÈ«²¿¼ÇÂ¼
+//----å®¶è°±æ–‡ä»¶æ“ä½œç®—æ³•---------------------------------------------
+void DelAll()					//æ¸…é™¤å®¶è°±æ–‡ä»¶å…¨éƒ¨è®°å½•
 {
 	FILE *fp;
 	if ((fp=fopen("fam.dat","wb"))==NULL) 
 	{	
-		printf("  >>²»ÄÜ´ò¿ª¼ÒÆ×ÎÄ¼ş\n");
+		printf("  >>ä¸èƒ½æ‰“å¼€å®¶è°±æ–‡ä»¶\n");
 		return;
 	}
 	n=0;
 	fclose(fp);
 }
-void ReadFile()				//¶Á¼ÒÆ×ÎÄ¼ş´æÈëfamÊı×éÖĞ
+void ReadFile()				//è¯»å®¶è°±æ–‡ä»¶å­˜å…¥famæ•°ç»„ä¸­
 {
 	FILE *fp;
 	long len;
@@ -196,54 +196,54 @@ void ReadFile()				//¶Á¼ÒÆ×ÎÄ¼ş´æÈëfamÊı×éÖĞ
 		n=0;
 		return;
 	}
-	fseek(fp,0,2);				//¼ÒÆ×ÎÄ¼şÎ»ÖÃÖ¸ÕëÒÆµ½¼ÒÆ×ÎÄ¼şÎ²
-	len=ftell(fp);    			//lenÇó³ö¼ÒÆ×ÎÄ¼ş³¤¶È
-	rewind(fp);					//¼ÒÆ×ÎÄ¼şÎ»ÖÃÖ¸ÕëÒÆµ½¼ÒÆ×ÎÄ¼şÊ×
-	n=len/sizeof(FamType); 		//nÇó³ö¼ÒÆ×ÎÄ¼şÖĞµÄ¼ÇÂ¼¸öÊı
+	fseek(fp,0,2);				//å®¶è°±æ–‡ä»¶ä½ç½®æŒ‡é’ˆç§»åˆ°å®¶è°±æ–‡ä»¶å°¾
+	len=ftell(fp);    			//lenæ±‚å‡ºå®¶è°±æ–‡ä»¶é•¿åº¦
+	rewind(fp);					//å®¶è°±æ–‡ä»¶ä½ç½®æŒ‡é’ˆç§»åˆ°å®¶è°±æ–‡ä»¶é¦–
+	n=len/sizeof(FamType); 		//næ±‚å‡ºå®¶è°±æ–‡ä»¶ä¸­çš„è®°å½•ä¸ªæ•°
 	for (i=0;i<n;i++)
-		fread(&fam[i],sizeof(FamType),1,fp);//½«¼ÒÆ×ÎÄ¼şÖĞµÄÊı¾İ¶Áµ½famÖĞ
+		fread(&fam[i],sizeof(FamType),1,fp);//å°†å®¶è°±æ–‡ä»¶ä¸­çš„æ•°æ®è¯»åˆ°famä¸­
 	fclose(fp);
 }
-void SaveFile()					//½«famÊı×é´æÈëÊı¾İ¼ÒÆ×ÎÄ¼ş
+void SaveFile()					//å°†famæ•°ç»„å­˜å…¥æ•°æ®å®¶è°±æ–‡ä»¶
 {
 	int i;
 	FILE *fp;
 	if ((fp=fopen("fam.dat","wb"))==NULL) 
 	{	
-		printf("  >>Êı¾İ¼ÒÆ×ÎÄ¼ş²»ÄÜ´ò¿ª\n");
+		printf("  >>æ•°æ®å®¶è°±æ–‡ä»¶ä¸èƒ½æ‰“å¼€\n");
 		return;
 	}
 	for (i=0;i<n;i++)
 		fwrite(&fam[i],sizeof(FamType),1,fp);
 	fclose(fp);
 }
-void InputFam()					//Ìí¼ÓÒ»¸ö¼ÇÂ¼
+void InputFam()					//æ·»åŠ ä¸€ä¸ªè®°å½•
 {
-	printf("  >>ÊäÈë¸¸Ç×¡¢Ä¸Ç×ºÍ¶ù×ÓĞÕÃû:");
+	printf("  >>è¾“å…¥çˆ¶äº²ã€æ¯äº²å’Œå„¿å­å§“å:");
 	scanf("%s%s%s",fam[n].father,fam[n].wife,fam[n].son);
 	n++;
 }
-void OutputFile()				//Êä³ö¼ÒÆ×ÎÄ¼şÈ«²¿¼ÇÂ¼
+void OutputFile()				//è¾“å‡ºå®¶è°±æ–‡ä»¶å…¨éƒ¨è®°å½•
 {
 	int i;
 	if (n<=0)
 	{
-		printf("  >>Ã»ÓĞÈÎºÎ¼ÇÂ¼\n");
+		printf("  >>æ²¡æœ‰ä»»ä½•è®°å½•\n");
 		return;
 	}
-	printf("         ¸¸Ç×     Ä¸Ç×      ¶ù×Ó\n");
+	printf("         çˆ¶äº²     æ¯äº²      å„¿å­\n");
 	printf("       ------------------------------\n");
 	for (i=0;i<n;i++)
 		printf("  %10s%10s%10s\n",fam[i].father,fam[i].wife,fam[i].son);
 	printf("       ------------------------------\n");
 }
 //---------------------------------------------------------------------
-void Fileop()		//¼ÒÆ×ÎÄ¼ş²Ù×÷
+void Fileop()		//å®¶è°±æ–‡ä»¶æ“ä½œ
 {
 	int sel;
 	do 
 	{
-		printf(" >1:ÊäÈë 2:Êä³ö 9:È«Çå 0:´æÅÌ·µ»Ø ÇëÑ¡Ôñ:");
+		printf(" >1:è¾“å…¥ 2:è¾“å‡º 9:å…¨æ¸… 0:å­˜ç›˜è¿”å› è¯·é€‰æ‹©:");
 		scanf("%d",&sel);
 		switch(sel)
 		{
@@ -262,15 +262,15 @@ void Fileop()		//¼ÒÆ×ÎÄ¼ş²Ù×÷
 		} 
 	} while (sel!=0);
 }
-void BTreeop()		//¼ÒÆ×¶ş²æÊ÷²Ù×÷
+void BTreeop()		//å®¶è°±äºŒå‰æ ‘æ“ä½œ
 {
 	BTree *b;
 	int sel;
-	if (n==0) return;				//¼ÒÆ×¼ÇÂ¼Îª0Ê±Ö±½Ó·µ»Ø
+	if (n==0) return;				//å®¶è°±è®°å½•ä¸º0æ—¶ç›´æ¥è¿”å›
 	b=CreateBTree(fam[0].father);
 	do 
 	{
-		printf(" >1:À¨ºÅ±íÊ¾·¨ 2.ÕÒÄ³ÈËËùÓĞ¶ù×Ó 3.ÕÒÄ³ÈËËùÓĞ×æÏÈ 0:·µ»Ø ÇëÑ¡Ôñ:");
+		printf(" >1:æ‹¬å·è¡¨ç¤ºæ³• 2.æ‰¾æŸäººæ‰€æœ‰å„¿å­ 3.æ‰¾æŸäººæ‰€æœ‰ç¥–å…ˆ 0:è¿”å› è¯·é€‰æ‹©:");
 		scanf("%d",&sel);
 		switch(sel)
 		{
@@ -285,7 +285,7 @@ void BTreeop()		//¼ÒÆ×¶ş²æÊ÷²Ù×÷
 			break;
 		} 
 	} while (sel!=0);
-	DestroyBTree(b);		//Ïú»Ù¼ÒÆ×¶ş²æÊ÷
+	DestroyBTree(b);		//é”€æ¯å®¶è°±äºŒå‰æ ‘
 }
 int main()
 {
@@ -294,7 +294,7 @@ int main()
 	ReadFile();
 	do
 	{	
-		printf("*1.ÎÄ¼ş²Ù×÷ 2:¼ÒÆ×²Ù×÷ 0:ÍË³ö ÇëÑ¡Ôñ:");
+		printf("*1.æ–‡ä»¶æ“ä½œ 2:å®¶è°±æ“ä½œ 0:é€€å‡º è¯·é€‰æ‹©:");
 		scanf("%d",&sel);
 		switch(sel)
 		{

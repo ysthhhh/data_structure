@@ -1,5 +1,5 @@
-//ÎÄ¼şÃû:exp4-5.cpp
-#include "sqstring.cpp"				//°üº¬Ë³Ğò´®µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp4-5.cpp
+#include "sqstring.cpp"				//åŒ…å«é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—ç®—æ³•
 #include <malloc.h>
 SqString *MaxSubstr(SqString s)
 {
@@ -10,12 +10,12 @@ SqString *MaxSubstr(SqString s)
 		j=i+1;
 		while (j<s.length) 
 		{
-			if (s.data[i]==s.data[j]) //ÕÒÒ»×Ó´®,ÆäĞòºÅÎªi,³¤¶ÈÎªlength1
+			if (s.data[i]==s.data[j]) //æ‰¾ä¸€å­ä¸²,å…¶åºå·ä¸ºi,é•¿åº¦ä¸ºlength1
 			{
 				length1=1;
 				for(k=1;s.data[i+k]==s.data[j+k];k++)
 					length1++;
-				if (length1>length)    //½«½Ï´ó³¤¶ÈÕß¸³¸øindexÓëlength
+				if (length1>length)    //å°†è¾ƒå¤§é•¿åº¦è€…èµ‹ç»™indexä¸length
 				{
 					index=i;
 					length=length1;
@@ -24,7 +24,7 @@ SqString *MaxSubstr(SqString s)
 			}
 			else j++;
 		}
-		i++;                                 //¼ÌĞøÉ¨ÃèµÚi×Ö·ûÖ®ºóµÄ×Ö·û
+		i++;                                 //ç»§ç»­æ‰«æç¬¬iå­—ç¬¦ä¹‹åçš„å­—ç¬¦
 	}
 	subs=(SqString *)malloc(sizeof(SqString));
 	subs->length=length;
@@ -36,14 +36,14 @@ int main()
 {
 	char str[MaxSize];
 	SqString s,*subs;
-	printf("ÊäÈë´®:");
+	printf("è¾“å…¥ä¸²:");
 	gets(str);
-	StrAssign(s,str);			//´´½¨´®s
+	StrAssign(s,str);			//åˆ›å»ºä¸²s
 	subs=MaxSubstr(s);
-	printf("Çó×î³¤ÖØ¸´×Ó´®:\n");
-	printf("    Ô­´®:");
+	printf("æ±‚æœ€é•¿é‡å¤å­ä¸²:\n");
+	printf("    åŸä¸²:");
 	DispStr(s);
-	printf("  ×î³¤ÖØ¸´×Ó´®:");	//Êä³ö×î³¤ÖØ¸´×Ó´®
+	printf("  æœ€é•¿é‡å¤å­ä¸²:");	//è¾“å‡ºæœ€é•¿é‡å¤å­ä¸²
 	DispStr(*subs);
 	DestroyStr(s); free(subs);
 	return 1;

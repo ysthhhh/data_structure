@@ -1,43 +1,43 @@
-//ÎÄ¼şÃû:exp9-3.cpp
-#include "seqlist.cpp"				//°üº¬Ë³Ğò±í»ù±¾ÔËËãËã·¨
-#define MAXI 20						//¶¨ÒåË÷Òı±íµÄ×î´ó³¤¶È
+//æ–‡ä»¶å:exp9-3.cpp
+#include "seqlist.cpp"				//åŒ…å«é¡ºåºè¡¨åŸºæœ¬è¿ç®—ç®—æ³•
+#define MAXI 20						//å®šä¹‰ç´¢å¼•è¡¨çš„æœ€å¤§é•¿åº¦
 typedef struct 
 {	
-	KeyType key;					//KeyTypeÎª¹Ø¼ü×ÖµÄÀàĞÍ
-	int link;						//Ö¸Ïò·Ö¿éµÄÆğÊ¼ÏÂ±ê
-} IdxType;							//Ë÷Òı±íÔªËØÀàĞÍ
+	KeyType key;					//KeyTypeä¸ºå…³é”®å­—çš„ç±»å‹
+	int link;						//æŒ‡å‘åˆ†å—çš„èµ·å§‹ä¸‹æ ‡
+} IdxType;							//ç´¢å¼•è¡¨å…ƒç´ ç±»å‹
 
-int IdxSearch(IdxType I[],int b,RecType R[],int n,KeyType k) //·Ö¿é²éÕÒ
+int IdxSearch(IdxType I[],int b,RecType R[],int n,KeyType k) //åˆ†å—æŸ¥æ‰¾
 {
-	int s=(n+b-1)/b;			//sÎªÃ¿¿éµÄÔªËØ¸öÊı£¬Ó¦Îªn/bÈ¡ÉÏ½ç
+	int s=(n+b-1)/b;			//sä¸ºæ¯å—çš„å…ƒç´ ä¸ªæ•°ï¼Œåº”ä¸ºn/bå–ä¸Šç•Œ
 	int count1=0,count2=0;
 	int low=0,high=b-1,mid,i;
-	printf("(1)ÔÚË÷Òı±íÖĞÕÛ°ë²éÕÒ\n");
-	while (low<=high)			//ÔÚË÷Òı±íÖĞ½øĞĞÕÛ°ë²éÕÒ£¬ÕÒµ½µÄÎ»ÖÃÎªhigh+1
+	printf("(1)åœ¨ç´¢å¼•è¡¨ä¸­æŠ˜åŠæŸ¥æ‰¾\n");
+	while (low<=high)			//åœ¨ç´¢å¼•è¡¨ä¸­è¿›è¡ŒæŠ˜åŠæŸ¥æ‰¾ï¼Œæ‰¾åˆ°çš„ä½ç½®ä¸ºhigh+1
 	{
 		mid=(low+high)/2;
-		printf("  µÚ%d´Î±È½Ï:ÔÚ[%d,%d]ÖĞ±È½ÏÔªËØR[%d]:%d\n",count1+1,low,high,mid,I[mid].key);
+		printf("  ç¬¬%dæ¬¡æ¯”è¾ƒ:åœ¨[%d,%d]ä¸­æ¯”è¾ƒå…ƒç´ R[%d]:%d\n",count1+1,low,high,mid,I[mid].key);
 		if (I[mid].key>=k)
 			high=mid-1;
 		else 
 			low=mid+1;
-		count1++;				//count1ÀÛ¼ÆÔÚË÷Òı±íÖĞµÄ±È½Ï´ÎÊı
+		count1++;				//count1ç´¯è®¡åœ¨ç´¢å¼•è¡¨ä¸­çš„æ¯”è¾ƒæ¬¡æ•°
 	}
-	printf("±È½Ï%d´Î,ÔÚµÚ%d¿éÖĞ²éÕÒÔªËØ%d\n",count1,low,k);
-	//Ó¦ÔÚË÷Òı±íµÄhigh+1¿éÖĞ£¬ÔÙÔÚÖ÷Êı¾İ±íÖĞ½øĞĞË³Ğò²éÕÒ
-	i=I[high+1].link;			//ÕÒµ½¶ÔÓ¦µÄ¿é
-	printf("(2)ÔÚ¶ÔÓ¦¿éÖĞË³Ğò²éÕÒ:\n    ");
+	printf("æ¯”è¾ƒ%dæ¬¡,åœ¨ç¬¬%då—ä¸­æŸ¥æ‰¾å…ƒç´ %d\n",count1,low,k);
+	//åº”åœ¨ç´¢å¼•è¡¨çš„high+1å—ä¸­ï¼Œå†åœ¨ä¸»æ•°æ®è¡¨ä¸­è¿›è¡Œé¡ºåºæŸ¥æ‰¾
+	i=I[high+1].link;			//æ‰¾åˆ°å¯¹åº”çš„å—
+	printf("(2)åœ¨å¯¹åº”å—ä¸­é¡ºåºæŸ¥æ‰¾:\n    ");
 	while (i<=I[high+1].link+s-1)
 	{	printf("%d ",R[i].key);
-		count2++;				//count2ÀÛ¼ÆÔÚË³Ğò±í¶ÔÓ¦¿éÖĞµÄ±È½Ï´ÎÊı
+		count2++;				//count2ç´¯è®¡åœ¨é¡ºåºè¡¨å¯¹åº”å—ä¸­çš„æ¯”è¾ƒæ¬¡æ•°
 		if (R[i].key==k) break;
 		i++;
 	}
-	printf("±È½Ï%d´Î,ÔÚË³Ğò±íÖĞ²éÕÒÔªËØ%d\n",count2,k);
+	printf("æ¯”è¾ƒ%dæ¬¡,åœ¨é¡ºåºè¡¨ä¸­æŸ¥æ‰¾å…ƒç´ %d\n",count2,k);
 	if (i<=I[high+1].link+s-1)
-		return i+1;			//²éÕÒ³É¹¦£¬·µ»Ø¸ÃÔªËØµÄÂß¼­ĞòºÅ
+		return i+1;			//æŸ¥æ‰¾æˆåŠŸï¼Œè¿”å›è¯¥å…ƒç´ çš„é€»è¾‘åºå·
 	else
-		return 0;			//²éÕÒÊ§°Ü£¬·µ»Ø0
+		return 0;			//æŸ¥æ‰¾å¤±è´¥ï¼Œè¿”å›0
 }
 
 int main()
@@ -46,13 +46,13 @@ int main()
 	IdxType I[MAXI];
 	int n=25, i;
 	int a[]={8,14,6,9,10,22,34,18,19,31,40,38,54,66,46,71,78,68,80,85,100,94,88,96,87};
-	CreateList(R,a,n);				//½¨Á¢Ë³Ğò±í
-	I[0].key=14;I[0].link=0;		//½¨Á¢Ë÷Òı±í
+	CreateList(R,a,n);				//å»ºç«‹é¡ºåºè¡¨
+	I[0].key=14;I[0].link=0;		//å»ºç«‹ç´¢å¼•è¡¨
 	I[1].key=34;I[1].link=5;
 	I[2].key=66;I[2].link=10;
 	I[3].key=85;I[3].link=15;
 	I[4].key=100;I[4].link=20;
-	printf("¹Ø¼ü×ÖĞòÁĞ:");
+	printf("å…³é”®å­—åºåˆ—:");
 	for (i=0;i<n;i++)
 	{
 		printf("%4d",R[i].key);
@@ -61,11 +61,11 @@ int main()
 	}
 	printf("\n");
 	KeyType k=46;
-	printf("²éÕÒ%dµÄ±È½Ï¹ı³ÌÈçÏÂ:\n",k);
+	printf("æŸ¥æ‰¾%dçš„æ¯”è¾ƒè¿‡ç¨‹å¦‚ä¸‹:\n",k);
 
 	if ((i=IdxSearch(I,5,R,25,k))!=-1)
-		printf("ÔªËØ%dµÄÎ»ÖÃÊÇ%d\n",k,i);
+		printf("å…ƒç´ %dçš„ä½ç½®æ˜¯%d\n",k,i);
 	else
-		printf("ÔªËØ%d²»ÔÚ±íÖĞ\n",k);
+		printf("å…ƒç´ %dä¸åœ¨è¡¨ä¸­\n",k);
 	return 1;
 }

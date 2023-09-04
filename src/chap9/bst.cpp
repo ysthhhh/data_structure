@@ -1,19 +1,19 @@
-//ÎÄ¼şÃû:bst.cpp
+//æ–‡ä»¶å:bst.cpp
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
-typedef int KeyType;					//¶¨Òå¹Ø¼ü×ÖÀàĞÍ
+typedef int KeyType;					//å®šä¹‰å…³é”®å­—ç±»å‹
 typedef char InfoType;
-typedef struct node               		//¼ÇÂ¼ÀàĞÍ
+typedef struct node               		//è®°å½•ç±»å‹
 {	
-	KeyType key;                  		//¹Ø¼ü×ÖÏî
-    InfoType data;               		//ÆäËûÊı¾İÓò
-    struct node *lchild,*rchild;		//×óÓÒº¢×ÓÖ¸Õë
+	KeyType key;                  		//å…³é”®å­—é¡¹
+    InfoType data;               		//å…¶ä»–æ•°æ®åŸŸ
+    struct node *lchild,*rchild;		//å·¦å³å­©å­æŒ‡é’ˆ
 } BSTNode;
-void DispBST(BSTNode *b);				//º¯ÊıËµÃ÷
-bool InsertBST(BSTNode *&bt,KeyType k)	//ÔÚÒÔbtÎª¸ù½ÚµãµÄBSTÖĞ²åÈëÒ»¸ö¹Ø¼ü×ÖÎªkµÄ½Úµã
+void DispBST(BSTNode *b);				//å‡½æ•°è¯´æ˜
+bool InsertBST(BSTNode *&bt,KeyType k)	//åœ¨ä»¥btä¸ºæ ¹èŠ‚ç‚¹çš„BSTä¸­æ’å…¥ä¸€ä¸ªå…³é”®å­—ä¸ºkçš„èŠ‚ç‚¹
 {
-   	if (bt==NULL)						//Ô­Ê÷Îª¿Õ, ĞÂ²åÈëµÄ¼ÇÂ¼Îª¸ù½Úµã
+   	if (bt==NULL)						//åŸæ ‘ä¸ºç©º, æ–°æ’å…¥çš„è®°å½•ä¸ºæ ¹èŠ‚ç‚¹
 	{
 		bt=(BSTNode *)malloc(sizeof(BSTNode));
 		bt->key=k;
@@ -23,75 +23,75 @@ bool InsertBST(BSTNode *&bt,KeyType k)	//ÔÚÒÔbtÎª¸ù½ÚµãµÄBSTÖĞ²åÈëÒ»¸ö¹Ø¼ü×ÖÎªkµ
 	else if (k==bt->key) 
 		return false;
 	else if (k<bt->key) 
-		return InsertBST(bt->lchild,k);	//²åÈëµ½bt½ÚµãµÄ×ó×ÓÊ÷ÖĞ
+		return InsertBST(bt->lchild,k);	//æ’å…¥åˆ°btèŠ‚ç‚¹çš„å·¦å­æ ‘ä¸­
 	else  
-		return InsertBST(bt->rchild,k);  //²åÈëµ½bt½ÚµãµÄÓÒ×ÓÊ÷ÖĞ
+		return InsertBST(bt->rchild,k);  //æ’å…¥åˆ°btèŠ‚ç‚¹çš„å³å­æ ‘ä¸­
 }
 BSTNode *CreateBST(KeyType A[],int n)				
-//ÓÉÊı×éAÖĞµÄ¹Ø¼ü×Ö½¨Á¢Ò»¿Ã¶ş²æÅÅĞòÊ÷
+//ç”±æ•°ç»„Aä¸­çš„å…³é”®å­—å»ºç«‹ä¸€æ£µäºŒå‰æ’åºæ ‘
 {
-  	BSTNode *bt=NULL;         			//³õÊ¼Ê±btÎª¿ÕÊ÷
+  	BSTNode *bt=NULL;         			//åˆå§‹æ—¶btä¸ºç©ºæ ‘
    	int i=0;
    	while (i<n) 
-		if (InsertBST(bt,A[i])==1)		//½«A[i]²åÈë¶ş²æÅÅĞòÊ÷TÖĞ
+		if (InsertBST(bt,A[i])==1)		//å°†A[i]æ’å…¥äºŒå‰æ’åºæ ‘Tä¸­
 		{
-			printf("    µÚ%d²½,²åÈë%d:",i+1,A[i]);
+			printf("    ç¬¬%dæ­¥,æ’å…¥%d:",i+1,A[i]);
 			DispBST(bt);printf("\n");
 			i++;
 		}
-    return bt;               			//·µ»Ø½¨Á¢µÄ¶ş²æÅÅĞòÊ÷µÄ¸ùÖ¸Õë
+    return bt;               			//è¿”å›å»ºç«‹çš„äºŒå‰æ’åºæ ‘çš„æ ¹æŒ‡é’ˆ
 }
-void Delete1(BSTNode *p,BSTNode *&r) //±»É¾½ÚµãpÓĞ×ó¡¢ÓÒ×ÓÊ÷£¬rÖ¸ÏòÆä×óº¢×Ó
+void Delete1(BSTNode *p,BSTNode *&r) //è¢«åˆ èŠ‚ç‚¹pæœ‰å·¦ã€å³å­æ ‘ï¼ŒræŒ‡å‘å…¶å·¦å­©å­
 {	BSTNode *q;
-	if (r->rchild!=NULL)		//µİ¹éÕÒ½ÚµãrµÄ×îÓÒÏÂ½Úµã
+	if (r->rchild!=NULL)		//é€’å½’æ‰¾èŠ‚ç‚¹rçš„æœ€å³ä¸‹èŠ‚ç‚¹
 		Delete1(p,r->rchild);
-	else						//ÕÒµ½ÁË×îÓÒÏÂ½Úµãr£¨ËüÃ»ÓĞÓÒ×ÓÊ÷£©
-	{	p->key=r->key;			//½«½ÚµãrµÄÖµ´æ·Åµ½½ÚµãpÖĞ£¨½ÚµãÖµÌæ´ú£©
+	else						//æ‰¾åˆ°äº†æœ€å³ä¸‹èŠ‚ç‚¹rï¼ˆå®ƒæ²¡æœ‰å³å­æ ‘ï¼‰
+	{	p->key=r->key;			//å°†èŠ‚ç‚¹rçš„å€¼å­˜æ”¾åˆ°èŠ‚ç‚¹pä¸­ï¼ˆèŠ‚ç‚¹å€¼æ›¿ä»£ï¼‰
 		p->data=r->data;
-		q=r;					//É¾³ı½Úµãr
-		r=r->lchild;			//¼´ÓÃ½ÚµãrµÄ×óº¢×ÓÌæ´úËü
-		free(q);				//ÊÍ·Å½ÚµãrµÄ¿Õ¼ä
+		q=r;					//åˆ é™¤èŠ‚ç‚¹r
+		r=r->lchild;			//å³ç”¨èŠ‚ç‚¹rçš„å·¦å­©å­æ›¿ä»£å®ƒ
+		free(q);				//é‡Šæ”¾èŠ‚ç‚¹rçš„ç©ºé—´
 	}
 }
-void Delete(BSTNode *&p)		//´Ó¶ş²æÅÅĞòÊ÷ÖĞÉ¾³ıp½Úµã
+void Delete(BSTNode *&p)		//ä»äºŒå‰æ’åºæ ‘ä¸­åˆ é™¤pèŠ‚ç‚¹
 {
 	BSTNode *q;
-	if (p->rchild==NULL)		//p½ÚµãÃ»ÓĞÓÒ×ÓÊ÷µÄÇé¿ö
+	if (p->rchild==NULL)		//pèŠ‚ç‚¹æ²¡æœ‰å³å­æ ‘çš„æƒ…å†µ
 	{
 		q=p;p=p->lchild;free(q);
 	}
-	else if (p->lchild==NULL)	//p½ÚµãÃ»ÓĞ×ó×ÓÊ÷µÄÇé¿ö
+	else if (p->lchild==NULL)	//pèŠ‚ç‚¹æ²¡æœ‰å·¦å­æ ‘çš„æƒ…å†µ
 	{
 		q=p;p=p->rchild;free(q);
 	}
-	else Delete1(p,p->lchild);	//p½Úµã¼ÈÓĞ×ó×ÓÊ÷ÓÖÓĞÓÒ×ÓÊ÷µÄÇé¿ö
+	else Delete1(p,p->lchild);	//pèŠ‚ç‚¹æ—¢æœ‰å·¦å­æ ‘åˆæœ‰å³å­æ ‘çš„æƒ…å†µ
 }
 bool DeleteBST(BSTNode *&bt,KeyType k)	
-//ÔÚbtÖĞÉ¾³ı¹Ø¼ü×ÖÎªkµÄ½Úµã
+//åœ¨btä¸­åˆ é™¤å…³é”®å­—ä¸ºkçš„èŠ‚ç‚¹
 {
-	if (bt==NULL) return false;		//¿ÕÊ÷É¾³ıÊ§°Ü
+	if (bt==NULL) return false;		//ç©ºæ ‘åˆ é™¤å¤±è´¥
 	else 
 	{
 		if (k<bt->key) 
-			return DeleteBST(bt->lchild,k);		//µİ¹éÔÚ×ó×ÓÊ÷ÖĞÉ¾³ı¹Ø¼ü×ÖÎªkµÄ½Úµã
+			return DeleteBST(bt->lchild,k);		//é€’å½’åœ¨å·¦å­æ ‘ä¸­åˆ é™¤å…³é”®å­—ä¸ºkçš„èŠ‚ç‚¹
 		else if (k>bt->key) 
-			return DeleteBST(bt->rchild,k);		//µİ¹éÔÚÓÒ×ÓÊ÷ÖĞÉ¾³ı¹Ø¼ü×ÖÎªkµÄ½Úµã
-		else									//k=bt->keyµÄÇé¿ö
+			return DeleteBST(bt->rchild,k);		//é€’å½’åœ¨å³å­æ ‘ä¸­åˆ é™¤å…³é”®å­—ä¸ºkçš„èŠ‚ç‚¹
+		else									//k=bt->keyçš„æƒ…å†µ
 		{
-			Delete(bt);							//µ÷ÓÃDelete(bt)º¯ÊıÉ¾³ıbt½Úµã
+			Delete(bt);							//è°ƒç”¨Delete(bt)å‡½æ•°åˆ é™¤btèŠ‚ç‚¹
 			return true;
 		}
 	}
 }
 void SearchBST1(BSTNode *bt,KeyType k,KeyType path[],int i)	
-//ÒÔ·Çµİ¹é·½Ê½Êä³ö´Ó¸ù½Úµãµ½²éÕÒµ½µÄ½ÚµãµÄÂ·¾¶
+//ä»¥éé€’å½’æ–¹å¼è¾“å‡ºä»æ ¹èŠ‚ç‚¹åˆ°æŸ¥æ‰¾åˆ°çš„èŠ‚ç‚¹çš„è·¯å¾„
 { 
 	int j;
 	if (bt==NULL)
 		return;
-	else if (k==bt->key)	//ÕÒµ½ÁË½Úµã
+	else if (k==bt->key)	//æ‰¾åˆ°äº†èŠ‚ç‚¹
 	{
-		path[i+1]=bt->key;	//Êä³öÆäÂ·¾¶
+		path[i+1]=bt->key;	//è¾“å‡ºå…¶è·¯å¾„
 		for (j=0;j<=i+1;j++)
 			printf("%3d",path[j]);
 		printf("\n");
@@ -100,13 +100,13 @@ void SearchBST1(BSTNode *bt,KeyType k,KeyType path[],int i)
 	{
 		path[i+1]=bt->key;
 		if (k<bt->key)
-			SearchBST1(bt->lchild,k,path,i+1);  //ÔÚ×ó×ÓÊ÷ÖĞµİ¹é²éÕÒ
+			SearchBST1(bt->lchild,k,path,i+1);  //åœ¨å·¦å­æ ‘ä¸­é€’å½’æŸ¥æ‰¾
 		else
-			SearchBST1(bt->rchild,k,path,i+1);  //ÔÚÓÒ×ÓÊ÷ÖĞµİ¹é²éÕÒ
+			SearchBST1(bt->rchild,k,path,i+1);  //åœ¨å³å­æ ‘ä¸­é€’å½’æŸ¥æ‰¾
 	}
 }
 int SearchBST2(BSTNode *bt,KeyType k)	
-//ÒÔµİ¹é·½Ê½Êä³ö´Ó¸ù½Úµãµ½²éÕÒµ½µÄ½ÚµãµÄÂ·¾¶
+//ä»¥é€’å½’æ–¹å¼è¾“å‡ºä»æ ¹èŠ‚ç‚¹åˆ°æŸ¥æ‰¾åˆ°çš„èŠ‚ç‚¹çš„è·¯å¾„
 { 
 	if (bt==NULL)
 		return 0;
@@ -116,14 +116,14 @@ int SearchBST2(BSTNode *bt,KeyType k)
 		return 1;
 	}
 	else if (k<bt->key)
-		SearchBST2(bt->lchild,k);  //ÔÚ×ó×ÓÊ÷ÖĞµİ¹é²éÕÒ
+		SearchBST2(bt->lchild,k);  //åœ¨å·¦å­æ ‘ä¸­é€’å½’æŸ¥æ‰¾
 	else
-		SearchBST2(bt->rchild,k);  //ÔÚÓÒ×ÓÊ÷ÖĞµİ¹é²éÕÒ
+		SearchBST2(bt->rchild,k);  //åœ¨å³å­æ ‘ä¸­é€’å½’æŸ¥æ‰¾
 	printf("%3d",bt->key);
 }
 
 void DispBST(BSTNode *bt)	
-//ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶ş²æÅÅĞòÊ÷bt
+//ä»¥æ‹¬å·è¡¨ç¤ºæ³•è¾“å‡ºäºŒå‰æ’åºæ ‘bt
 {
 	if (bt!=NULL)
 	{
@@ -138,8 +138,8 @@ void DispBST(BSTNode *bt)
 		}
 	}
 }
-KeyType predt=-32767;		//predtÎªÈ«¾Ö±äÁ¿,±£´æµ±Ç°½ÚµãÖĞĞòÇ°ÇıµÄÖµ,³õÖµÎª-¡Ş
-bool JudgeBST(BSTNode *bt)	//ÅĞ¶ÏbtÊÇ·ñÎªBST
+KeyType predt=-32767;		//predtä¸ºå…¨å±€å˜é‡,ä¿å­˜å½“å‰èŠ‚ç‚¹ä¸­åºå‰é©±çš„å€¼,åˆå€¼ä¸º-âˆ
+bool JudgeBST(BSTNode *bt)	//åˆ¤æ–­btæ˜¯å¦ä¸ºBST
 {
 	bool b1,b2;
 	if (bt==NULL)
@@ -154,7 +154,7 @@ bool JudgeBST(BSTNode *bt)	//ÅĞ¶ÏbtÊÇ·ñÎªBST
 		return b2;
 	}
 }
-void DestroyBST(BSTNode *bt)	//Ïú»ÙÒ»¿ÅBST
+void DestroyBST(BSTNode *bt)	//é”€æ¯ä¸€é¢—BST
 {
 	if (bt!=NULL)
 	{

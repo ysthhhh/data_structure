@@ -2,16 +2,16 @@
 #include<string.h>
 #define N 5
 int grid[N][N];	
-int dx[]={-2,-1,1,2,2,1,-1,-2};			//x·½ÏòµÄÆ«ÒÆÁ¿ 
-int dy[]={1,2,2,1,-1,-2,-2,-1};			//y·½ÏòµÄÆ«ÒÆÁ¿
+int dx[]={-2,-1,1,2,2,1,-1,-2};			//xæ–¹å‘çš„åç§»é‡ 
+int dy[]={1,2,2,1,-1,-2,-2,-1};			//yæ–¹å‘çš„åç§»é‡
 int cnt=0;
-void DFS(int i,int j,int step)			//´Ó(i,j)¸ñ×Ó¿ªÊ¼ÓÎÀú 
+void DFS(int i,int j,int step)			//ä»(i,j)æ ¼å­å¼€å§‹æ¸¸å† 
 {
 	int ni,nj;
-	if(step>=N*N)						//ÕÒµ½Ò»ÌõÂ·¾¶ 
+	if(step>=N*N)						//æ‰¾åˆ°ä¸€æ¡è·¯å¾„ 
 	{	cnt++;
 		if(cnt<=3)
-		{	printf("µÚ%d¸ö½â\n",cnt); 
+		{	printf("ç¬¬%dä¸ªè§£\n",cnt); 
 			for(int i=0;i<N;i++)
 			{ 
 				for(int j=0;j<N;j++)
@@ -23,34 +23,34 @@ void DFS(int i,int j,int step)			//´Ó(i,j)¸ñ×Ó¿ªÊ¼ÓÎÀú
 	}
 	for(int di=0;di<8;di++)
 	{
-		ni=i+dx[di];						//di·½Î»µÄÏàÁÚ¸ñ×ÓÊÇ(ni,nj) 
+		ni=i+dx[di];						//diæ–¹ä½çš„ç›¸é‚»æ ¼å­æ˜¯(ni,nj) 
 		nj=j+dy[di];
 		if(ni<0 || nj<0 || ni>=N || nj>=N) 
-			continue;						//Èç¹ûÊÇ±ß½çÔò²»¿É×ß
-		if(grid[ni][nj]==0)					//Èç¹ûÕâ¸ö·½Î»¿É×ß
+			continue;						//å¦‚æœæ˜¯è¾¹ç•Œåˆ™ä¸å¯èµ°
+		if(grid[ni][nj]==0)					//å¦‚æœè¿™ä¸ªæ–¹ä½å¯èµ°
 		{
-			grid[ni][nj]=step+1;			//´Ó(i,j)×ßµ½(ni,nj) 
-			DFS(ni,nj,step+1);				//µİ¹éµ÷ÓÃ£¬¼ÌĞø×ßÏÂÈ¥ 
-			grid[ni][nj]=0;					//´Ó(ni,nj)»ØÍË 
+			grid[ni][nj]=step+1;			//ä»(i,j)èµ°åˆ°(ni,nj) 
+			DFS(ni,nj,step+1);				//é€’å½’è°ƒç”¨ï¼Œç»§ç»­èµ°ä¸‹å» 
+			grid[ni][nj]=0;					//ä»(ni,nj)å›é€€ 
 		}
 	}
 }
 int main()
 {
 	int sx, sy;
-	memset(grid,0,sizeof(grid));			//³õÊ¼Ê±gridËùÓĞÔªËØÎª0 
-	printf("ÊäÈëÆğÊ¼µã£º");
+	memset(grid,0,sizeof(grid));			//åˆå§‹æ—¶gridæ‰€æœ‰å…ƒç´ ä¸º0 
+	printf("è¾“å…¥èµ·å§‹ç‚¹ï¼š");
 	scanf("%d %d", &sx, &sy);
 	if(sx<0 || sx>=N || sy<0 || sy>=N)
 	{
-		printf("  ÆğÊ¼Î»ÖÃ´íÎó!\n");
+		printf("  èµ·å§‹ä½ç½®é”™è¯¯!\n");
 		return 0;
 	}
-	printf("\n´Ó(%d,%d)³ö·¢µÄÓÎÀú\n",sx,sy);
-	grid[sx][sy]=1;							//(sx,sy)¸ñ×ÓÊÇµÚ1²½ 
+	printf("\nä»(%d,%d)å‡ºå‘çš„æ¸¸å†\n",sx,sy);
+	grid[sx][sy]=1;							//(sx,sy)æ ¼å­æ˜¯ç¬¬1æ­¥ 
 	DFS(sx, sy,1);
 	printf(".\n\.\n");
-	printf("¹²%d¸ö½â\n",cnt); 
+	printf("å…±%dä¸ªè§£\n",cnt); 
 	return 1;
 }
 

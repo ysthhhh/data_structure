@@ -1,20 +1,20 @@
-//ÎÄ¼şÃû:exp6-1.cpp
+//æ–‡ä»¶å:exp6-1.cpp
 #include <stdio.h>
 #define N 4
 typedef int ElemType;
-#define MaxSize  100		//¾ØÕóÖĞ·ÇÁãÔªËØ×î¶à¸öÊı
+#define MaxSize  100		//çŸ©é˜µä¸­éé›¶å…ƒç´ æœ€å¤šä¸ªæ•°
 typedef struct 
-{	int r;              	//ĞĞºÅ
-    int c;					//ÁĞºÅ
-    ElemType d;            	//ÔªËØÖµ
-} TupNode;              	//ÈıÔª×é¶¨Òå
+{	int r;              	//è¡Œå·
+    int c;					//åˆ—å·
+    ElemType d;            	//å…ƒç´ å€¼
+} TupNode;              	//ä¸‰å…ƒç»„å®šä¹‰
 typedef struct 
-{	int rows;              	//ĞĞÊıÖµ
-    int cols;              	//ÁĞÊıÖµ
-    int nums;              	//·ÇÁãÔªËØ¸öÊı
+{	int rows;              	//è¡Œæ•°å€¼
+    int cols;              	//åˆ—æ•°å€¼
+    int nums;              	//éé›¶å…ƒç´ ä¸ªæ•°
     TupNode data[MaxSize];
-} TSMatrix;                	//ÈıÔª×éË³Ğò±í¶¨Òå
-void CreatMat(TSMatrix &t,ElemType A[N][N])  //²úÉúÏ¡Êè¾ØÕóAµÄÈıÔª×é±íÊ¾t
+} TSMatrix;                	//ä¸‰å…ƒç»„é¡ºåºè¡¨å®šä¹‰
+void CreatMat(TSMatrix &t,ElemType A[N][N])  //äº§ç”Ÿç¨€ç–çŸ©é˜µAçš„ä¸‰å…ƒç»„è¡¨ç¤ºt
 {
 	int i,j;
 	t.rows=N;t.cols=N;t.nums=0;
@@ -28,7 +28,7 @@ void CreatMat(TSMatrix &t,ElemType A[N][N])  //²úÉúÏ¡Êè¾ØÕóAµÄÈıÔª×é±íÊ¾t
 			}
 	}
 }
-void DispMat(TSMatrix t)	//Êä³öÈıÔª×é±íÊ¾t
+void DispMat(TSMatrix t)	//è¾“å‡ºä¸‰å…ƒç»„è¡¨ç¤ºt
 {
 	int i;
 	if (t.nums<=0) 
@@ -38,14 +38,14 @@ void DispMat(TSMatrix t)	//Êä³öÈıÔª×é±íÊ¾t
 	for (i=0;i<t.nums;i++)
 		printf("\t%d\t%d\t%d\n",t.data[i].r,t.data[i].c,t.data[i].d);
 }
-void TranMat(TSMatrix t,TSMatrix &tb)	//ÇóÈıÔª×é±íÊ¾tµÄ×ªÖÃ¾ØÕótb
+void TranMat(TSMatrix t,TSMatrix &tb)	//æ±‚ä¸‰å…ƒç»„è¡¨ç¤ºtçš„è½¬ç½®çŸ©é˜µtb
 {
-	int p,q=0,v;      					//qÎªtb.dataµÄÏÂ±ê
+	int p,q=0,v;      					//qä¸ºtb.dataçš„ä¸‹æ ‡
 	tb.rows=t.cols;tb.cols=t.rows;tb.nums=t.nums;
 	if (t.nums!=0) 
 	{	
-		for (v=0;v<t.cols;v++)			//tb.data[q]ÖĞµÄ¼ÇÂ¼ÒÔcÓòµÄ´ÎĞòÅÅÁĞ
-			for (p=0;p<t.nums;p++) 		//pÎªt.dataµÄÏÂ±ê
+		for (v=0;v<t.cols;v++)			//tb.data[q]ä¸­çš„è®°å½•ä»¥cåŸŸçš„æ¬¡åºæ’åˆ—
+			for (p=0;p<t.nums;p++) 		//pä¸ºt.dataçš„ä¸‹æ ‡
 				if (t.data[p].c==v) 
 				{	
 					tb.data[q].r=t.data[p].c;
@@ -55,35 +55,35 @@ void TranMat(TSMatrix t,TSMatrix &tb)	//ÇóÈıÔª×é±íÊ¾tµÄ×ªÖÃ¾ØÕótb
 				}
 	}
 }
-bool MatAdd(TSMatrix a,TSMatrix b,TSMatrix &c)	//Çóc=a+b
+bool MatAdd(TSMatrix a,TSMatrix b,TSMatrix &c)	//æ±‚c=a+b
 {
 	int i=0,j=0,k=0;
 	ElemType v;
 	if (a.rows!=b.rows || a.cols!=b.cols)
-		return false;						//ĞĞÊı»òÁĞÊı²»µÈÊ±²»ÄÜ½øĞĞÏà¼ÓÔËËã
-	c.rows=a.rows;c.cols=a.cols;			//cµÄĞĞÁĞÊıÓëaµÄÏàÍ¬
-	while (i<a.nums && j<b.nums)			//´¦ÀíaºÍbÖĞµÄÃ¿¸öÔªËØ
+		return false;						//è¡Œæ•°æˆ–åˆ—æ•°ä¸ç­‰æ—¶ä¸èƒ½è¿›è¡Œç›¸åŠ è¿ç®—
+	c.rows=a.rows;c.cols=a.cols;			//cçš„è¡Œåˆ—æ•°ä¸açš„ç›¸åŒ
+	while (i<a.nums && j<b.nums)			//å¤„ç†aå’Œbä¸­çš„æ¯ä¸ªå…ƒç´ 
 	{	
-		if (a.data[i].r==b.data[j].r)		//ĞĞºÅÏàµÈÊ±
+		if (a.data[i].r==b.data[j].r)		//è¡Œå·ç›¸ç­‰æ—¶
 		{	
-			if(a.data[i].c<b.data[j].c)		//aÔªËØµÄÁĞºÅĞ¡ÓÚbÔªËØµÄÁĞºÅ
+			if(a.data[i].c<b.data[j].c)		//aå…ƒç´ çš„åˆ—å·å°äºbå…ƒç´ çš„åˆ—å·
 			{	
-				c.data[k].r=a.data[i].r;	//½«aÔªËØÌí¼Óµ½cÖĞ
+				c.data[k].r=a.data[i].r;	//å°†aå…ƒç´ æ·»åŠ åˆ°cä¸­
 				c.data[k].c=a.data[i].c;
 				c.data[k].d=a.data[i].d;
 				k++;i++;
            	}
-           	else if (a.data[i].c>b.data[j].c)//aÔªËØµÄÁĞºÅ´óÓÚbÔªËØµÄÁĞºÅ
+           	else if (a.data[i].c>b.data[j].c)//aå…ƒç´ çš„åˆ—å·å¤§äºbå…ƒç´ çš„åˆ—å·
 			{	
-				c.data[k].r=b.data[j].r;	//½«bÔªËØÌí¼Óµ½cÖĞ
+				c.data[k].r=b.data[j].r;	//å°†bå…ƒç´ æ·»åŠ åˆ°cä¸­
                	c.data[k].c=b.data[j].c;
                	c.data[k].d=b.data[j].d;
                	k++;j++;
            	}
-           	else							//aÔªËØµÄÁĞºÅµÈÓÚbÔªËØµÄÁĞºÅ
+           	else							//aå…ƒç´ çš„åˆ—å·ç­‰äºbå…ƒç´ çš„åˆ—å·
 			{ 	
 				v=a.data[i].d+b.data[j].d;
-				if (v!=0)					//Ö»½«²»Îª0µÄ½á¹ûÌí¼Óµ½cÖĞ
+				if (v!=0)					//åªå°†ä¸ä¸º0çš„ç»“æœæ·»åŠ åˆ°cä¸­
 				{	
 					c.data[k].r=a.data[i].r;
 					c.data[k].c=a.data[i].c;
@@ -93,16 +93,16 @@ bool MatAdd(TSMatrix a,TSMatrix b,TSMatrix &c)	//Çóc=a+b
 				i++;j++;
           	 }
 		}
-     	else if (a.data[i].r<b.data[j].r)	//aÔªËØµÄĞĞºÅĞ¡ÓÚbÔªËØµÄĞĞºÅ
+     	else if (a.data[i].r<b.data[j].r)	//aå…ƒç´ çš„è¡Œå·å°äºbå…ƒç´ çš„è¡Œå·
 		{	
-			c.data[k].r=a.data[i].r;		//½«aÔªËØÌí¼Óµ½cÖĞ
+			c.data[k].r=a.data[i].r;		//å°†aå…ƒç´ æ·»åŠ åˆ°cä¸­
 			c.data[k].c=a.data[i].c;
 			c.data[k].d=a.data[i].d;
 			k++;i++;
 		}
-    	else								//aÔªËØµÄĞĞºÅ´óÓÚbÔªËØµÄĞĞºÅ
+    	else								//aå…ƒç´ çš„è¡Œå·å¤§äºbå…ƒç´ çš„è¡Œå·
 		{	
-			c.data[k].r=b.data[j].r;		//½«bÔªËØÌí¼Óµ½cÖĞ
+			c.data[k].r=b.data[j].r;		//å°†bå…ƒç´ æ·»åŠ åˆ°cä¸­
 			c.data[k].c=b.data[j].c;
 			c.data[k].d=b.data[j].d;
 			k++;j++;
@@ -111,7 +111,7 @@ bool MatAdd(TSMatrix a,TSMatrix b,TSMatrix &c)	//Çóc=a+b
 	}
 	return true;
 }
-int getvalue(TSMatrix t,int i,int j)		//·µ»ØÈıÔª×ét±íÊ¾µÄA[i][j]Öµ
+int getvalue(TSMatrix t,int i,int j)		//è¿”å›ä¸‰å…ƒç»„tè¡¨ç¤ºçš„A[i][j]å€¼
 {
     int k=0;
     while (k<t.nums && (t.data[k].r!=i || t.data[k].c!=j)) 
@@ -121,11 +121,11 @@ int getvalue(TSMatrix t,int i,int j)		//·µ»ØÈıÔª×ét±íÊ¾µÄA[i][j]Öµ
     else 
 		return(0);
 }
-bool MatMul(TSMatrix a,TSMatrix b,TSMatrix &c)	//Çóc=a¡Áb
+bool MatMul(TSMatrix a,TSMatrix b,TSMatrix &c)	//æ±‚c=aÃ—b
 {
     int i,j,k,p=0;
 	ElemType s;
-	if (a.cols!=b.rows)		//aµÄÁĞÊı²»µÈÓÚbµÄĞĞÊıÊ±²»ÄÜ½øĞĞÏà³ËÔËËã
+	if (a.cols!=b.rows)		//açš„åˆ—æ•°ä¸ç­‰äºbçš„è¡Œæ•°æ—¶ä¸èƒ½è¿›è¡Œç›¸ä¹˜è¿ç®—
 		return false;
 	for (i=0;i<a.rows;i++)
 		for (j=0;j<b.cols;j++) 
@@ -133,7 +133,7 @@ bool MatMul(TSMatrix a,TSMatrix b,TSMatrix &c)	//Çóc=a¡Áb
             s=0;
             for (k=0;k<a.cols;k++)
 				s=s+getvalue(a,i,k)*getvalue(b,k,j);
-            if (s!=0)     //²úÉúÒ»¸öÈıÔª×éÔªËØ
+            if (s!=0)     //äº§ç”Ÿä¸€ä¸ªä¸‰å…ƒç»„å…ƒç´ 
             {
                 c.data[p].r=i;
                 c.data[p].c=j;
@@ -153,16 +153,16 @@ int main()
 	TSMatrix a,b,c;
 	CreatMat(a,a1);
 	CreatMat(b,b1);
-	printf("aµÄÈıÔª×é:\n");DispMat(a);
-	printf("bµÄÈıÔª×é:\n");DispMat(b);
-	printf("a×ªÖÃÎªc\n");
+	printf("açš„ä¸‰å…ƒç»„:\n");DispMat(a);
+	printf("bçš„ä¸‰å…ƒç»„:\n");DispMat(b);
+	printf("aè½¬ç½®ä¸ºc\n");
 	TranMat(a,c);
-	printf("cµÄÈıÔª×é:\n");DispMat(c);
+	printf("cçš„ä¸‰å…ƒç»„:\n");DispMat(c);
 	printf("c=a+b\n");
 	MatAdd(a,b,c);
-	printf("cµÄÈıÔª×é:\n");DispMat(c);
-	printf("c=a¡Áb\n");
+	printf("cçš„ä¸‰å…ƒç»„:\n");DispMat(c);
+	printf("c=aÃ—b\n");
 	MatMul(a,b,c);
-	printf("cµÄÈıÔª×é:\n");DispMat(c);
+	printf("cçš„ä¸‰å…ƒç»„:\n");DispMat(c);
 	return 1;
 }

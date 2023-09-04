@@ -1,25 +1,25 @@
-//ÎÄ¼şÃû:exp8-5.cpp
-#include "graph.cpp"			//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp8-5.cpp
+#include "graph.cpp"			//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
 void Prim(MatGraph g,int v)
 {
 	int lowcost[MAXV],min,n=g.n;
 	int closest[MAXV],i,j,k;
-	for (i=0;i<n;i++)          	//¸ølowcost[]ºÍclosest[]ÖÃ³õÖµ
+	for (i=0;i<n;i++)          	//ç»™lowcost[]å’Œclosest[]ç½®åˆå€¼
 	{	
 		lowcost[i]=g.edges[v][i];
 		closest[i]=v;
 	}
-	for (i=1;i<n;i++)          	//ÕÒ³ön-1¸ö¶¥µã
+	for (i=1;i<n;i++)          	//æ‰¾å‡ºn-1ä¸ªé¡¶ç‚¹
 	{   
 		min=INF;
-	    for (j=0;j<n;j++)       //ÔÚ(V-U)ÖĞÕÒ³öÀëU×î½üµÄ¶¥µãk
+	    for (j=0;j<n;j++)       //åœ¨(V-U)ä¸­æ‰¾å‡ºç¦»Uæœ€è¿‘çš„é¡¶ç‚¹k
 		   	if (lowcost[j]!=0 && lowcost[j]<min) 
 			{	
 				min=lowcost[j]; k=j;  
 			}
-		printf("  ±ß(%d,%d)È¨Îª:%d\n",closest[k],k,min);
-		lowcost[k]=0;         	//±ê¼ÇkÒÑ¾­¼ÓÈëU
-		for (j=0;j<n;j++)   	//ĞŞ¸ÄÊı×élowcostºÍclosest
+		printf("  è¾¹(%d,%d)æƒä¸º:%d\n",closest[k],k,min);
+		lowcost[k]=0;         	//æ ‡è®°kå·²ç»åŠ å…¥U
+		for (j=0;j<n;j++)   	//ä¿®æ”¹æ•°ç»„lowcostå’Œclosest
            	if (g.edges[k][j]!=0 && g.edges[k][j]<lowcost[j]) 
 			{	lowcost[j]=g.edges[k][j];
 				closest[j]=k; 
@@ -38,9 +38,9 @@ int main()
 		{INF,INF,INF,5,0,1},
 		{3,INF,9,6,1,0}};
 	int n=6,e=10;
-	CreateMat(g,A,n,e);		//½¨Á¢Í¼8.10µÄÁÚ½Ó¾ØÕó
-	printf("Í¼GµÄÁÚ½Ó¾ØÕó:\n");	DispMat(g);
-	printf("ÆÕÀïÄ·Ëã·¨Çó½â½á¹û:\n");
+	CreateMat(g,A,n,e);		//å»ºç«‹å›¾8.10çš„é‚»æ¥çŸ©é˜µ
+	printf("å›¾Gçš„é‚»æ¥çŸ©é˜µ:\n");	DispMat(g);
+	printf("æ™®é‡Œå§†ç®—æ³•æ±‚è§£ç»“æœ:\n");
 	Prim(g,0);
 	return 1;
 }

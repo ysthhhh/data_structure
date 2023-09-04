@@ -1,23 +1,23 @@
-//ÎÄ¼şÃû:exp9-10.cpp
-#include "bst.cpp"   //¶ş²æÅÅĞòÊ÷»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp9-10.cpp
+#include "bst.cpp"   //äºŒå‰æ’åºæ ‘åŸºæœ¬è¿ç®—ç®—æ³•
 
-void Succlength(BSTNode *bt,int &sumlen,int &m,int level) //Çó²éÕÒ³É¹¦×ÜµÄ±È½Ï´ÎÊısumlenºÍÇé¿öÊım
+void Succlength(BSTNode *bt,int &sumlen,int &m,int level) //æ±‚æŸ¥æ‰¾æˆåŠŸæ€»çš„æ¯”è¾ƒæ¬¡æ•°sumlenå’Œæƒ…å†µæ•°m
 {
-	if (bt==NULL) return;	//¿ÕÊ÷Ö±½Ó·µ»Ø
+	if (bt==NULL) return;	//ç©ºæ ‘ç›´æ¥è¿”å›
 	m++;
 	sumlen+=level;
 	Succlength(bt->lchild,sumlen,m,level+1);
 	Succlength(bt->rchild,sumlen,m,level+1);
 }
-double ASLsucc(BSTNode *bt)	//Çó²éÕÒ³É¹¦Çé¿öÏÂµÄÆ½¾ù²éÕÒ³¤¶È
+double ASLsucc(BSTNode *bt)	//æ±‚æŸ¥æ‰¾æˆåŠŸæƒ…å†µä¸‹çš„å¹³å‡æŸ¥æ‰¾é•¿åº¦
 {
 	int sumlen=0,m=0;
 	Succlength(bt,sumlen,m,1);
 	return sumlen*1.0/m;
 }
-void Unsucclength(BSTNode *bt,int &sumlen,int &m,int level) //Çó²éÕÒÊ§°Ü×ÜµÄ±È½Ï´ÎÊısumlenºÍÇé¿öÊım
+void Unsucclength(BSTNode *bt,int &sumlen,int &m,int level) //æ±‚æŸ¥æ‰¾å¤±è´¥æ€»çš„æ¯”è¾ƒæ¬¡æ•°sumlenå’Œæƒ…å†µæ•°m
 {
-	if (bt==NULL)		//¿ÕÖ¸Õë¶ÔÓ¦Íâ²¿½Úµã
+	if (bt==NULL)		//ç©ºæŒ‡é’ˆå¯¹åº”å¤–éƒ¨èŠ‚ç‚¹
 	{
 		m++;
 		sumlen+=level-1;
@@ -26,7 +26,7 @@ void Unsucclength(BSTNode *bt,int &sumlen,int &m,int level) //Çó²éÕÒÊ§°Ü×ÜµÄ±È½Ï
 	Unsucclength(bt->lchild,sumlen,m,level+1);
 	Unsucclength(bt->rchild,sumlen,m,level+1);
 }
-double ASLunsucc(BSTNode *bt)	//Çó²éÕÒÊ§°ÜÇé¿öÏÂµÄÆ½¾ù²éÕÒ³¤¶È
+double ASLunsucc(BSTNode *bt)	//æ±‚æŸ¥æ‰¾å¤±è´¥æƒ…å†µä¸‹çš„å¹³å‡æŸ¥æ‰¾é•¿åº¦
 {
 	int sumlen=0,m=0;
 	Unsucclength(bt,sumlen,m,1);
@@ -37,7 +37,7 @@ int main()
 	BSTNode *bt;
 	int n=12;
 	KeyType a[]={25,18,46,2,53,39,32,4,74,67,60,11};
-	printf("(1)´´½¨BST\n");				//´´½¨¡¶½Ì³Ì¡·Àı9.3µÄÒ»¿ÃBST
+	printf("(1)åˆ›å»ºBST\n");				//åˆ›å»ºã€Šæ•™ç¨‹ã€‹ä¾‹9.3çš„ä¸€æ£µBST
 	bt=CreateBST(a,n);
 	printf("(2)BST:"); DispBST(bt); printf("\n");
 	printf("(3)ASLsucc=%g\n",ASLsucc(bt));

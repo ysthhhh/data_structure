@@ -2,50 +2,50 @@
 #include<string.h>
 #define N 8
 int grid[N][N];	
-int dx[8]={-2,-1,1,2,2,1,-1,-2};			//x·½ÏòµÄÆ«ÒÆÁ¿ 
-int dy[8]={1,2,2,1,-1,-2,-2,-1};			//y·½ÏòµÄÆ«ÒÆÁ¿
-bool DFS(int i,int j,int step)			//´Ó(i,j)¸ñ×Ó¿ªÊ¼ÓÎÀú 
+int dx[8]={-2,-1,1,2,2,1,-1,-2};			//xæ–¹å‘çš„åç§»é‡ 
+int dy[8]={1,2,2,1,-1,-2,-2,-1};			//yæ–¹å‘çš„åç§»é‡
+bool DFS(int i,int j,int step)			//ä»(i,j)æ ¼å­å¼€å§‹æ¸¸å† 
 {
 	if(step>=N*N) return true;
-	int exists[8]={0};						//¼ÇÂ¼Ã¿¸ö·½Î»³ö¿ÚµÄ³öÂ·Êı
-	int nexti[8]={0};						//¼ÇÂ¼Ã¿¸ö·½Î»³ö¿ÚµÄ¸ñ×Ó 
+	int exists[8]={0};						//è®°å½•æ¯ä¸ªæ–¹ä½å‡ºå£çš„å‡ºè·¯æ•°
+	int nexti[8]={0};						//è®°å½•æ¯ä¸ªæ–¹ä½å‡ºå£çš„æ ¼å­ 
 	int nextj[8]={0};
 	int ni,nj;
 	int count, mindi;
-	for(int di=0;di<8;di++)					//³õÊ¼»¯Ã¿¸ö·½Î»³ö¿ÚµÄ³öÂ·ÊıÎª0 
+	for(int di=0;di<8;di++)					//åˆå§‹åŒ–æ¯ä¸ªæ–¹ä½å‡ºå£çš„å‡ºè·¯æ•°ä¸º0 
 		exists[di]=0;
-	int total=0;							//(i,j)¸ñ×ÓµÄ³ö¿ÚÊıÎªtotal£¬³õÊ¼Îª0 
-	for(int di=0;di<8;di++)					//ÊÔÌ½(i,j)¸ñ×ÓµÄ8¸ö·½Î»
+	int total=0;							//(i,j)æ ¼å­çš„å‡ºå£æ•°ä¸ºtotalï¼Œåˆå§‹ä¸º0 
+	for(int di=0;di<8;di++)					//è¯•æ¢(i,j)æ ¼å­çš„8ä¸ªæ–¹ä½
 	{
-		ni=i+dx[di];						//di·½Î»µÄÏàÁÚ¸ñ×ÓÊÇ(ni,nj) 
+		ni=i+dx[di];						//diæ–¹ä½çš„ç›¸é‚»æ ¼å­æ˜¯(ni,nj) 
 		nj=j+dy[di];
 		if(ni<0 || nj<0 || ni>=N || nj>=N) 
-			continue;						//Èç¹ûÊÇ±ß½çÔò²»¿É×ß
-		if(grid[ni][nj]==0)					//Èç¹ûÕâ¸ö·½Î»¿É×ß£¬¼ÇÂ¼ÏÂÀ´
-		{	nexti[total]=ni;				//(ni,nj)ÊÇ(i,j)µÄµÚtotal¸öÏàÁÚ¿É×ß¸ñ×Ó
+			continue;						//å¦‚æœæ˜¯è¾¹ç•Œåˆ™ä¸å¯èµ°
+		if(grid[ni][nj]==0)					//å¦‚æœè¿™ä¸ªæ–¹ä½å¯èµ°ï¼Œè®°å½•ä¸‹æ¥
+		{	nexti[total]=ni;				//(ni,nj)æ˜¯(i,j)çš„ç¬¬totalä¸ªç›¸é‚»å¯èµ°æ ¼å­
 			nextj[total]=nj;
-			total++;						//(i,j)¸ñ×ÓµÄ³ö¿ÚÊıÔö1
+			total++;						//(i,j)æ ¼å­çš„å‡ºå£æ•°å¢1
 		}
 	}
-	if(total==0)							//Èç¹û³ö¿ÚÊıÎª0Ôò·µ»Ø
+	if(total==0)							//å¦‚æœå‡ºå£æ•°ä¸º0åˆ™è¿”å›
 		return false;
-	else if(total==1)						//Èç¹ûÖ»ÓĞÒ»¸ö³ö¿Ú£¬mindi±íÊ¾¸Ã³ö¿Ú
+	else if(total==1)						//å¦‚æœåªæœ‰ä¸€ä¸ªå‡ºå£ï¼Œmindiè¡¨ç¤ºè¯¥å‡ºå£
 		mindi=0;
 	else
 	{	
-		for(int c=0;c<total;c++)			//ÇóÃ¿¸ö³ö¿ÚµÄ³ö¿ÚÊı
-			for(int di=0;di<8;di++)			//ÊÔÌ½Ã¿¸ö·½Î»µÄÏàÁÚ¸ñ×Ó 
+		for(int c=0;c<total;c++)			//æ±‚æ¯ä¸ªå‡ºå£çš„å‡ºå£æ•°
+			for(int di=0;di<8;di++)			//è¯•æ¢æ¯ä¸ªæ–¹ä½çš„ç›¸é‚»æ ¼å­ 
 			{
 				ni=nexti[c]+dx[di];
 				nj=nextj[c]+dy[di];
 				if(ni<0 || nj<0 || ni>=N || nj>=N)
 					continue;
-				if(grid[ni][nj]==0)			//(ni,nj)¸ñ×ÓÊÇ¿É×ßµÄ 
+				if(grid[ni][nj]==0)			//(ni,nj)æ ¼å­æ˜¯å¯èµ°çš„ 
 					exists[c]++;
 			}
 		int tmp=exists[0];
 		mindi=0;
-		for(int c=1;c<total;c++)		//ÔÚ¶à¸ö³ö¿ÚÖĞÕÒ×îĞ¡³ö¿ÚÊıµÄ³ö¿Úmindi
+		for(int c=1;c<total;c++)		//åœ¨å¤šä¸ªå‡ºå£ä¸­æ‰¾æœ€å°å‡ºå£æ•°çš„å‡ºå£mindi
 			if(exists[c]<tmp)
 			{
 				tmp=exists[c];
@@ -61,18 +61,18 @@ bool DFS(int i,int j,int step)			//´Ó(i,j)¸ñ×Ó¿ªÊ¼ÓÎÀú
 int main(void)
 {
 	int sx, sy;
-	memset(grid,0,sizeof(grid));			//³õÊ¼Ê±gridËùÓĞÔªËØÎª0 
-	printf("ÊäÈëÆğÊ¼µã£º");
+	memset(grid,0,sizeof(grid));			//åˆå§‹æ—¶gridæ‰€æœ‰å…ƒç´ ä¸º0 
+	printf("è¾“å…¥èµ·å§‹ç‚¹ï¼š");
 	scanf("%d %d", &sx, &sy);
 	if(sx<0 || sx>=N || sy<0 || sy>=N)
 	{
-		printf("  ÆğÊ¼Î»ÖÃ´íÎó!\n");
+		printf("  èµ·å§‹ä½ç½®é”™è¯¯!\n");
 		return 0;
 	}
-	grid[sx][sy]=1;							//(sx,sy)¸ñ×ÓÊÇµÚ1²½ 
+	grid[sx][sy]=1;							//(sx,sy)æ ¼å­æ˜¯ç¬¬1æ­¥ 
 	if(DFS(sx, sy,1))
 	{
-		printf("´Ó(%d,%d)³ö·¢µÄÓÎÀúÍê³É£¬ÓÎÀúÈçÏÂ:\n",sx,sy);
+		printf("ä»(%d,%d)å‡ºå‘çš„æ¸¸å†å®Œæˆï¼Œæ¸¸å†å¦‚ä¸‹:\n",sx,sy);
 		for(int i=0;i<N;i++)
 		{ 
 			for(int j=0;j<N;j++)
@@ -81,7 +81,7 @@ int main(void)
 		}
 	}
 	else
-		printf("ÓÎÀúÊ§°Ü£¡\n");
+		printf("æ¸¸å†å¤±è´¥ï¼\n");
 	return 1;
 }
 

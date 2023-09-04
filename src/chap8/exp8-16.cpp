@@ -1,16 +1,16 @@
 #include<stdio.h>
 using namespace std;
 #define MAXV 1010
-#define INF 0x3f3f3f3f							//¶¨Òå¡Ş
+#define INF 0x3f3f3f3f							//å®šä¹‰âˆ
 int n,m;
 int D[MAXV][MAXV],C[MAXV][MAXV];
 int s,t;
-void Dijkstra()								//µÒ¿ËË¹ÌØÀ­Ëã·¨
+void Dijkstra()								//ç‹„å…‹æ–¯ç‰¹æ‹‰ç®—æ³•
 {	int dist[MAXV];
 	int cost[MAXV];
 	int S[MAXV];
 	int mindist,u;
-	for(int i=1;i<=n;i++)							//dist¡¢cost¡¢S³õÊ¼»¯
+	for(int i=1;i<=n;i++)							//distã€costã€Såˆå§‹åŒ–
 	{	dist[i]=D[s][i];
 		cost[i]=C[s][i];
 		S[i]=0;
@@ -20,35 +20,35 @@ void Dijkstra()								//µÒ¿ËË¹ÌØÀ­Ëã·¨
 	for(int i=0;i<n-1;i++)
 	{	mindist=INF;
 		u=s;
-		for(int j=1;j<=n;j++)						//ÇóÉĞÎ´¿¼ÂÇµÄ¡¢¾àÀë×îĞ¡µÄ¶¥µãu
+		for(int j=1;j<=n;j++)						//æ±‚å°šæœªè€ƒè™‘çš„ã€è·ç¦»æœ€å°çš„é¡¶ç‚¹u
 		{	if (S[j]==0 && mindist>dist[j])
 			{	mindist=dist[j];
 				u=j;
 			}
 		}
-		if (mindist==INF) break;					//ÕÒ²»µ½Á¬Í¨µÄ¶¥µã
-		S[u]=1;									//½«¶¥µãu¼ÓÈëS¼¯ºÏ
-		for (int j=1;j<=n;j++)						//¿¼ÂÇ¶¥µãu,Çósµ½Ã¿¸ö¶¥µãjµÄ×î¶ÌÂ·¾¶³¤¶ÈºÍ»¨·Ñ
-		{	int d=mindist+D[u][j];				//d¼ÇÂ¼¾­¹ı¶¥µãuµÄÂ·¾¶³¤¶È
-			int c=cost[u]+C[u][j];					//c¼ÇÂ¼¾­¹ı¶¥µãuµÄ»¨·Ñ
+		if (mindist==INF) break;					//æ‰¾ä¸åˆ°è¿é€šçš„é¡¶ç‚¹
+		S[u]=1;									//å°†é¡¶ç‚¹uåŠ å…¥Sé›†åˆ
+		for (int j=1;j<=n;j++)						//è€ƒè™‘é¡¶ç‚¹u,æ±‚såˆ°æ¯ä¸ªé¡¶ç‚¹jçš„æœ€çŸ­è·¯å¾„é•¿åº¦å’ŒèŠ±è´¹
+		{	int d=mindist+D[u][j];				//dè®°å½•ç»è¿‡é¡¶ç‚¹uçš„è·¯å¾„é•¿åº¦
+			int c=cost[u]+C[u][j];					//cè®°å½•ç»è¿‡é¡¶ç‚¹uçš„èŠ±è´¹
 			if(S[j]==0 && d<dist[j])
 			{	dist[j]=d;
 				cost[j]=c;
 			}
 			else if(S[j]==0 && d==dist[j] && c<cost[j])
-				cost[j]=c;						//ÓĞ¶àÌõ³¤¶ÈÏàÍ¬µÄ×î¶ÌÂ·¾¶Ê±Çó×îĞ¡»¨·Ñ
+				cost[j]=c;						//æœ‰å¤šæ¡é•¿åº¦ç›¸åŒçš„æœ€çŸ­è·¯å¾„æ—¶æ±‚æœ€å°èŠ±è´¹
 		}
-		if(S[t]==1)								//ÒÑ¾­Çó³ösµ½tµÄ×î¶ÌÂ·¾¶
-		{	printf("  ×î¶Ì¾àÀëÎª%d£¬»¨·ÑÎª%d\n",dist[t],cost[t]);
+		if(S[t]==1)								//å·²ç»æ±‚å‡ºsåˆ°tçš„æœ€çŸ­è·¯å¾„
+		{	printf("  æœ€çŸ­è·ç¦»ä¸º%dï¼ŒèŠ±è´¹ä¸º%d\n",dist[t],cost[t]);
 			return;
 		}
 	}
 }
 int main()
 {
-	freopen("data16.txt","r",stdin);	//ÊäÈëÖØ¶¨Ïò 
+	freopen("data16.txt","r",stdin);	//è¾“å…¥é‡å®šå‘ 
 	int a,b,d,p;
-	printf("ÊäÈëÊı¾İ\n"); 
+	printf("è¾“å…¥æ•°æ®\n"); 
 	scanf("%d%d",&n,&m); 
 	printf("  n=%d,m=%d\n",n,m);
 	for(int i=1;i<=n;i++)
@@ -60,15 +60,15 @@ int main()
 	int cnt=0;
 	for(int i=0;i<m;i++)
 	{	scanf("%d%d%d%d\n",&a,&b,&d,&p);
-		printf("  µÚ%dÌõ±ß: (%d,%d),³¤¶È:%d,»¨·Ñ%d\n",++cnt,a,b,d,p); 
+		printf("  ç¬¬%dæ¡è¾¹: (%d,%d),é•¿åº¦:%d,èŠ±è´¹%d\n",++cnt,a,b,d,p); 
 		if(D[a][b]>d)
-		{	D[a][b]=D[b][a]=d;				//ÎŞÏòÍ¼µÄ±ßÊÇ¶Ô³ÆµÄ
+		{	D[a][b]=D[b][a]=d;				//æ— å‘å›¾çš„è¾¹æ˜¯å¯¹ç§°çš„
 			C[a][b]=C[b][a]=p;
 		}
 	}
 	scanf("%d%d",&s,&t);
-	printf("  Æğµã:%d  ÖÕµã:%d\n",s,t); 
-	printf("Çó½â½á¹û\n"); 
+	printf("  èµ·ç‚¹:%d  ç»ˆç‚¹:%d\n",s,t); 
+	printf("æ±‚è§£ç»“æœ\n"); 
 	Dijkstra();
 	return 0;
 }

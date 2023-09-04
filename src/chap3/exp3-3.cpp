@@ -1,32 +1,32 @@
-//ÎÄ¼şÃû:exp3-3.cpp
-#include "sqqueue.cpp"		//°üº¬»·ĞÎ¶ÓÁĞµÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp3-3.cpp
+#include "sqqueue.cpp"		//åŒ…å«ç¯å½¢é˜Ÿåˆ—çš„åŸºæœ¬è¿ç®—ç®—æ³•
 int main()
 {
 	ElemType e;
 	SqQueue *q;
-	printf("»·ĞÎ¶ÓÁĞ»ù±¾ÔËËãÈçÏÂ:\n");
-	printf("  (1)³õÊ¼»¯¶ÓÁĞq\n");
+	printf("ç¯å½¢é˜Ÿåˆ—åŸºæœ¬è¿ç®—å¦‚ä¸‹:\n");
+	printf("  (1)åˆå§‹åŒ–é˜Ÿåˆ—q\n");
 	InitQueue(q);
-	printf("  (2)ÒÀ´Î½ø¶ÓÁĞÔªËØa,b,c\n");
-	if (!enQueue(q,'a')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	if (!enQueue(q,'b')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	if (!enQueue(q,'c')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	printf("  (3)¶ÓÁĞÎª%s\n",(QueueEmpty(q)?"¿Õ":"·Ç¿Õ"));
+	printf("  (2)ä¾æ¬¡è¿›é˜Ÿåˆ—å…ƒç´ a,b,c\n");
+	if (!enQueue(q,'a')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	if (!enQueue(q,'b')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	if (!enQueue(q,'c')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	printf("  (3)é˜Ÿåˆ—ä¸º%s\n",(QueueEmpty(q)?"ç©º":"éç©º"));
 	if (deQueue(q,e)==0) 
-		printf("¶Ó¿Õ,²»ÄÜ³ö¶Ó\n");
+		printf("é˜Ÿç©º,ä¸èƒ½å‡ºé˜Ÿ\n");
 	else
-		printf("  (4)³ö¶ÓÒ»¸öÔªËØ%c\n",e);
-	printf("  (5)ÒÀ´Î½ø¶ÓÁĞÔªËØd,e,f\n");
-	if (!enQueue(q,'d')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	if (!enQueue(q,'e')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	if (!enQueue(q,'f')) printf("\tÌáÊ¾:¶ÓÂú,²»ÄÜ½ø¶Ó\n");
-	printf("  (6)³ö¶ÓÁĞĞòÁĞ:");
+		printf("  (4)å‡ºé˜Ÿä¸€ä¸ªå…ƒç´ %c\n",e);
+	printf("  (5)ä¾æ¬¡è¿›é˜Ÿåˆ—å…ƒç´ d,e,f\n");
+	if (!enQueue(q,'d')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	if (!enQueue(q,'e')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	if (!enQueue(q,'f')) printf("\tæç¤º:é˜Ÿæ»¡,ä¸èƒ½è¿›é˜Ÿ\n");
+	printf("  (6)å‡ºé˜Ÿåˆ—åºåˆ—:");
 	while (!QueueEmpty(q))
 	{	deQueue(q,e);
 		printf("%c ",e);
 	}
 	printf("\n");
-	printf("  (7)ÊÍ·Å¶ÓÁĞ\n");
+	printf("  (7)é‡Šæ”¾é˜Ÿåˆ—\n");
 	DestroyQueue(q);
 	return 1;
 }

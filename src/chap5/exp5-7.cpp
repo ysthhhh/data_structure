@@ -1,37 +1,37 @@
-//ÎÄ¼şÃû:exp5-7.cpp
+//æ–‡ä»¶å:exp5-7.cpp
 #include <stdio.h>
 #include <stdlib.h>
-const int N=20;      	//×î¶à»Êºó¸öÊı
-int q[N];            	//´æ·Å¸÷»ÊºóËùÔÚµÄÁĞºÅ
-int count=0;          	//´æ·Å½â¸öÊı
-void print(int n)    	//Êä³öÒ»¸ö½â
+const int N=20;      	//æœ€å¤šçš‡åä¸ªæ•°
+int q[N];            	//å­˜æ”¾å„çš‡åæ‰€åœ¨çš„åˆ—å·
+int count=0;          	//å­˜æ”¾è§£ä¸ªæ•°
+void print(int n)    	//è¾“å‡ºä¸€ä¸ªè§£
 {
 	count++;
 	int i;
-	printf("  µÚ%d¸ö½â£º",count);
+	printf("  ç¬¬%dä¸ªè§£ï¼š",count);
 	for (i=1;i<=n;i++)
 		printf("(%d,%d) ",i,q[i]);
 	printf("\n");
 }
-bool place(int k,int j)			//²âÊÔ(k,j)Î»ÖÃÄÜ·ñ°Ú·Å»Êºó
+bool place(int k,int j)			//æµ‹è¯•(k,j)ä½ç½®èƒ½å¦æ‘†æ”¾çš‡å
 {
 	int i=1;
-	while (i<k)       			//i=1¡«k-1ÊÇÒÑ·ÅÖÃÁË»ÊºóµÄĞĞ
+	while (i<k)       			//i=1ï½k-1æ˜¯å·²æ”¾ç½®äº†çš‡åçš„è¡Œ
 	{
 	    if ((q[i]==j) || (abs(q[i]-j)==abs(i-k)))
-		    return false;		//ÓĞ³åÍ»Ê±·µ»Ø¼Ù
+		    return false;		//æœ‰å†²çªæ—¶è¿”å›å‡
 	    i++;
 	}
-	return true;				//Ã»ÓĞ³åÍ»Ê±·µ»ØÕæ
+	return true;				//æ²¡æœ‰å†²çªæ—¶è¿”å›çœŸ
 }
-void queen(int k,int n)			//·ÅÖÃ1¡«kµÄ»Êºó
+void queen(int k,int n)			//æ”¾ç½®1ï½kçš„çš‡å
 {
 	int j;
 	if (k>n) 
-		print(n);         		//ËùÓĞ»Êºó·ÅÖÃ½áÊø
+		print(n);         		//æ‰€æœ‰çš‡åæ”¾ç½®ç»“æŸ
 	else
-		for (j=1;j<=n;j++) 		//ÔÚµÚkĞĞÉÏÇî¾ÙÃ¿Ò»¸öÎ»ÖÃ
-		    if (place(k,j))		//ÔÚµÚkĞĞÉÏÕÒµ½Ò»¸öºÏÊÊÎ»ÖÃ(k,j)
+		for (j=1;j<=n;j++) 		//åœ¨ç¬¬kè¡Œä¸Šç©·ä¸¾æ¯ä¸€ä¸ªä½ç½®
+		    if (place(k,j))		//åœ¨ç¬¬kè¡Œä¸Šæ‰¾åˆ°ä¸€ä¸ªåˆé€‚ä½ç½®(k,j)
 			{
 				q[k]=j;
 				queen(k+1,n);
@@ -39,14 +39,14 @@ void queen(int k,int n)			//·ÅÖÃ1¡«kµÄ»Êºó
 }
 int main()
 {
-	int n;     					//n´æ·ÅÊµ¼Ê»Êºó¸öÊı
-	printf(" »ÊºóÎÊÌâ(n<20) n:");
+	int n;     					//nå­˜æ”¾å®é™…çš‡åä¸ªæ•°
+	printf(" çš‡åé—®é¢˜(n<20) n:");
 	scanf("%d",&n);
 	if (n>20)
-		printf("nÖµÌ«´ó,²»ÄÜÇó½â\n");
+		printf("nå€¼å¤ªå¤§,ä¸èƒ½æ±‚è§£\n");
 	else
 	{
-		printf(" %d»ÊºóÎÊÌâÇó½âÈçÏÂ£º\n",n);
+		printf(" %dçš‡åé—®é¢˜æ±‚è§£å¦‚ä¸‹ï¼š\n",n);
 		queen(1,n);
 		printf("\n");
     }

@@ -1,14 +1,14 @@
-//ÎÄ¼şÃû:exp9-14.cpp
+//æ–‡ä»¶å:exp9-14.cpp
 #include <stdio.h>
 #include <malloc.h>
 #include <math.h>
 typedef struct node
 {
-	long index;						//µ±Ç°½Úµã¶ÔÓ¦µÄ¼ÇÂ¼ÏÂ±ê
-	int level;						//µ±Ç°½ÚµãµÄ²ã´Î
-	struct node *lchild,*rchild;	//×óÓÒº¢×ÓÖ¸Õë
-} DecNode;							//ÅĞ¶¨Ê÷½ÚµãÀàĞÍ
-void CreateDectree1(DecNode *&b,long low,long high,int h) //ÓÉCreateDectreeµ÷ÓÃÒÔ½¨Á¢ÅĞ¶¨Ê÷
+	long index;						//å½“å‰èŠ‚ç‚¹å¯¹åº”çš„è®°å½•ä¸‹æ ‡
+	int level;						//å½“å‰èŠ‚ç‚¹çš„å±‚æ¬¡
+	struct node *lchild,*rchild;	//å·¦å³å­©å­æŒ‡é’ˆ
+} DecNode;							//åˆ¤å®šæ ‘èŠ‚ç‚¹ç±»å‹
+void CreateDectree1(DecNode *&b,long low,long high,int h) //ç”±CreateDectreeè°ƒç”¨ä»¥å»ºç«‹åˆ¤å®šæ ‘
 {
 	int mid;
 	if (low<=high)
@@ -23,12 +23,12 @@ void CreateDectree1(DecNode *&b,long low,long high,int h) //ÓÉCreateDectreeµ÷ÓÃÒ
 	else
 		b=NULL;
 }
-void CreateDectree(DecNode *&b,long n)	//½¨Á¢ÅĞ¶¨Ê÷b
+void CreateDectree(DecNode *&b,long n)	//å»ºç«‹åˆ¤å®šæ ‘b
 {
 	CreateDectree1(b,0,n-1,1);
 }
 	
-void DispDectree(DecNode *b)	//ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶ş²æÊ÷b
+void DispDectree(DecNode *b)	//ä»¥æ‹¬å·è¡¨ç¤ºæ³•è¾“å‡ºäºŒå‰æ ‘b
 {
 	if (b!=NULL)
 	{
@@ -43,7 +43,7 @@ void DispDectree(DecNode *b)	//ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶ş²æÊ÷b
 		}
 	}
 }
-void DestroyDectree(DecNode *&b)		//Ïú»ÙÅĞ¶¨Ê÷b
+void DestroyDectree(DecNode *&b)		//é”€æ¯åˆ¤å®šæ ‘b
 {
 	if (b!=NULL)
 	{
@@ -52,7 +52,7 @@ void DestroyDectree(DecNode *&b)		//Ïú»ÙÅĞ¶¨Ê÷b
 		free(b);
 	}
 }
-int Sum(DecNode *b)		//ÇóÅĞ¶¨Ê÷bÖĞ±È½ÏµÄ×Ü´ÎÊı
+int Sum(DecNode *b)		//æ±‚åˆ¤å®šæ ‘bä¸­æ¯”è¾ƒçš„æ€»æ¬¡æ•°
 {
 	if (b!=NULL)
 	{
@@ -64,7 +64,7 @@ int Sum(DecNode *b)		//ÇóÅĞ¶¨Ê÷bÖĞ±È½ÏµÄ×Ü´ÎÊı
 	else
 		return 0;
 }
-double ASLsucc(DecNode *b,long n)	//Çó³É¹¦Çé¿öÏÂµÄÆ½¾ù²éÕÒ³¤¶È
+double ASLsucc(DecNode *b,long n)	//æ±‚æˆåŠŸæƒ…å†µä¸‹çš„å¹³å‡æŸ¥æ‰¾é•¿åº¦
 {
 	return 1.0*Sum(b)/n;
 }
@@ -74,12 +74,12 @@ int main()
 	long n=11;
 	double d,asl1,asl2;
 	CreateDectree(b,n);
-	printf("R[0..%d]ÅĞ¶¨Ê÷:\n\t",n-1);
+	printf("R[0..%d]åˆ¤å®šæ ‘:\n\t",n-1);
 	DispDectree(b);
 	printf("\n\tASL=%g\n",ASLsucc(b,n));
 	DestroyDectree(b);
-	printf("³É¹¦Æ½¾ù²éÕÒ³¤¶È·ÖÎö:\n");
-	printf("\tn\t\tASL1\t\tASL2\t\t²îÖµ\n");  
+	printf("æˆåŠŸå¹³å‡æŸ¥æ‰¾é•¿åº¦åˆ†æ:\n");
+	printf("\tn\t\tASL1\t\tASL2\t\tå·®å€¼\n");  
 	for (n=10;n<=1000000;n*=10)
 	{
 		CreateDectree(b,n);

@@ -1,76 +1,76 @@
-//ÎÄ¼şÃû:travsal.cpp
-#include "graph.cpp"					//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
-int visited[MAXV];						//È«¾ÖÊı×é
-void DFS(AdjGraph *G,int v)				//µİ¹éÉî¶ÈÓÅÏÈ±éÀúËã·¨
+//æ–‡ä»¶å:travsal.cpp
+#include "graph.cpp"					//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
+int visited[MAXV];						//å…¨å±€æ•°ç»„
+void DFS(AdjGraph *G,int v)				//é€’å½’æ·±åº¦ä¼˜å…ˆéå†ç®—æ³•
 {
 	ArcNode *p;
-	visited[v]=1;                   	//ÖÃÒÑ·ÃÎÊ±ê¼Ç
-	printf("%3d",v); 					//Êä³ö±»·ÃÎÊ¶¥µãµÄ±àºÅ
-	p=G->adjlist[v].firstarc;      		//pÖ¸Ïò¶¥µãvµÄµÚÒ»Ìõ»¡µÄ»¡Í·½áµã
+	visited[v]=1;                   	//ç½®å·²è®¿é—®æ ‡è®°
+	printf("%3d",v); 					//è¾“å‡ºè¢«è®¿é—®é¡¶ç‚¹çš„ç¼–å·
+	p=G->adjlist[v].firstarc;      		//pæŒ‡å‘é¡¶ç‚¹vçš„ç¬¬ä¸€æ¡å¼§çš„å¼§å¤´ç»“ç‚¹
 	while (p!=NULL) 
 	{	
-		if (visited[p->adjvex]==0)		//Èôp->adjvex¶¥µãÎ´·ÃÎÊ,µİ¹é·ÃÎÊËü
+		if (visited[p->adjvex]==0)		//è‹¥p->adjvexé¡¶ç‚¹æœªè®¿é—®,é€’å½’è®¿é—®å®ƒ
 			DFS(G,p->adjvex);    
-		p=p->nextarc;              		//pÖ¸Ïò¶¥µãvµÄÏÂÒ»Ìõ»¡µÄ»¡Í·½áµã
+		p=p->nextarc;              		//pæŒ‡å‘é¡¶ç‚¹vçš„ä¸‹ä¸€æ¡å¼§çš„å¼§å¤´ç»“ç‚¹
 	}
 }
-void DFS1(AdjGraph *G,int v)		//·Çµİ¹éÉî¶ÈÓÅÏÈ±éÀúËã·¨
+void DFS1(AdjGraph *G,int v)		//éé€’å½’æ·±åº¦ä¼˜å…ˆéå†ç®—æ³•
 {
 	ArcNode *p;
 	int St[MAXV];
 	int top=-1,w,x,i;
     for (i=0;i<G->n;i++) 
-		visited[i]=0;				//¶¥µã·ÃÎÊ±êÖ¾¾ùÖÃ³É0
-	printf("%3d",v);				//·ÃÎÊ¶¥µãv
-	visited[v]=1;					//ÖÃ¶¥µãvÒÑ·ÃÎÊ
-	top++; St[top]=v;				//½«¶¥µãv½øÕ»
-	while (top>-1)					//Õ»²»¿ÕÑ­»·
+		visited[i]=0;				//é¡¶ç‚¹è®¿é—®æ ‡å¿—å‡ç½®æˆ0
+	printf("%3d",v);				//è®¿é—®é¡¶ç‚¹v
+	visited[v]=1;					//ç½®é¡¶ç‚¹vå·²è®¿é—®
+	top++; St[top]=v;				//å°†é¡¶ç‚¹vè¿›æ ˆ
+	while (top>-1)					//æ ˆä¸ç©ºå¾ªç¯
 	{
-		x=St[top]; 					//È¡Õ»¶¥¶¥µãx×÷Îªµ±Ç°¶¥µã
-		p=G->adjlist[x].firstarc;	//ÕÒ¶¥µãxµÄµÚÒ»¸öÏàÁÚµã
+		x=St[top]; 					//å–æ ˆé¡¶é¡¶ç‚¹xä½œä¸ºå½“å‰é¡¶ç‚¹
+		p=G->adjlist[x].firstarc;	//æ‰¾é¡¶ç‚¹xçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 		while (p!=NULL)
 		{
-			w=p->adjvex;			//xµÄÏàÁÚµãÎªw
-			if (visited[w]==0)		//Èô¶¥µãwÃ»ÓĞ·ÃÎÊ
+			w=p->adjvex;			//xçš„ç›¸é‚»ç‚¹ä¸ºw
+			if (visited[w]==0)		//è‹¥é¡¶ç‚¹wæ²¡æœ‰è®¿é—®
 			{
-				printf("%3d",w);	//·ÃÎÊ¶¥µãw
-				visited[w]=1;		//ÖÃ¶¥µãwÒÑ·ÃÎÊ
-				top++;				//½«¶¥µãw½øÕ»
+				printf("%3d",w);	//è®¿é—®é¡¶ç‚¹w
+				visited[w]=1;		//ç½®é¡¶ç‚¹wå·²è®¿é—®
+				top++;				//å°†é¡¶ç‚¹wè¿›æ ˆ
 				St[top]=w;
-				break;				//ÍË³öÑ­»·£¬¼´ÔÙ´¦ÀíÕ»¶¥µÄ¶¥µã(ÌåÏÖºó½øÏÈ³ö)
+				break;				//é€€å‡ºå¾ªç¯ï¼Œå³å†å¤„ç†æ ˆé¡¶çš„é¡¶ç‚¹(ä½“ç°åè¿›å…ˆå‡º)
 			}
-			p=p->nextarc;			//ÕÒ¶¥µãxµÄÏÂÒ»¸öÏàÁÚµã
+			p=p->nextarc;			//æ‰¾é¡¶ç‚¹xçš„ä¸‹ä¸€ä¸ªç›¸é‚»ç‚¹
 		}
-		if (p==NULL) top--;			//Èô¶¥µãxÔÙÃ»ÓĞÏàÁÚµã£¬½«ÆäÍËÕ»
+		if (p==NULL) top--;			//è‹¥é¡¶ç‚¹xå†æ²¡æœ‰ç›¸é‚»ç‚¹ï¼Œå°†å…¶é€€æ ˆ
 	}
 	printf("\n");
 }
-void BFS(AdjGraph *G,int v)					//¹ã¶ÈÓÅÏÈ±éÀúËã·¨		
+void BFS(AdjGraph *G,int v)					//å¹¿åº¦ä¼˜å…ˆéå†ç®—æ³•		
 {
 	ArcNode *p;
-	int queue[MAXV],front=0,rear=0;			//¶¨Òå»·ĞÎ¶ÓÁĞ²¢³õÊ¼»¯
-	int visited[MAXV];            			//¶¨Òå´æ·Å¶¥µãµÄ·ÃÎÊ±êÖ¾µÄÊı×é
+	int queue[MAXV],front=0,rear=0;			//å®šä¹‰ç¯å½¢é˜Ÿåˆ—å¹¶åˆå§‹åŒ–
+	int visited[MAXV];            			//å®šä¹‰å­˜æ”¾é¡¶ç‚¹çš„è®¿é—®æ ‡å¿—çš„æ•°ç»„
 	int w,i;
-	for (i=0;i<G->n;i++) visited[i]=0;		//·ÃÎÊ±êÖ¾Êı×é³õÊ¼»¯
-	printf("%3d",v); 						//Êä³ö±»·ÃÎÊ¶¥µãµÄ±àºÅ
-	visited[v]=1;              				//ÖÃÒÑ·ÃÎÊ±ê¼Ç
+	for (i=0;i<G->n;i++) visited[i]=0;		//è®¿é—®æ ‡å¿—æ•°ç»„åˆå§‹åŒ–
+	printf("%3d",v); 						//è¾“å‡ºè¢«è®¿é—®é¡¶ç‚¹çš„ç¼–å·
+	visited[v]=1;              				//ç½®å·²è®¿é—®æ ‡è®°
 	rear=(rear+1)%MAXV;
-	queue[rear]=v;             				//v½ø¶Ó
-	while (front!=rear)       				//Èô¶ÓÁĞ²»¿ÕÊ±Ñ­»·
+	queue[rear]=v;             				//vè¿›é˜Ÿ
+	while (front!=rear)       				//è‹¥é˜Ÿåˆ—ä¸ç©ºæ—¶å¾ªç¯
 	{	
 		front=(front+1)%MAXV;
-		w=queue[front];       				//³ö¶Ó²¢¸³¸øw
-		p=G->adjlist[w].firstarc; 			//ÕÒ¶¥µãwµÄµÚÒ»¸öÏàÁÚµã
+		w=queue[front];       				//å‡ºé˜Ÿå¹¶èµ‹ç»™w
+		p=G->adjlist[w].firstarc; 			//æ‰¾é¡¶ç‚¹wçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 		while (p!=NULL) 
 		{	
-			if (visited[p->adjvex]==0) 		//ÈôÏàÁÚµãÎ´±»·ÃÎÊ
+			if (visited[p->adjvex]==0) 		//è‹¥ç›¸é‚»ç‚¹æœªè¢«è®¿é—®
 			{	
-				printf("%3d",p->adjvex);  	//·ÃÎÊÏàÁÚµã
-				visited[p->adjvex]=1;		//ÖÃ¸Ã¶¥µãÒÑ±»·ÃÎÊµÄ±êÖ¾
-				rear=(rear+1)%MAXV;			//¸Ã¶¥µã½ø¶Ó
+				printf("%3d",p->adjvex);  	//è®¿é—®ç›¸é‚»ç‚¹
+				visited[p->adjvex]=1;		//ç½®è¯¥é¡¶ç‚¹å·²è¢«è®¿é—®çš„æ ‡å¿—
+				rear=(rear+1)%MAXV;			//è¯¥é¡¶ç‚¹è¿›é˜Ÿ
 				queue[rear]=p->adjvex; 		
            	}
-           	p=p->nextarc;              		//ÕÒÏÂÒ»¸öÏàÁÚµã
+           	p=p->nextarc;              		//æ‰¾ä¸‹ä¸€ä¸ªç›¸é‚»ç‚¹
 		}
 	}
 	printf("\n");

@@ -10,101 +10,101 @@ int U[MAXV];
 int lowcost[MAXV];
 int n;
 
-int Prim()									//½â·¨1£ºPrimËã·¨Çó¶¥µã1³ö·¢µÄ×îĞ¡Éú³ÉÊ÷µÄÈ¨ÖµºÍ
+int Prim()									//è§£æ³•1ï¼šPrimç®—æ³•æ±‚é¡¶ç‚¹1å‡ºå‘çš„æœ€å°ç”Ÿæˆæ ‘çš„æƒå€¼å’Œ
 {	memset(U,0,sizeof(U));
 	memset(lowcost,0x3f,sizeof(lowcost));
-	int ans=0;								//´æ·Å½á¹û
+	int ans=0;								//å­˜æ”¾ç»“æœ
 	lowcost[1]=0;
 	for(int i=1;i<=n;i++)
 	{	int minc=INF,k=0;
-		for(int j=1;j<=n;j++)					//ÔÚ(V-U)ÖĞÕÒ³öÀëU×î½üµÄ¶¥µãk
+		for(int j=1;j<=n;j++)					//åœ¨(V-U)ä¸­æ‰¾å‡ºç¦»Uæœ€è¿‘çš„é¡¶ç‚¹k
 			if(!U[j] && lowcost[j]<minc)
 			{	minc=lowcost[j];
 				k=j;
 			}
-		ans+=minc;							//ÀÛ¼Æ×îĞ¡Éú³ÉÊ÷µÄ±ßÈ¨
-		U[k]=1;								//±ê¼ÇkÒÑ¾­¼ÓÈëU
-		for(int i=1;i<=n;i++)					//µ÷Õû
+		ans+=minc;							//ç´¯è®¡æœ€å°ç”Ÿæˆæ ‘çš„è¾¹æƒ
+		U[k]=1;								//æ ‡è®°kå·²ç»åŠ å…¥U
+		for(int i=1;i<=n;i++)					//è°ƒæ•´
 			if(U[i]==0 && lowcost[i]>mat[k][i])
 				lowcost[i]=mat[k][i];
 	}
 	return ans;
 }
-//----²¢²é¼¯»ù±¾ÔËËãËã·¨ 
-int parent[MAXV];							//²¢²é¼¯´æ´¢½á¹¹
-int rnk[MAXV];								//´æ´¢½áµãµÄÖÈ
-void Init(int n)								//²¢²é¼¯³õÊ¼»¯
-{	for (int i=1;i<=n;i++)						//¶¥µã±àºÅ1µ½n 
+//----å¹¶æŸ¥é›†åŸºæœ¬è¿ç®—ç®—æ³• 
+int parent[MAXV];							//å¹¶æŸ¥é›†å­˜å‚¨ç»“æ„
+int rnk[MAXV];								//å­˜å‚¨ç»“ç‚¹çš„ç§©
+void Init(int n)								//å¹¶æŸ¥é›†åˆå§‹åŒ–
+{	for (int i=1;i<=n;i++)						//é¡¶ç‚¹ç¼–å·1åˆ°n 
 	{	parent[i]=i;
 		rnk[i]=0;
 	}
 }
-int Find(int x)								//²¢²é¼¯ÖĞ²éÕÒx½áµãµÄ¸ù½áµã
+int Find(int x)								//å¹¶æŸ¥é›†ä¸­æŸ¥æ‰¾xç»“ç‚¹çš„æ ¹ç»“ç‚¹
 {	if (x!=parent[x])
-		parent[x]=Find(parent[x]);			//Â·¾¶Ñ¹Ëõ
+		parent[x]=Find(parent[x]);			//è·¯å¾„å‹ç¼©
 	return parent[x];
 }
-void Union(int x,int y)						//²¢²é¼¯ÖĞxºÍyµÄÁ½¸ö¼¯ºÏµÄºÏ²¢
+void Union(int x,int y)						//å¹¶æŸ¥é›†ä¸­xå’Œyçš„ä¸¤ä¸ªé›†åˆçš„åˆå¹¶
 {	int rx=Find(x);
 	int ry=Find(y);
-	if (rx==ry)								//xºÍyÊôÓÚÍ¬Ò»¿ÃÊ÷µÄÇé¿ö
+	if (rx==ry)								//xå’Œyå±äºåŒä¸€æ£µæ ‘çš„æƒ…å†µ
 		return;
 	if (rnk[rx]<rnk[ry])
-		parent[rx]=ry;						//rx½áµã×÷ÎªryµÄº¢×Ó 
+		parent[rx]=ry;						//rxç»“ç‚¹ä½œä¸ºryçš„å­©å­ 
 	else
-	{	if (rnk[rx]==rnk[ry])					//ÖÈÏàÍ¬£¬ºÏ²¢ºórxµÄÖÈÔö1
+	{	if (rnk[rx]==rnk[ry])					//ç§©ç›¸åŒï¼Œåˆå¹¶årxçš„ç§©å¢1
 			rnk[rx]++;
-		parent[ry]=rx;						//ry½áµã×÷ÎªrxµÄº¢×Ó
+		parent[ry]=rx;						//ryç»“ç‚¹ä½œä¸ºrxçš„å­©å­
 	}
 }
-struct Edge								//±ßÏòÁ¿ÔªËØÀàĞÍ
-{	int u;									//±ßµÄÆğÊ¼¶¥µã
-	int v;									//±ßµÄÖÕÖ¹¶¥µã
-	int w;									//±ßµÄÈ¨Öµ
-	Edge(int u,int v,int w)					//¹¹Ôìº¯Êı
+struct Edge								//è¾¹å‘é‡å…ƒç´ ç±»å‹
+{	int u;									//è¾¹çš„èµ·å§‹é¡¶ç‚¹
+	int v;									//è¾¹çš„ç»ˆæ­¢é¡¶ç‚¹
+	int w;									//è¾¹çš„æƒå€¼
+	Edge(int u,int v,int w)					//æ„é€ å‡½æ•°
 	{	this->u=u;
 		this->v=v;
 		this->w=w;
 	}
-	bool operator<(const Edge &s) const		//ÖØÔØ<ÔËËã·û
+	bool operator<(const Edge &s) const		//é‡è½½<è¿ç®—ç¬¦
 	{
-		return w<s.w;						//ÓÃÓÚ°´wµİÔöÅÅĞò
+		return w<s.w;						//ç”¨äºæŒ‰wé€’å¢æ’åº
 	}
 };
-int Kruskal()								//½â·¨2£º¸Ä½øµÄKruskalËã·¨Çó×îĞ¡Éú³ÉÊ÷µÄÈ¨ÖµºÍ
+int Kruskal()								//è§£æ³•2ï¼šæ”¹è¿›çš„Kruskalç®—æ³•æ±‚æœ€å°ç”Ÿæˆæ ‘çš„æƒå€¼å’Œ
 {	int ans=0;
-	vector<Edge> E;							//½¨Á¢´æ·ÅËùÓĞ±ßµÄÏòÁ¿E
-	for (int i=1;i<=n;i++)						//ÓÉÍ¼µÄÁÚ½Ó¾ØÕóg²úÉú±ßÏòÁ¿E
+	vector<Edge> E;							//å»ºç«‹å­˜æ”¾æ‰€æœ‰è¾¹çš„å‘é‡E
+	for (int i=1;i<=n;i++)						//ç”±å›¾çš„é‚»æ¥çŸ©é˜µgäº§ç”Ÿè¾¹å‘é‡E
 		for (int j=1;j<=n;j++)
 			if (i<j)
 				E.push_back(Edge(i,j,mat[i][j]));
-	sort(E.begin(),E.end());					//¶ÔE°´È¨ÖµµİÔöÅÅĞò
-	Init(n);									//²¢²é¼¯³õÊ¼»¯
-	int k=1;									//k±íÊ¾µ±Ç°¹¹ÔìÉú³ÉÊ÷µÄµÚ¼¸Ìõ±ß,³õÖµÎª1
-	int j=0;									//EÖĞ±ßµÄÏÂ±ê,³õÖµÎª0
-	while (k<n)								//Éú³ÉµÄ±ßÊıĞ¡ÓÚnÊ±Ñ­»·
+	sort(E.begin(),E.end());					//å¯¹EæŒ‰æƒå€¼é€’å¢æ’åº
+	Init(n);									//å¹¶æŸ¥é›†åˆå§‹åŒ–
+	int k=1;									//kè¡¨ç¤ºå½“å‰æ„é€ ç”Ÿæˆæ ‘çš„ç¬¬å‡ æ¡è¾¹,åˆå€¼ä¸º1
+	int j=0;									//Eä¸­è¾¹çš„ä¸‹æ ‡,åˆå€¼ä¸º0
+	while (k<n)								//ç”Ÿæˆçš„è¾¹æ•°å°äºnæ—¶å¾ªç¯
 	{	int u1=E[j].u;
-		int v1=E[j].v;						//È¡Ò»Ìõ±ßµÄÆğÊ¼ºÍÖÕÖ¹¶¥µã
+		int v1=E[j].v;						//å–ä¸€æ¡è¾¹çš„èµ·å§‹å’Œç»ˆæ­¢é¡¶ç‚¹
 		int sn1=Find(u1);
-		int sn2=Find(v1);					//·Ö±ğµÃµ½Á½¸ö¶¥µãËùÊôµÄ¼¯ºÏ±àºÅ
-		if (sn1!=sn2)							//Á½¶¥µãÊôÓÚ²»Í¬µÄ¼¯ºÏ,¸Ã±ßÊÇ×îĞ¡Éú³ÉÊ÷µÄÒ»Ìõ±ß
-		{	ans+=E[j].w;					//ÀÛ¼Æ×îĞ¡Éú³ÉÊ÷µÄ±ßÈ¨
-			k++;							//Éú³É±ßÊıÔö1
-			Union(sn1,sn2);					//ºÏ²¢
+		int sn2=Find(v1);					//åˆ†åˆ«å¾—åˆ°ä¸¤ä¸ªé¡¶ç‚¹æ‰€å±çš„é›†åˆç¼–å·
+		if (sn1!=sn2)							//ä¸¤é¡¶ç‚¹å±äºä¸åŒçš„é›†åˆ,è¯¥è¾¹æ˜¯æœ€å°ç”Ÿæˆæ ‘çš„ä¸€æ¡è¾¹
+		{	ans+=E[j].w;					//ç´¯è®¡æœ€å°ç”Ÿæˆæ ‘çš„è¾¹æƒ
+			k++;							//ç”Ÿæˆè¾¹æ•°å¢1
+			Union(sn1,sn2);					//åˆå¹¶
 		}
-		j++;									//É¨ÃèÏÂÒ»Ìõ±ß
+		j++;									//æ‰«æä¸‹ä¸€æ¡è¾¹
 	}
 	return ans;
 }
 int main()
 {
-	freopen("data14.txt","r",stdin);	//ÊäÈëÖØ¶¨Ïò 
+	freopen("data14.txt","r",stdin);	//è¾“å…¥é‡å®šå‘ 
 	scanf("%d",&n);
-	printf("´å×¯n=%d\n",n);
+	printf("æ‘åº„n=%d\n",n);
 	for(int i=1;i<=n;i++)
 		for(int j=1;j<=n;j++)
 			scanf("%d",&mat[i][j]);
-	printf("ÁÚ½Ó¾ØÕó\n"); 
+	printf("é‚»æ¥çŸ©é˜µ\n"); 
 	for(int i=1;i<=n;i++)
 	{
 		for(int j=1;j<=n;j++)
@@ -113,16 +113,16 @@ int main()
 	}
 	int k;
 	scanf("%d",&k);
-	printf("ÒÑ¾­½¨ºÃÈçÏÂ%dÌõµÀÂ·\n",k);
+	printf("å·²ç»å»ºå¥½å¦‚ä¸‹%dæ¡é“è·¯\n",k);
 	for(int i=0;i<k;i++)
 	{	int a,b;
 		scanf("%d%d",&a,&b);
 		printf("  (%d,%d)\n",a,b);
 		mat[a][b]=mat[b][a]=0;
 	}
-	printf("Çó½â½á¹û\n"); 
-	printf("  ½â·¨1: %d\n",Prim());
-	printf("  ½â·¨2: %d\n",Kruskal());
+	printf("æ±‚è§£ç»“æœ\n"); 
+	printf("  è§£æ³•1: %d\n",Prim());
+	printf("  è§£æ³•2: %d\n",Kruskal());
 	return 0;
 }
 

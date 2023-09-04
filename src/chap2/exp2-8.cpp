@@ -1,62 +1,62 @@
-//ÎÄ¼şÃû:exp2-8.cpp
+//æ–‡ä»¶å:exp2-8.cpp
 #include "linklist.cpp"
-void sort(LinkNode *&L)		//µ¥Á´±íÔªËØµİÔöÅÅĞò
+void sort(LinkNode *&L)		//å•é“¾è¡¨å…ƒç´ é€’å¢æ’åº
 {
 	LinkNode *p,*pre,*q;
-	p=L->next->next;		//pÖ¸ÏòLµÄµÚ2¸öÊı¾İ½áµã
-	L->next->next=NULL;		//¹¹ÔìÖ»º¬Ò»¸öÊı¾İ½áµãµÄÓĞĞò±í
+	p=L->next->next;		//pæŒ‡å‘Lçš„ç¬¬2ä¸ªæ•°æ®ç»“ç‚¹
+	L->next->next=NULL;		//æ„é€ åªå«ä¸€ä¸ªæ•°æ®ç»“ç‚¹çš„æœ‰åºè¡¨
 	while (p!=NULL)
-	{	q=p->next;			//q±£´æp½áµãµÄºó¼Ì½áµã
-		pre=L;				//´ÓÓĞĞò±í¿ªÍ·½øĞĞ±È½Ï,preÖ¸Ïò²åÈë½áµãpµÄÇ°Çı½áµã
+	{	q=p->next;			//qä¿å­˜pç»“ç‚¹çš„åç»§ç»“ç‚¹
+		pre=L;				//ä»æœ‰åºè¡¨å¼€å¤´è¿›è¡Œæ¯”è¾ƒ,preæŒ‡å‘æ’å…¥ç»“ç‚¹pçš„å‰é©±ç»“ç‚¹
 		while (pre->next!=NULL && pre->next->data<p->data)
-			pre=pre->next;	//ÔÚÓĞĞò±íÖĞÕÒpre½áµã
-		p->next=pre->next;	//½«½áµãpreÖ®ºó²åÈëp½áµã
+			pre=pre->next;	//åœ¨æœ‰åºè¡¨ä¸­æ‰¾preç»“ç‚¹
+		p->next=pre->next;	//å°†ç»“ç‚¹preä¹‹åæ’å…¥pç»“ç‚¹
 		pre->next=p;
-		p=q;				//É¨ÃèÔ­µ¥Á´±íÓàÏÂµÄ½áµã
+		p=q;				//æ‰«æåŸå•é“¾è¡¨ä½™ä¸‹çš„ç»“ç‚¹
 	}
 }
 
-void Union(LinkNode *ha,LinkNode *hb,LinkNode *&hc)  //ÇóÁ½ÓĞĞò¼¯ºÏµÄ²¢
+void Union(LinkNode *ha,LinkNode *hb,LinkNode *&hc)  //æ±‚ä¸¤æœ‰åºé›†åˆçš„å¹¶
 {
 	LinkNode *pa=ha->next,*pb=hb->next,*s,*tc;
-	hc=(LinkNode *)malloc(sizeof(LinkNode));	//´´½¨Í·½áµã
+	hc=(LinkNode *)malloc(sizeof(LinkNode));	//åˆ›å»ºå¤´ç»“ç‚¹
 	tc=hc;
 	while (pa!=NULL && pb!=NULL)
 	{
 		if (pa->data<pb->data)
 		{
-			s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+			s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 			s->data=pa->data;
 			tc->next=s;tc=s;
 			pa=pa->next;
 		}
 		else if (pa->data>pb->data)
 		{
-			s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+			s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 			s->data=pb->data;
 			tc->next=s;tc=s;
 			pb=pb->next;
 		}
 		else
 		{
-			s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+			s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 			s->data=pa->data;
 			tc->next=s;tc=s;
-			pa=pa->next;	//ÖØ¸´µÄÔªËØÖ»¸´ÖÆÒ»¸ö
+			pa=pa->next;	//é‡å¤çš„å…ƒç´ åªå¤åˆ¶ä¸€ä¸ª
 			pb=pb->next;
 		}
 	}
-	if (pb!=NULL) pa=pb;	//¸´ÖÆÓàÏÂµÄ½áµã
+	if (pb!=NULL) pa=pb;	//å¤åˆ¶ä½™ä¸‹çš„ç»“ç‚¹
 	while (pa!=NULL)
 	{
-		s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+		s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 		s->data=pa->data;
 		tc->next=s;tc=s;
 		pa=pa->next;
 	}
 	tc->next=NULL;
 }
-void InterSect(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//ÇóÁ½ÓĞĞò¼¯ºÏµÄ½»
+void InterSect(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//æ±‚ä¸¤æœ‰åºé›†åˆçš„äº¤
 {
    LinkNode *pa=ha->next,*pb,*s,*tc;
    hc=(LinkNode *)malloc(sizeof(LinkNode));
@@ -66,9 +66,9 @@ void InterSect(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//ÇóÁ½ÓĞĞò¼¯ºÏµÄ½»
 	   pb=hb->next;
 	   while (pb!=NULL && pb->data<pa->data)  
 		   pb=pb->next; 
-	   if (pb!=NULL && pb->data==pa->data)			//Èôpa½áµãÖµÔÚBÖĞ
+	   if (pb!=NULL && pb->data==pa->data)			//è‹¥paç»“ç‚¹å€¼åœ¨Bä¸­
 	   {
-		   s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+		   s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 		   s->data=pa->data;
 		   tc->next=s;tc=s;
 	   }
@@ -76,7 +76,7 @@ void InterSect(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//ÇóÁ½ÓĞĞò¼¯ºÏµÄ½»
    }
    tc->next=NULL;
 }
-void Subs(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//ÇóÁ½ÓĞĞò¼¯ºÏµÄ²î
+void Subs(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//æ±‚ä¸¤æœ‰åºé›†åˆçš„å·®
 {
    LinkNode *pa=ha->next,*pb,*s,*tc;
    hc=(LinkNode *)malloc(sizeof(LinkNode));
@@ -86,9 +86,9 @@ void Subs(LinkNode *ha,LinkNode *hb,LinkNode *&hc)	//ÇóÁ½ÓĞĞò¼¯ºÏµÄ²î
 	   pb=hb->next;
 	   while (pb!=NULL && pb->data<pa->data)  
 		   pb=pb->next; 
-	   if (!(pb!=NULL && pb->data==pa->data))		//Èôpa½áµãÖµ²»ÔÚBÖĞ
+	   if (!(pb!=NULL && pb->data==pa->data))		//è‹¥paç»“ç‚¹å€¼ä¸åœ¨Bä¸­
 	   {
-		   s=(LinkNode *)malloc(sizeof(LinkNode));	//¸´ÖÆ½áµã
+		   s=(LinkNode *)malloc(sizeof(LinkNode));	//å¤åˆ¶ç»“ç‚¹
 		   s->data=pa->data;
 		   tc->next=s;tc=s;
 	   }
@@ -101,21 +101,21 @@ int main()
 	LinkNode *ha,*hb,*hc;
 	ElemType a[]={'c','a','e','h'};
 	ElemType b[]={'f','h','b','g','d','a'};
-	printf("¼¯ºÏµÄÔËËãÈçÏÂ:\n");
+	printf("é›†åˆçš„è¿ç®—å¦‚ä¸‹:\n");
 	CreateListR(ha,a,4);
 	CreateListR(hb,b,6);
-	printf("  Ô­ ¼¯ ºÏA: ");DispList(ha);
-	printf("  Ô­ ¼¯ ºÏB: ");DispList(hb);
+	printf("  åŸ é›† åˆA: ");DispList(ha);
+	printf("  åŸ é›† åˆB: ");DispList(hb);
 	sort(ha);
 	sort(hb);
-	printf("  ÓĞĞò¼¯ºÏA: ");DispList(ha);
-	printf("  ÓĞĞò¼¯ºÏB: ");DispList(hb);
+	printf("  æœ‰åºé›†åˆA: ");DispList(ha);
+	printf("  æœ‰åºé›†åˆB: ");DispList(hb);
 	Union(ha,hb,hc);
-	printf("  ¼¯ºÏµÄ²¢C: ");DispList(hc);
+	printf("  é›†åˆçš„å¹¶C: ");DispList(hc);
 	InterSect(ha,hb,hc);
-	printf("  ¼¯ºÏµÄ½»C: ");DispList(hc);
+	printf("  é›†åˆçš„äº¤C: ");DispList(hc);
 	Subs(ha,hb,hc);
-	printf("  ¼¯ºÏµÄ²îC: ");DispList(hc);
+	printf("  é›†åˆçš„å·®C: ");DispList(hc);
 	DestroyList(ha);
 	DestroyList(hb);
 	DestroyList(hc);

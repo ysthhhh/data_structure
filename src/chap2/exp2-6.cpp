@@ -1,42 +1,42 @@
-//ÎÄ¼şÃû:exp2-6.cpp
-#include "linklist.cpp"				//°üº¬µ¥Á´±íµÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp2-6.cpp
+#include "linklist.cpp"				//åŒ…å«å•é“¾è¡¨çš„åŸºæœ¬è¿ç®—ç®—æ³•
 #include<string.h>
-void Split1(LinkNode *&L)			//½â·¨1£º½«LÖĞËùÓĞ½áµã°´Ê×½áµãÖµ½øĞĞ»®·Ö
+void Split1(LinkNode *&L)			//è§£æ³•1ï¼šå°†Lä¸­æ‰€æœ‰ç»“ç‚¹æŒ‰é¦–ç»“ç‚¹å€¼è¿›è¡Œåˆ’åˆ†
 {
 	LinkNode *pre,*p,*q;
 	if(L->next==NULL || L->next->next==NULL)
-		return;						//µ¥Á´±íLÎª¿Õ»òÕßÖ»ÓĞÒ»¸ö½áµãÊ±·µ»Ø 
-	int x=L->next->data;			//È¡Ê×½áµãÖµx 
-	pre=L->next;					//preÖ¸ÏòÊ×½áµã
-	p=pre->next;					//pÖ¸Ïòpre½áµãµÄºó¼Ì½áµã 
+		return;						//å•é“¾è¡¨Lä¸ºç©ºæˆ–è€…åªæœ‰ä¸€ä¸ªç»“ç‚¹æ—¶è¿”å› 
+	int x=L->next->data;			//å–é¦–ç»“ç‚¹å€¼x 
+	pre=L->next;					//preæŒ‡å‘é¦–ç»“ç‚¹
+	p=pre->next;					//pæŒ‡å‘preç»“ç‚¹çš„åç»§ç»“ç‚¹ 
 	while(p!=NULL) 
 	{
-		if(p->data<x)				//½áµãpµÄÖµĞ¡ÓÚxÊ± 
+		if(p->data<x)				//ç»“ç‚¹pçš„å€¼å°äºxæ—¶ 
 		{ 
-			pre->next=p->next;		//É¾³ı½áµãp
-			p->next=L->next;		//½«½áµãp²åÈëµ½±íÍ·
+			pre->next=p->next;		//åˆ é™¤ç»“ç‚¹p
+			p->next=L->next;		//å°†ç»“ç‚¹pæ’å…¥åˆ°è¡¨å¤´
 			L->next=p;
-			p=pre->next;			//¼ÌĞø±éÀú 
+			p=pre->next;			//ç»§ç»­éå† 
 		}
-		else						//½áµãpµÄÖµ´óÓÚµÈÓÚxÊ± 
+		else						//ç»“ç‚¹pçš„å€¼å¤§äºç­‰äºxæ—¶ 
 		{
-			pre=p;					//pre,pÍ¬²½ºóÒÆ 
+			pre=p;					//pre,påŒæ­¥åç§» 
 			p=pre->next;
 		}
 	}
 }
-void Split2(LinkNode *&L)			//½â·¨2£º½«LÖĞËùÓĞ½áµã°´Ê×½áµãÖµ½øĞĞ»®·Ö
+void Split2(LinkNode *&L)			//è§£æ³•2ï¼šå°†Lä¸­æ‰€æœ‰ç»“ç‚¹æŒ‰é¦–ç»“ç‚¹å€¼è¿›è¡Œåˆ’åˆ†
 {
 	LinkNode *p=L->next,*r,*L1,*r1;
 	if(L->next==NULL || L->next->next==NULL)
-		return;						//µ¥Á´±íLÎª¿Õ»òÕßÖ»ÓĞÒ»¸ö½áµãÊ±·µ»Ø 
-	int x=L->next->data;			//È¡Ê×½áµãÖµx 
+		return;						//å•é“¾è¡¨Lä¸ºç©ºæˆ–è€…åªæœ‰ä¸€ä¸ªç»“ç‚¹æ—¶è¿”å› 
+	int x=L->next->data;			//å–é¦–ç»“ç‚¹å€¼x 
 	r=L;
-	L1=(LinkNode*)malloc(sizeof(LinkNode));	//½¨Á¢´óÓÚµÈÓÚxµÄµ¥Á´±íL1
+	L1=(LinkNode*)malloc(sizeof(LinkNode));	//å»ºç«‹å¤§äºç­‰äºxçš„å•é“¾è¡¨L1
 	r1=L1; 
 	while (p!=NULL)
 	{
-		if (p->data<x)			//Èôp½áµãÖµĞ¡ÓÚx
+		if (p->data<x)			//è‹¥pç»“ç‚¹å€¼å°äºx
 		{
 			r->next=p; r=p;
 			p=p->next;
@@ -48,7 +48,7 @@ void Split2(LinkNode *&L)			//½â·¨2£º½«LÖĞËùÓĞ½áµã°´Ê×½áµãÖµ½øĞĞ»®·Ö
 		}
 	}
 	r1->next=NULL;
-	r->next=L1->next;			//LºÍL1Á¬½Ó 
+	r->next=L1->next;			//Lå’ŒL1è¿æ¥ 
 	free(L1);
 }
 
@@ -57,17 +57,17 @@ int main()
 	LinkNode *L;
 	ElemType a[]="daxgdchaeb";
 	int n=strlen(a);
-	printf("½â·¨1\n"); 
+	printf("è§£æ³•1\n"); 
 	CreateListR(L,a,n);
 	printf("  L: "); DispList(L);
-	printf("  ÒÔÊ×½áµãÖµ½øĞĞ»®·Ö\n");
+	printf("  ä»¥é¦–ç»“ç‚¹å€¼è¿›è¡Œåˆ’åˆ†\n");
 	Split1(L);
 	printf("  L: "); DispList(L);
 	DestroyList(L);
-	printf("½â·¨2\n"); 
+	printf("è§£æ³•2\n"); 
 	CreateListR(L,a,n);
 	printf("  L: "); DispList(L);
-	printf("  ÒÔÊ×½áµãÖµ½øĞĞ»®·Ö\n");
+	printf("  ä»¥é¦–ç»“ç‚¹å€¼è¿›è¡Œåˆ’åˆ†\n");
 	Split2(L);
 	printf("  L: "); DispList(L);
 	DestroyList(L);

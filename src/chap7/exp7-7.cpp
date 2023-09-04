@@ -1,32 +1,32 @@
-//ÎÄ¼şÃû:exp7-7.cpp
-#include "btree.cpp"			//°üº¬¶ş²æÊ÷µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp7-7.cpp
+#include "btree.cpp"			//åŒ…å«äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
 void AllPath1(BTNode *b,ElemType path[],int pathlen)
-//²ÉÓÃÏÈĞò±éÀú·½·¨Êä³öËùÓĞ´ÓÒ¶×Ó½áµãµ½¸ù½áµãµÄÄæÂ·¾¶
+//é‡‡ç”¨å…ˆåºéå†æ–¹æ³•è¾“å‡ºæ‰€æœ‰ä»å¶å­ç»“ç‚¹åˆ°æ ¹ç»“ç‚¹çš„é€†è·¯å¾„
 {
 	if (b!=NULL)
 	{
-		if (b->lchild==NULL && b->rchild==NULL)	//bÎªÒ¶×Ó½áµã
+		if (b->lchild==NULL && b->rchild==NULL)	//bä¸ºå¶å­ç»“ç‚¹
 		{
-			printf("   %cµ½¸ù½áµãÄæÂ·¾¶: %c->",b->data,b->data);
+			printf("   %cåˆ°æ ¹ç»“ç‚¹é€†è·¯å¾„: %c->",b->data,b->data);
 			for (int i=pathlen-1;i>0;i--)
 				printf("%c->",path[i]);
 			printf("%c\n",path[0]);
 		}
 		else
 		{
-			path[pathlen]=b->data;				//½«µ±Ç°½áµã·ÅÈëÂ·¾¶ÖĞ
-			pathlen++;							//Â·¾¶³¤¶ÈÔö1
-			AllPath1(b->lchild,path,pathlen);	//µİ¹éÉ¨Ãè×ó×ÓÊ÷
-			AllPath1(b->rchild,path,pathlen);	//µİ¹éÉ¨ÃèÓÒ×ÓÊ÷
+			path[pathlen]=b->data;				//å°†å½“å‰ç»“ç‚¹æ”¾å…¥è·¯å¾„ä¸­
+			pathlen++;							//è·¯å¾„é•¿åº¦å¢1
+			AllPath1(b->lchild,path,pathlen);	//é€’å½’æ‰«æå·¦å­æ ‘
+			AllPath1(b->rchild,path,pathlen);	//é€’å½’æ‰«æå³å­æ ‘
 		}
 	}
 }
 void LongPath1(BTNode *b,ElemType path[],int pathlen,ElemType longpath[],int &longpathlen)
-//²ÉÓÃÏÈĞò±éÀú·½·¨Êä³öµÚÒ»Ìõ×î³¤µÄÄæÂ·¾¶
+//é‡‡ç”¨å…ˆåºéå†æ–¹æ³•è¾“å‡ºç¬¬ä¸€æ¡æœ€é•¿çš„é€†è·¯å¾„
 {
 	if (b==NULL)
 	{
-		if (pathlen>longpathlen)	//Èôµ±Ç°Â·¾¶¸ü³¤,½«Â·¾¶±£´æÔÚlongpathÖĞ
+		if (pathlen>longpathlen)	//è‹¥å½“å‰è·¯å¾„æ›´é•¿,å°†è·¯å¾„ä¿å­˜åœ¨longpathä¸­
 		{
 			for (int i=pathlen-1;i>=0;i--)
 				longpath[i]=path[i];
@@ -35,72 +35,72 @@ void LongPath1(BTNode *b,ElemType path[],int pathlen,ElemType longpath[],int &lo
 	}
 	else	
 	{
-		path[pathlen]=b->data;					//½«µ±Ç°½áµã·ÅÈëÂ·¾¶ÖĞ
-		pathlen++;								//Â·¾¶³¤¶ÈÔö1
-		LongPath1(b->lchild,path,pathlen,longpath,longpathlen);	//µİ¹éÉ¨Ãè×ó×ÓÊ÷
-		LongPath1(b->rchild,path,pathlen,longpath,longpathlen);	//µİ¹éÉ¨ÃèÓÒ×ÓÊ÷
+		path[pathlen]=b->data;					//å°†å½“å‰ç»“ç‚¹æ”¾å…¥è·¯å¾„ä¸­
+		pathlen++;								//è·¯å¾„é•¿åº¦å¢1
+		LongPath1(b->lchild,path,pathlen,longpath,longpathlen);	//é€’å½’æ‰«æå·¦å­æ ‘
+		LongPath1(b->rchild,path,pathlen,longpath,longpathlen);	//é€’å½’æ‰«æå³å­æ ‘
 	}
 }
-void AllPath2(BTNode *b)	//²ÉÓÃºóĞò·Çµİ¹é±éÀú·½·¨Êä³öËùÓĞ´ÓÒ¶×Ó½áµãµ½¸ù½áµãµÄÄæÂ·¾¶
+void AllPath2(BTNode *b)	//é‡‡ç”¨ååºéé€’å½’éå†æ–¹æ³•è¾“å‡ºæ‰€æœ‰ä»å¶å­ç»“ç‚¹åˆ°æ ¹ç»“ç‚¹çš„é€†è·¯å¾„
 {
-	BTNode *st[MaxSize];			//¶¨ÒåÒ»¸öË³ĞòÕ»st
-	int top=-1;						//Õ»¶¥Ö¸Õë³õÊ¼»¯
+	BTNode *st[MaxSize];			//å®šä¹‰ä¸€ä¸ªé¡ºåºæ ˆst
+	int top=-1;						//æ ˆé¡¶æŒ‡é’ˆåˆå§‹åŒ–
 	BTNode *p,*r;
 	bool flag;
 	p=b;
 	do
 	{
-		while (p!=NULL)				//É¨Ãè½áµãpµÄËùÓĞ×óÏÂ½áµã²¢½øÕ»
+		while (p!=NULL)				//æ‰«æç»“ç‚¹pçš„æ‰€æœ‰å·¦ä¸‹ç»“ç‚¹å¹¶è¿›æ ˆ
 		{
 			top++;
-			st[top]=p;				//½áµãp½øÕ»
-			p=p->lchild;			//ÒÆ¶¯µ½×óº¢×Ó
+			st[top]=p;				//ç»“ç‚¹pè¿›æ ˆ
+			p=p->lchild;			//ç§»åŠ¨åˆ°å·¦å­©å­
 		}
-		r=NULL;						//rÖ¸Ïò¸Õ¸Õ·ÃÎÊµÄ½áµã£¬³õÊ¼Ê±Îª¿Õ
-		flag=true;					//flagÎªÕæ±íÊ¾ÕıÔÚ´¦ÀíÕ»¶¥½áµã
-		while (top>-1 && flag)		//Õ»²»¿ÕÇÒflagÎªÕæÊ±Ñ­»·
+		r=NULL;						//ræŒ‡å‘åˆšåˆšè®¿é—®çš„ç»“ç‚¹ï¼Œåˆå§‹æ—¶ä¸ºç©º
+		flag=true;					//flagä¸ºçœŸè¡¨ç¤ºæ­£åœ¨å¤„ç†æ ˆé¡¶ç»“ç‚¹
+		while (top>-1 && flag)		//æ ˆä¸ç©ºä¸”flagä¸ºçœŸæ—¶å¾ªç¯
 		{
-			p=st[top];				//È¡³öµ±Ç°µÄÕ»¶¥½áµãp
-			if (p->rchild==r)		//Èô½áµãpµÄÓÒº¢×ÓÎª¿Õ»òÕßÎª¸Õ¸Õ·ÃÎÊ¹ıµÄ½áµã
+			p=st[top];				//å–å‡ºå½“å‰çš„æ ˆé¡¶ç»“ç‚¹p
+			if (p->rchild==r)		//è‹¥ç»“ç‚¹pçš„å³å­©å­ä¸ºç©ºæˆ–è€…ä¸ºåˆšåˆšè®¿é—®è¿‡çš„ç»“ç‚¹
 			{
-				if (p->lchild==NULL && p->rchild==NULL)	//ÈôÎªÒ¶×Ó½áµã
-				{					//Êä³öÕ»ÖĞËùÓĞ½áµãÖµ
-					printf("   %cµ½¸ù½áµãÄæÂ·¾¶£º",p->data);
+				if (p->lchild==NULL && p->rchild==NULL)	//è‹¥ä¸ºå¶å­ç»“ç‚¹
+				{					//è¾“å‡ºæ ˆä¸­æ‰€æœ‰ç»“ç‚¹å€¼
+					printf("   %cåˆ°æ ¹ç»“ç‚¹é€†è·¯å¾„ï¼š",p->data);
 					for (int i=top;i>0;i--)
 						printf("%c->",st[i]->data);
 					printf("%c\n",st[0]->data);
 				}
-				top--;				//ÍËÕ»
-				r=p;				//rÖ¸Ïò¸Õ·ÃÎÊ¹ıµÄ½áµã
+				top--;				//é€€æ ˆ
+				r=p;				//ræŒ‡å‘åˆšè®¿é—®è¿‡çš„ç»“ç‚¹
 			}
 			else
-			{	p=p->rchild;		//×ªÏò´¦ÀíÆäÓÒ×ÓÊ÷
-				flag=false;			//±íÊ¾µ±Ç°²»ÊÇ´¦ÀíÕ»¶¥½áµã
+			{	p=p->rchild;		//è½¬å‘å¤„ç†å…¶å³å­æ ‘
+				flag=false;			//è¡¨ç¤ºå½“å‰ä¸æ˜¯å¤„ç†æ ˆé¡¶ç»“ç‚¹
 			}
 		}
-	} while (top>-1);			//Õ»²»¿ÕÑ­»·
+	} while (top>-1);			//æ ˆä¸ç©ºå¾ªç¯
 }
 
 void AllPath3(BTNode *b)
-//²ÉÓÃ²ã´Î±éÀú·½·¨Êä³öËùÓĞ´ÓÒ¶×Ó½áµãµ½¸ù½áµãµÄÄæÂ·¾¶
+//é‡‡ç”¨å±‚æ¬¡éå†æ–¹æ³•è¾“å‡ºæ‰€æœ‰ä»å¶å­ç»“ç‚¹åˆ°æ ¹ç»“ç‚¹çš„é€†è·¯å¾„
 {
 	struct snode
 	{
-	   BTNode *node;			//´æ·Åµ±Ç°½áµãÖ¸Õë
-	   int parent;				//´æ·ÅË«Ç×½áµãÔÚ¶ÓÁĞÖĞµÄÎ»ÖÃ
-	} Qu[MaxSize];				//¶¨ÒåË³Ğò¶ÓÁĞ
-	int front,rear,p;			//¶¨Òå¶ÓÍ·ºÍ¶ÓÎ²Ö¸Õë
-    front=rear=-1;				//ÖÃ¶ÓÁĞÎª¿Õ¶ÓÁĞ
+	   BTNode *node;			//å­˜æ”¾å½“å‰ç»“ç‚¹æŒ‡é’ˆ
+	   int parent;				//å­˜æ”¾åŒäº²ç»“ç‚¹åœ¨é˜Ÿåˆ—ä¸­çš„ä½ç½®
+	} Qu[MaxSize];				//å®šä¹‰é¡ºåºé˜Ÿåˆ—
+	int front,rear,p;			//å®šä¹‰é˜Ÿå¤´å’Œé˜Ÿå°¾æŒ‡é’ˆ
+    front=rear=-1;				//ç½®é˜Ÿåˆ—ä¸ºç©ºé˜Ÿåˆ—
 	rear++;
-    Qu[rear].node=b;			//¸ù½áµãÖ¸Õë½øÈë¶ÓÁĞ
-	Qu[rear].parent=-1;			//¸ù½áµãÃ»ÓĞË«Ç×½áµã
-    while (front<rear)			//¶ÓÁĞ²»Îª¿Õ
+    Qu[rear].node=b;			//æ ¹ç»“ç‚¹æŒ‡é’ˆè¿›å…¥é˜Ÿåˆ—
+	Qu[rear].parent=-1;			//æ ¹ç»“ç‚¹æ²¡æœ‰åŒäº²ç»“ç‚¹
+    while (front<rear)			//é˜Ÿåˆ—ä¸ä¸ºç©º
     {
 		front++;
-		b=Qu[front].node;		//¶ÓÍ·³ö¶ÓÁĞ
-		if (b->lchild==NULL && b->rchild==NULL)	//*bÎªÒ¶×Ó½áµã
+		b=Qu[front].node;		//é˜Ÿå¤´å‡ºé˜Ÿåˆ—
+		if (b->lchild==NULL && b->rchild==NULL)	//*bä¸ºå¶å­ç»“ç‚¹
 		{
-			printf("   %cµ½¸ù½áµãÄæÂ·¾¶£º",b->data);
+			printf("   %cåˆ°æ ¹ç»“ç‚¹é€†è·¯å¾„ï¼š",b->data);
 			p=front;
 			while (Qu[p].parent!=-1)
 			{
@@ -109,13 +109,13 @@ void AllPath3(BTNode *b)
 			}
 			printf("%c\n",Qu[p].node->data);
 		}
-		if (b->lchild!=NULL)		//×óº¢×ÓÈë¶ÓÁĞ
+		if (b->lchild!=NULL)		//å·¦å­©å­å…¥é˜Ÿåˆ—
 		{
 			rear++;
 			Qu[rear].node=b->lchild;
 			Qu[rear].parent=front;
 		}
-		if (b->rchild!=NULL)		//ÓÒº¢×ÓÈë¶ÓÁĞ
+		if (b->rchild!=NULL)		//å³å­©å­å…¥é˜Ÿåˆ—
 		{
 			rear++;
 			Qu[rear].node=b->rchild;
@@ -130,16 +130,16 @@ int main()
 	ElemType path[MaxSize],longpath[MaxSize];
 	int i,longpathlen=0;
 	CreateBTree(b,"A(B(D,E(H(J,K(L,M(,N))))),C(F,G(,I)))"); 
-	printf("¶ş²æÊ÷b:");DispBTree(b);printf("\n");
-	printf("ÏÈĞò±éÀú·½·¨:\n");AllPath1(b,path,0);
+	printf("äºŒå‰æ ‘b:");DispBTree(b);printf("\n");
+	printf("å…ˆåºéå†æ–¹æ³•:\n");AllPath1(b,path,0);
 	LongPath1(b,path,0,longpath,longpathlen);
-	printf("   µÚÒ»Ìõ×î³¤ÄæÂ·¾¶³¤¶È:%d\n",longpathlen);
-	printf("   µÚÒ»Ìõ×î³¤ÄæÂ·¾¶:");
+	printf("   ç¬¬ä¸€æ¡æœ€é•¿é€†è·¯å¾„é•¿åº¦:%d\n",longpathlen);
+	printf("   ç¬¬ä¸€æ¡æœ€é•¿é€†è·¯å¾„:");
 	for (i=longpathlen-1;i>=0;i--)
 		printf("%c ",longpath[i]);
 	printf("\n");
-	printf("ºóĞò·Çµİ¹é±éÀú·½·¨:\n");AllPath2(b);
-	printf("²ã´Î±éÀú·½·¨:\n");AllPath3(b);
+	printf("ååºéé€’å½’éå†æ–¹æ³•:\n");AllPath2(b);
+	printf("å±‚æ¬¡éå†æ–¹æ³•:\n");AllPath3(b);
 	DestroyBTree(b);
 	return 1;
 }

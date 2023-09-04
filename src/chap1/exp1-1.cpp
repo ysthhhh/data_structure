@@ -1,10 +1,10 @@
-//Œƒº˛√˚£∫exp1-1.cpp
+//Êñá‰ª∂ÂêçÔºöexp1-1.cpp
 #include <stdio.h>
 #include <time.h>		 	//clock_t, clock, CLOCKS_PER_SEC
 #include <math.h>
 
-//------∑Ω∑®1-----------------------------------------------
-long add1(long n)			//∑Ω∑®1£∫«Û1+2+...+n
+//------ÊñπÊ≥ï1-----------------------------------------------
+long add1(long n)			//ÊñπÊ≥ï1ÔºöÊ±Ç1+2+...+n
 {
 	long i,sum=0;
 	for (i=1;i<=n;i++)
@@ -12,39 +12,39 @@ long add1(long n)			//∑Ω∑®1£∫«Û1+2+...+n
 	return sum;
 }
 
-void AddTime1(long n)		//≤…”√∑Ω∑®1µƒ∫ƒ ±Õ≥º∆
+void AddTime1(long n)		//ÈááÁî®ÊñπÊ≥ï1ÁöÑËÄóÊó∂ÁªüËÆ°
 {
 	clock_t t;
 	long sum;
 	t=clock();
 	sum=add1(n);
 	t=clock()-t;
-	printf("∑Ω∑®1:\n");
-	printf("  Ω·π˚:1°´%d÷Æ∫Õ:%ld\n",n,sum);
-	printf("  ”√ ±:%lf√Î\n" ,((float)t)/CLOCKS_PER_SEC);
+	printf("ÊñπÊ≥ï1:\n");
+	printf("  ÁªìÊûú:1ÔΩû%d‰πãÂíå:%ld\n",n,sum);
+	printf("  Áî®Êó∂:%lfÁßí\n" ,((float)t)/CLOCKS_PER_SEC);
 }
 
-//------∑Ω∑®2-----------------------------------------------
-long add2(long n)			//∑Ω∑®2£∫«Û1+2+...+n
+//------ÊñπÊ≥ï2-----------------------------------------------
+long add2(long n)			//ÊñπÊ≥ï2ÔºöÊ±Ç1+2+...+n
 {
 	return n*(n+1)/2;
 }
-void AddTime2(long n)		//≤…”√∑Ω∑®2µƒ∫ƒ ±Õ≥º∆
+void AddTime2(long n)		//ÈááÁî®ÊñπÊ≥ï2ÁöÑËÄóÊó∂ÁªüËÆ°
 {
 	clock_t t;
 	long sum;
 	t=clock();
 	sum=add2(n);
 	t=clock()-t;
-	printf("∑Ω∑®2:\n");
-	printf("  Ω·π˚:1°´%d÷Æ∫Õ:%ld\n",n,sum);
-	printf("  ”√ ±:%lf√Î\n" ,((float)t)/CLOCKS_PER_SEC);
+	printf("ÊñπÊ≥ï2:\n");
+	printf("  ÁªìÊûú:1ÔΩû%d‰πãÂíå:%ld\n",n,sum);
+	printf("  Áî®Êó∂:%lfÁßí\n" ,((float)t)/CLOCKS_PER_SEC);
 }
 //------------------------------------------------------------
 int main()
 {
 	int n;
-	printf("n(¥Û”⁄1000000):");
+	printf("n(Â§ß‰∫é1000000):");
 	scanf("%d",&n);
 	if (n<1000000) return 0;
 	AddTime1(n);

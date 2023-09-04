@@ -1,51 +1,51 @@
-//ÎÄ¼şÃû:exp4-3.cpp
-#include "sqstring.cpp"				//°üº¬Ë³Ğò´®µÄ»ù±¾ÔËËãËã·¨
-int Index(SqString s,SqString t)	//¼òµ¥Æ¥ÅäËã·¨
+//æ–‡ä»¶å:exp4-3.cpp
+#include "sqstring.cpp"				//åŒ…å«é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—ç®—æ³•
+int Index(SqString s,SqString t)	//ç®€å•åŒ¹é…ç®—æ³•
 {
 	int i=0,j=0;
 	while (i<s.length && j<t.length) 
-	{	if (s.data[i]==t.data[j])	//¼ÌĞøÆ¥ÅäÏÂÒ»¸ö×Ö·û
-		{	i++;					//Ö÷´®ºÍ×Ó´®ÒÀ´ÎÆ¥ÅäÏÂÒ»¸ö×Ö·û
+	{	if (s.data[i]==t.data[j])	//ç»§ç»­åŒ¹é…ä¸‹ä¸€ä¸ªå­—ç¬¦
+		{	i++;					//ä¸»ä¸²å’Œå­ä¸²ä¾æ¬¡åŒ¹é…ä¸‹ä¸€ä¸ªå­—ç¬¦
 			j++;
 		}
-		else						//Ö÷´®¡¢×Ó´®Ö¸Õë»ØËİÖØĞÂ¿ªÊ¼ÏÂÒ»´ÎÆ¥Åä
-		{	i=i-j+1;				//Ö÷´®´ÓÏÂÒ»¸öÎ»ÖÃ¿ªÊ¼Æ¥Åä
-			j=0; 					//×Ó´®´ÓÍ·¿ªÊ¼Æ¥Åä
+		else						//ä¸»ä¸²ã€å­ä¸²æŒ‡é’ˆå›æº¯é‡æ–°å¼€å§‹ä¸‹ä¸€æ¬¡åŒ¹é…
+		{	i=i-j+1;				//ä¸»ä¸²ä»ä¸‹ä¸€ä¸ªä½ç½®å¼€å§‹åŒ¹é…
+			j=0; 					//å­ä¸²ä»å¤´å¼€å§‹åŒ¹é…
 		}
 	}
 	if (j>=t.length)
-		return(i-t.length);			//·µ»ØÆ¥ÅäµÄµÚÒ»¸ö×Ö·ûµÄÏÂ±ê
+		return(i-t.length);			//è¿”å›åŒ¹é…çš„ç¬¬ä¸€ä¸ªå­—ç¬¦çš„ä¸‹æ ‡
 	else
-		return(-1);					//Ä£Ê½Æ¥Åä²»³É¹¦
+		return(-1);					//æ¨¡å¼åŒ¹é…ä¸æˆåŠŸ
 }
-void GetNext(SqString t,int next[])	//ÓÉÄ£Ê½´®tÇó³önextÖµ
+void GetNext(SqString t,int next[])	//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextå€¼
 {	int j,k;
 	j=0;k=-1;next[0]=-1;
 	while (j<t.length-1)
-	{	if (k==-1 || t.data[j]==t.data[k]) 	//kÎª-1»ò±È½ÏµÄ×Ö·ûÏàµÈÊ±
+	{	if (k==-1 || t.data[j]==t.data[k]) 	//kä¸º-1æˆ–æ¯”è¾ƒçš„å­—ç¬¦ç›¸ç­‰æ—¶
 		{	j++;k++;
 			next[j]=k;
 		}
 		else  k=next[k];
 	}
 }
-int KMPIndex(SqString s,SqString t)	//KMPËã·¨
+int KMPIndex(SqString s,SqString t)	//KMPç®—æ³•
 {
 	int next[MaxSize],i=0,j=0;
 	GetNext(t,next);
 	while (i<s.length && j<t.length) 
 	{	if (j==-1 || s.data[i]==t.data[j]) 
 		{	i++;
-			j++;				//i,j¸÷Ôö1
+			j++;				//i,jå„å¢1
 		}
-		else j=next[j]; 		//i²»±ä,jºóÍË
+		else j=next[j]; 		//iä¸å˜,jåé€€
 	}
 	if (j>=t.length)
-		return(i-t.length);		//·µ»ØÆ¥ÅäÄ£Ê½´®µÄÊ××Ö·ûÏÂ±ê
+		return(i-t.length);		//è¿”å›åŒ¹é…æ¨¡å¼ä¸²çš„é¦–å­—ç¬¦ä¸‹æ ‡
 	else
-		return(-1);				//·µ»Ø²»Æ¥Åä±êÖ¾
+		return(-1);				//è¿”å›ä¸åŒ¹é…æ ‡å¿—
 }
-void GetNextval(SqString t,int nextval[])  //ÓÉÄ£Ê½´®tÇó³önextvalÖµ
+void GetNextval(SqString t,int nextval[])  //ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextvalå€¼
 {
 	int j=0,k=-1;
 	nextval[0]=-1;
@@ -61,7 +61,7 @@ void GetNextval(SqString t,int nextval[])  //ÓÉÄ£Ê½´®tÇó³önextvalÖµ
 			k=nextval[k];
 	}
 }
-int KMPIndex1(SqString s,SqString t)	//ĞŞÕıµÄKMPËã·¨
+int KMPIndex1(SqString s,SqString t)	//ä¿®æ­£çš„KMPç®—æ³•
 {
 	int nextval[MaxSize],i=0,j=0;
 	GetNextval(t,nextval);
@@ -86,12 +86,12 @@ int main()
 	SqString s,t;
 	StrAssign(s,"abcabcdabcdeabcdefabcdefg");
 	StrAssign(t,"abcdeabcdefab");
-	printf("´®s:");DispStr(s);
-	printf("´®t:");DispStr(t);
-	printf("¼òµ¥Æ¥ÅäËã·¨:\n");
-	printf("  tÔÚsÖĞµÄÎ»ÖÃ=%d\n",Index(s,t));
-	GetNext(t,next);			//ÓÉÄ£Ê½´®tÇó³önextÖµ
-	GetNextval(t,nextval);		//ÓÉÄ£Ê½´®tÇó³önextvalÖµ
+	printf("ä¸²s:");DispStr(s);
+	printf("ä¸²t:");DispStr(t);
+	printf("ç®€å•åŒ¹é…ç®—æ³•:\n");
+	printf("  tåœ¨sä¸­çš„ä½ç½®=%d\n",Index(s,t));
+	GetNext(t,next);			//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextå€¼
+	GetNextval(t,nextval);		//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextvalå€¼
 	printf("    j   ");
 	for (j=0;j<t.length;j++)
 		printf("%4d",j);
@@ -108,10 +108,10 @@ int main()
 	for (j=0;j<t.length;j++)
 		printf("%4d",nextval[j]);
 	printf("\n");
-	printf("KMPËã·¨:\n");
-	printf("  tÔÚsÖĞµÄÎ»ÖÃ=%d\n",KMPIndex(s,t));
-	printf("¸Ä½øµÄKMPËã·¨:\n");
-	printf("  tÔÚsÖĞµÄÎ»ÖÃ=%d\n",KMPIndex1(s,t));
+	printf("KMPç®—æ³•:\n");
+	printf("  tåœ¨sä¸­çš„ä½ç½®=%d\n",KMPIndex(s,t));
+	printf("æ”¹è¿›çš„KMPç®—æ³•:\n");
+	printf("  tåœ¨sä¸­çš„ä½ç½®=%d\n",KMPIndex1(s,t));
 	DestroyStr(s); DestroyStr(t);
 	return 1;
 }

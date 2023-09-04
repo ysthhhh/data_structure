@@ -1,5 +1,5 @@
-//ÎÄ¼şÃû:algo7-1.cpp
-#include "btree.cpp"   //°üº¬¶ş²æÊ÷µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:algo7-1.cpp
+#include "btree.cpp"   //åŒ…å«äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
 void levelnodes(BTNode *b,int h,int a[])
 {
 	if (b==NULL)
@@ -16,10 +16,10 @@ int BTWidth1(BTNode *b)
 	int width=0,i;
 	int a[MaxSize];
 	for (i=1;i<MaxSize;i++)
-		a[i]=0;				//aÉèÖÃËùÓĞÔªËØ³õÊ¼»¯Îª0
+		a[i]=0;				//aè®¾ç½®æ‰€æœ‰å…ƒç´ åˆå§‹åŒ–ä¸º0
 	levelnodes(b,1,a);
 	i=1;
-	while (a[i]!=0)			//ÇóaÖĞ×î´óÔªËØ¼´¿í¶È
+	while (a[i]!=0)			//æ±‚aä¸­æœ€å¤§å…ƒç´ å³å®½åº¦
 	{
 		if (a[i]>width)
 			width=a[i];
@@ -28,46 +28,46 @@ int BTWidth1(BTNode *b)
 	return width;
 }
 
-int BTWidth2(BTNode *b)					//Çó¶ş²æÊ÷bµÄ¿í¶È
+int BTWidth2(BTNode *b)					//æ±‚äºŒå‰æ ‘bçš„å®½åº¦
 {
 	struct 
 	{
-		int lno;						//½áµãµÄ²ã´Î
-		BTNode *p;						//½áµãÖ¸Õë
-	} Qu[MaxSize];						//¶¨Òå·Ç»·ĞÎ¶ÓÁĞ
-	int front,rear;						//¶¨Òå¶ÓÍ·ºÍ¶ÓÎ²Ö¸Õë
+		int lno;						//ç»“ç‚¹çš„å±‚æ¬¡
+		BTNode *p;						//ç»“ç‚¹æŒ‡é’ˆ
+	} Qu[MaxSize];						//å®šä¹‰éç¯å½¢é˜Ÿåˆ—
+	int front,rear;						//å®šä¹‰é˜Ÿå¤´å’Œé˜Ÿå°¾æŒ‡é’ˆ
 	int lnum,width,i,n;
-	front=rear=0;						//ÖÃ¶ÓÁĞÎª¿Õ¶Ó
+	front=rear=0;						//ç½®é˜Ÿåˆ—ä¸ºç©ºé˜Ÿ
     if (b!=NULL) 
 	{
 		rear++;	
-		Qu[rear].p=b;					//¸ù½áµã½ø¶Ó
-		Qu[rear].lno=1;					//¸ù½áµãµÄ²ã´ÎÎª1
-		while (rear!=front)				//¶Ó²»¿ÕÊ±Ñ­»·
+		Qu[rear].p=b;					//æ ¹ç»“ç‚¹è¿›é˜Ÿ
+		Qu[rear].lno=1;					//æ ¹ç»“ç‚¹çš„å±‚æ¬¡ä¸º1
+		while (rear!=front)				//é˜Ÿä¸ç©ºæ—¶å¾ªç¯
 		{
 			front++;
-			b=Qu[front].p;				//³ö¶Ó½áµãp
+			b=Qu[front].p;				//å‡ºé˜Ÿç»“ç‚¹p
 			lnum=Qu[front].lno;
-			if (b->lchild!=NULL)		//ÓĞ×óº¢×Ó£¬½«Æä½ø¶Ó
+			if (b->lchild!=NULL)		//æœ‰å·¦å­©å­ï¼Œå°†å…¶è¿›é˜Ÿ
 			{
 				rear++;
 				Qu[rear].p=b->lchild;
 				Qu[rear].lno=lnum+1;
 			}
-			if (b->rchild!=NULL)		//ÓĞÓÒº¢×Ó£¬½«Æä½ø¶Ó
+			if (b->rchild!=NULL)		//æœ‰å³å­©å­ï¼Œå°†å…¶è¿›é˜Ÿ
 			{
 				rear++;
 				Qu[rear].p=b->rchild;
 				Qu[rear].lno=lnum+1;
 			}
 		}
-		width=0;lnum=1;i=1;				//width´æ·Å¿í¶È
+		width=0;lnum=1;i=1;				//widthå­˜æ”¾å®½åº¦
 		while (i<=rear)
 		{
 			n=0;
-			while (i<=rear && Qu[i].lno==lnum) //iÉ¨Ãè¶ÓÁĞÖĞËùÓĞ½áµã
+			while (i<=rear && Qu[i].lno==lnum) //iæ‰«æé˜Ÿåˆ—ä¸­æ‰€æœ‰ç»“ç‚¹
 			{
-				n++;					//nÀÛ¼ÆÒ»²ãÖĞµÄ½áµã¸öÊı
+				n++;					//nç´¯è®¡ä¸€å±‚ä¸­çš„ç»“ç‚¹ä¸ªæ•°
 				i++;
 			}
 			lnum=Qu[i].lno;
@@ -82,8 +82,8 @@ int main()
 	ElemType x='K';
 	BTNode *b,*p,*lp,*rp;;
 	CreateBTree(b,"A(B(D,E(H(J,K(L,M(,N))))),C(F,G(,I)))");
-	printf("Êä³ö¶ş²æÊ÷b:");DispBTree(b);printf("\n");
-	printf("¶ş²æÊ÷bµÄ¿í¶È:%d\n",BTWidth2(b));
+	printf("è¾“å‡ºäºŒå‰æ ‘b:");DispBTree(b);printf("\n");
+	printf("äºŒå‰æ ‘bçš„å®½åº¦:%d\n",BTWidth2(b));
 	DestroyBTree(b);
 	return 1;
 }

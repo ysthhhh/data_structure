@@ -1,51 +1,51 @@
-//ÎÄ¼şÃû:exp8-12.cpp
+//æ–‡ä»¶å:exp8-12.cpp
 #include<stdio.h>
 #include<malloc.h>
 #define MAXV 201
-//------Í¼µÄÁÚ½Ó±í¶¨Òå---------
+//------å›¾çš„é‚»æ¥è¡¨å®šä¹‰---------
 typedef struct ANode
-{	int no;					//¶¯Îï±àºÅ
-	struct ANode *nextarc;	//Ö¸ÏòÏÂÒ»¸ö¿ÉÍ¨ĞÅ¶¯Îï½Úµã
+{	int no;					//åŠ¨ç‰©ç¼–å·
+	struct ANode *nextarc;	//æŒ‡å‘ä¸‹ä¸€ä¸ªå¯é€šä¿¡åŠ¨ç‰©èŠ‚ç‚¹
 } ArcNode;
 typedef struct Vnode
 {
-	ArcNode *firstarc;		//Ö¸ÏòµÚÒ»¸ö¿ÉÍ¨ĞÅ¶¯Îï½Úµã
+	ArcNode *firstarc;		//æŒ‡å‘ç¬¬ä¸€ä¸ªå¯é€šä¿¡åŠ¨ç‰©èŠ‚ç‚¹
 } VNode;
 typedef struct
-{	int n;					//¶¯Îï¸öÊı£¬¼´¶¥µãÊı
-	int m;					//¿ÉÍ¨ĞÅ¶¯Îï¶ÔÊı,¼´±ßÊı
-	VNode adjlist[MAXV];	//±íÍ·½ÚµãÊı×é
+{	int n;					//åŠ¨ç‰©ä¸ªæ•°ï¼Œå³é¡¶ç‚¹æ•°
+	int m;					//å¯é€šä¿¡åŠ¨ç‰©å¯¹æ•°,å³è¾¹æ•°
+	VNode adjlist[MAXV];	//è¡¨å¤´èŠ‚ç‚¹æ•°ç»„
 } ALGraph;
 
-int BFS(ALGraph *G,int s,int e)			//²ÉÓÃ¹ã¶ÈÓÅÏÈ±éÀú²éÕÒsµ½eµÄ×î¶ÌÂ·¾¶³¤¶È
+int BFS(ALGraph *G,int s,int e)			//é‡‡ç”¨å¹¿åº¦ä¼˜å…ˆéå†æŸ¥æ‰¾såˆ°eçš„æœ€çŸ­è·¯å¾„é•¿åº¦
 {
 	int visited[MAXV];
 	struct
-	{	int no;							//¶¯Îï¶¥µã±àºÅ
-		int level;						//²ã´Î
-	} qu[MAXV];							//»·ĞÎ¶ÓÁĞ
+	{	int no;							//åŠ¨ç‰©é¡¶ç‚¹ç¼–å·
+		int level;						//å±‚æ¬¡
+	} qu[MAXV];							//ç¯å½¢é˜Ÿåˆ—
 	int front=0,rear=0,i,w,l;
 	ArcNode *p;
 	if (s==e) return 0;
 	for (i=0;i<G->n;i++) visited[i]=0;
 	visited[s]=1;
-	rear=(rear+1) % MAXV;				//Æğµãs½ø¶Ó
+	rear=(rear+1) % MAXV;				//èµ·ç‚¹sè¿›é˜Ÿ
 	qu[rear].no=s; 
-	qu[rear].level=0;					//ÆğµãµÄ²ã´ÎÉèÖÃÎª0
-	while (front!=rear)					//¶Ó²»¿ÕÑ­»·
+	qu[rear].level=0;					//èµ·ç‚¹çš„å±‚æ¬¡è®¾ç½®ä¸º0
+	while (front!=rear)					//é˜Ÿä¸ç©ºå¾ªç¯
 	{
 		front=(front+1) % MAXV;
-		w=qu[front].no;					//³ö¶Ó¶¥µãw
-		l=qu[front].level;				//¶¥µãwµÄ²ã´ÎÎªl
-		p=G->adjlist[w].firstarc;		//ÕÒ¶¥µãwµÄµÚÒ»¸öÏàÁÚµã
+		w=qu[front].no;					//å‡ºé˜Ÿé¡¶ç‚¹w
+		l=qu[front].level;				//é¡¶ç‚¹wçš„å±‚æ¬¡ä¸ºl
+		p=G->adjlist[w].firstarc;		//æ‰¾é¡¶ç‚¹wçš„ç¬¬ä¸€ä¸ªç›¸é‚»ç‚¹
 		while (p!=NULL)
 		{
-			if (visited[p->no]==0)		//Èô¸Ã¶¥µãÃ»ÓĞ·ÃÎÊ¹ı
+			if (visited[p->no]==0)		//è‹¥è¯¥é¡¶ç‚¹æ²¡æœ‰è®¿é—®è¿‡
 			{
-				if (p->no==e)			//ÕÒµ½ÖÕµãe£¬·ÃÎÊÆä²ã´Î
+				if (p->no==e)			//æ‰¾åˆ°ç»ˆç‚¹eï¼Œè®¿é—®å…¶å±‚æ¬¡
 					return qu[rear].level;
-				visited[p->no]=1;		//·ÃÎÊËü
-				rear=(rear+1) % MAXV;	//½«Ëü½ø¶Ó
+				visited[p->no]=1;		//è®¿é—®å®ƒ
+				rear=(rear+1) % MAXV;	//å°†å®ƒè¿›é˜Ÿ
 				qu[rear].no=p->no;
 				qu[rear].level=l+1;
 			}
@@ -55,7 +55,7 @@ int BFS(ALGraph *G,int s,int e)			//²ÉÓÃ¹ã¶ÈÓÅÏÈ±éÀú²éÕÒsµ½eµÄ×î¶ÌÂ·¾¶³¤¶È
 	return -1;
 }
 
-void InitGraph(ALGraph *&G,int n)		//³õÊ¼»¯ÁÚ½Ó±í
+void InitGraph(ALGraph *&G,int n)		//åˆå§‹åŒ–é‚»æ¥è¡¨
 {	int i;
 	G=(ALGraph *)malloc(sizeof(ALGraph));
 	for (i=0;i<n;i++)
@@ -63,7 +63,7 @@ void InitGraph(ALGraph *&G,int n)		//³õÊ¼»¯ÁÚ½Ó±í
 	G->n=n;
 	G->m=0;
 }
-void Add(ALGraph *&G,int a,int b)		//Í¼ÖĞÌí¼ÓÒ»Ìõ±ß(a,b)
+void Add(ALGraph *&G,int a,int b)		//å›¾ä¸­æ·»åŠ ä¸€æ¡è¾¹(a,b)
 {	ArcNode *p;
 	p=(ArcNode *)malloc(sizeof(ArcNode));
 	p->no=b;
@@ -75,7 +75,7 @@ void Add(ALGraph *&G,int a,int b)		//Í¼ÖĞÌí¼ÓÒ»Ìõ±ß(a,b)
 	G->adjlist[b].firstarc=p;
 	G->m++;
 }
-void DestroyGraph(ALGraph *&G)	//Ïú»ÙÍ¼
+void DestroyGraph(ALGraph *&G)	//é”€æ¯å›¾
 {
 	ArcNode *pre,*p;
 	for (int i=0;i<G->n;i++)
@@ -94,7 +94,7 @@ void DestroyGraph(ALGraph *&G)	//Ïú»ÙÍ¼
 	}
 	free(G);
 }
-void DispGraph(ALGraph *G)		//Êä³öÍ¼
+void DispGraph(ALGraph *G)		//è¾“å‡ºå›¾
 {
 	int i;
 	ArcNode *p;
@@ -103,10 +103,10 @@ void DispGraph(ALGraph *G)		//Êä³öÍ¼
 	{	printf("[%3d]:",i);
 		p=G->adjlist[i].firstarc;
 		while (p!=NULL)
-		{	printf("¡ú(%d)",p->no);
+		{	printf("â†’(%d)",p->no);
 			p=p->nextarc;
 		}
-		printf("¡ú¡Ä\n");
+		printf("â†’âˆ§\n");
 	}
 }
 int main()
@@ -117,23 +117,23 @@ int main()
 	fp=fopen("test.txt","r");
 	if (fp==NULL)
 	{
-		printf("²»ÄÜ´ò¿ªtest.txtÎÄ¼ş\n");
+		printf("ä¸èƒ½æ‰“å¼€test.txtæ–‡ä»¶\n");
 		return 0;
 	}
 	fscanf(fp,"%d%d",&n,&m);
 	InitGraph(G,n);
-	for (i=0;i<m;i++)		//¸ù¾İÊäÈë½¨Á¢ÁÚ½Ó±íÖĞµÄµ¥Á´±í
+	for (i=0;i<m;i++)		//æ ¹æ®è¾“å…¥å»ºç«‹é‚»æ¥è¡¨ä¸­çš„å•é“¾è¡¨
 	{
 		fscanf(fp,"%d%d",&a,&b);
 		Add(G,a,b);
 	}
-	printf("ÁÚ½Ó±í:\n"); DispGraph(G);
-	printf("Çó½â½á¹û:\n");
+	printf("é‚»æ¥è¡¨:\n"); DispGraph(G);
+	printf("æ±‚è§£ç»“æœ:\n");
 	fscanf(fp,"%d",&k);
 	for (i=0;i<k;i++)
 	{
 		fscanf(fp,"%d %d",&s,&e);
-		printf("  case%dÖÁÉÙĞèÒª%d¸ö·­Òë\n",i+1,BFS(G,s,e));
+		printf("  case%dè‡³å°‘éœ€è¦%dä¸ªç¿»è¯‘\n",i+1,BFS(G,s,e));
 	}
 	DestroyGraph(G);
 	fclose(fp);

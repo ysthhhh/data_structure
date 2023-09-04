@@ -1,17 +1,17 @@
-//ÎÄ¼şÃû:exp9-9.cpp
+//æ–‡ä»¶å:exp9-9.cpp
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
 #define MAXWORD 100
 typedef struct tnode 
 {
-	char ch;      //×Ö·û
-	int count;    //³öÏÖ´ÎÊı
+	char ch;      //å­—ç¬¦
+	int count;    //å‡ºç°æ¬¡æ•°
 	struct tnode *lchild,*rchild;
 } BSTNode;
-void CreateBST(BSTNode *&bt,char c) //²ÉÓÃµİ¹é·½Ê½¹¹ÔìÒ»¿Ã¶ş²æÅÅĞòÊ÷bt
+void CreateBST(BSTNode *&bt,char c) //é‡‡ç”¨é€’å½’æ–¹å¼æ„é€ ä¸€æ£µäºŒå‰æ’åºæ ‘bt
 {
-	if (bt==NULL)				//btÎªNULL,Ôò½¨Á¢Ò»¸öĞÂ½Úµã
+	if (bt==NULL)				//btä¸ºNULL,åˆ™å»ºç«‹ä¸€ä¸ªæ–°èŠ‚ç‚¹
 	{
 		bt=(BSTNode *)malloc(sizeof(BSTNode));
 		bt->ch=c;
@@ -25,16 +25,16 @@ void CreateBST(BSTNode *&bt,char c) //²ÉÓÃµİ¹é·½Ê½¹¹ÔìÒ»¿Ã¶ş²æÅÅĞòÊ÷bt
 	else 
 		CreateBST(bt->rchild,c);
 }
-void InOrder(BSTNode *bt)		//ÖĞĞò±éÀú¶ş²æÅÅĞòÊ÷bt
+void InOrder(BSTNode *bt)		//ä¸­åºéå†äºŒå‰æ’åºæ ‘bt
 {
 	if (bt!=NULL) 
 	{
-		InOrder(bt->lchild);	//ÖĞĞò±éÀú×ó×ÓÊ÷
-		printf("  %c(%d)\n",bt->ch,bt->count);//·ÃÎÊ¸ù½Úµã
-		InOrder(bt->rchild);	//ÖĞĞò±éÀúÓÒ×ÓÊ÷
+		InOrder(bt->lchild);	//ä¸­åºéå†å·¦å­æ ‘
+		printf("  %c(%d)\n",bt->ch,bt->count);//è®¿é—®æ ¹èŠ‚ç‚¹
+		InOrder(bt->rchild);	//ä¸­åºéå†å³å­æ ‘
 	}
 }
-void DestroyBST(BSTNode *bt)	//Ïú»Ù¶ş²æÅÅĞòÊ÷bt
+void DestroyBST(BSTNode *bt)	//é”€æ¯äºŒå‰æ’åºæ ‘bt
 {
 	if (bt!=NULL)
 	{
@@ -48,14 +48,14 @@ int main()
 	BSTNode *bt=NULL;
 	int i=0;
 	char str[MAXWORD];
-	printf("ÊäÈë×Ö·û´®:");
+	printf("è¾“å…¥å­—ç¬¦ä¸²:");
 	gets(str);
 	while (str[i]!='\0') 
 	{
 		CreateBST(bt,str[i]);
 		i++;
 	}
-	printf("×Ö·û¼°³öÏÖ´ÎÊı:\n");
+	printf("å­—ç¬¦åŠå‡ºç°æ¬¡æ•°:\n");
 	InOrder(bt);
 	DestroyBST(bt);
 	return 1;

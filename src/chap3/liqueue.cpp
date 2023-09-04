@@ -1,4 +1,4 @@
-//Á´¶ÓÔËËãËã·¨
+//é“¾é˜Ÿè¿ç®—ç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
 typedef char ElemType;
@@ -6,21 +6,21 @@ typedef struct DataNode
 {	
 	ElemType data;
 	struct DataNode *next;
-} DataNode;				//Á´¶ÓÊı¾İ½ÚµãÀàĞÍ¶¨Òå
+} DataNode;				//é“¾é˜Ÿæ•°æ®èŠ‚ç‚¹ç±»å‹å®šä¹‰
 typedef struct
 {	
 	DataNode *front;
 	DataNode *rear;
-} LinkQuNode;			//Á´¶ÓÀàĞÍ¶¨Òå
-void InitQueue(LinkQuNode *&q)	//³õÊ¼»¯¶ÓÁĞq
+} LinkQuNode;			//é“¾é˜Ÿç±»å‹å®šä¹‰
+void InitQueue(LinkQuNode *&q)	//åˆå§‹åŒ–é˜Ÿåˆ—q
 {	
 	q=(LinkQuNode *)malloc(sizeof(LinkQuNode));
 	q->front=q->rear=NULL;
 }
-void DestroyQueue(LinkQuNode *&q)	//Ïú»Ù¶ÓÁĞq
+void DestroyQueue(LinkQuNode *&q)	//é”€æ¯é˜Ÿåˆ—q
 {
-	DataNode *p=q->front,*r;//pÖ¸Ïò¶ÓÍ·Êı¾İ½Úµã
-	if (p!=NULL)			//ÊÍ·ÅÊı¾İ½ÚµãÕ¼ÓÃ¿Õ¼ä
+	DataNode *p=q->front,*r;//pæŒ‡å‘é˜Ÿå¤´æ•°æ®èŠ‚ç‚¹
+	if (p!=NULL)			//é‡Šæ”¾æ•°æ®èŠ‚ç‚¹å ç”¨ç©ºé—´
 	{	r=p->next;
 		while (r!=NULL)
 		{	free(p);
@@ -28,32 +28,32 @@ void DestroyQueue(LinkQuNode *&q)	//Ïú»Ù¶ÓÁĞq
 		}
 	}
 	free(p);
-	free(q);				//ÊÍ·ÅÁ´¶Ó½ÚµãÕ¼ÓÃ¿Õ¼ä
+	free(q);				//é‡Šæ”¾é“¾é˜ŸèŠ‚ç‚¹å ç”¨ç©ºé—´
 }
-bool QueueEmpty(LinkQuNode *q)	//ÅĞ¶Ï¶ÓqÊÇ·ñ¿Õ
+bool QueueEmpty(LinkQuNode *q)	//åˆ¤æ–­é˜Ÿqæ˜¯å¦ç©º
 {
 	return(q->rear==NULL);
 }
-void enQueue(LinkQuNode *&q,ElemType e)	//½ø¶Ó
+void enQueue(LinkQuNode *&q,ElemType e)	//è¿›é˜Ÿ
 {	DataNode *p;
 	p=(DataNode *)malloc(sizeof(DataNode));
 	p->data=e;
 	p->next=NULL;
-	if (q->rear==NULL)		//ÈôÁ´¶ÓÎª¿Õ,ÔòĞÂ½ÚµãÊÇ¶ÓÊ×½ÚµãÓÖÊÇ¶ÓÎ²½Úµã
+	if (q->rear==NULL)		//è‹¥é“¾é˜Ÿä¸ºç©º,åˆ™æ–°èŠ‚ç‚¹æ˜¯é˜Ÿé¦–èŠ‚ç‚¹åˆæ˜¯é˜Ÿå°¾èŠ‚ç‚¹
 		q->front=q->rear=p;
 	else
-	{	q->rear->next=p;	//½«p½ÚµãÁ´µ½¶ÓÎ²,²¢½«rearÖ¸ÏòËü
+	{	q->rear->next=p;	//å°†pèŠ‚ç‚¹é“¾åˆ°é˜Ÿå°¾,å¹¶å°†rearæŒ‡å‘å®ƒ
 		q->rear=p;
 	}
 }
-bool deQueue(LinkQuNode *&q,ElemType &e)	//³ö¶Ó
+bool deQueue(LinkQuNode *&q,ElemType &e)	//å‡ºé˜Ÿ
 {	DataNode *t;
-	if (q->rear==NULL)		//¶ÓÁĞÎª¿Õ
+	if (q->rear==NULL)		//é˜Ÿåˆ—ä¸ºç©º
 		return false;
-	t=q->front;				//tÖ¸ÏòµÚÒ»¸öÊı¾İ½Úµã
-	if (q->front==q->rear)  //¶ÓÁĞÖĞÖ»ÓĞÒ»¸ö½ÚµãÊ±
+	t=q->front;				//tæŒ‡å‘ç¬¬ä¸€ä¸ªæ•°æ®èŠ‚ç‚¹
+	if (q->front==q->rear)  //é˜Ÿåˆ—ä¸­åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹æ—¶
 		q->front=q->rear=NULL;
-	else					//¶ÓÁĞÖĞÓĞ¶à¸ö½ÚµãÊ±
+	else					//é˜Ÿåˆ—ä¸­æœ‰å¤šä¸ªèŠ‚ç‚¹æ—¶
 		q->front=q->front->next;
 	e=t->data;
 	free(t);

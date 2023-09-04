@@ -1,12 +1,12 @@
-//ÎÄ¼şÃû:exp5-4.cpp
+//æ–‡ä»¶å:exp5-4.cpp
 #include <stdio.h>
 double expx(double x,int n)
 {
 	if (n==1)
 		return x;
-	else if (n%2==0)		//µ±nÎª´óÓÚ1µÄÅ¼ÊıÊ±
+	else if (n%2==0)		//å½“nä¸ºå¤§äº1çš„å¶æ•°æ—¶
 		return expx(x,n/2)*expx(x,n/2);
-	else					//µ±nÎª´óÓÚ1µÄÆæÊıÊ±
+	else					//å½“nä¸ºå¤§äº1çš„å¥‡æ•°æ—¶
 		return x*expx(x,(n-1)/2)*expx(x,(n-1)/2);
 }
 int main()
@@ -15,6 +15,6 @@ int main()
 	int n;
 	printf("x:"); scanf("%lf",&x);
 	printf("n:"); scanf("%d",&n);
-	printf("%gµÄ%d´Î·½:%g\n",x,n,expx(x,n));
+	printf("%gçš„%dæ¬¡æ–¹:%g\n",x,n,expx(x,n));
 	return 1;
 }

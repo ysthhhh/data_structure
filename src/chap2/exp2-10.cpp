@@ -1,30 +1,30 @@
-//ÎÄ¼şÃû:exp2-8.cpp
+//æ–‡ä»¶å:exp2-8.cpp
 #include <stdio.h>
 #include <malloc.h>
 #define MAX 20
 typedef struct node
 {  
-	double coef;		//ÏµÊı
-	int exp;			//Ö¸Êı
+	double coef;		//ç³»æ•°
+	int exp;			//æŒ‡æ•°
 	struct node *next;
-} PolyNode;				//ÉùÃ÷¶àÏîÊ½µ¥Á´±í½áµãÀàĞÍ
-void CreatePolyR(PolyNode *&L,double a[],int b[],int n) //Î²²å·¨´´½¨¶àÏîÊ½µ¥Á´±í
+} PolyNode;				//å£°æ˜å¤šé¡¹å¼å•é“¾è¡¨ç»“ç‚¹ç±»å‹
+void CreatePolyR(PolyNode *&L,double a[],int b[],int n) //å°¾æ’æ³•åˆ›å»ºå¤šé¡¹å¼å•é“¾è¡¨
 {
 	PolyNode *s,*r;int i;
 	L=(PolyNode *)malloc(sizeof(PolyNode));
 	L->next=NULL;
-	r=L;						//rÊ¼ÖÕÖ¸ÏòÖÕ¶Ë½áµã,¿ªÊ¼Ê±Ö¸ÏòÍ·½áµã
+	r=L;						//rå§‹ç»ˆæŒ‡å‘ç»ˆç«¯ç»“ç‚¹,å¼€å§‹æ—¶æŒ‡å‘å¤´ç»“ç‚¹
 	for (i=0;i<n;i++)
 	{
 		s=(PolyNode *)malloc(sizeof(PolyNode));         
 		s->coef=a[i];
 		s->exp=b[i];
-		r->next=s;				//½«½áµãs²åÈë½áµãrÖ®ºó
+		r->next=s;				//å°†ç»“ç‚¹sæ’å…¥ç»“ç‚¹rä¹‹å
 		r=s;
 	}
-	r->next=NULL;				//Î²½áµãnextÓòÖÃÎªNULL
+	r->next=NULL;				//å°¾ç»“ç‚¹nextåŸŸç½®ä¸ºNULL
 }
-void DestroyPoly(PolyNode *&L)	//Ïú»Ùµ¥Á´±í
+void DestroyPoly(PolyNode *&L)	//é”€æ¯å•é“¾è¡¨
 { 
 	PolyNode *pre=L,*p=pre->next;
 	while (p!=NULL)
@@ -35,9 +35,9 @@ void DestroyPoly(PolyNode *&L)	//Ïú»Ùµ¥Á´±í
 	}
 	free(pre);
 }
-void DispPoly(PolyNode *L)	//Êä³ö¶àÏîÊ½µ¥Á´±í
+void DispPoly(PolyNode *L)	//è¾“å‡ºå¤šé¡¹å¼å•é“¾è¡¨
 {
-	bool first=true;		//firstÎªtrue±íÊ¾ÊÇµÚÒ»Ïî
+	bool first=true;		//firstä¸ºtrueè¡¨ç¤ºæ˜¯ç¬¬ä¸€é¡¹
 	PolyNode *p=L->next;
 	while (p!=NULL)
 	{
@@ -55,27 +55,27 @@ void DispPoly(PolyNode *L)	//Êä³ö¶àÏîÊ½µ¥Á´±í
 	}
 	printf("\n");
 }
-void Sort(PolyNode *&L)				//½«¶àÏîÊ½µ¥Á´±í°´Ö¸Êıµİ¼õÅÅĞò
+void Sort(PolyNode *&L)				//å°†å¤šé¡¹å¼å•é“¾è¡¨æŒ‰æŒ‡æ•°é€’å‡æ’åº
 {
 	PolyNode *p=L->next,*pre,*q;
-	if (p!=NULL)					//LÓĞÒ»¸ö»òÒÔÉÏµÄÊı¾İ½áµã
+	if (p!=NULL)					//Læœ‰ä¸€ä¸ªæˆ–ä»¥ä¸Šçš„æ•°æ®ç»“ç‚¹
 	{
-		q=p->next;					//q±£´æp½áµãµÄºó¼Ì½áµã
-		p->next=NULL;				//¹¹ÔìÖ»º¬Ò»¸öÊı¾İ½áµãµÄÓĞĞò±í
+		q=p->next;					//qä¿å­˜pç»“ç‚¹çš„åç»§ç»“ç‚¹
+		p->next=NULL;				//æ„é€ åªå«ä¸€ä¸ªæ•°æ®ç»“ç‚¹çš„æœ‰åºè¡¨
 		p=q;
-		while (p!=NULL)				//É¨ÃèÔ­LÖĞÓàÏÂµÄÊı¾İ½áµã
+		while (p!=NULL)				//æ‰«æåŸLä¸­ä½™ä¸‹çš„æ•°æ®ç»“ç‚¹
 		{
-			q=p->next;				//q±£´æp½áµãµÄºó¼Ì½áµã
+			q=p->next;				//qä¿å­˜pç»“ç‚¹çš„åç»§ç»“ç‚¹
 			pre=L;
 			while (pre->next!=NULL && pre->next->exp>p->exp)
-				pre=pre->next;     //ÔÚÓĞĞò±íÖĞÕÒ²åÈë½áµãpµÄÇ°Çı½áµãpre
-			p->next=pre->next;		//½«½áµãp²åÈëµ½½áµãpreÖ®ºó
+				pre=pre->next;     //åœ¨æœ‰åºè¡¨ä¸­æ‰¾æ’å…¥ç»“ç‚¹pçš„å‰é©±ç»“ç‚¹pre
+			p->next=pre->next;		//å°†ç»“ç‚¹pæ’å…¥åˆ°ç»“ç‚¹preä¹‹å
 			pre->next=p;
-			p=q;					//É¨ÃèÔ­µ¥Á´±íÓàÏÂµÄ½áµã
+			p=q;					//æ‰«æåŸå•é“¾è¡¨ä½™ä¸‹çš„ç»“ç‚¹
 		}
 	}
 }
-void Mult1(PolyNode *ha,PolyNode *hb,PolyNode *&hc)	 //haºÍbh¼òµ¥Ïà³ËµÃµ½hc
+void Mult1(PolyNode *ha,PolyNode *hb,PolyNode *&hc)	 //haå’Œbhç®€å•ç›¸ä¹˜å¾—åˆ°hc
 {
 	PolyNode *pa=ha->next,*pb,*s,*tc;
 	hc=(PolyNode *)malloc(sizeof(PolyNode)); 
@@ -96,7 +96,7 @@ void Mult1(PolyNode *ha,PolyNode *hb,PolyNode *&hc)	 //haºÍbh¼òµ¥Ïà³ËµÃµ½hc
 	}
 	tc->next=NULL;
 }
-void Comb(PolyNode *&L)		//ºÏ²¢Ö¸ÊıÏàÍ¬µÄÏî
+void Comb(PolyNode *&L)		//åˆå¹¶æŒ‡æ•°ç›¸åŒçš„é¡¹
 {
 	PolyNode *pre=L->next,*p;
 	if (pre==NULL) return;
@@ -114,7 +114,7 @@ void Comb(PolyNode *&L)		//ºÏ²¢Ö¸ÊıÏàÍ¬µÄÏî
 		p=p->next;
 	}
 }
-void DelZero(PolyNode *&L)		//É¾³ıÏµÊıÎª0µÄÏî
+void DelZero(PolyNode *&L)		//åˆ é™¤ç³»æ•°ä¸º0çš„é¡¹
 {
 	PolyNode *pre=L,*p=pre->next;
 	while (p!=NULL)
@@ -128,41 +128,41 @@ void DelZero(PolyNode *&L)		//É¾³ıÏµÊıÎª0µÄÏî
 		p=p->next;
 	}
 }
-void Mult(PolyNode *ha,PolyNode *hb,PolyNode *&hc)	//haºÍbhÏà³ËµÃµ½×îÖÕµÄhc
+void Mult(PolyNode *ha,PolyNode *hb,PolyNode *&hc)	//haå’Œbhç›¸ä¹˜å¾—åˆ°æœ€ç»ˆçš„hc
 {
 	Mult1(ha,hb,hc);
-	printf("Ïà³Ë½á¹û:      ");DispPoly(hc);
+	printf("ç›¸ä¹˜ç»“æœ:      ");DispPoly(hc);
 	Sort(hc);
-	printf("°´Ö¸ÊıÅÅĞòºó:  ");DispPoly(hc);
+	printf("æŒ‰æŒ‡æ•°æ’åºå:  ");DispPoly(hc);
 	Comb(hc);
-	printf("ºÏ²¢ÖØ¸´Ö¸ÊıÏî:");DispPoly(hc);
+	printf("åˆå¹¶é‡å¤æŒ‡æ•°é¡¹:");DispPoly(hc);
 	DelZero(hc);
-	printf("É¾³ıĞòÊıÎª0Ïî: ");DispPoly(hc);
+	printf("åˆ é™¤åºæ•°ä¸º0é¡¹: ");DispPoly(hc);
 }
 int main()
 {
 	PolyNode *Poly1,*Poly2,*Poly3;
 	double a[MAX];
 	int b[MAX],n;
-	//----´´½¨µÚ1¸ö¶àÏîµ¥Á´±í²¢ÅÅĞò-----
+	//----åˆ›å»ºç¬¬1ä¸ªå¤šé¡¹å•é“¾è¡¨å¹¶æ’åº-----
 	a[0]=2;b[0]=3;	a[1]=1;b[1]=0;	a[2]=3;b[2]=1;
 	n=3;
-	printf("µÚ1¸ö¶àÏîÊ½:\n");
+	printf("ç¬¬1ä¸ªå¤šé¡¹å¼:\n");
 	CreatePolyR(Poly1,a,b,n);
-	printf("  ÅÅĞòÇ°¶àÏîÊ½1:");DispPoly(Poly1);
+	printf("  æ’åºå‰å¤šé¡¹å¼1:");DispPoly(Poly1);
 	Sort(Poly1);
-	printf("  ÅÅĞòºó¶àÏîÊ½1:");DispPoly(Poly1);
-	//----´´½¨µÚ2¸ö¶àÏîµ¥Á´±í²¢ÅÅĞò-----
-	printf("µÚ2¸ö¶àÏîÊ½:\n");
+	printf("  æ’åºåå¤šé¡¹å¼1:");DispPoly(Poly1);
+	//----åˆ›å»ºç¬¬2ä¸ªå¤šé¡¹å•é“¾è¡¨å¹¶æ’åº-----
+	printf("ç¬¬2ä¸ªå¤šé¡¹å¼:\n");
 	a[0]=2; b[0]=3;	a[1]=-3;b[1]=2;	
 	a[2]=5; b[2]=4;	a[3]=-3;b[3]=0;
 	n=4;
 	CreatePolyR(Poly2,a,b,n);
-	printf("  ÅÅĞòÇ°¶àÏîÊ½2:");DispPoly(Poly2);
+	printf("  æ’åºå‰å¤šé¡¹å¼2:");DispPoly(Poly2);
 	Sort(Poly2);
-	printf("  ÅÅĞòºó¶àÏîÊ½2:");DispPoly(Poly2);
+	printf("  æ’åºåå¤šé¡¹å¼2:");DispPoly(Poly2);
 	Mult(Poly1,Poly2,Poly3);
-	printf("Ïà³Ëºó¶àÏîÊ½3: ");DispPoly(Poly3);
+	printf("ç›¸ä¹˜åå¤šé¡¹å¼3: ");DispPoly(Poly3);
 	DestroyPoly(Poly1);
 	DestroyPoly(Poly2);
 	DestroyPoly(Poly3);

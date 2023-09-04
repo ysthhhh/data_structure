@@ -1,4 +1,4 @@
-//ÎÄ¼şÃû:exp8-2.cpp
+//æ–‡ä»¶å:exp8-2.cpp
 #include "travsal.cpp"
 int main()
 {
@@ -10,14 +10,14 @@ int main()
 		{INF,INF,5,0,INF,6},
 		{INF,INF,INF,5,0,INF},
 		{3,INF,INF,INF,1,0}};
-	int n=6,e=10;			//Í¼8.1ÖĞµÄÊı¾İ
+	int n=6,e=10;			//å›¾8.1ä¸­çš„æ•°æ®
 	CreateAdj(G,A,n,e);
-	printf("Í¼GµÄÁÚ½Ó±í:\n"); DispAdj(G);
-	printf("´Ó¶¥µã0¿ªÊ¼µÄDFS(µİ¹éËã·¨):\n");
+	printf("å›¾Gçš„é‚»æ¥è¡¨:\n"); DispAdj(G);
+	printf("ä»é¡¶ç‚¹0å¼€å§‹çš„DFS(é€’å½’ç®—æ³•):\n");
 	DFS(G,0);printf("\n");
-	printf("´Ó¶¥µã0¿ªÊ¼µÄDFS(·Çµİ¹éËã·¨):\n");
+	printf("ä»é¡¶ç‚¹0å¼€å§‹çš„DFS(éé€’å½’ç®—æ³•):\n");
 	DFS1(G,0);
-	printf("´Ó¶¥µã0¿ªÊ¼µÄBFS:\n");
+	printf("ä»é¡¶ç‚¹0å¼€å§‹çš„BFS:\n");
 	BFS(G,0);
 	DestroyAdj(G);
 	return 1;

@@ -1,13 +1,13 @@
-//ÎÄ¼şÃû:exp9-6.cpp
+//æ–‡ä»¶å:exp9-6.cpp
 #include <stdio.h>
-#define MAXL 100					//¶¨Òå±íÖĞ×î¶à¼ÇÂ¼¸öÊı
-typedef int KeyType;				//¶¨Òå¹Ø¼ü×ÖÀàĞÍÎªint
+#define MAXL 100					//å®šä¹‰è¡¨ä¸­æœ€å¤šè®°å½•ä¸ªæ•°
+typedef int KeyType;				//å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºint
 typedef char InfoType;
 typedef struct
-{	KeyType key;					//¹Ø¼ü×ÖÏî
-	InfoType data;					//ÆäËûÊı¾İÏî£¬ÀàĞÍÎªInfoType
-} RecType;							//²éÕÒÔªËØµÄÀàĞÍ
-int lowerbound(RecType R[],int n,KeyType k)	//Çó¹Ø¼ü×ÖÎªk¼ÇÂ¼µÄÏÂ½ç
+{	KeyType key;					//å…³é”®å­—é¡¹
+	InfoType data;					//å…¶ä»–æ•°æ®é¡¹ï¼Œç±»å‹ä¸ºInfoType
+} RecType;							//æŸ¥æ‰¾å…ƒç´ çš„ç±»å‹
+int lowerbound(RecType R[],int n,KeyType k)	//æ±‚å…³é”®å­—ä¸ºkè®°å½•çš„ä¸‹ç•Œ
 {
 	int low=0, high=n, mid;
 	while (low<high)
@@ -20,7 +20,7 @@ int lowerbound(RecType R[],int n,KeyType k)	//Çó¹Ø¼ü×ÖÎªk¼ÇÂ¼µÄÏÂ½ç
 	}
 	return low;
 }
-int upperbound(RecType R[],int n,KeyType k)	//Çó¹Ø¼ü×ÖÎªk¼ÇÂ¼µÄÉÏ½ç
+int upperbound(RecType R[],int n,KeyType k)	//æ±‚å…³é”®å­—ä¸ºkè®°å½•çš„ä¸Šç•Œ
 {
 	int low=0, high=n, mid;
 	while (low<high)
@@ -33,32 +33,32 @@ int upperbound(RecType R[],int n,KeyType k)	//Çó¹Ø¼ü×ÖÎªk¼ÇÂ¼µÄÉÏ½ç
 	}
 	return low;
 }
-void SearchRange(RecType R[],int n,KeyType k)  //Êä³ö¹Ø¼ü×ÖÎªkµÄ¼ÇÂ¼µÄÇø¼ä
+void SearchRange(RecType R[],int n,KeyType k)  //è¾“å‡ºå…³é”®å­—ä¸ºkçš„è®°å½•çš„åŒºé—´
 {
 	int lower=lowerbound(R,n,k);
 	int upper=upperbound(R,n,k);
 	if (lower==n || lower>=upper)
-		printf("²»´æÔÚ\n");
+		printf("ä¸å­˜åœ¨\n");
 	else
-		printf("Çø¼ä[%d,%d]\n",lower,upper-1);
+		printf("åŒºé—´[%d,%d]\n",lower,upper-1);
 }
 int main()
 {
 	RecType R[MAXL];
 	KeyType k=9;
 	int a[]={1,2,3,3,3,3,3,8,9,10},i,n=10;
-	for (i=0;i<n;i++)				//½¨Á¢Ë³Ğò±í
+	for (i=0;i<n;i++)				//å»ºç«‹é¡ºåºè¡¨
 		R[i].key=a[i];
-	printf("¹Ø¼ü×ÖĞòÁĞ:");
+	printf("å…³é”®å­—åºåˆ—:");
 	for (i=0;i<n;i++)
 		printf("%d ",R[i].key);
 	printf("\n");
 	int b[]={-1,1,2,3,8,9,10,20};
 	int m=sizeof(b)/sizeof(b[0]);
-	printf("²éÕÒ½á¹û:\n");
+	printf("æŸ¥æ‰¾ç»“æœ:\n");
 	for (i=0;i<m;i++)
 	{
-		printf("  ²éÕÒ¹Ø¼ü×Ö%2d:\t",b[i]);
+		printf("  æŸ¥æ‰¾å…³é”®å­—%2d:\t",b[i]);
 		SearchRange(R,n,b[i]);
 	}
 	return 1;

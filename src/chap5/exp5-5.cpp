@@ -1,15 +1,15 @@
-//ÎÄ¼þÃû:exp5-5.cpp
-#include "linklist.cpp"		//°üº¬µ¥Á´±íµÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp5-5.cpp
+#include "linklist.cpp"		//åŒ…å«å•é“¾è¡¨çš„åŸºæœ¬è¿ç®—ç®—æ³•
 void Reverse(LinkNode *p,LinkNode *&L)  
 {  
-    if(p->next==NULL)		//ÒÔpÎªÊ×½ÚµãÖ¸ÕëµÄµ¥Á´±íÖ»ÓÐÒ»¸ö½ÚµãÊ±
+    if(p->next==NULL)		//ä»¥pä¸ºé¦–èŠ‚ç‚¹æŒ‡é’ˆçš„å•é“¾è¡¨åªæœ‰ä¸€ä¸ªèŠ‚ç‚¹æ—¶
     {  
-        L->next=p;			//p½Úµã±äÎªÎ²½Úµã
+        L->next=p;			//pèŠ‚ç‚¹å˜ä¸ºå°¾èŠ‚ç‚¹
         return;
     }  
-    Reverse(p->next,L);		//ÄæÖÃºóµÄÎ²½ÚµãÊÇp->next  
-    p->next->next=p;		//½«½ÚµãÁ´½ÓÔÚÎ²½ÚµãÖ®ºó  
-    p->next=NULL;			//Î²½ÚµãnextÓòÖÃÎªNULL  
+    Reverse(p->next,L);		//é€†ç½®åŽçš„å°¾èŠ‚ç‚¹æ˜¯p->next  
+    p->next->next=p;		//å°†èŠ‚ç‚¹é“¾æŽ¥åœ¨å°¾èŠ‚ç‚¹ä¹‹åŽ  
+    p->next=NULL;			//å°¾èŠ‚ç‚¹nextåŸŸç½®ä¸ºNULL  
 }  
 
 int main()
@@ -19,7 +19,7 @@ int main()
 	int n=8;
 	CreateListR(L,a,n);
 	printf("L:"); DispList(L);
-	printf("ÄæÖÃL\n");
+	printf("é€†ç½®L\n");
 	Reverse(L->next,L);
 	printf("L:"); DispList(L);
 	DestroyList(L);

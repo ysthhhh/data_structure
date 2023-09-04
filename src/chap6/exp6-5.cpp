@@ -1,22 +1,22 @@
-//ÎÄ¼şÃû:exp6-5.cpp
+//æ–‡ä»¶å:exp6-5.cpp
 #include <stdio.h>
 #define N 4
 #define M 10
-int value(int a[],int i,int j)	//·µ»ØÑ¹Ëõ´æ´¢aÖĞA[i][j]Ö®Öµ
+int value(int a[],int i,int j)	//è¿”å›å‹ç¼©å­˜å‚¨aä¸­A[i][j]ä¹‹å€¼
 {
 	if (i>=j)
 		return a[(i*(i-1))/2+j];
 	else
 		return a[(j*(j-1))/2+i];
 }
-void madd(int a[],int b[],int c[][N])	//ÇóÑ¹Ëõ´æ´¢aºÍbµÄºÍ
+void madd(int a[],int b[],int c[][N])	//æ±‚å‹ç¼©å­˜å‚¨aå’Œbçš„å’Œ
 {
 	int i,j;
     for (i=0;i<N;i++)
        for (j=0;j<N;j++)
            c[i][j]=value(a,i,j)+value(b,i,j);
 }
-void mult(int a[],int b[],int c[][N])	//ÇóÑ¹Ëõ´æ´¢aºÍbµÄ³Ë»ı
+void mult(int a[],int b[],int c[][N])	//æ±‚å‹ç¼©å­˜å‚¨aå’Œbçš„ä¹˜ç§¯
 {
 	int i,j,k,s;
     for (i=0;i<N;i++)
@@ -28,7 +28,7 @@ void mult(int a[],int b[],int c[][N])	//ÇóÑ¹Ëõ´æ´¢aºÍbµÄ³Ë»ı
            c[i][j]=s;
        }
 }
-void disp1(int a[])	//Êä³öÑ¹Ëõ´æ´¢a
+void disp1(int a[])	//è¾“å‡ºå‹ç¼©å­˜å‚¨a
 {
 	int i,j;
 	for (i=0;i<N;i++)
@@ -38,7 +38,7 @@ void disp1(int a[])	//Êä³öÑ¹Ëõ´æ´¢a
 		printf("\n");
 	}
 }
-void disp2(int c[][N])	//Êä³ö¶Ô³Æ¾ØÕóc
+void disp2(int c[][N])	//è¾“å‡ºå¯¹ç§°çŸ©é˜µc
 {
 	int i,j;
 	for (i=0;i<N;i++)
@@ -55,9 +55,9 @@ int main()
 	int c1[N][N],c2[N][N];
 	madd(a,b,c1);
 	mult(a,b,c2);
-	printf("a¾ØÕó:\n");disp1(a);
-	printf("b¾ØÕó:\n");disp1(b);
+	printf("açŸ©é˜µ:\n");disp1(a);
+	printf("bçŸ©é˜µ:\n");disp1(b);
     printf("a+b:\n");disp2(c1);
-    printf("a¡Áb:\n");disp2(c2);
+    printf("aÃ—b:\n");disp2(c2);
 	return 1;
 }

@@ -1,25 +1,25 @@
-//ÎÄ¼şÃû:exp5-3.cpp
+//æ–‡ä»¶å:exp5-3.cpp
 #include <stdio.h>
 #define MaxSize 100
 typedef struct
 {	char data[MaxSize];
 	int length;
 } IP;
-void addch(IP &ip,char ch)	//ipµÄÄ©Î²Ìí¼ÓÒ»¸ö×Ö·ûch
+void addch(IP &ip,char ch)	//ipçš„æœ«å°¾æ·»åŠ ä¸€ä¸ªå­—ç¬¦ch
 {	ip.data[ip.length]=ch;
 	ip.length++;
 }
-IP adddot(IP ip)			//ipµÄÄ©Î²Ìí¼ÓÒ»¸ö'.'£¬²¢·µ»Ø½á¹û
+IP adddot(IP ip)			//ipçš„æœ«å°¾æ·»åŠ ä¸€ä¸ª'.'ï¼Œå¹¶è¿”å›ç»“æœ
 {	addch(ip,'.');
 	return ip;
 }
-void solveip(char s[],int n,int start,int step,IP ip)	//»Ö¸´IPµØÖ·´®
+void solveip(char s[],int n,int start,int step,IP ip)	//æ¢å¤IPåœ°å€ä¸²
 {
 	if (start<=n)
 	{
-		if (start==n && step==4)			//ÕÒµ½Ò»¸öºÏ·¨½â
+		if (start==n && step==4)			//æ‰¾åˆ°ä¸€ä¸ªåˆæ³•è§£
 		{
-			for (int i=0;i<ip.length-1;i++)	//Êä³öÆä½á¹û,²»º¬×îºóµÄÒ»¸ö'.'
+			for (int i=0;i<ip.length-1;i++)	//è¾“å‡ºå…¶ç»“æœ,ä¸å«æœ€åçš„ä¸€ä¸ª'.'
 				printf("%c",ip.data[i]);
 			printf("\n");
 		}
@@ -27,13 +27,13 @@ void solveip(char s[],int n,int start,int step,IP ip)	//»Ö¸´IPµØÖ·´®
 	int num=0;
 	for (int i=start;i<n && i<start+3;i++)
 	{
-		num=10*num+(s[i]-'0');			//½«start¿ªÊ¼µÄi¸öÊı×Ö·û×ª»»ÎªÊıÖµ		
-		if (num<=255)					//ÎªºÏ·¨µã£¬¼ÌĞøµİ¹é
+		num=10*num+(s[i]-'0');			//å°†startå¼€å§‹çš„iä¸ªæ•°å­—ç¬¦è½¬æ¢ä¸ºæ•°å€¼		
+		if (num<=255)					//ä¸ºåˆæ³•ç‚¹ï¼Œç»§ç»­é€’å½’
 		{
 			addch(ip,s[i]);
 			solveip(s,n,i+1,step+1,adddot(ip));
 		}
-		if (num==0) break;				//²»ÔÊĞíÇ°×º0£¬µ¥ÔÊĞíµ¥¸ö0
+		if (num==0) break;				//ä¸å…è®¸å‰ç¼€0ï¼Œå•å…è®¸å•ä¸ª0
 	}
 }
 int main()

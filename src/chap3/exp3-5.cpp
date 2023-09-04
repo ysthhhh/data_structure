@@ -1,9 +1,9 @@
-//ÎÄ¼şÃû:exp3-5.cpp
+//æ–‡ä»¶å:exp3-5.cpp
 #include <stdio.h>
-#define M 4					//ĞĞÊı
-#define N 4					//ÁĞÊı
-#define MaxSize 100			//Õ»×î¶àÔªËØ¸öÊı
-int mg[M+2][N+2]={			//Ò»¸öÃÔ¹¬,ÆäËÄÖÜÒª¼ÓÉÏ¾ùÎª1µÄÍâ¿ò
+#define M 4					//è¡Œæ•°
+#define N 4					//åˆ—æ•°
+#define MaxSize 100			//æ ˆæœ€å¤šå…ƒç´ ä¸ªæ•°
+int mg[M+2][N+2]={			//ä¸€ä¸ªè¿·å®«,å…¶å››å‘¨è¦åŠ ä¸Šå‡ä¸º1çš„å¤–æ¡†
 {1,1,1,1,1,1},
 {1,0,0,0,1,1},
 {1,0,1,0,0,1},
@@ -15,53 +15,53 @@ struct
 {
 	int i,j;
 	int di;
-} St[MaxSize],Path[MaxSize];	//¶¨ÒåÕ»ºÍ´æ·Å×î¶ÌÂ·¾¶µÄÊı×é
-int top=-1;						//Õ»¶¥Ö¸Õë
-int count=1;					//Â·¾¶Êı¼ÆÊı
-int minlen=MaxSize;				//×î¶ÌÂ·¾¶³¤¶È
-void dispapath()				//Êä³öÒ»ÌõÂ·¾¶²¢Çó×î¶ÌÂ·¾¶
+} St[MaxSize],Path[MaxSize];	//å®šä¹‰æ ˆå’Œå­˜æ”¾æœ€çŸ­è·¯å¾„çš„æ•°ç»„
+int top=-1;						//æ ˆé¡¶æŒ‡é’ˆ
+int count=1;					//è·¯å¾„æ•°è®¡æ•°
+int minlen=MaxSize;				//æœ€çŸ­è·¯å¾„é•¿åº¦
+void dispapath()				//è¾“å‡ºä¸€æ¡è·¯å¾„å¹¶æ±‚æœ€çŸ­è·¯å¾„
 {
 	int k;
-	printf("%5d: ",count++);	//Êä³öµÚcountÌõÂ·¾¶
+	printf("%5d: ",count++);	//è¾“å‡ºç¬¬countæ¡è·¯å¾„
 	for (k=0;k<=top;k++)
 		printf("(%d,%d) ",St[k].i,St[k].j);
 	printf("\n");
-	if (top+1<minlen)			//±È½ÏÕÒ×î¶ÌÂ·¾¶
+	if (top+1<minlen)			//æ¯”è¾ƒæ‰¾æœ€çŸ­è·¯å¾„
 	{
-		for (k=0;k<=top;k++)	//½«×î¶ÌÂ·¾¶´æ·ÅÔÚpathÖĞ
+		for (k=0;k<=top;k++)	//å°†æœ€çŸ­è·¯å¾„å­˜æ”¾åœ¨pathä¸­
 			Path[k]=St[k];
-		minlen=top+1;			//½«×î¶ÌÂ·¾¶³¤¶È´æ·ÅÔÚminlenÖĞ
+		minlen=top+1;			//å°†æœ€çŸ­è·¯å¾„é•¿åº¦å­˜æ”¾åœ¨minlenä¸­
 	}
 }
-void dispminpath()				//Êä³öµÚÒ»Ìõ×î¶ÌÂ·¾¶
+void dispminpath()				//è¾“å‡ºç¬¬ä¸€æ¡æœ€çŸ­è·¯å¾„
 {
-	printf("×î¶ÌÂ·¾¶ÈçÏÂ:\n");
-	printf("³¤¶È: %d\n",minlen);
-	printf("Â·¾¶: ");
+	printf("æœ€çŸ­è·¯å¾„å¦‚ä¸‹:\n");
+	printf("é•¿åº¦: %d\n",minlen);
+	printf("è·¯å¾„: ");
 	for (int k=0;k<minlen;k++)
 		printf("(%d,%d) ",Path[k].i,Path[k].j);
 	printf("\n");
 }
-void mgpath(int xi,int yi,int xe,int ye) //ÇóÃÔ¹¬Â·¾¶
+void mgpath(int xi,int yi,int xe,int ye) //æ±‚è¿·å®«è·¯å¾„
 {
 	int i,j,i1,j1,di;
 	bool find;
-	top++;							//½øÕ»
+	top++;							//è¿›æ ˆ
 	St[top].i=xi;
 	St[top].j=yi;
-	St[top].di=-1;mg[xi][yi]=-1;	//³õÊ¼·½¿é½øÕ»
-	while (top>-1)					//Õ»²»¿ÕÊ±Ñ­»·
+	St[top].di=-1;mg[xi][yi]=-1;	//åˆå§‹æ–¹å—è¿›æ ˆ
+	while (top>-1)					//æ ˆä¸ç©ºæ—¶å¾ªç¯
 	{
 		i=St[top].i;j=St[top].j;di=St[top].di;
-		if (i==xe && j==ye)			//ÕÒµ½ÁË³ö¿Ú
+		if (i==xe && j==ye)			//æ‰¾åˆ°äº†å‡ºå£
 		{
-			dispapath();			//Êä³öÒ»ÌõÂ·¾¶
-			mg[i][j]=0;				//ÈÃ³ö¿Ú±äÎªÆäËûÂ·¾¶¿É×ß·½¿é
-			top--;					//³ö¿ÚÍËÕ»,¼´»ØÍËÒ»¸ö·½¿é
+			dispapath();			//è¾“å‡ºä¸€æ¡è·¯å¾„
+			mg[i][j]=0;				//è®©å‡ºå£å˜ä¸ºå…¶ä»–è·¯å¾„å¯èµ°æ–¹å—
+			top--;					//å‡ºå£é€€æ ˆ,å³å›é€€ä¸€ä¸ªæ–¹å—
 			i=St[top].i;j=St[top].j;
-			di=St[top].di;			//ÈÃÕ»¶¥·½¿é±äÎªµ±Ç°·½¿é
+			di=St[top].di;			//è®©æ ˆé¡¶æ–¹å—å˜ä¸ºå½“å‰æ–¹å—
 		}
-		find=false;					//ÕÒÏÂÒ»¸ö¿É×ß·½¿é(i,1j1)
+		find=false;					//æ‰¾ä¸‹ä¸€ä¸ªå¯èµ°æ–¹å—(i,1j1)
 		while (di<4 && !find)	
 		{	di++;
 			switch(di)
@@ -73,23 +73,23 @@ void mgpath(int xi,int yi,int xe,int ye) //ÇóÃÔ¹¬Â·¾¶
 			}
 			if (mg[i1][j1]==0) find=true;
 		}
-		if (find)					//ÕÒµ½ÁËÏÂÒ»¸ö¿É×ß·½¿é(i1,j1)
-		{	St[top].di=di;			//ĞŞ¸ÄÔ­Õ»¶¥ÔªËØµÄdiÖµ
+		if (find)					//æ‰¾åˆ°äº†ä¸‹ä¸€ä¸ªå¯èµ°æ–¹å—(i1,j1)
+		{	St[top].di=di;			//ä¿®æ”¹åŸæ ˆé¡¶å…ƒç´ çš„diå€¼
 			top++;St[top].i=i1;St[top].j=j1;
-			St[top].di=-1;			//ÏÂÒ»¸ö¿É×ß·½¿é(i1,j1)½øÕ»
-			mg[i1][j1]=-1;			//±ÜÃâÖØ¸´×ßµ½¸Ã·½¿é
+			St[top].di=-1;			//ä¸‹ä¸€ä¸ªå¯èµ°æ–¹å—(i1,j1)è¿›æ ˆ
+			mg[i1][j1]=-1;			//é¿å…é‡å¤èµ°åˆ°è¯¥æ–¹å—
 		}
-		else						//Ã»ÓĞÂ·¾¶¿É×ß,ÔòÍËÕ»(i,j)·½¿é
+		else						//æ²¡æœ‰è·¯å¾„å¯èµ°,åˆ™é€€æ ˆ(i,j)æ–¹å—
 		{
-			mg[i][j]=0;				//ÈÃ¸ÃÎ»ÖÃ±äÎªÆäËûÂ·¾¶¿É×ß·½¿é
+			mg[i][j]=0;				//è®©è¯¥ä½ç½®å˜ä¸ºå…¶ä»–è·¯å¾„å¯èµ°æ–¹å—
 			top--;
 		}
 	}
-	dispminpath();					//Êä³ö×î¶ÌÂ·¾¶
+	dispminpath();					//è¾“å‡ºæœ€çŸ­è·¯å¾„
 }
 int main()
 {
-	printf("ÃÔ¹¬ËùÓĞÂ·¾¶ÈçÏÂ:\n");
+	printf("è¿·å®«æ‰€æœ‰è·¯å¾„å¦‚ä¸‹:\n");
 	mgpath(1,1,M,N);
 	return 1;
 }

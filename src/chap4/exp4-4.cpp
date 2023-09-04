@@ -1,32 +1,32 @@
-//ÎÄ¼şÃû:exp4-4.cpp
-#include "sqstring.cpp"				//°üº¬Ë³Ğò´®µÄ»ù±¾ÔËËãËã·¨
-SqString A,B;						//È«¾Ö´®
-SqString EnCrypt(SqString p)		//·µ»Ø¼ÓÃÜ´®
+//æ–‡ä»¶å:exp4-4.cpp
+#include "sqstring.cpp"				//åŒ…å«é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—ç®—æ³•
+SqString A,B;						//å…¨å±€ä¸²
+SqString EnCrypt(SqString p)		//è¿”å›åŠ å¯†ä¸²
 {
 	int i=0,j;
 	SqString q;
 	while (i<p.length) 
 	{
 		for (j=0;p.data[i]!=A.data[j];j++);	
-		if (j>=p.length)			//ÔÚA´®ÖĞÎ´ÕÒµ½p.data[i]×ÖÄ¸
+		if (j>=p.length)			//åœ¨Aä¸²ä¸­æœªæ‰¾åˆ°p.data[i]å­—æ¯
 			q.data[i]=p.data[i];
-		else						//ÔÚA´®ÖĞÕÒµ½p.data[i]×ÖÄ¸
+		else						//åœ¨Aä¸²ä¸­æ‰¾åˆ°p.data[i]å­—æ¯
 			q.data[i]=B.data[j];
 		i++;
 	}
 	q.length=p.length;
 	return q;
 }
-SqString UnEncrypt(SqString q)		//·µ»Ø½âÃÜ´®
+SqString UnEncrypt(SqString q)		//è¿”å›è§£å¯†ä¸²
 {
 	int i=0,j;
 	SqString p;
 	while (i<q.length) 
 	{	
 		for (j=0;q.data[i]!=B.data[j];j++);
-		if (j>=q.length)			//ÔÚB´®ÖĞÎ´ÕÒµ½q.data[i]×ÖÄ¸
+		if (j>=q.length)			//åœ¨Bä¸²ä¸­æœªæ‰¾åˆ°q.data[i]å­—æ¯
 			p.data[i]=q.data[i];
-		else						//ÔÚB´®ÖĞÕÒµ½q.data[i]×ÖÄ¸
+		else						//åœ¨Bä¸²ä¸­æ‰¾åˆ°q.data[i]å­—æ¯
 			p.data[i]=A.data[j];
 		i++;
 	}
@@ -37,19 +37,19 @@ int main()
 {
 	SqString p,q;
 	int ok=1;
-	StrAssign(A,"abcdefghijklmnopqrstuvwxyz");	//½¨Á¢A´®
-	StrAssign(B,"ngzqtcobmuhelkpdawxfyivrsj");	//½¨Á¢B´®
+	StrAssign(A,"abcdefghijklmnopqrstuvwxyz");	//å»ºç«‹Aä¸²
+	StrAssign(B,"ngzqtcobmuhelkpdawxfyivrsj");	//å»ºç«‹Bä¸²
 	char str[MaxSize];
 	printf("\n");
-	printf("ÊäÈëÔ­ÎÄ´®:");
-	gets(str);									//»ñÈ¡ÓÃ»§ÊäÈëµÄÔ­ÎÄ´®
-	StrAssign(p,str);							//½¨Á¢p´®
-	printf("¼ÓÃÜ½âÃÜÈçÏÂ:\n");
-	printf("  Ô­ÎÄ´®:");DispStr(p);
-	q=EnCrypt(p);								//p´®¼ÓÃÜ²úÉúq´®
-	printf("  ¼ÓÃÜ´®:");DispStr(q);
-    	p=UnEncrypt(q);							//q´®½âÃÜ²úÉúp´®
-	printf("  ½âÃÜ´®:");DispStr(p);
+	printf("è¾“å…¥åŸæ–‡ä¸²:");
+	gets(str);									//è·å–ç”¨æˆ·è¾“å…¥çš„åŸæ–‡ä¸²
+	StrAssign(p,str);							//å»ºç«‹pä¸²
+	printf("åŠ å¯†è§£å¯†å¦‚ä¸‹:\n");
+	printf("  åŸæ–‡ä¸²:");DispStr(p);
+	q=EnCrypt(p);								//pä¸²åŠ å¯†äº§ç”Ÿqä¸²
+	printf("  åŠ å¯†ä¸²:");DispStr(q);
+    	p=UnEncrypt(q);							//qä¸²è§£å¯†äº§ç”Ÿpä¸²
+	printf("  è§£å¯†ä¸²:");DispStr(p);
 	printf("\n");
 	DestroyStr(p); DestroyStr(q);
 	return 1;

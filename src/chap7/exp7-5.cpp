@@ -1,33 +1,33 @@
-//ÎÄ¼şÃû:exp7-5.cpp
+//æ–‡ä»¶å:exp7-5.cpp
 #include <stdio.h>
 #include <string.h>
-#define N 50		//Ò¶×Ó½áµãÊı
-#define M 2*N-1		//Ê÷ÖĞ½áµã×ÜÊı
+#define N 50		//å¶å­ç»“ç‚¹æ•°
+#define M 2*N-1		//æ ‘ä¸­ç»“ç‚¹æ€»æ•°
 typedef struct
 {
-	char data[5];	//½áµãÖµ
-	int weight;		//È¨ÖØ
-	int parent;		//Ë«Ç×½áµã
-	int lchild;		//×óº¢×Ó½áµã
-	int rchild;		//ÓÒº¢×Ó½áµã
+	char data[5];	//ç»“ç‚¹å€¼
+	int weight;		//æƒé‡
+	int parent;		//åŒäº²ç»“ç‚¹
+	int lchild;		//å·¦å­©å­ç»“ç‚¹
+	int rchild;		//å³å­©å­ç»“ç‚¹
 } HTNode;
 typedef struct
 {
-	char cd[N];		//´æ·Å¹ş·òÂüÂë
+	char cd[N];		//å­˜æ”¾å“ˆå¤«æ›¼ç 
 	int start;
 } HCode;
-void CreateHT(HTNode ht[],int n)  //ÓÉhtµÄÒ¶×Ó½áµã¹¹ÔìÍêÕûµÄ¹ş·òÂüÊ÷
+void CreateHT(HTNode ht[],int n)  //ç”±htçš„å¶å­ç»“ç‚¹æ„é€ å®Œæ•´çš„å“ˆå¤«æ›¼æ ‘
 {
 	int i,k,lnode,rnode;
 	int min1,min2;
-	for (i=0;i<2*n-1;i++)			//ËùÓĞ½áµãµÄÏà¹ØÓòÖÃ³õÖµ-1
+	for (i=0;i<2*n-1;i++)			//æ‰€æœ‰ç»“ç‚¹çš„ç›¸å…³åŸŸç½®åˆå€¼-1
 		ht[i].parent=ht[i].lchild=ht[i].rchild=-1;
-	for (i=n;i<2*n-1;i++)			//¹¹Ôì¹ş·òÂüÊ÷µÄ·ÖÖ§½áµã
+	for (i=n;i<2*n-1;i++)			//æ„é€ å“ˆå¤«æ›¼æ ‘çš„åˆ†æ”¯ç»“ç‚¹
 	{
-		min1=min2=32767;			//lnodeºÍrnodeÎª×îĞ¡È¨ÖØµÄÁ½¸ö½áµãÎ»ÖÃ
+		min1=min2=32767;			//lnodeå’Œrnodeä¸ºæœ€å°æƒé‡çš„ä¸¤ä¸ªç»“ç‚¹ä½ç½®
 		lnode=rnode=-1;
-		for (k=0;k<=i-1;k++)		//²éÕÒ×îĞ¡ºÍ´ÎĞ¡µÄ½áµã
-			if (ht[k].parent==-1)	//Ö»ÔÚÉĞÎ´¹¹Ôì¶ş²æÊ÷µÄ½áµãÖĞ²éÕÒ
+		for (k=0;k<=i-1;k++)		//æŸ¥æ‰¾æœ€å°å’Œæ¬¡å°çš„ç»“ç‚¹
+			if (ht[k].parent==-1)	//åªåœ¨å°šæœªæ„é€ äºŒå‰æ ‘çš„ç»“ç‚¹ä¸­æŸ¥æ‰¾
 			{
 				if (ht[k].weight<min1)
 				{
@@ -39,36 +39,36 @@ void CreateHT(HTNode ht[],int n)  //ÓÉhtµÄÒ¶×Ó½áµã¹¹ÔìÍêÕûµÄ¹ş·òÂüÊ÷
 					min2=ht[k].weight;rnode=k;
 				}
 			}
-		ht[lnode].parent=i;ht[rnode].parent=i;	//ºÏ²¢Á½¸ö×îĞ¡ºÍ´ÎĞ¡µÄ½áµã
+		ht[lnode].parent=i;ht[rnode].parent=i;	//åˆå¹¶ä¸¤ä¸ªæœ€å°å’Œæ¬¡å°çš„ç»“ç‚¹
 		ht[i].weight=ht[lnode].weight+ht[rnode].weight;
 		ht[i].lchild=lnode;ht[i].rchild=rnode;
 	}
 }
-void CreateHCode(HTNode ht[],HCode hcd[],int n)	//ÓÉ¹ş·òÂüÊ÷ht¹¹Ôì¹ş·òÂü±àÂëhcd
+void CreateHCode(HTNode ht[],HCode hcd[],int n)	//ç”±å“ˆå¤«æ›¼æ ‘htæ„é€ å“ˆå¤«æ›¼ç¼–ç hcd
 {
 	int i,f,c;
 	HCode hc;
-	for (i=0;i<n;i++)	//¸ù¾İ¹ş·òÂüÊ÷¹¹ÔìËùÓĞÒ¶×Ó½áµãµÄ¹ş·òÂü±àÂë
+	for (i=0;i<n;i++)	//æ ¹æ®å“ˆå¤«æ›¼æ ‘æ„é€ æ‰€æœ‰å¶å­ç»“ç‚¹çš„å“ˆå¤«æ›¼ç¼–ç 
 	{
 		hc.start=n;c=i;
 		f=ht[i].parent;
-		while (f!=-1)	//Ñ­»·Ö±µ½Ê÷¸ù½áµã
+		while (f!=-1)	//å¾ªç¯ç›´åˆ°æ ‘æ ¹ç»“ç‚¹
 		{
-			if (ht[f].lchild==c)	//´¦Àí×óº¢×Ó½áµã
+			if (ht[f].lchild==c)	//å¤„ç†å·¦å­©å­ç»“ç‚¹
 				hc.cd[hc.start--]='0';
-			else					//´¦ÀíÓÒº¢×Ó½áµã
+			else					//å¤„ç†å³å­©å­ç»“ç‚¹
 				hc.cd[hc.start--]='1';
 			c=f;f=ht[f].parent;
 		}
-		hc.start++;		//startÖ¸Ïò¹ş·òÂü±àÂë×î¿ªÊ¼×Ö·û
+		hc.start++;		//startæŒ‡å‘å“ˆå¤«æ›¼ç¼–ç æœ€å¼€å§‹å­—ç¬¦
 		hcd[i]=hc;
 	}
 }
-void DispHCode(HTNode ht[],HCode hcd[],int n)	//Êä³ö¹ş·òÂü±àÂë
+void DispHCode(HTNode ht[],HCode hcd[],int n)	//è¾“å‡ºå“ˆå¤«æ›¼ç¼–ç 
 {
 	int i,k;
 	int sum=0,m=0,j;
-	printf("Êä³ö¹ş·òÂü±àÂë:\n"); 
+	printf("è¾“å‡ºå“ˆå¤«æ›¼ç¼–ç :\n"); 
 	for (i=0;i<n;i++)
 	{
 		j=0;
@@ -82,7 +82,7 @@ void DispHCode(HTNode ht[],HCode hcd[],int n)	//Êä³ö¹ş·òÂü±àÂë
 		sum+=ht[i].weight*j;
 		printf("\n");
 	}
-	printf("Æ½¾ù³¤¶È=%g\n",1.0*sum/m);
+	printf("å¹³å‡é•¿åº¦=%g\n",1.0*sum/m);
 }
 int main()
 {

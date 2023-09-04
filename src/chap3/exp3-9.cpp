@@ -1,36 +1,36 @@
-//ÎÄ¼şÃû:exp3-9.cpp
+//æ–‡ä»¶å:exp3-9.cpp
 #include <stdio.h>
 #include <malloc.h>
-#define N 3					//Í£³µ³¡ÄÚ×î¶àµÄÍ£³µÊı
-#define M 4					//ºò³µ³¡ÄÚ×î¶àµÄÍ£³µÊı
-#define Price 2				//Ã¿µ¥Î»Í£³µ·ÑÓÃ
+#define N 3					//åœè½¦åœºå†…æœ€å¤šçš„åœè½¦æ•°
+#define M 4					//å€™è½¦åœºå†…æœ€å¤šçš„åœè½¦æ•°
+#define Price 2				//æ¯å•ä½åœè½¦è´¹ç”¨
 typedef struct 
 {
-	int CarNo[N];			//³µÅÆºÅ
-	int CarTime[N];			//½ø³¡Ê±¼ä
-	int top;				//Õ»Ö¸Õë
-} SqStack;					//ÉùÃ÷Ë³ĞòÕ»ÀàĞÍ
+	int CarNo[N];			//è½¦ç‰Œå·
+	int CarTime[N];			//è¿›åœºæ—¶é—´
+	int top;				//æ ˆæŒ‡é’ˆ
+} SqStack;					//å£°æ˜é¡ºåºæ ˆç±»å‹
 typedef struct 
 {
-	int CarNo[M];			//³µÅÆºÅ
-	int front,rear;			//¶ÓÊ×ºÍ¶ÓÎ²Ö¸Õë
-} SqQueue;					//ÉùÃ÷»·ĞÎ¶ÓÁĞÀàĞÍ
+	int CarNo[M];			//è½¦ç‰Œå·
+	int front,rear;			//é˜Ÿé¦–å’Œé˜Ÿå°¾æŒ‡é’ˆ
+} SqQueue;					//å£°æ˜ç¯å½¢é˜Ÿåˆ—ç±»å‹
 
-//ÒÔÏÂÎªÕ»µÄÔËËãËã·¨
-void InitStack(SqStack *&s)	 //³õÊ¼»¯Õ»
+//ä»¥ä¸‹ä¸ºæ ˆçš„è¿ç®—ç®—æ³•
+void InitStack(SqStack *&s)	 //åˆå§‹åŒ–æ ˆ
 {
 	s=(SqStack *)malloc(sizeof(SqStack));
 	s->top=-1;
 }
-bool StackEmpty(SqStack *s)	//ÅĞ¶ÏÕ»¿Õ
+bool StackEmpty(SqStack *s)	//åˆ¤æ–­æ ˆç©º
 {
 	return(s->top==-1);
 }
-bool StackFull(SqStack *s)	//ÅĞ¶ÏÕ»Âú
+bool StackFull(SqStack *s)	//åˆ¤æ–­æ ˆæ»¡
 {
 	return(s->top==N-1);
 }
-bool Push(SqStack *&s,int e1,int e2)  //½øÕ»
+bool Push(SqStack *&s,int e1,int e2)  //è¿›æ ˆ
 {
 	if (s->top==N-1)
 		return false;
@@ -39,7 +39,7 @@ bool Push(SqStack *&s,int e1,int e2)  //½øÕ»
 	s->CarTime[s->top]=e2;
 	return true;
 }
-bool Pop(SqStack *&s,int &e1,int &e2)  //³öÕ»
+bool Pop(SqStack *&s,int &e1,int &e2)  //å‡ºæ ˆ
 {
 	if (s->top==-1)
 		return false;
@@ -48,44 +48,44 @@ bool Pop(SqStack *&s,int &e1,int &e2)  //³öÕ»
 	s->top--;
 	return true;
 }
-void DispStack(SqStack *s)	 //ÏÔÊ¾Õ»ÖĞÔªËØ
+void DispStack(SqStack *s)	 //æ˜¾ç¤ºæ ˆä¸­å…ƒç´ 
 {
 	for (int i=s->top;i>=0;i--)
 		printf("%d ",s->CarNo[i]);
 	printf("\n");
 }
 
-//ÒÔÏÂÎª¶ÓÁĞµÄÔËËãËã·¨
-void InitQueue(SqQueue *&q)		//³õÊ¼»¯¶Ó
+//ä»¥ä¸‹ä¸ºé˜Ÿåˆ—çš„è¿ç®—ç®—æ³•
+void InitQueue(SqQueue *&q)		//åˆå§‹åŒ–é˜Ÿ
 {
 	q=(SqQueue *)malloc (sizeof(SqQueue));
 	q->front=q->rear=0;
 }
-bool QueueEmpty(SqQueue *q)		//ÅĞ¶Ï¶Ó¿Õ
+bool QueueEmpty(SqQueue *q)		//åˆ¤æ–­é˜Ÿç©º
 {
 	return(q->front==q->rear);
 }
-bool QueueFull(SqQueue *q)			//ÅĞ¶Ï¶ÓÂú
+bool QueueFull(SqQueue *q)			//åˆ¤æ–­é˜Ÿæ»¡
 {
 	return ((q->rear+1)%M==q->front);
 }
-bool enQueue(SqQueue *&q,int e)		//½ø¶Ó
+bool enQueue(SqQueue *&q,int e)		//è¿›é˜Ÿ
 {
-	if ((q->rear+1)%M==q->front)	//¶ÓÂú
+	if ((q->rear+1)%M==q->front)	//é˜Ÿæ»¡
 		return false;
 	q->rear=(q->rear+1)%M;
 	q->CarNo[q->rear]=e;
 	return true;
 }
-bool deQueue(SqQueue *&q,int &e)	//³ö¶Ó
+bool deQueue(SqQueue *&q,int &e)	//å‡ºé˜Ÿ
 {
-	if (q->front==q->rear)			//¶Ó¿ÕµÄÇé¿ö
+	if (q->front==q->rear)			//é˜Ÿç©ºçš„æƒ…å†µ
 		return false;
 	q->front=(q->front+1)%M;
 	e=q->CarNo[q->front];
 	return true;
 }
-void DispQueue(SqQueue *q)	 //ÏÔÊ¾¶ÓÖĞÔªËØ
+void DispQueue(SqQueue *q)	 //æ˜¾ç¤ºé˜Ÿä¸­å…ƒç´ 
 {
 	int i=(q->front+1)%M;
 	printf("%d ",q->CarNo[i]);
@@ -107,88 +107,88 @@ int main()
 	InitQueue(Qu);
 	do
 	{
-		printf(">ÊäÈëÖ¸Áî(1:µ½´ï 2:Àë¿ª 3:Í£³µ³¡ 4:ºò³µ³¡ 0:ÍË³ö):");
+		printf(">è¾“å…¥æŒ‡ä»¤(1:åˆ°è¾¾ 2:ç¦»å¼€ 3:åœè½¦åœº 4:å€™è½¦åœº 0:é€€å‡º):");
 		scanf("%d",&comm);
 		switch(comm)
 		{
-		case 1:		//Æû³µµ½´ï
-			printf("  ³µºÅ µ½´ïÊ±¼ä:");
+		case 1:		//æ±½è½¦åˆ°è¾¾
+			printf("  è½¦å· åˆ°è¾¾æ—¶é—´:");
 			scanf("%d%d",&no,&time);
-			if (!StackFull(St))			//Í£³µ³¡²»Âú
+			if (!StackFull(St))			//åœè½¦åœºä¸æ»¡
 			{
 				Push(St,no,time);
-				printf("  Í£³µ³¡Î»ÖÃ:%d\n",St->top+1);
+				printf("  åœè½¦åœºä½ç½®:%d\n",St->top+1);
 			}
-			else						//Í£³µ³¡Âú
+			else						//åœè½¦åœºæ»¡
 			{
-				if (!QueueFull(Qu))		//ºò³µ³¡²»Âú
+				if (!QueueFull(Qu))		//å€™è½¦åœºä¸æ»¡
 				{
 					enQueue(Qu,no);
-					printf("  ºò³µ³¡Î»ÖÃ:%d\n",Qu->rear);
+					printf("  å€™è½¦åœºä½ç½®:%d\n",Qu->rear);
 				}
 				else
-					printf("  ºò³µ³¡ÒÑÂú,²»ÄÜÍ£³µ\n");
+					printf("  å€™è½¦åœºå·²æ»¡,ä¸èƒ½åœè½¦\n");
 			}
 			break;
-		case 2:		//Æû³µÀë¿ª
-			printf("  ³µºÅ Àë¿ªÊ±¼ä:");
+		case 2:		//æ±½è½¦ç¦»å¼€
+			printf("  è½¦å· ç¦»å¼€æ—¶é—´:");
 			scanf("%d%d",&no,&time);
 			for (i=0;i<=St->top && St->CarNo[i]!=no;i++);
 			if (i>St->top)
-				printf("  Î´ÕÒµ½¸Ã±àºÅµÄÆû³µ\n");
+				printf("  æœªæ‰¾åˆ°è¯¥ç¼–å·çš„æ±½è½¦\n");
 			else
 			{
 				for (j=i;j<=St->top;j++)
 				{
 					Pop(St,e1,e2);
-					Push(St1,e1,e2);		//µ¹³µµ½ÁÙÊ±Õ»St1ÖĞ
+					Push(St1,e1,e2);		//å€’è½¦åˆ°ä¸´æ—¶æ ˆSt1ä¸­
 				}
-				Pop(St,e1,e2);				//¸ÃÆû³µÀë¿ª
-				printf("  %dÆû³µÍ£³µ·ÑÓÃ:%d\n",no,(time-e2)*Price);
-				while (!StackEmpty(St1))	//½«ÁÙÊ±Õ»St1ÖØĞÂ»Øµ½StÖĞ
+				Pop(St,e1,e2);				//è¯¥æ±½è½¦ç¦»å¼€
+				printf("  %dæ±½è½¦åœè½¦è´¹ç”¨:%d\n",no,(time-e2)*Price);
+				while (!StackEmpty(St1))	//å°†ä¸´æ—¶æ ˆSt1é‡æ–°å›åˆ°Stä¸­
 				{
 					Pop(St1,e1,e2);
 					Push(St,e1,e2);
 				}
-				if (!QueueEmpty(Qu))		//¶Ó²»¿ÕÊ±,½«¶ÓÍ·½øÕ»St
+				if (!QueueEmpty(Qu))		//é˜Ÿä¸ç©ºæ—¶,å°†é˜Ÿå¤´è¿›æ ˆSt
 				{
 					deQueue(Qu,e1);
-					Push(St,e1,time);		//ÒÔµ±Ç°Ê±¼ä¿ªÊ¼¼Æ·Ñ
+					Push(St,e1,time);		//ä»¥å½“å‰æ—¶é—´å¼€å§‹è®¡è´¹
 				}
 			}
 			break;
-		case 3:		//ÏÔÊ¾Í£³µ³¡Çé¿ö
+		case 3:		//æ˜¾ç¤ºåœè½¦åœºæƒ…å†µ
 			if (!StackEmpty(St))
 			{
-				printf("  Í£³µ³¡ÖĞµÄ³µÁ¾:");	//Êä³öÍ£³µ³¡ÖĞµÄ³µÁ¾
+				printf("  åœè½¦åœºä¸­çš„è½¦è¾†:");	//è¾“å‡ºåœè½¦åœºä¸­çš„è½¦è¾†
 				DispStack(St);
 			}
 			else
-				printf("  Í£³µ³¡ÖĞÎŞ³µÁ¾\n");	
+				printf("  åœè½¦åœºä¸­æ— è½¦è¾†\n");	
 			break;
-		case 4:		//ÏÔÊ¾ºò³µ³¡Çé¿ö
+		case 4:		//æ˜¾ç¤ºå€™è½¦åœºæƒ…å†µ
 			if (!QueueEmpty(Qu))
 			{
-				printf("  ºò³µ³¡ÖĞµÄ³µÁ¾:");	//Êä³öºò³µ³¡ÖĞµÄ³µÁ¾
+				printf("  å€™è½¦åœºä¸­çš„è½¦è¾†:");	//è¾“å‡ºå€™è½¦åœºä¸­çš„è½¦è¾†
 				DispQueue(Qu);
 			}
 			else
-				printf("  ºò³µ³¡ÖĞÎŞ³µÁ¾\n");	
+				printf("  å€™è½¦åœºä¸­æ— è½¦è¾†\n");	
 			break;
-		case 0:		//½áÊø
+		case 0:		//ç»“æŸ
 			if (!StackEmpty(St))
 			{
-				printf("  Í£³µ³¡ÖĞµÄ³µÁ¾:");	//Êä³öÍ£³µ³¡ÖĞµÄ³µÁ¾
+				printf("  åœè½¦åœºä¸­çš„è½¦è¾†:");	//è¾“å‡ºåœè½¦åœºä¸­çš„è½¦è¾†
 				DispStack(St);
 			}
 			if (!QueueEmpty(Qu))
 			{
-				printf("  ºò³µ³¡ÖĞµÄ³µÁ¾:");	//Êä³öºò³µ³¡ÖĞµÄ³µÁ¾
+				printf("  å€™è½¦åœºä¸­çš„è½¦è¾†:");	//è¾“å‡ºå€™è½¦åœºä¸­çš„è½¦è¾†
 				DispQueue(Qu);
 			}
 			break;
-		default:	//ÆäËûÇé¿ö
-			printf("  ÊäÈëµÄÃüÁî´íÎó\n");
+		default:	//å…¶ä»–æƒ…å†µ
+			printf("  è¾“å…¥çš„å‘½ä»¤é”™è¯¯\n");
 			break;
 		} 
 	} while(comm!=0);

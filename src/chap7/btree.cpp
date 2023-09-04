@@ -1,33 +1,33 @@
-//¶þ²æÊ÷µÄ»ù±¾ÔËËãËã·¨
+//äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
 typedef char ElemType;
 typedef struct node 
 {	
-	ElemType data;			//Êý¾ÝÔªËØ
-	struct node *lchild;	//Ö¸Ïò×óº¢×Ó½áµã
-	struct node *rchild;	//Ö¸ÏòÓÒº¢×Ó½áµã
+	ElemType data;			//æ•°æ®å…ƒç´ 
+	struct node *lchild;	//æŒ‡å‘å·¦å­©å­ç»“ç‚¹
+	struct node *rchild;	//æŒ‡å‘å³å­©å­ç»“ç‚¹
 } BTNode;
-void CreateBTree(BTNode * &b,char *str)	//´´½¨¶þ²æÊ÷
+void CreateBTree(BTNode * &b,char *str)	//åˆ›å»ºäºŒå‰æ ‘
 {
 	BTNode *St[MaxSize],*p=NULL;
 	int top=-1,k,j=0;  
 	char ch;
-	b=NULL;				//½¨Á¢µÄ¶þ²æÊ÷³õÊ¼Ê±Îª¿Õ
+	b=NULL;				//å»ºç«‹çš„äºŒå‰æ ‘åˆå§‹æ—¶ä¸ºç©º
 	ch=str[j];
-	while (ch!='\0')  	//strÎ´É¨ÃèÍêÊ±Ñ­»·
+	while (ch!='\0')  	//stræœªæ‰«æå®Œæ—¶å¾ªçŽ¯
 	{
    	   	switch(ch) 
 		{
-		case '(':top++;St[top]=p;k=1; break;		//Îª×óº¢×Ó½áµã
+		case '(':top++;St[top]=p;k=1; break;		//ä¸ºå·¦å­©å­ç»“ç‚¹
 		case ')':top--;break;
-		case ',':k=2; break;                      		//Îªº¢×Ó½áµãÓÒ½áµã
+		case ',':k=2; break;                      		//ä¸ºå­©å­ç»“ç‚¹å³ç»“ç‚¹
 		default:p=(BTNode *)malloc(sizeof(BTNode));
 				p->data=ch;p->lchild=p->rchild=NULL;
-				if (b==NULL)                    	 	//*pÎª¶þ²æÊ÷µÄ¸ù½áµã
+				if (b==NULL)                    	 	//*pä¸ºäºŒå‰æ ‘çš„æ ¹ç»“ç‚¹
 					b=p;
-				else  								//ÒÑ½¨Á¢¶þ²æÊ÷¸ù½áµã
+				else  								//å·²å»ºç«‹äºŒå‰æ ‘æ ¹ç»“ç‚¹
 				{	
 					switch(k) 
 					{
@@ -40,14 +40,14 @@ void CreateBTree(BTNode * &b,char *str)	//´´½¨¶þ²æÊ÷
 		ch=str[j];
 	}
 }
-void DestroyBTree(BTNode *&b)	//Ïú»Ù¶þ²æÊ÷
+void DestroyBTree(BTNode *&b)	//é”€æ¯äºŒå‰æ ‘
 {	if (b!=NULL)
 	{	DestroyBTree(b->lchild);
 		DestroyBTree(b->rchild);
 		free(b);
 	}
 }
-BTNode *FindNode(BTNode *b,ElemType x) //²éÕÒÖµÎªxµÄ½áµã
+BTNode *FindNode(BTNode *b,ElemType x) //æŸ¥æ‰¾å€¼ä¸ºxçš„ç»“ç‚¹
 {
 	BTNode *p;
 	if (b==NULL)
@@ -71,27 +71,27 @@ BTNode *RchildNode(BTNode *p)
 {
     return p->rchild;
 }
-int BTHeight(BTNode *b)		//Çó¶þ²æÊ÷bµÄ¸ß¶È
+int BTHeight(BTNode *b)		//æ±‚äºŒå‰æ ‘bçš„é«˜åº¦
 {
    	int lchildh,rchildh;
-   	if (b==NULL) return(0); 				//¿ÕÊ÷µÄ¸ß¶ÈÎª0
+   	if (b==NULL) return(0); 				//ç©ºæ ‘çš„é«˜åº¦ä¸º0
    	else  
 	{
-		lchildh=BTHeight(b->lchild);	//Çó×ó×ÓÊ÷µÄ¸ß¶ÈÎªlchildh
-		rchildh=BTHeight(b->rchild);	//ÇóÓÒ×ÓÊ÷µÄ¸ß¶ÈÎªrchildh
+		lchildh=BTHeight(b->lchild);	//æ±‚å·¦å­æ ‘çš„é«˜åº¦ä¸ºlchildh
+		rchildh=BTHeight(b->rchild);	//æ±‚å³å­æ ‘çš„é«˜åº¦ä¸ºrchildh
 		return (lchildh>rchildh)? (lchildh+1):(rchildh+1);
    	}
 }
-void DispBTree(BTNode *b)  //ÒÔÀ¨ºÅ±íÊ¾·¨Êä³ö¶þ²æÊ÷
+void DispBTree(BTNode *b)  //ä»¥æ‹¬å·è¡¨ç¤ºæ³•è¾“å‡ºäºŒå‰æ ‘
 {
 	if (b!=NULL)
 	{	printf("%c",b->data);
 		if (b->lchild!=NULL || b->rchild!=NULL)
-		{	printf("(");						//ÓÐº¢×Ó½áµãÊ±²ÅÊä³ö(
-			DispBTree(b->lchild);				//µÝ¹é´¦Àí×ó×ÓÊ÷
-			if (b->rchild!=NULL) printf(",");	//ÓÐÓÒº¢×Ó½áµãÊ±²ÅÊä³ö,
-			DispBTree(b->rchild);				//µÝ¹é´¦ÀíÓÒ×ÓÊ÷
-			printf(")");						//ÓÐº¢×Ó½áµãÊ±²ÅÊä³ö)
+		{	printf("(");						//æœ‰å­©å­ç»“ç‚¹æ—¶æ‰è¾“å‡º(
+			DispBTree(b->lchild);				//é€’å½’å¤„ç†å·¦å­æ ‘
+			if (b->rchild!=NULL) printf(",");	//æœ‰å³å­©å­ç»“ç‚¹æ—¶æ‰è¾“å‡º,
+			DispBTree(b->rchild);				//é€’å½’å¤„ç†å³å­æ ‘
+			printf(")");						//æœ‰å­©å­ç»“ç‚¹æ—¶æ‰è¾“å‡º)
 		}
 	}
 }

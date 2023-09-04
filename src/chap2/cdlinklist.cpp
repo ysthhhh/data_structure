@@ -1,70 +1,70 @@
-//Ñ­»·Ë«Á´±íÔËËãËã·¨
+//å¾ªç¯åŒé“¾è¡¨è¿ç®—ç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
 typedef int ElemType;
-typedef struct DNode		//¶¨ÒåË«Á´±í½áµãÀàĞÍ
+typedef struct DNode		//å®šä¹‰åŒé“¾è¡¨ç»“ç‚¹ç±»å‹
 {
 	ElemType data;
-	struct DNode *prior;	//Ö¸ÏòÇ°Çı½áµã
-	struct DNode *next;		//Ö¸Ïòºó¼Ì½áµã
+	struct DNode *prior;	//æŒ‡å‘å‰é©±ç»“ç‚¹
+	struct DNode *next;		//æŒ‡å‘åç»§ç»“ç‚¹
 } DLinkNode;
-void CreateListF(DLinkNode *&L,ElemType a[],int n) //Í·²å·¨½¨Á¢Ñ­»·Ë«Á´±í
+void CreateListF(DLinkNode *&L,ElemType a[],int n) //å¤´æ’æ³•å»ºç«‹å¾ªç¯åŒé“¾è¡¨
 {
 	DLinkNode *s;
-	L=(DLinkNode *)malloc(sizeof(DLinkNode));  	//´´½¨Í·½áµã
+	L=(DLinkNode *)malloc(sizeof(DLinkNode));  	//åˆ›å»ºå¤´ç»“ç‚¹
 	L->next=NULL;
 	for (int i=0;i<n;i++)
 	{	
-		s=(DLinkNode *)malloc(sizeof(DLinkNode));//´´½¨ĞÂ½áµã
+		s=(DLinkNode *)malloc(sizeof(DLinkNode));//åˆ›å»ºæ–°ç»“ç‚¹
 		s->data=a[i];
-		s->next=L->next;			//½«½áµãs²åÔÚÔ­¿ªÊ¼½áµãÖ®Ç°,Í·½áµãÖ®ºó
+		s->next=L->next;			//å°†ç»“ç‚¹sæ’åœ¨åŸå¼€å§‹ç»“ç‚¹ä¹‹å‰,å¤´ç»“ç‚¹ä¹‹å
 		if (L->next!=NULL) L->next->prior=s;
 		L->next=s;s->prior=L;
 	}
 	s=L->next;	
-	while (s->next!=NULL)			//²éÕÒÎ²½áµã,ÓÉsÖ¸ÏòËü
+	while (s->next!=NULL)			//æŸ¥æ‰¾å°¾ç»“ç‚¹,ç”±sæŒ‡å‘å®ƒ
 		s=s->next;
-	s->next=L;						//Î²½áµãnextÓòÖ¸ÏòÍ·½áµã
-	L->prior=s;						//Í·½áµãµÄpriorÓòÖ¸ÏòÎ²½áµã
+	s->next=L;						//å°¾ç»“ç‚¹nextåŸŸæŒ‡å‘å¤´ç»“ç‚¹
+	L->prior=s;						//å¤´ç»“ç‚¹çš„prioråŸŸæŒ‡å‘å°¾ç»“ç‚¹
 
 }
-void CreateListR(DLinkNode *&L,ElemType a[],int n) //Î²²å·¨½¨Á¢Ñ­»·Ë«Á´±í
+void CreateListR(DLinkNode *&L,ElemType a[],int n) //å°¾æ’æ³•å»ºç«‹å¾ªç¯åŒé“¾è¡¨
 {
 	DLinkNode *s,*r;
-	L=(DLinkNode *)malloc(sizeof(DLinkNode));  //´´½¨Í·½áµã
+	L=(DLinkNode *)malloc(sizeof(DLinkNode));  //åˆ›å»ºå¤´ç»“ç‚¹
 	L->next=NULL;
-	r=L;					//rÊ¼ÖÕÖ¸ÏòÎ²½áµã,¿ªÊ¼Ê±Ö¸ÏòÍ·½áµã
+	r=L;					//rå§‹ç»ˆæŒ‡å‘å°¾ç»“ç‚¹,å¼€å§‹æ—¶æŒ‡å‘å¤´ç»“ç‚¹
 	for (int i=0;i<n;i++)
 	{	
-		s=(DLinkNode *)malloc(sizeof(DLinkNode));//´´½¨ĞÂ½áµã
+		s=(DLinkNode *)malloc(sizeof(DLinkNode));//åˆ›å»ºæ–°ç»“ç‚¹
 		s->data=a[i];
-		r->next=s;s->prior=r;	//½«½áµãs²åÈë½áµãrÖ®ºó
+		r->next=s;s->prior=r;	//å°†ç»“ç‚¹sæ’å…¥ç»“ç‚¹rä¹‹å
 		r=s;
 	}
-	r->next=L;				//Î²½áµãnextÓòÖ¸ÏòÍ·½áµã
-	L->prior=r;				//Í·½áµãµÄpriorÓòÖ¸ÏòÎ²½áµã
+	r->next=L;				//å°¾ç»“ç‚¹nextåŸŸæŒ‡å‘å¤´ç»“ç‚¹
+	L->prior=r;				//å¤´ç»“ç‚¹çš„prioråŸŸæŒ‡å‘å°¾ç»“ç‚¹
 }
-void InitList(DLinkNode *&L)	//³õÊ¼»¯ÏßĞÔ±í
+void InitList(DLinkNode *&L)	//åˆå§‹åŒ–çº¿æ€§è¡¨
 {
-	L=(DLinkNode *)malloc(sizeof(DLinkNode));  	//´´½¨Í·½áµã
+	L=(DLinkNode *)malloc(sizeof(DLinkNode));  	//åˆ›å»ºå¤´ç»“ç‚¹
 	L->prior=L->next=L;
 }
-void DestroyList(DLinkNode *&L)	//Ïú»ÙÏßĞÔ±í
+void DestroyList(DLinkNode *&L)	//é”€æ¯çº¿æ€§è¡¨
 {
 	DLinkNode *pre=L,*p=pre->next;
 	while (p!=L)
 	{
 		free(pre);
-		pre=p;			//pre¡¢pÍ¬²½ºóÒÆÒ»¸ö½áµã
+		pre=p;			//preã€påŒæ­¥åç§»ä¸€ä¸ªç»“ç‚¹
 		p=pre->next;
 	}
-	free(pre);			//´ËÊ±p=L,preÖ¸ÏòÎ²½áµã,ÊÍ·ÅËü
+	free(pre);			//æ­¤æ—¶p=L,preæŒ‡å‘å°¾ç»“ç‚¹,é‡Šæ”¾å®ƒ
 }
-bool ListEmpty(DLinkNode *L)	//ÅĞÏßĞÔ±íÊÇ·ñÎª¿Õ±í
+bool ListEmpty(DLinkNode *L)	//åˆ¤çº¿æ€§è¡¨æ˜¯å¦ä¸ºç©ºè¡¨
 {
 	return(L->next==L);
 }
-int ListLength(DLinkNode *L)	//ÇóÏßĞÔ±íµÄ³¤¶È
+int ListLength(DLinkNode *L)	//æ±‚çº¿æ€§è¡¨çš„é•¿åº¦
 {
 	DLinkNode *p=L;
 	int i=0;
@@ -73,9 +73,9 @@ int ListLength(DLinkNode *L)	//ÇóÏßĞÔ±íµÄ³¤¶È
 		i++;
 		p=p->next;
 	}
-	return(i);				//Ñ­»·½áÊø,pÖ¸ÏòÎ²½áµã,ÆäĞòºÅiÎª½áµã¸öÊı
+	return(i);				//å¾ªç¯ç»“æŸ,pæŒ‡å‘å°¾ç»“ç‚¹,å…¶åºå·iä¸ºç»“ç‚¹ä¸ªæ•°
 }
-void DispList(DLinkNode *L)	//Êä³öÏßĞÔ±í
+void DispList(DLinkNode *L)	//è¾“å‡ºçº¿æ€§è¡¨
 {
 	DLinkNode *p=L->next;
 	while (p!=L)
@@ -85,34 +85,34 @@ void DispList(DLinkNode *L)	//Êä³öÏßĞÔ±í
 	}
 	printf("\n");
 }
-bool GetElem(DLinkNode *L,int i,ElemType &e)	//ÇóÏßĞÔ±íÖĞµÚi¸öÔªËØÖµ
+bool GetElem(DLinkNode *L,int i,ElemType &e)	//æ±‚çº¿æ€§è¡¨ä¸­ç¬¬iä¸ªå…ƒç´ å€¼
 {
 	int j=1;
 	DLinkNode *p=L->next;
 	if (i<=0 || L->next==L) 
-		return false;			//i´íÎó»òÕßLÎª¿Õ±í·µ»Ø¼Ù
-	if (i==1)					//i=1×÷ÎªÌØÊâÇé¿ö´¦Àí
+		return false;			//ié”™è¯¯æˆ–è€…Lä¸ºç©ºè¡¨è¿”å›å‡
+	if (i==1)					//i=1ä½œä¸ºç‰¹æ®Šæƒ…å†µå¤„ç†
 	{
 		e=L->next->data;
 		return true;
 	}
-	else						//i²»Îª1Ê±
+	else						//iä¸ä¸º1æ—¶
 	{
-		while (j<=i-1 && p!=L)	//²éÕÒµÚi¸ö½áµãp
+		while (j<=i-1 && p!=L)	//æŸ¥æ‰¾ç¬¬iä¸ªç»“ç‚¹p
 		{
 			j++;
 			p=p->next;
 		}
-		if (p==L)				//Ã»ÓĞÕÒµ½µÚi¸ö½Ú£¬·µ»Ø¼Ù
+		if (p==L)				//æ²¡æœ‰æ‰¾åˆ°ç¬¬iä¸ªèŠ‚ï¼Œè¿”å›å‡
 			return false;
-		else					//ÕÒµ½ÁËµÚi¸ö½Ú£¬·µ»ØÕæ
+		else					//æ‰¾åˆ°äº†ç¬¬iä¸ªèŠ‚ï¼Œè¿”å›çœŸ
 		{
 			e=p->data;
 			return true;
 		}
 	}
 }
-int LocateElem(DLinkNode *L,ElemType e)	//²éÕÒµÚÒ»¸öÖµÓòÎªeµÄÔªËØĞòºÅ
+int LocateElem(DLinkNode *L,ElemType e)	//æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå€¼åŸŸä¸ºeçš„å…ƒç´ åºå·
 {
 	int i=1;
 	DLinkNode *p=L->next;
@@ -121,46 +121,46 @@ int LocateElem(DLinkNode *L,ElemType e)	//²éÕÒµÚÒ»¸öÖµÓòÎªeµÄÔªËØĞòºÅ
 		i++;
 		p=p->next;
 	}
-	if (p==NULL)			//²»´æÔÚÖµÎªeµÄ½áµã,·µ»Ø0
+	if (p==NULL)			//ä¸å­˜åœ¨å€¼ä¸ºeçš„ç»“ç‚¹,è¿”å›0
 		return(0);
-	else					//´æÔÚÖµÎªeµÄ½áµã,·µ»ØÆäÂß¼­ĞòºÅi
+	else					//å­˜åœ¨å€¼ä¸ºeçš„ç»“ç‚¹,è¿”å›å…¶é€»è¾‘åºå·i
 		return(i);
 }
-bool ListInsert(DLinkNode *&L,int i,ElemType e)	//²åÈëµÚi¸öÔªËØ
+bool ListInsert(DLinkNode *&L,int i,ElemType e)	//æ’å…¥ç¬¬iä¸ªå…ƒç´ 
 {
 	int j=1;
 	DLinkNode *p=L,*s;
-	if (i<=0) return false;				//i´íÎó·µ»Ø¼Ù
-	if (p->next==L)						//Ô­Ë«Á´±íÎª¿Õ±íÊ±
+	if (i<=0) return false;				//ié”™è¯¯è¿”å›å‡
+	if (p->next==L)						//åŸåŒé“¾è¡¨ä¸ºç©ºè¡¨æ—¶
 	{	
-		s=(DLinkNode *)malloc(sizeof(DLinkNode));	//´´½¨ĞÂ½áµãs
+		s=(DLinkNode *)malloc(sizeof(DLinkNode));	//åˆ›å»ºæ–°ç»“ç‚¹s
 		s->data=e;
 		p->next=s;s->next=p;
 		p->prior=s;s->prior=p;
 		return true;
 	}
-	else if (i==1)						//L²»Îª¿Õ£¬i=1×÷ÎªÌØÊâÇé¿ö´¦Àí
+	else if (i==1)						//Lä¸ä¸ºç©ºï¼Œi=1ä½œä¸ºç‰¹æ®Šæƒ…å†µå¤„ç†
 	{
-		s=(DLinkNode *)malloc(sizeof(DLinkNode));	//´´½¨ĞÂ½áµãs
+		s=(DLinkNode *)malloc(sizeof(DLinkNode));	//åˆ›å»ºæ–°ç»“ç‚¹s
 		s->data=e;
-		s->next=p->next;p->next=s;		//½«½áµãs²åÈëµ½½áµãpÖ®ºó
+		s->next=p->next;p->next=s;		//å°†ç»“ç‚¹sæ’å…¥åˆ°ç»“ç‚¹pä¹‹å
 		s->next->prior=s;s->prior=p;
 		return true;
 	}
-	else								//i²»Îª1Ê±
+	else								//iä¸ä¸º1æ—¶
 	{	
 		p=L->next;
-		while (j<=i-2 && p!=L)			//²éÕÒµÚi-1¸ö½áµãp
+		while (j<=i-2 && p!=L)			//æŸ¥æ‰¾ç¬¬i-1ä¸ªç»“ç‚¹p
 		{	j++;
 			p=p->next;
 		}
-		if (p==L)						//Î´ÕÒµ½µÚi-1¸ö½áµã
+		if (p==L)						//æœªæ‰¾åˆ°ç¬¬i-1ä¸ªç»“ç‚¹
 			return false;
-		else							//ÕÒµ½µÚi-1¸ö½áµã*p
+		else							//æ‰¾åˆ°ç¬¬i-1ä¸ªç»“ç‚¹*p
 		{
-			s=(DLinkNode *)malloc(sizeof(DLinkNode));	//´´½¨ĞÂ½áµãs
+			s=(DLinkNode *)malloc(sizeof(DLinkNode));	//åˆ›å»ºæ–°ç»“ç‚¹s
 			s->data=e;	
-			s->next=p->next;			//½«½áµãs²åÈëµ½½áµãpÖ®ºó
+			s->next=p->next;			//å°†ç»“ç‚¹sæ’å…¥åˆ°ç»“ç‚¹pä¹‹å
 			if (p->next!=NULL) p->next->prior=s;
 			s->prior=p;
 			p->next=s;
@@ -168,39 +168,39 @@ bool ListInsert(DLinkNode *&L,int i,ElemType e)	//²åÈëµÚi¸öÔªËØ
 		}
 	}
 }
-bool ListDelete(DLinkNode *&L,int i,ElemType &e) //É¾³ıµÚi¸öÔªËØ
+bool ListDelete(DLinkNode *&L,int i,ElemType &e) //åˆ é™¤ç¬¬iä¸ªå…ƒç´ 
 {
 	int j=1;
 	DLinkNode *p=L,*q;
 	if (i<=0 || L->next==L) 
-		return false;				//i´íÎó»òÕßÎª¿Õ±í·µ»Ø¼Ù
-	if (i==1)						//i==1×÷ÎªÌØÊâÇé¿ö´¦Àí
+		return false;				//ié”™è¯¯æˆ–è€…ä¸ºç©ºè¡¨è¿”å›å‡
+	if (i==1)						//i==1ä½œä¸ºç‰¹æ®Šæƒ…å†µå¤„ç†
 	{
-		q=L->next;					//É¾³ıµÚ1¸ö½áµã
+		q=L->next;					//åˆ é™¤ç¬¬1ä¸ªç»“ç‚¹
 		e=q->data;
 		L->next=q->next;
 		q->next->prior=L;
 		free(q);
 		return true;
 	}
-	else							//i²»Îª1Ê±
+	else							//iä¸ä¸º1æ—¶
 	{	
 		p=L->next;
-		while (j<=i-2 && p!=NULL)	//²éÕÒµ½µÚi-1¸ö½áµãp	
+		while (j<=i-2 && p!=NULL)	//æŸ¥æ‰¾åˆ°ç¬¬i-1ä¸ªç»“ç‚¹p	
 		{
 			j++;
 			p=p->next;
 		}
-		if (p==NULL)				//Î´ÕÒµ½µÚi-1¸ö½áµã
+		if (p==NULL)				//æœªæ‰¾åˆ°ç¬¬i-1ä¸ªç»“ç‚¹
 			return false;
-		else						//ÕÒµ½µÚi-1¸ö½áµãp
+		else						//æ‰¾åˆ°ç¬¬i-1ä¸ªç»“ç‚¹p
 		{
-			q=p->next;				//qÖ¸ÏòÒªÉ¾³ıµÄ½áµã
-			if (q==NULL) return 0;	//²»´æÔÚµÚi¸ö½áµã
+			q=p->next;				//qæŒ‡å‘è¦åˆ é™¤çš„ç»“ç‚¹
+			if (q==NULL) return 0;	//ä¸å­˜åœ¨ç¬¬iä¸ªç»“ç‚¹
 			e=q->data;
-			p->next=q->next;		//´Óµ¥Á´±íÖĞÉ¾³ıq½áµã
+			p->next=q->next;		//ä»å•é“¾è¡¨ä¸­åˆ é™¤qç»“ç‚¹
 			if (p->next!=NULL) p->next->prior=p;
-			free(q);				//ÊÍ·Åq½áµã
+			free(q);				//é‡Šæ”¾qç»“ç‚¹
 			return true;
 		}
 	}

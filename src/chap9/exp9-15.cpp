@@ -1,29 +1,29 @@
-//ÎÄ¼şÃû:exp9-15.cpp
-//AVLËã·¨
+//æ–‡ä»¶å:exp9-15.cpp
+//AVLç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
 #define max(x,y) ((x)>(y)?(x):(y))
 typedef struct node 
 {	
-	int key;                  		//¹Ø¼ü×ÖÏî
-	int ht;                       		//µ±Ç°½áµãµÄ×ÓÊ÷¸ß¶È
-    struct node *lchild,*rchild;		//×óÓÒº¢×ÓÖ¸Õë
-} AVLNode;								//AVLÊ÷½áµãÀàĞÍ
-void DestroyAVL(AVLNode* r)				//ÊÍ·ÅËùÓĞµÄ½áµã¿Õ¼ä
+	int key;                  		//å…³é”®å­—é¡¹
+	int ht;                       		//å½“å‰ç»“ç‚¹çš„å­æ ‘é«˜åº¦
+    struct node *lchild,*rchild;		//å·¦å³å­©å­æŒ‡é’ˆ
+} AVLNode;								//AVLæ ‘ç»“ç‚¹ç±»å‹
+void DestroyAVL(AVLNode* r)				//é‡Šæ”¾æ‰€æœ‰çš„ç»“ç‚¹ç©ºé—´
 {
 	if (r!=NULL)
 	{
-		DestroyAVL(r->lchild);			//µİ¹éÊÍ·Å×ó×ÓÊ÷
-		DestroyAVL(r->rchild);			//µİ¹éÊÍ·ÅÓÒ×ÓÊ÷
-		delete r;						//ÊÍ·Å¸ù½áµã
+		DestroyAVL(r->lchild);			//é€’å½’é‡Šæ”¾å·¦å­æ ‘
+		DestroyAVL(r->rchild);			//é€’å½’é‡Šæ”¾å³å­æ ‘
+		delete r;						//é‡Šæ”¾æ ¹ç»“ç‚¹
 	}
 }
-int getht(AVLNode* p)                 	//·µ»Ø½áµãpµÄ×ÓÊ÷¸ß¶È
+int getht(AVLNode* p)                 	//è¿”å›ç»“ç‚¹pçš„å­æ ‘é«˜åº¦
 {	if (p==NULL)
 		return 0;
     return p->ht;
  }
-AVLNode* right_rotate(AVLNode* A) 			//ÒÔ½áµãAÎª¸ù×öÓÒĞı×ª
+AVLNode* right_rotate(AVLNode* A) 			//ä»¥ç»“ç‚¹Aä¸ºæ ¹åšå³æ—‹è½¬
 {	AVLNode* B=A->lchild;
 	A->lchild=B->rchild;
 	B->rchild=A;
@@ -31,7 +31,7 @@ AVLNode* right_rotate(AVLNode* A) 			//ÒÔ½áµãAÎª¸ù×öÓÒĞı×ª
 	B->ht=max(getht(B->rchild),getht(B->lchild))+1;
 	return B;
 }
-AVLNode* left_rotate(AVLNode* A)            //ÒÔ½áµãAÎª¸ù×ö×óĞı×ª
+AVLNode* left_rotate(AVLNode* A)            //ä»¥ç»“ç‚¹Aä¸ºæ ¹åšå·¦æ—‹è½¬
 {	AVLNode* B=A->rchild;
 	A->rchild=B->lchild;
 	B->lchild=A;
@@ -39,87 +39,87 @@ AVLNode* left_rotate(AVLNode* A)            //ÒÔ½áµãAÎª¸ù×ö×óĞı×ª
 	B->ht=max(getht(B->rchild),getht(B->lchild))+1;
 	return B;
 }
-AVLNode* LL(AVLNode* A)                    	//LLĞÍµ÷Õû
+AVLNode* LL(AVLNode* A)                    	//LLå‹è°ƒæ•´
 {
 	return right_rotate(A);
 }
-AVLNode* RR(AVLNode* A)                     //RRĞÍµ÷Õû
+AVLNode* RR(AVLNode* A)                     //RRå‹è°ƒæ•´
 {
 	return left_rotate(A);
 }
-AVLNode* LR(AVLNode* A)                     //LRĞÍµ÷Õû
+AVLNode* LR(AVLNode* A)                     //LRå‹è°ƒæ•´
 {	AVLNode* B=A->lchild;
-	A->lchild=left_rotate(B);    			//½áµãb×óĞı
-	return right_rotate(A);     			//½áµãaÓÒĞı
+	A->lchild=left_rotate(B);    			//ç»“ç‚¹bå·¦æ—‹
+	return right_rotate(A);     			//ç»“ç‚¹aå³æ—‹
 }
-AVLNode* RL(AVLNode* A)                     //RLĞÍµ÷Õû
+AVLNode* RL(AVLNode* A)                     //RLå‹è°ƒæ•´
 {	AVLNode* B=A->rchild;
-	A->rchild=right_rotate(B);   			//½áµãbÓÒĞı
-	return left_rotate(A);     				 //½áµãa×óĞı
+	A->rchild=right_rotate(B);   			//ç»“ç‚¹bå³æ—‹
+	return left_rotate(A);     				 //ç»“ç‚¹aå·¦æ—‹
 }
-AVLNode* InsertAVL(AVLNode* r,int k)			//ÔÚAVLÊ÷rÖĞ²åÈë¹Ø¼ü×Ök 
-{	if (r==NULL)                             		//¿ÕÊ÷Ê±´´½¨¸ù½áµã
+AVLNode* InsertAVL(AVLNode* r,int k)			//åœ¨AVLæ ‘rä¸­æ’å…¥å…³é”®å­—k 
+{	if (r==NULL)                             		//ç©ºæ ‘æ—¶åˆ›å»ºæ ¹ç»“ç‚¹
 	{   AVLNode* p=(AVLNode*)malloc(sizeof(AVLNode));
 		p->key=k; p->ht=1;
 		p->lchild=p->rchild=NULL;
         return p;
     }
-	else if (k==r->key)								//ÕÒµ½ÖØ¸´¹Ø¼ü×ÖÊ±·µ»Ø			
+	else if (k==r->key)								//æ‰¾åˆ°é‡å¤å…³é”®å­—æ—¶è¿”å›			
          return r;
-	else if (k<r->key)                           	//k<r->keyµÄÇé¿ö
-	{	r->lchild=InsertAVL(r->lchild,k);		 	//½«k²åÈëµ½rµÄ×ó×ÓÊ÷ÖĞ
-        if (getht(r->lchild)-getht(r->rchild)>=2)	//ÕÒµ½Ê§ºâ½áµãr
-        {	if (k<r->lchild->key)             		//k²åÈëÔÚrµÄ×óº¢×ÓµÄ×ó×ÓÊ÷ÖĞ
-                r=LL(r);               				//²ÉÓÃLLĞÍµ÷Õû
-            else                           			//k²åÈëÔÚrµÄ×óº¢×ÓµÄÓÒ×ÓÊ÷ÖĞ
-                r=LR(r);                			//²ÉÓÃLRĞÍµ÷Õû
+	else if (k<r->key)                           	//k<r->keyçš„æƒ…å†µ
+	{	r->lchild=InsertAVL(r->lchild,k);		 	//å°†kæ’å…¥åˆ°rçš„å·¦å­æ ‘ä¸­
+        if (getht(r->lchild)-getht(r->rchild)>=2)	//æ‰¾åˆ°å¤±è¡¡ç»“ç‚¹r
+        {	if (k<r->lchild->key)             		//kæ’å…¥åœ¨rçš„å·¦å­©å­çš„å·¦å­æ ‘ä¸­
+                r=LL(r);               				//é‡‡ç”¨LLå‹è°ƒæ•´
+            else                           			//kæ’å…¥åœ¨rçš„å·¦å­©å­çš„å³å­æ ‘ä¸­
+                r=LR(r);                			//é‡‡ç”¨LRå‹è°ƒæ•´
         }
 	}
-	else                                   			//k>r->keyµÄÇé¿ö
-	{	r->rchild=InsertAVL(r->rchild,k);		 	//½«k²åÈëµ½rµÄÓÒ×ÓÊ÷ÖĞ
-        if (getht(r->rchild)-getht(r->lchild)>=2)   //ÕÒµ½Ê§ºâ½áµãr
-        {	if (k>r->rchild->key)              		//k²åÈëÔÚrµÄÓÒº¢×ÓµÄÓÒ×ÓÊ÷ÖĞ
-                r=RR(r);                			//²ÉÓÃRRĞÍµ÷Õû
-            else                           			//k²åÈëÔÚrµÄÓÒº¢×ÓµÄ×ó×ÓÊ÷ÖĞ
-                r=RL(r);                			//²ÉÓÃRLĞÍµ÷Õû
+	else                                   			//k>r->keyçš„æƒ…å†µ
+	{	r->rchild=InsertAVL(r->rchild,k);		 	//å°†kæ’å…¥åˆ°rçš„å³å­æ ‘ä¸­
+        if (getht(r->rchild)-getht(r->lchild)>=2)   //æ‰¾åˆ°å¤±è¡¡ç»“ç‚¹r
+        {	if (k>r->rchild->key)              		//kæ’å…¥åœ¨rçš„å³å­©å­çš„å³å­æ ‘ä¸­
+                r=RR(r);                			//é‡‡ç”¨RRå‹è°ƒæ•´
+            else                           			//kæ’å…¥åœ¨rçš„å³å­©å­çš„å·¦å­æ ‘ä¸­
+                r=RL(r);                			//é‡‡ç”¨RLå‹è°ƒæ•´
         }
     }
-    r->ht=max(getht(r->lchild),getht(r->rchild))+1;   //¸üĞÂ½áµãrµÄ¸ß¶È
+    r->ht=max(getht(r->lchild),getht(r->rchild))+1;   //æ›´æ–°ç»“ç‚¹rçš„é«˜åº¦
 	return r;
 }
-AVLNode* Deletemin(AVLNode* r,int &mine)		//É¾³ıAVLÊ÷rÖĞµÄ×îĞ¡½áµã 
+AVLNode* Deletemin(AVLNode* r,int &mine)		//åˆ é™¤AVLæ ‘rä¸­çš„æœ€å°ç»“ç‚¹ 
 {
 	AVLNode *f=NULL,*p=r;
-	while(p->lchild!=NULL)						//ÕÒ¸ù½áµãrµÄ×î×óÏÂ½áµãp
+	while(p->lchild!=NULL)						//æ‰¾æ ¹ç»“ç‚¹rçš„æœ€å·¦ä¸‹ç»“ç‚¹p
 	{
 		f=p;
 		p=p->lchild;
 	}
-	if(f==NULL)									//½áµãpÊÇ¸ù½áµã
+	if(f==NULL)									//ç»“ç‚¹pæ˜¯æ ¹ç»“ç‚¹
 		r=r->rchild;
-	else										//½áµãp²»ÊÇ¸ù½áµã
+	else										//ç»“ç‚¹pä¸æ˜¯æ ¹ç»“ç‚¹
 		f->lchild=p->rchild;
 	mine=p->key;
 	free(p);
 	return r;
 }
-AVLNode* Deletemax(AVLNode* r,int &maxe)			//É¾³ıAVLÊ÷rÖĞµÄ×î´ó½áµã 
+AVLNode* Deletemax(AVLNode* r,int &maxe)			//åˆ é™¤AVLæ ‘rä¸­çš„æœ€å¤§ç»“ç‚¹ 
 {
 	AVLNode *f=NULL,*p=r;
-	while(p->rchild!=NULL)						//ÕÒ¸ù½áµãrµÄ×îÓÒÏÂ½áµãp
+	while(p->rchild!=NULL)						//æ‰¾æ ¹ç»“ç‚¹rçš„æœ€å³ä¸‹ç»“ç‚¹p
 	{
 		f=p;
 		p=p->rchild;
 	}
-	if(f==NULL)									//½áµãpÊÇ¸ù½áµã
+	if(f==NULL)									//ç»“ç‚¹pæ˜¯æ ¹ç»“ç‚¹
 		r=r->lchild;
-	else										//½áµãp²»ÊÇ¸ù½áµã
+	else										//ç»“ç‚¹pä¸æ˜¯æ ¹ç»“ç‚¹
 		f->rchild=p->lchild;
 	maxe=p->key;
 	free(p);
 	return r;
 }
-void inorder(AVLNode* r)                    //ÖĞĞò±éÀúËùÓĞ½áµãÖµ 
+void inorder(AVLNode* r)                    //ä¸­åºéå†æ‰€æœ‰ç»“ç‚¹å€¼ 
 {
     if (r!=NULL)
     {	inorder(r->lchild);
@@ -133,23 +133,23 @@ void solve(int a[],int n)
 	int mine,maxe;
 	for(int i=0;i<n;i++)
 	{
-		if(a[i]==-1)						//É¾³ı×îĞ¡ÕûÊı
+		if(a[i]==-1)						//åˆ é™¤æœ€å°æ•´æ•°
 		{
 			b=Deletemin(b,mine);
-			printf("É¾³ı×îĞ¡ÔªËØ%2d  ",mine);
-			printf("ĞòÁĞ: "); inorder(b); printf("\n");
+			printf("åˆ é™¤æœ€å°å…ƒç´ %2d  ",mine);
+			printf("åºåˆ—: "); inorder(b); printf("\n");
 		}			 
-		else if (a[i]==-2)					//É¾³ı×î´óÕûÊı
+		else if (a[i]==-2)					//åˆ é™¤æœ€å¤§æ•´æ•°
 		{
 			b=Deletemax(b,maxe); 
-			printf("É¾³ı×î´óÔªËØ%2d  ",maxe);
-			printf("ĞòÁĞ: "); inorder(b); printf("\n");
+			printf("åˆ é™¤æœ€å¤§å…ƒç´ %2d  ",maxe);
+			printf("åºåˆ—: "); inorder(b); printf("\n");
 		}
-		else								//²åÈëÒ»¸öÕûÊı 
+		else								//æ’å…¥ä¸€ä¸ªæ•´æ•° 
 		{
 			b=InsertAVL(b,a[i]);
-			printf("²åÈë%d\t\t",a[i]);
-			printf("ĞòÁĞ: "); inorder(b); printf("\n");
+			printf("æ’å…¥%d\t\t",a[i]);
+			printf("åºåˆ—: "); inorder(b); printf("\n");
 		}
 	} 
 	DestroyAVL(b);

@@ -1,11 +1,11 @@
-//ÎÄ¼şÃû:exp2-7.cpp
-#include "linklist.cpp"				//°üº¬µ¥Á´±íµÄ»ù±¾ÔËËãËã·¨
-void Merge(LinkNode *L1,LinkNode *L2,LinkNode *&L3) //L1ºÍL2ºÏ²¢²úÉúL3
+//æ–‡ä»¶å:exp2-7.cpp
+#include "linklist.cpp"				//åŒ…å«å•é“¾è¡¨çš„åŸºæœ¬è¿ç®—ç®—æ³•
+void Merge(LinkNode *L1,LinkNode *L2,LinkNode *&L3) //L1å’ŒL2åˆå¹¶äº§ç”ŸL3
 {
 	LinkNode *p=L1->next,*q=L2->next,*r;
 	L3=L1;
-	r=L3;				//rÖ¸ÏòĞÂ½¨µ¥Á´±íL3µÄÎ²½áµã
-	free(L2);			//ÊÍ·ÅL2µÄÍ·½áµã
+	r=L3;				//ræŒ‡å‘æ–°å»ºå•é“¾è¡¨L3çš„å°¾ç»“ç‚¹
+	free(L2);			//é‡Šæ”¾L2çš„å¤´ç»“ç‚¹
 	while (p!=NULL && q!=NULL)
 	{
 		r->next=p; r=p; p=p->next;
@@ -28,7 +28,7 @@ int main()
 	n=5;
 	CreateListR(L2,b,n);
 	printf("L2:"); DispList(L2);
-	printf("L1ºÍL2ºÏ²¢²úÉúL3\n");
+	printf("L1å’ŒL2åˆå¹¶äº§ç”ŸL3\n");
 	Merge(L1,L2,L3);
 	printf("L3:"); DispList(L3);
 	DestroyList(L3);

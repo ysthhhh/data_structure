@@ -1,18 +1,18 @@
-//ÎÄ¼şÃû:exp9-2.cpp
-#include "seqlist.cpp"						//°üº¬Ë³Ğò±í»ù±¾ÔËËãËã·¨
-int BinSearch(RecType R[],int n,KeyType k)	//ÕÛ°ë²éÕÒËã·¨
+//æ–‡ä»¶å:exp9-2.cpp
+#include "seqlist.cpp"						//åŒ…å«é¡ºåºè¡¨åŸºæœ¬è¿ç®—ç®—æ³•
+int BinSearch(RecType R[],int n,KeyType k)	//æŠ˜åŠæŸ¥æ‰¾ç®—æ³•
 {
 	int low=0,high=n-1,mid,count=0;
 	while (low<=high) 
 	{	
 		mid=(low+high)/2;
-		printf("  µÚ%d´Î±È½Ï:ÔÚ[%d,%d]ÖĞ±È½ÏÔªËØR[%d]:%d\n",++count,low,high,mid,R[mid].key);
-			if (R[mid].key==k)   	//²éÕÒ³É¹¦·µ»Ø
+		printf("  ç¬¬%dæ¬¡æ¯”è¾ƒ:åœ¨[%d,%d]ä¸­æ¯”è¾ƒå…ƒç´ R[%d]:%d\n",++count,low,high,mid,R[mid].key);
+			if (R[mid].key==k)   	//æŸ¥æ‰¾æˆåŠŸè¿”å›
 			return mid+1;
-		if (R[mid].key>k)     		//¼ÌĞøÔÚR[low..mid-1]ÖĞ²éÕÒ
+		if (R[mid].key>k)     		//ç»§ç»­åœ¨R[low..mid-1]ä¸­æŸ¥æ‰¾
 			high=mid-1;
 		else
-			low=mid+1;       		//¼ÌĞøÔÚR[mid+1..high]ÖĞ²éÕÒ
+			low=mid+1;       		//ç»§ç»­åœ¨R[mid+1..high]ä¸­æŸ¥æ‰¾
 	}
 	return 0;
 }
@@ -21,12 +21,12 @@ int main()
 	RecType R[MAXL];
 	KeyType k=9;
 	int a[]={1,2,3,4,5,6,7,8,9,10},i,n=10;
-	CreateList(R,a,n);			//½¨Á¢Ë³Ğò±í
-	printf("¹Ø¼ü×ÖĞòÁĞ:"); DispList(R,n);
-	printf("²éÕÒ%dµÄ±È½Ï¹ı³ÌÈçÏÂ:\n",k);
+	CreateList(R,a,n);			//å»ºç«‹é¡ºåºè¡¨
+	printf("å…³é”®å­—åºåˆ—:"); DispList(R,n);
+	printf("æŸ¥æ‰¾%dçš„æ¯”è¾ƒè¿‡ç¨‹å¦‚ä¸‹:\n",k);
 	if ((i=BinSearch(R,n,k))!=0)
-		printf("ÔªËØ%dµÄÎ»ÖÃÊÇ%d\n",k,i);
+		printf("å…ƒç´ %dçš„ä½ç½®æ˜¯%d\n",k,i);
 	else
-		printf("ÔªËØ%d²»ÔÚ±íÖĞ\n",k);
+		printf("å…ƒç´ %dä¸åœ¨è¡¨ä¸­\n",k);
 	return 1;
 }

@@ -1,4 +1,4 @@
-//кЁпР╤сапё╗╥г╩╥пн╤сапё╘тккЦкЦ╥╗
+//И║╨Е╨▐И≤÷Е┬≈О╪┬И²·Г▌╞Е╫╒И≤÷Е┬≈О╪┴Х©░Г╝≈Г╝≈ФЁ∙
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
@@ -6,29 +6,29 @@ typedef char ElemType;
 typedef struct 
 {	
 	ElemType data[MaxSize];
-	int front,rear;						//╤см╥╨м╤сн╡ж╦уК
+	int front,rear;						//И≤÷Е╓╢Е▓▄И≤÷Е╟╬Ф▄┤И▓┬
 } SqQueue;
 void InitQueue(SqQueue *&q)
 {	q=(SqQueue *)malloc (sizeof(SqQueue));
 	q->front=q->rear=-1;
 }
-void DestroyQueue(SqQueue *&q)			//оЗ╩ы╤сап
+void DestroyQueue(SqQueue *&q)			//И■─Ф╞│И≤÷Е┬≈
 {
 	free(q);
 }
-bool QueueEmpty(SqQueue *q)				//еп╤о╤сапйг╥Ян╙©у
+bool QueueEmpty(SqQueue *q)				//Е┬╓Ф√╜И≤÷Е┬≈Ф≤╞Е░╕Д╦╨Г╘╨
 {
 	return(q->front==q->rear);
 }
-bool enQueue(SqQueue *&q,ElemType e)	//╫Ь╤с
-{	if (q->rear==MaxSize-1)				//╤сбЗиорГЁЖ
-		return false;					//╥╣╩ь╪ы
-	q->rear++;							//╤сн╡тЖ1
-	q->data[q->rear]=e;					//rearн╩жц╡ЕхКт╙кьe
-	return true;						//╥╣╩ьуФ
+bool enQueue(SqQueue *&q,ElemType e)	//Х©⌡И≤÷
+{	if (q->rear==MaxSize-1)				//И≤÷Ф╩║Д╦┼Ф╨╒Е┤╨
+		return false;					//Х©■Е⌡·Е│┤
+	q->rear++;							//И≤÷Е╟╬Е╒·1
+	q->data[q->rear]=e;					//rearД╫█Г╫╝Ф▐▓Е┘╔Е┘┐Г╢═e
+	return true;						//Х©■Е⌡·Г°÷
 }
-bool deQueue(SqQueue *&q,ElemType &e)	//ЁЖ╤с
-{	if (q->front==q->rear)				//╤с©уобрГЁЖ
+bool deQueue(SqQueue *&q,ElemType &e)	//Е┤╨И≤÷
+{	if (q->front==q->rear)				//И≤÷Г╘╨Д╦▀Ф╨╒Е┤╨
 		return false;
 	q->front++;
 	e=q->data[q->front];

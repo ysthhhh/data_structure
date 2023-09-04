@@ -1,21 +1,21 @@
-//Ë³Ğò±í»ù±¾ÔËËãËã·¨
+//é¡ºåºè¡¨åŸºæœ¬è¿ç®—ç®—æ³•
 #include <stdio.h>
 #include <malloc.h>
-#define MAXL 100		//×î´ó³¤¶È
-typedef int KeyType;	//¶¨Òå¹Ø¼ü×ÖÀàĞÍÎªint
+#define MAXL 100		//æœ€å¤§é•¿åº¦
+typedef int KeyType;	//å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºint
 typedef char InfoType;
 
 typedef struct
-{	KeyType key;		//¹Ø¼ü×ÖÏî
-	InfoType data;		//ÆäËûÊı¾İÏî£¬ÀàĞÍÎªInfoType
-} RecType;				//²éÕÒÔªËØµÄÀàĞÍ
+{	KeyType key;		//å…³é”®å­—é¡¹
+	InfoType data;		//å…¶ä»–æ•°æ®é¡¹ï¼Œç±»å‹ä¸ºInfoType
+} RecType;				//æŸ¥æ‰¾å…ƒç´ çš„ç±»å‹
 
-void CreateList(RecType R[],KeyType keys[],int n)	//´´½¨Ë³Ğò±í
+void CreateList(RecType R[],KeyType keys[],int n)	//åˆ›å»ºé¡ºåºè¡¨
 {
-	for (int i=0;i<n;i++)			//R[0..n-1]´æ·ÅÅÅĞò¼ÇÂ¼
+	for (int i=0;i<n;i++)			//R[0..n-1]å­˜æ”¾æ’åºè®°å½•
 		R[i].key=keys[i];
 }
-void DispList(RecType R[],int n)	//Êä³öË³Ğò±í
+void DispList(RecType R[],int n)	//è¾“å‡ºé¡ºåºè¡¨
 {
 	for (int i=0;i<n;i++)
 		printf("%d ",R[i].key);

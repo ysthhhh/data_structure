@@ -1,12 +1,12 @@
-//ÎÄ¼şÃû:exp8-11.cpp
-#include "graph.cpp"				//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
-int visited[MAXV];		//È«¾Ö±äÁ¿
+//æ–‡ä»¶å:exp8-11.cpp
+#include "graph.cpp"				//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
+int visited[MAXV];		//å…¨å±€å˜é‡
 int V1[MAXV],V2[MAXV],n,m; 
 int count=0;
-bool Cond(int path[],int d)			//ÅĞ¶ÏÌõ¼ş
+bool Cond(int path[],int d)			//åˆ¤æ–­æ¡ä»¶
 {
 	int flag1=0,f1,flag2=0,f2,i,j;
-	for (i=0;i<n;i++)				//ÅĞ¶ÏÂ·¾¶ÖĞÊÇ·ñÓĞ±Ø¾­µã
+	for (i=0;i<n;i++)				//åˆ¤æ–­è·¯å¾„ä¸­æ˜¯å¦æœ‰å¿…ç»ç‚¹
 	{
 		f1=1;
 		for (j=0;j<=d;j++)
@@ -17,7 +17,7 @@ bool Cond(int path[],int d)			//ÅĞ¶ÏÌõ¼ş
 		flag1+=f1;
 	}
 
-	for (i=0;i<m;i++)		//ÅĞ¶ÏÂ·¾¶ÖĞÊÇ·ñÓĞ±Ø±Üµã
+	for (i=0;i<m;i++)		//åˆ¤æ–­è·¯å¾„ä¸­æ˜¯å¦æœ‰å¿…é¿ç‚¹
 	{
 		f2=0;
 		for (j=0;j<=d;j++)
@@ -27,12 +27,12 @@ bool Cond(int path[],int d)			//ÅĞ¶ÏÌõ¼ş
 			}
 		flag2+=f2;
 	}
-	if (flag1==0 && flag2==0)	//Âú×ãÌõ¼ş·µ»Øtrue
+	if (flag1==0 && flag2==0)	//æ»¡è¶³æ¡ä»¶è¿”å›true
 		return true;
-	else						//²»Âú×ãÌõ¼ş·µ»Øfalse
+	else						//ä¸æ»¡è¶³æ¡ä»¶è¿”å›false
 		return false;
 }
-void TravPath(AdjGraph *G,int vi,int vj,int path[],int d) //ÔÚÍ¼GÖĞ²éÕÒ´Ó¶¥µãviµ½¶¥µãvjµÄÂú×ãÌõ¼şµÄÂ·¾¶
+void TravPath(AdjGraph *G,int vi,int vj,int path[],int d) //åœ¨å›¾Gä¸­æŸ¥æ‰¾ä»é¡¶ç‚¹viåˆ°é¡¶ç‚¹vjçš„æ»¡è¶³æ¡ä»¶çš„è·¯å¾„
 {
 	int v,i;
 	ArcNode *p;
@@ -40,20 +40,20 @@ void TravPath(AdjGraph *G,int vi,int vj,int path[],int d) //ÔÚÍ¼GÖĞ²éÕÒ´Ó¶¥µãviµ
 	d++; path[d]=vi;
 	if (vi==vj && Cond(path,d))
 	{
-		printf("  Â·¾¶%d: ",++count);
+		printf("  è·¯å¾„%d: ",++count);
 		for (i=0;i<d;i++)
 			printf("%d->",path[i]);
 		printf("%d\n",path[i]);
 	}
-    p=G->adjlist[vi].firstarc;      //ÕÒviµÄµÚÒ»¸öÁÚ½Ó¶¥µã
+    p=G->adjlist[vi].firstarc;      //æ‰¾viçš„ç¬¬ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
 	while (p!=NULL)
 	{
-		v=p->adjvex;                //vÎªviµÄÁÚ½Ó¶¥µã
-		if (visited[v]==0)          //Èô¸Ã¶¥µãÎ´±ê¼Ç·ÃÎÊ,Ôòµİ¹é·ÃÎÊÖ®
+		v=p->adjvex;                //vä¸ºviçš„é‚»æ¥é¡¶ç‚¹
+		if (visited[v]==0)          //è‹¥è¯¥é¡¶ç‚¹æœªæ ‡è®°è®¿é—®,åˆ™é€’å½’è®¿é—®ä¹‹
 			TravPath(G,v,vj,path,d);
-		p=p->nextarc;               //ÕÒviµÄÏÂÒ»¸öÁÚ½Ó¶¥µã
+		p=p->nextarc;               //æ‰¾viçš„ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
 	}
-	visited[vi]=0;                  //È¡Ïû·ÃÎÊ±ê¼Ç,ÒÔÊ¹¸Ã¶¥µã¿ÉÖØĞÂÊ¹ÓÃ
+	visited[vi]=0;                  //å–æ¶ˆè®¿é—®æ ‡è®°,ä»¥ä½¿è¯¥é¡¶ç‚¹å¯é‡æ–°ä½¿ç”¨
 	d--;
 }
 int main()
@@ -78,21 +78,21 @@ int main()
 		{0,0,0,0,0,0,0,0,0,0,1,1,0,0,1},
 		{0,0,0,0,0,0,0,0,0,0,0,0,1,1,0}};
 	CreateAdj(G,A,15,21);
-	printf("Í¼GµÄÁÚ½Ó±í:\n"); DispAdj(G);
+	printf("å›¾Gçš„é‚»æ¥è¡¨:\n"); DispAdj(G);
 	for (i=0;i<n;i++) visited[i]=0;
-	printf("ÊäÈëÆğµãºÍÖÕµã:");
+	printf("è¾“å…¥èµ·ç‚¹å’Œç»ˆç‚¹:");
 	scanf("%d%d",&u,&v);
-	printf("ÊäÈë±Ø¾­µã¸öÊı:");
+	printf("è¾“å…¥å¿…ç»ç‚¹ä¸ªæ•°:");
 	scanf("%d",&n);
-	printf("ÊäÈë±Ø¾­µã¼¯ºÏ:");
+	printf("è¾“å…¥å¿…ç»ç‚¹é›†åˆ:");
 	for (i=0;i<n;i++)
 		scanf("%d",&V1[i]);
-	printf("ÊäÈë±Ø±Üµã¸öÊı:");
+	printf("è¾“å…¥å¿…é¿ç‚¹ä¸ªæ•°:");
 	scanf("%d",&m);
-	printf("ÊäÈë±Ø±Üµã¼¯ºÏ:");
+	printf("è¾“å…¥å¿…é¿ç‚¹é›†åˆ:");
 	for (i=0;i<m;i++)
 		scanf("%d",&V2[i]);
-	printf("\nËùÓĞµÄÌ½±¦Â·¾¶ÈçÏÂ:\n");
+	printf("\næ‰€æœ‰çš„æ¢å®è·¯å¾„å¦‚ä¸‹:\n");
     TravPath(G,u,v,path,-1);
 	DestroyAdj(G);
 	return 1;

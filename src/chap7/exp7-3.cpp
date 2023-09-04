@@ -1,19 +1,19 @@
-//ÎÄ¼şÃû:exp7-3.cpp
-#include "btree.cpp"				//°üº¬¶ş²æÊ÷µÄ»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp7-3.cpp
+#include "btree.cpp"				//åŒ…å«äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
 #define MaxWidth 40
 BTNode *CreateBT1(char *pre,char *in,int n)
 {	BTNode *b;
 	char *p;
 	int k;
 	if (n<=0) return NULL;
-	b=(BTNode *)malloc(sizeof(BTNode));		//´´½¨¶ş²æÊ÷½áµã*b
+	b=(BTNode *)malloc(sizeof(BTNode));		//åˆ›å»ºäºŒå‰æ ‘ç»“ç‚¹*b
 	b->data=*pre;
-	for (p=in;p<in+n;p++)					//ÔÚÖĞĞòĞòÁĞÖĞÕÒµÈÓÚ*preµÄÎ»ÖÃk
-		if (*p==*pre)						//preÖ¸Ïò¸ù½áµã
-			break;						//ÔÚinÖĞÕÒµ½ºóÍË³öÑ­»·
-	k=p-in;								//È·¶¨¸ù½áµãÔÚinÖĞµÄÎ»ÖÃ
-	b->lchild=CreateBT1(pre+1,in,k);			//µİ¹é¹¹Ôì×ó×ÓÊ÷
-	b->rchild=CreateBT1(pre+k+1,p+1,n-k-1); 	//µİ¹é¹¹ÔìÓÒ×ÓÊ÷
+	for (p=in;p<in+n;p++)					//åœ¨ä¸­åºåºåˆ—ä¸­æ‰¾ç­‰äº*preçš„ä½ç½®k
+		if (*p==*pre)						//preæŒ‡å‘æ ¹ç»“ç‚¹
+			break;						//åœ¨inä¸­æ‰¾åˆ°åé€€å‡ºå¾ªç¯
+	k=p-in;								//ç¡®å®šæ ¹ç»“ç‚¹åœ¨inä¸­çš„ä½ç½®
+	b->lchild=CreateBT1(pre+1,in,k);			//é€’å½’æ„é€ å·¦å­æ ‘
+	b->rchild=CreateBT1(pre+k+1,p+1,n-k-1); 	//é€’å½’æ„é€ å³å­æ ‘
 	return b;
 }
 BTNode *CreateBT2(char *post,char *in,int n)
@@ -21,18 +21,18 @@ BTNode *CreateBT2(char *post,char *in,int n)
 	char r,*p;
 	int k;
 	if (n<=0) return NULL;
-	r=*(post+n-1);						//¸ù½áµãÖµ
-	b=(BTNode *)malloc(sizeof(BTNode));		//´´½¨¶ş²æÊ÷½áµã*b
+	r=*(post+n-1);						//æ ¹ç»“ç‚¹å€¼
+	b=(BTNode *)malloc(sizeof(BTNode));		//åˆ›å»ºäºŒå‰æ ‘ç»“ç‚¹*b
 	b->data=r;
-	for (p=in;p<in+n;p++)					//ÔÚinÖĞ²éÕÒ¸ù½áµã
+	for (p=in;p<in+n;p++)					//åœ¨inä¸­æŸ¥æ‰¾æ ¹ç»“ç‚¹
 		if (*p==r)	break;
-	k=p-in;								//kÎª¸ù½áµãÔÚinÖĞµÄÏÂ±ê
-	b->lchild=CreateBT2(post,in,k);			//µİ¹é¹¹Ôì×ó×ÓÊ÷
-	b->rchild=CreateBT2(post+k,p+1,n-k-1);	//µİ¹é¹¹ÔìÓÒ×ÓÊ÷
+	k=p-in;								//kä¸ºæ ¹ç»“ç‚¹åœ¨inä¸­çš„ä¸‹æ ‡
+	b->lchild=CreateBT2(post,in,k);			//é€’å½’æ„é€ å·¦å­æ ‘
+	b->rchild=CreateBT2(post+k,p+1,n-k-1);	//é€’å½’æ„é€ å³å­æ ‘
 	return b;
 }
 
-void DispBTree1(BTNode *b)  //ÒÔ°¼Èë±í±íÊ¾·¨Êä³öÒ»¿Ã¶ş²æÊ÷
+void DispBTree1(BTNode *b)  //ä»¥å‡¹å…¥è¡¨è¡¨ç¤ºæ³•è¾“å‡ºä¸€æ£µäºŒå‰æ ‘
 {
 	BTNode *St[MaxSize],*p;
 	int level[MaxSize][2],top=-1,n,i,width=4;
@@ -40,20 +40,20 @@ void DispBTree1(BTNode *b)  //ÒÔ°¼Èë±í±íÊ¾·¨Êä³öÒ»¿Ã¶ş²æÊ÷
 	if (b!=NULL)
 	{
 		top++;
-		St[top]=b;						//¸ù½áµãÈëÕ»
+		St[top]=b;						//æ ¹ç»“ç‚¹å…¥æ ˆ
 		level[top][0]=width;
-		level[top][1]=2;				//2±íÊ¾ÊÇ¸ù
+		level[top][1]=2;				//2è¡¨ç¤ºæ˜¯æ ¹
 		while (top>-1)
 		{
-			p=St[top];					//ÍËÕ»²¢°¼ÈëÏÔÊ¾¸Ã½áµãÖµ
+			p=St[top];					//é€€æ ˆå¹¶å‡¹å…¥æ˜¾ç¤ºè¯¥ç»“ç‚¹å€¼
 			n=level[top][0];
 			switch(level[top][1])
 			{
-			case 0:type='L';break;		//×ó½áµãÖ®ºóÊä³ö(L)
-			case 1:type='R';break;		//ÓÒ½áµãÖ®ºóÊä³ö(R)
-			case 2:type='B';break;		//¸ù½áµãÖ®ºóÇ°Êä³ö(B)
+			case 0:type='L';break;		//å·¦ç»“ç‚¹ä¹‹åè¾“å‡º(L)
+			case 1:type='R';break;		//å³ç»“ç‚¹ä¹‹åè¾“å‡º(R)
+			case 2:type='B';break;		//æ ¹ç»“ç‚¹ä¹‹åå‰è¾“å‡º(B)
 			}
-			for (i=1;i<=n;i++)			//ÆäÖĞnÎªÏÔÊ¾³¡¿í,×Ö·ûÒÔÓÒ¶ÔÆëÏÔÊ¾
+			for (i=1;i<=n;i++)			//å…¶ä¸­nä¸ºæ˜¾ç¤ºåœºå®½,å­—ç¬¦ä»¥å³å¯¹é½æ˜¾ç¤º
 				printf(" ");
 			printf("%c(%c)",p->data,type);
 			for (i=n+1;i<=MaxWidth;i+=2)
@@ -61,18 +61,18 @@ void DispBTree1(BTNode *b)  //ÒÔ°¼Èë±í±íÊ¾·¨Êä³öÒ»¿Ã¶ş²æÊ÷
 			printf("\n");
 			top--;
 			if (p->rchild!=NULL)
-			{							//½«ÓÒ×ÓÊ÷¸ù½áµãÈëÕ»
+			{							//å°†å³å­æ ‘æ ¹ç»“ç‚¹å…¥æ ˆ
 				top++;
 				St[top]=p->rchild;
-				level[top][0]=n+width;	//ÏÔÊ¾³¡¿íÔöwidth
-				level[top][1]=1;		//1±íÊ¾ÊÇÓÒ×ÓÊ÷
+				level[top][0]=n+width;	//æ˜¾ç¤ºåœºå®½å¢width
+				level[top][1]=1;		//1è¡¨ç¤ºæ˜¯å³å­æ ‘
 			}
 			if (p->lchild!=NULL)
-			{							//½«×ó×ÓÊ÷¸ù½áµãÈëÕ»
+			{							//å°†å·¦å­æ ‘æ ¹ç»“ç‚¹å…¥æ ˆ
 				top++;
 				St[top]=p->lchild;
-				level[top][0]=n+width;  //ÏÔÊ¾³¡¿íÔöwidth
-				level[top][1]=0;        //0±íÊ¾ÊÇ×ó×ÓÊ÷
+				level[top][0]=n+width;  //æ˜¾ç¤ºåœºå®½å¢width
+				level[top][1]=0;        //0è¡¨ç¤ºæ˜¯å·¦å­æ ‘
 			}
 		}
 	}
@@ -86,17 +86,17 @@ int main()
 	ElemType post[]="DJLNMKHEBFIGCA";
 	int n=14;
 	b=CreateBT1(pre,in,n);
-	printf("ÏÈĞòĞòÁĞ:%s\n",pre);
-	printf("ÖĞĞòĞòÁĞ:%s\n",in);
-	printf("¹¹ÔìÒ»¿Ã¶ş²æÊ÷b:\n");
-	printf("  À¨ºÅ±íÊ¾·¨:");DispBTree(b);printf("\n");
-	printf("  °¼Èë±íÊ¾·¨:\n");DispBTree1(b);printf("\n\n");
-	printf("ÖĞĞòĞòÁĞ:%s\n",in);
-	printf("ºóĞòĞòÁĞ:%s\n",post);
+	printf("å…ˆåºåºåˆ—:%s\n",pre);
+	printf("ä¸­åºåºåˆ—:%s\n",in);
+	printf("æ„é€ ä¸€æ£µäºŒå‰æ ‘b:\n");
+	printf("  æ‹¬å·è¡¨ç¤ºæ³•:");DispBTree(b);printf("\n");
+	printf("  å‡¹å…¥è¡¨ç¤ºæ³•:\n");DispBTree1(b);printf("\n\n");
+	printf("ä¸­åºåºåˆ—:%s\n",in);
+	printf("ååºåºåˆ—:%s\n",post);
 	b=CreateBT2(post,in,n);
-	printf("¹¹ÔìÒ»¿Ã¶ş²æÊ÷b:\n");
-	printf(" À¨ºÅ±íÊ¾·¨:");DispBTree(b);printf("\n");
-	printf(" °¼Èë±íÊ¾·¨:\n");DispBTree1(b);printf("\n");
+	printf("æ„é€ ä¸€æ£µäºŒå‰æ ‘b:\n");
+	printf(" æ‹¬å·è¡¨ç¤ºæ³•:");DispBTree(b);printf("\n");
+	printf(" å‡¹å…¥è¡¨ç¤ºæ³•:\n");DispBTree1(b);printf("\n");
 	DestroyBTree(b);
 	return 1;
 }

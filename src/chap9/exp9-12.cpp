@@ -1,7 +1,7 @@
-//ÎÄ¼şÃû:exp9-12.cpp
-#include "bst.cpp"   //¶ş²æÅÅĞòÊ÷»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp9-12.cpp
+#include "bst.cpp"   //äºŒå‰æ’åºæ ‘åŸºæœ¬è¿ç®—ç®—æ³•
 
-BSTNode *LCA(BSTNode *bt,KeyType x,KeyType y) //ÔÚ¶ş²æÅÅĞòÊ÷btÖĞÇóxºÍy½ÚµãµÄLCA£¬²¢·µ»Ø¸Ã½ÚµãµÄÖ¸Õë
+BSTNode *LCA(BSTNode *bt,KeyType x,KeyType y) //åœ¨äºŒå‰æ’åºæ ‘btä¸­æ±‚xå’ŒyèŠ‚ç‚¹çš„LCAï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æŒ‡é’ˆ
 {
 	if (bt==NULL) return NULL;
 	if (x<bt->key && y<bt->key)
@@ -18,14 +18,14 @@ int main()
 	BSTNode *bt,*p;
 	KeyType x=1,y=4;
 	KeyType a[]={5,2,1,6,7,4,8,3,9},n=9;
-	printf("(1)¹¹Ôì¶ş²æÅÅĞòÊ÷bt\n");
-	bt=CreateBST(a,n);		//´´½¨Ò»¿Ã¶ş²æÅÅĞòÊ÷
-	printf("(2)Êä³öBST:");DispBST(bt);printf("\n");
-	printf("(3)²éÕÒ%dºÍ%d½ÚµãµÄLCA\n",x,y);
+	printf("(1)æ„é€ äºŒå‰æ’åºæ ‘bt\n");
+	bt=CreateBST(a,n);		//åˆ›å»ºä¸€æ£µäºŒå‰æ’åºæ ‘
+	printf("(2)è¾“å‡ºBST:");DispBST(bt);printf("\n");
+	printf("(3)æŸ¥æ‰¾%då’Œ%dèŠ‚ç‚¹çš„LCA\n",x,y);
 	if (p=LCA(bt,x,y))
-		printf("  LCAÊÇ:%d\n",p->key);
+		printf("  LCAæ˜¯:%d\n",p->key);
 	else
-		printf("  Ö¸¶¨µÄ¹Ø¼ü×Ö²»´æÔÚ\n");
-	printf("(4)Ïú»Ùbt"); DestroyBST(bt); printf("\n");
+		printf("  æŒ‡å®šçš„å…³é”®å­—ä¸å­˜åœ¨\n");
+	printf("(4)é”€æ¯bt"); DestroyBST(bt); printf("\n");
 	return 1;
 }

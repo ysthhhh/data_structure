@@ -1,29 +1,29 @@
-//ÎÄ¼şÃû:exp4-1.cpp
-#include "sqstring.cpp"		//°üº¬Ë³Ğò´®»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp4-1.cpp
+#include "sqstring.cpp"		//åŒ…å«é¡ºåºä¸²åŸºæœ¬è¿ç®—ç®—æ³•
 int main()
 {
 	SqString s,s1,s2,s3,s4;
-	printf("Ë³Ğò´®µÄ»ù±¾ÔËËãÈçÏÂ:\n");
-	printf("  (1)½¨Á¢´®sºÍ´®s1\n");
+	printf("é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—å¦‚ä¸‹:\n");
+	printf("  (1)å»ºç«‹ä¸²så’Œä¸²s1\n");
 	StrAssign(s,"abcdefghijklmn");
 	StrAssign(s1,"123");
-	printf("  (2)Êä³ö´®s:");DispStr(s);
-	printf("  (3)´®sµÄ³¤¶È:%d\n",StrLength(s));
-	printf("  (4)ÔÚ´®sµÄµÚ9¸ö×Ö·ûÎ»ÖÃ²åÈë´®s1¶ø²úÉú´®s2\n");
+	printf("  (2)è¾“å‡ºä¸²s:");DispStr(s);
+	printf("  (3)ä¸²sçš„é•¿åº¦:%d\n",StrLength(s));
+	printf("  (4)åœ¨ä¸²sçš„ç¬¬9ä¸ªå­—ç¬¦ä½ç½®æ’å…¥ä¸²s1è€Œäº§ç”Ÿä¸²s2\n");
 	s2=InsStr(s,9,s1);
-	printf("  (5)Êä³ö´®s2:");DispStr(s2);
-	printf("  (6)É¾³ı´®sµÚ2¸ö×Ö·û¿ªÊ¼µÄ5¸ö×Ö·û¶ø²úÉú´®s2\n");
+	printf("  (5)è¾“å‡ºä¸²s2:");DispStr(s2);
+	printf("  (6)åˆ é™¤ä¸²sç¬¬2ä¸ªå­—ç¬¦å¼€å§‹çš„5ä¸ªå­—ç¬¦è€Œäº§ç”Ÿä¸²s2\n");
 	s2=DelStr(s,2,3);
-	printf("  (7)Êä³ö´®s2:");DispStr(s2);
-	printf("  (8)½«´®sµÚ2¸ö×Ö·û¿ªÊ¼µÄ5¸ö×Ö·ûÌæ»»³É´®s1¶ø²úÉú´®s2\n");
+	printf("  (7)è¾“å‡ºä¸²s2:");DispStr(s2);
+	printf("  (8)å°†ä¸²sç¬¬2ä¸ªå­—ç¬¦å¼€å§‹çš„5ä¸ªå­—ç¬¦æ›¿æ¢æˆä¸²s1è€Œäº§ç”Ÿä¸²s2\n");
 	s2=RepStr(s,2,5,s1);
-	printf("  (9)Êä³ö´®s2:");DispStr(s2);
-	printf("  (10)ÌáÈ¡´®sµÄµÚ2¸ö×Ö·û¿ªÊ¼µÄ10¸ö×Ö·û¶ø²úÉú´®s3\n");
+	printf("  (9)è¾“å‡ºä¸²s2:");DispStr(s2);
+	printf("  (10)æå–ä¸²sçš„ç¬¬2ä¸ªå­—ç¬¦å¼€å§‹çš„10ä¸ªå­—ç¬¦è€Œäº§ç”Ÿä¸²s3\n");
 	s3=SubStr(s,2,10);
-	printf("  (11)Êä³ö´®s3:");DispStr(s3);
-	printf("  (12)½«´®s1ºÍ´®s2Á¬½ÓÆğÀ´¶ø²úÉú´®s4\n");
+	printf("  (11)è¾“å‡ºä¸²s3:");DispStr(s3);
+	printf("  (12)å°†ä¸²s1å’Œä¸²s2è¿æ¥èµ·æ¥è€Œäº§ç”Ÿä¸²s4\n");
 	s4=Concat(s1,s2);
-	printf("  (13)Êä³ö´®s4:");DispStr(s4);
+	printf("  (13)è¾“å‡ºä¸²s4:");DispStr(s4);
 	DestroyStr(s); DestroyStr(s1); DestroyStr(s2);
 	DestroyStr(s3); DestroyStr(s4);
 	return 1;

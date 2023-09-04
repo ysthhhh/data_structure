@@ -1,20 +1,20 @@
-//ÎÄ¼şÃû:exp8-9.cpp
-#include "graph.cpp"   //°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp8-9.cpp
+#include "graph.cpp"   //åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
 typedef struct
-{	int ino;			//Æğµã
-	int eno;			//ÖÕµã
-} KeyNode;				//¹Ø¼ü»î¶¯ÀàĞÍ
+{	int ino;			//èµ·ç‚¹
+	int eno;			//ç»ˆç‚¹
+} KeyNode;				//å…³é”®æ´»åŠ¨ç±»å‹
 
 bool TopSort(AdjGraph *G,int topseq[])
-//²úÉúº¬ÓĞn¸ö¶¥µã±àºÅµÄÍØÆËĞòÁĞtopseq
+//äº§ç”Ÿå«æœ‰nä¸ªé¡¶ç‚¹ç¼–å·çš„æ‹“æ‰‘åºåˆ—topseq
 {
 	int i,j,n=0;
-	int st[MAXV];						//¶¨ÒåÒ»¸öË³ĞòÕ»
-	int top=-1;							//Õ»¶¥Ö¸ÕëÎªtop
+	int st[MAXV];						//å®šä¹‰ä¸€ä¸ªé¡ºåºæ ˆ
+	int top=-1;							//æ ˆé¡¶æŒ‡é’ˆä¸ºtop
 	ArcNode *p;
-	for (i=0;i<G->n;i++)				//ËùÓĞ¶¥µãµÄÈë¶ÈÖÃ³õÖµ0
+	for (i=0;i<G->n;i++)				//æ‰€æœ‰é¡¶ç‚¹çš„å…¥åº¦ç½®åˆå€¼0
 		G->adjlist[i].count=0;
-	for (i=0;i<G->n;i++)				//ÇóËùÓĞ¶¥µãµÄÈë¶È
+	for (i=0;i<G->n;i++)				//æ±‚æ‰€æœ‰é¡¶ç‚¹çš„å…¥åº¦
 	{	p=G->adjlist[i].firstarc;
 		while (p!=NULL)
 		{	G->adjlist[p->adjvex].count++;
@@ -22,29 +22,29 @@ bool TopSort(AdjGraph *G,int topseq[])
 		}
 	}
 	for (i=0;i<G->n;i++)
-		if (G->adjlist[i].count==0)		//Èë¶ÈÎª0µÄ¶¥µã½øÕ»
+		if (G->adjlist[i].count==0)		//å…¥åº¦ä¸º0çš„é¡¶ç‚¹è¿›æ ˆ
 		{	top++;
 			st[top]=i;
 		}
-	while (top>-1)						//Õ»²»Îª¿ÕÊ±Ñ­»·
-	{	i=st[top];top--;				//³öÕ»
+	while (top>-1)						//æ ˆä¸ä¸ºç©ºæ—¶å¾ªç¯
+	{	i=st[top];top--;				//å‡ºæ ˆ
 		topseq[n]=i; n++;
-		p=G->adjlist[i].firstarc;		//ÕÒµÚÒ»¸öÁÚ½Óµã
+		p=G->adjlist[i].firstarc;		//æ‰¾ç¬¬ä¸€ä¸ªé‚»æ¥ç‚¹
 		while (p!=NULL)
 		{	j=p->adjvex;
 			G->adjlist[j].count--;
-			if (G->adjlist[j].count==0)	//Èë¶ÈÎª0µÄÏàÁÚ¶¥µã½øÕ»
+			if (G->adjlist[j].count==0)	//å…¥åº¦ä¸º0çš„ç›¸é‚»é¡¶ç‚¹è¿›æ ˆ
 			{	top++;
 				st[top]=j;
 			}
-			p=p->nextarc;				//ÕÒÏÂÒ»¸öÁÚ½Óµã
+			p=p->nextarc;				//æ‰¾ä¸‹ä¸€ä¸ªé‚»æ¥ç‚¹
 		}
 	}
-	if (n<G->n)					//ÍØÆËĞòÁĞÖĞ²»º¬ËùÓĞ¶¥µãÊ±
+	if (n<G->n)					//æ‹“æ‰‘åºåˆ—ä¸­ä¸å«æ‰€æœ‰é¡¶ç‚¹æ—¶
 		return false;
 	else
 	{
-		printf("ÍØÆËĞòÁĞ:");
+		printf("æ‹“æ‰‘åºåˆ—:");
 		for (i=0;i<n;i++)
 			printf("%c ",(char)(topseq[i]+'A')); 
 		printf("\n");
@@ -52,43 +52,43 @@ bool TopSort(AdjGraph *G,int topseq[])
 	}
 }
 bool KeyPath(AdjGraph *G,int &inode,int &enode,KeyNode keynode[],int &d)
-//´ÓÍ¼ÁÚ½Ó±íGÖĞÇó³ö´ÓÔ´µãinodeµ½»ãµãenodeµÄ¹Ø¼ü»î¶¯keynode[0..d]
-{	int topseq[MAXV];						//topseqÓÃÓÚ´æ·ÅÍØÆËĞòÁĞ
+//ä»å›¾é‚»æ¥è¡¨Gä¸­æ±‚å‡ºä»æºç‚¹inodeåˆ°æ±‡ç‚¹enodeçš„å…³é”®æ´»åŠ¨keynode[0..d]
+{	int topseq[MAXV];						//topseqç”¨äºå­˜æ”¾æ‹“æ‰‘åºåˆ—
 	int i,w;
 	ArcNode *p;
 	if (!TopSort(G,topseq))
-		return false;						//²»ÄÜ²úÉúÍØÆËĞòÁĞÊ±·µ»Øfalse
-	inode=topseq[0];						//Çó³öÔ´µã
-	enode=topseq[G->n-1];					//Çó³ö»ãµã
-	int ve[MAXV];							//ÊÂ¼şµÄ×îÔç¿ªÊ¼Ê±¼ä
-	int vl[MAXV];							//ÊÂ¼şµÄ×î³Ù¿ªÊ¼Ê±¼ä
-	for (i=0;i<G->n;i++) ve[i]=0;			//ÏÈ½«ËùÓĞÊÂ¼şµÄveÖÃ³õÖµÎª0
-	for (i=0;i<G->n;i++)					//´Ó×óÏòÓÒÇóËùÓĞÊÂ¼şµÄ×îÔç¿ªÊ¼Ê±¼ä
+		return false;						//ä¸èƒ½äº§ç”Ÿæ‹“æ‰‘åºåˆ—æ—¶è¿”å›false
+	inode=topseq[0];						//æ±‚å‡ºæºç‚¹
+	enode=topseq[G->n-1];					//æ±‚å‡ºæ±‡ç‚¹
+	int ve[MAXV];							//äº‹ä»¶çš„æœ€æ—©å¼€å§‹æ—¶é—´
+	int vl[MAXV];							//äº‹ä»¶çš„æœ€è¿Ÿå¼€å§‹æ—¶é—´
+	for (i=0;i<G->n;i++) ve[i]=0;			//å…ˆå°†æ‰€æœ‰äº‹ä»¶çš„veç½®åˆå€¼ä¸º0
+	for (i=0;i<G->n;i++)					//ä»å·¦å‘å³æ±‚æ‰€æœ‰äº‹ä»¶çš„æœ€æ—©å¼€å§‹æ—¶é—´
 	{	p=G->adjlist[i].firstarc;
-		while (p!=NULL)						//±éÀúÃ¿Ò»Ìõ±ß¼´»î¶¯
+		while (p!=NULL)						//éå†æ¯ä¸€æ¡è¾¹å³æ´»åŠ¨
 		{	w=p->adjvex;
-			if (ve[i]+p->weight>ve[w])		//Çó×î´óÕß
+			if (ve[i]+p->weight>ve[w])		//æ±‚æœ€å¤§è€…
 				ve[w]=ve[i]+p->weight;
 			p=p->nextarc;
 		}
 	 }
-	for (i=0;i<G->n;i++)					//ÏÈ½«ËùÓĞÊÂ¼şµÄvlÖµÖÃÎª×î´óÖµ
+	for (i=0;i<G->n;i++)					//å…ˆå°†æ‰€æœ‰äº‹ä»¶çš„vlå€¼ç½®ä¸ºæœ€å¤§å€¼
 		vl[i]=ve[enode];
-	for (i=G->n-2;i>=0;i--)					//´ÓÓÒÏò×óÇóËùÓĞÊÂ¼şµÄ×î³Ù¿ªÊ¼Ê±¼ä
+	for (i=G->n-2;i>=0;i--)					//ä»å³å‘å·¦æ±‚æ‰€æœ‰äº‹ä»¶çš„æœ€è¿Ÿå¼€å§‹æ—¶é—´
 	{	p=G->adjlist[i].firstarc;
 		while (p!=NULL)
 		{	w=p->adjvex;
-			if (vl[w]-p->weight<vl[i])		//Çó×îĞ¡Õß
+			if (vl[w]-p->weight<vl[i])		//æ±‚æœ€å°è€…
 				vl[i]=vl[w]-p->weight; 
 			p=p->nextarc;
 		}
 	}
-	d=-1;									//d´æ·ÅkeynodeÖĞµÄ¹Ø¼ü»î¶¯ÏÂ±ê,ÖÃ³õÖÃÎª-1
-	for (i=0;i<G->n;i++)					//Çó¹Ø¼ü»î¶¯
+	d=-1;									//då­˜æ”¾keynodeä¸­çš„å…³é”®æ´»åŠ¨ä¸‹æ ‡,ç½®åˆç½®ä¸º-1
+	for (i=0;i<G->n;i++)					//æ±‚å…³é”®æ´»åŠ¨
 	{	p=G->adjlist[i].firstarc;
 		while (p!=NULL)
 		{	w=p->adjvex;
-			if (ve[i]==vl[w]-p->weight)		//(i¡úw)ÊÇÒ»¸ö¹Ø¼ü»î¶¯
+			if (ve[i]==vl[w]-p->weight)		//(iâ†’w)æ˜¯ä¸€ä¸ªå…³é”®æ´»åŠ¨
 			{
 				d++; keynode[d].ino=i; keynode[d].eno=w;
 			}
@@ -97,18 +97,18 @@ bool KeyPath(AdjGraph *G,int &inode,int &enode,KeyNode keynode[],int &d)
 	}
 	return true;
 }
-void DispKeynode(AdjGraph *G)	//Êä³öÍ¼GµÄ¹Ø¼ü»î¶¯
+void DispKeynode(AdjGraph *G)	//è¾“å‡ºå›¾Gçš„å…³é”®æ´»åŠ¨
 {
 	int inode,enode,d,i;
 	KeyNode keynode[MAXV];
 	if (KeyPath(G,inode,enode,keynode,d))
 	{
-		printf("´ÓÔ´µã%cµ½»ãµã%cµÄ¹Ø¼ü»î¶¯:",char(inode='A'),char(enode+'A'));
+		printf("ä»æºç‚¹%cåˆ°æ±‡ç‚¹%cçš„å…³é”®æ´»åŠ¨:",char(inode='A'),char(enode+'A'));
 		for (i=0;i<=d;i++)
 			printf("(%c,%c)  ",char(keynode[i].ino+'A'),char(keynode[i].eno+'A'));
 		printf("\n");
 	}
-	else printf("²»ÄÜÇó¹Ø¼ü»î¶¯\n");
+	else printf("ä¸èƒ½æ±‚å…³é”®æ´»åŠ¨\n");
 }
 int main()
 {
@@ -124,10 +124,10 @@ int main()
 		{INF,INF,INF,INF,INF,INF, 0 ,INF, 4 },
 		{INF,INF,INF,INF,INF,INF,INF, 0 , 4 },
 		{INF,INF,INF,INF,INF,INF,INF,INF, 0 }};
-	printf("½¨Á¢Í¼µÄÁÚ½Ó±í:\n");
-	CreateAdj(G,A,n,e);							//´´½¨Í¼8.45µÄÁÚ½Ó±í
-	printf("Í¼GµÄÁÚ½Ó±í:\n"); DispAdj(G);
-	DispKeynode(G);								//Çó¹¹³É¹Ø¼üÂ·¾¶µÄ¹Ø¼ü»î¶¯
-	DestroyAdj(G);								//Ïú»ÙÍ¼
+	printf("å»ºç«‹å›¾çš„é‚»æ¥è¡¨:\n");
+	CreateAdj(G,A,n,e);							//åˆ›å»ºå›¾8.45çš„é‚»æ¥è¡¨
+	printf("å›¾Gçš„é‚»æ¥è¡¨:\n"); DispAdj(G);
+	DispKeynode(G);								//æ±‚æ„æˆå…³é”®è·¯å¾„çš„å…³é”®æ´»åŠ¨
+	DestroyAdj(G);								//é”€æ¯å›¾
 	return 1;
 }

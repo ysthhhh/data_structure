@@ -1,51 +1,51 @@
-//ÎÄ¼şÃû£ºexp5-1.cpp
+//æ–‡ä»¶åï¼šexp5-1.cpp
 #include <stdio.h>
 #include <malloc.h>
 #define MaxSize 100
-//----µİ¹éËã·¨------------------------------------------
+//----é€’å½’ç®—æ³•------------------------------------------
 void Hanoi1(int n,char a,char b,char c)
 {
 	if (n==1) 
-		printf("\t½«µÚ%d¸öÅÌÆ¬´Ó%cÒÆ¶¯µ½%c\n",n,a,c);
+		printf("\tå°†ç¬¬%dä¸ªç›˜ç‰‡ä»%cç§»åŠ¨åˆ°%c\n",n,a,c);
     else 
 	{
 		Hanoi1(n-1,a,c,b);
-		printf("\t½«µÚ%d¸öÅÌÆ¬´Ó%cÒÆ¶¯µ½%c\n",n,a,c);
+		printf("\tå°†ç¬¬%dä¸ªç›˜ç‰‡ä»%cç§»åŠ¨åˆ°%c\n",n,a,c);
 		Hanoi1(n-1,b,a,c);
 	}
 }
-//----·Çµİ¹éËã·¨------------------------------------------
+//----éé€’å½’ç®—æ³•------------------------------------------
 typedef struct
-{	int n;							//ÅÌÆ¬¸öÊı
-	char x,y,z;						//3¸öËş×ù
-	bool flag;						//¿ÉÖ±½ÓÒÆ¶¯ÅÌÆ¬Ê±Îªtrue,·ñÔòÎªfalse
-} ElemType;							//Ë³ĞòÕ»ÖĞÔªËØÀàĞÍ
+{	int n;							//ç›˜ç‰‡ä¸ªæ•°
+	char x,y,z;						//3ä¸ªå¡”åº§
+	bool flag;						//å¯ç›´æ¥ç§»åŠ¨ç›˜ç‰‡æ—¶ä¸ºtrue,å¦åˆ™ä¸ºfalse
+} ElemType;							//é¡ºåºæ ˆä¸­å…ƒç´ ç±»å‹
 typedef struct
-{	ElemType data[MaxSize];			//´æ·ÅÔªËØ
-	int top;						//Õ»¶¥Ö¸Õë
-} StackType;						//ÉùÃ÷Ë³ĞòÕ»ÀàĞÍ
+{	ElemType data[MaxSize];			//å­˜æ”¾å…ƒç´ 
+	int top;						//æ ˆé¡¶æŒ‡é’ˆ
+} StackType;						//å£°æ˜é¡ºåºæ ˆç±»å‹
 
-//--Çó½âHanoiÎÊÌâ¶ÔÓ¦Ë³ĞòÕ»µÄ»ù±¾ÔËËãËã·¨--------------
-void InitStack(StackType *&s)			//³õÊ¼»¯Õ»
+//--æ±‚è§£Hanoié—®é¢˜å¯¹åº”é¡ºåºæ ˆçš„åŸºæœ¬è¿ç®—ç®—æ³•--------------
+void InitStack(StackType *&s)			//åˆå§‹åŒ–æ ˆ
 {	s=(StackType *)malloc(sizeof(StackType));
 	s->top=-1;
 }
-void DestroyStack(StackType *&s)		//Ïú»ÙÕ»
+void DestroyStack(StackType *&s)		//é”€æ¯æ ˆ
 {
 	free(s);
 }
-bool StackEmpty(StackType *s)			//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
+bool StackEmpty(StackType *s)			//åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 {
 	return(s->top==-1);
 }
-bool Push(StackType *&s,ElemType e)		//½øÕ»
+bool Push(StackType *&s,ElemType e)		//è¿›æ ˆ
 {	if (s->top==MaxSize-1)
 		return false;
 	s->top++;
 	s->data[s->top]=e;
 	return true;
 }
-bool Pop(StackType *&s,ElemType &e)		//³öÕ»
+bool Pop(StackType *&s,ElemType &e)		//å‡ºæ ˆ
 {	if (s->top==-1)
 		return false;
 	e=s->data[s->top];
@@ -53,43 +53,43 @@ bool Pop(StackType *&s,ElemType &e)		//³öÕ»
 	return true;
 }
 void Hanoi2(int n, char x, char y, char z)
-{	StackType *st;							//¶¨ÒåË³ĞòÕ»Ö¸Õë
+{	StackType *st;							//å®šä¹‰é¡ºåºæ ˆæŒ‡é’ˆ
 	ElemType e,e1,e2,e3;
-	if (n<=0) return;						//²ÎÊı´íÎóÊ±Ö±½Ó·µ»Ø
-	InitStack(st);							//³õÊ¼»¯Õ»
+	if (n<=0) return;						//å‚æ•°é”™è¯¯æ—¶ç›´æ¥è¿”å›
+	InitStack(st);							//åˆå§‹åŒ–æ ˆ
 	e.n=n; e.x=x; e.y=y; e.z=z; e.flag=false;
-	Push(st,e);								//ÔªËØe½øÕ»
-	while (!StackEmpty(st))					//Õ»²»¿ÕÑ­»·
-	{	Pop(st,e);							//³öÕ»ÔªËØe
-		if (e.flag==false)					//µ±²»ÄÜÖ±½ÓÒÆ¶¯ÅÌÆ¬Ê±
+	Push(st,e);								//å…ƒç´ eè¿›æ ˆ
+	while (!StackEmpty(st))					//æ ˆä¸ç©ºå¾ªç¯
+	{	Pop(st,e);							//å‡ºæ ˆå…ƒç´ e
+		if (e.flag==false)					//å½“ä¸èƒ½ç›´æ¥ç§»åŠ¨ç›˜ç‰‡æ—¶
 		{
 			e1.n=e.n-1; e1.x=e.y; e1.y=e.x; e1.z=e.z;
-			if (e1.n==1)					//Ö»ÓĞÒ»¸öÅÌÆ¬Ê±¿ÉÖ±½ÓÒÆ¶¯
+			if (e1.n==1)					//åªæœ‰ä¸€ä¸ªç›˜ç‰‡æ—¶å¯ç›´æ¥ç§»åŠ¨
 				e1.flag=true;
-			else							//ÓĞÒ»¸öÒÔÉÏÅÌÆ¬Ê±²»ÄÜÖ±½ÓÒÆ¶¯
+			else							//æœ‰ä¸€ä¸ªä»¥ä¸Šç›˜ç‰‡æ—¶ä¸èƒ½ç›´æ¥ç§»åŠ¨
 				e1.flag=false;
-			Push(st,e1);					//´¦ÀíHanoi(n-1,y,x,z)²½Öè
+			Push(st,e1);					//å¤„ç†Hanoi(n-1,y,x,z)æ­¥éª¤
 			e2.n=e.n; e2.x=e.x; e2.y=e.y; e2.z=e.z; e2.flag=true;
-			Push(st,e2);					//´¦Àímove(n,x,z)²½Öè
+			Push(st,e2);					//å¤„ç†move(n,x,z)æ­¥éª¤
 			e3.n=e.n-1; e3.x=e.x; e3.y=e.z; e3.z=e.y;
-			if (e3.n==1)					//Ö»ÓĞÒ»¸öÅÌÆ¬Ê±¿ÉÖ±½ÓÒÆ¶¯
+			if (e3.n==1)					//åªæœ‰ä¸€ä¸ªç›˜ç‰‡æ—¶å¯ç›´æ¥ç§»åŠ¨
 				e3.flag=true;
 			else
-				e3.flag=false;				//ÓĞÒ»¸öÒÔÉÏÅÌÆ¬Ê±²»ÄÜÖ±½ÓÒÆ¶¯
-			Push(st,e3);					//´¦ÀíHanoi(n-1,x,z,y)²½Öè
+				e3.flag=false;				//æœ‰ä¸€ä¸ªä»¥ä¸Šç›˜ç‰‡æ—¶ä¸èƒ½ç›´æ¥ç§»åŠ¨
+			Push(st,e3);					//å¤„ç†Hanoi(n-1,x,z,y)æ­¥éª¤
 		}
-		else								//µ±¿ÉÒÔÖ±½ÓÒÆ¶¯Ê±
-			printf("\t½«µÚ%d¸öÅÌÆ¬´Ó%cÒÆ¶¯µ½%c\n",e.n,e.x,e.z);
+		else								//å½“å¯ä»¥ç›´æ¥ç§»åŠ¨æ—¶
+			printf("\tå°†ç¬¬%dä¸ªç›˜ç‰‡ä»%cç§»åŠ¨åˆ°%c\n",e.n,e.x,e.z);
 	}
-	DestroyStack(st);						//Ïú»ÙÕ»
+	DestroyStack(st);						//é”€æ¯æ ˆ
 }
 //----------------------------------------------------
 int main()
 {
 	int n=3;
-	printf("µİ¹éËã·¨£º%d¸öÅÌÆ¬ÒÆ¶¯¹ı³Ì:\n",n);
+	printf("é€’å½’ç®—æ³•ï¼š%dä¸ªç›˜ç‰‡ç§»åŠ¨è¿‡ç¨‹:\n",n);
 	Hanoi1(n,'X','Y','Z');
-	printf("·Çµİ¹éËã·¨£º%d¸öÅÌÆ¬ÒÆ¶¯¹ı³Ì:\n",n);
+	printf("éé€’å½’ç®—æ³•ï¼š%dä¸ªç›˜ç‰‡ç§»åŠ¨è¿‡ç¨‹:\n",n);
 	Hanoi2(n,'X','Y','Z');
 	return 1;
 }

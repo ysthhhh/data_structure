@@ -1,48 +1,48 @@
-//ÎÄ¼şÃû:exp6-2.cpp
+//æ–‡ä»¶å:exp6-2.cpp
 #include <stdio.h>
 #include <malloc.h>
 typedef char ElemType;
 typedef struct lnode  
-{	int tag;				//½ÚµãÀàĞÍ±êÊ¶
+{	int tag;				//èŠ‚ç‚¹ç±»å‹æ ‡è¯†
    	union 
 	{	
 		ElemType data;
         struct lnode *sublist;
 	} val;
-    struct lnode *link;		//Ö¸ÏòÏÂÒ»¸öÔªËØ
-} GLNode;					//ÉùÃ÷¹ãÒå±í½ÚµãÀàĞÍ
-GLNode *CreateGL(char *&s)					//·µ»ØÓÉÀ¨ºÅ±íÊ¾·¨±íÊ¾sµÄ¹ãÒå±íÁ´Ê½´æ´¢½á¹¹
+    struct lnode *link;		//æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
+} GLNode;					//å£°æ˜å¹¿ä¹‰è¡¨èŠ‚ç‚¹ç±»å‹
+GLNode *CreateGL(char *&s)					//è¿”å›ç”±æ‹¬å·è¡¨ç¤ºæ³•è¡¨ç¤ºsçš„å¹¿ä¹‰è¡¨é“¾å¼å­˜å‚¨ç»“æ„
 {	GLNode *g;
-	char ch=*s++;							//È¡Ò»¸ö×Ö·û
-	if (ch!='\0')							//´®Î´½áÊøÅĞ¶Ï
-	{	g=(GLNode *)malloc(sizeof(GLNode));//´´½¨Ò»¸öĞÂ½Úµã
-		if (ch=='(')						//µ±Ç°×Ö·ûÎª×óÀ¨ºÅÊ±
-		{	g->tag=1;						//ĞÂ½Úµã×÷Îª±íÍ·½Úµã
-			g->val.sublist=CreateGL(s);		//µİ¹é¹¹Ôì×Ó±í²¢Á´µ½±íÍ·½Úµã
+	char ch=*s++;							//å–ä¸€ä¸ªå­—ç¬¦
+	if (ch!='\0')							//ä¸²æœªç»“æŸåˆ¤æ–­
+	{	g=(GLNode *)malloc(sizeof(GLNode));//åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹
+		if (ch=='(')						//å½“å‰å­—ç¬¦ä¸ºå·¦æ‹¬å·æ—¶
+		{	g->tag=1;						//æ–°èŠ‚ç‚¹ä½œä¸ºè¡¨å¤´èŠ‚ç‚¹
+			g->val.sublist=CreateGL(s);		//é€’å½’æ„é€ å­è¡¨å¹¶é“¾åˆ°è¡¨å¤´èŠ‚ç‚¹
 		}
 		else if (ch==')')
-			g=NULL;							//Óöµ½')'×Ö·û,gÖÃÎª¿Õ
-		else if (ch=='#')					//Óöµ½'#'×Ö·û£¬±íÊ¾¿Õ±í
+			g=NULL;							//é‡åˆ°')'å­—ç¬¦,gç½®ä¸ºç©º
+		else if (ch=='#')					//é‡åˆ°'#'å­—ç¬¦ï¼Œè¡¨ç¤ºç©ºè¡¨
 			g->val.sublist=NULL;
-		else								//ÎªÔ­×Ó×Ö·û
-		{	g->tag=0;						//ĞÂ½Úµã×÷ÎªÔ­×Ó½Úµã
+		else								//ä¸ºåŸå­å­—ç¬¦
+		{	g->tag=0;						//æ–°èŠ‚ç‚¹ä½œä¸ºåŸå­èŠ‚ç‚¹
 			g->val.data=ch;
 		}
 	}
-	else									//´®½áÊø,gÖÃÎª¿Õ
+	else									//ä¸²ç»“æŸ,gç½®ä¸ºç©º
 		g=NULL;
-	ch=*s++;								//È¡ÏÂÒ»¸ö×Ö·û
-	if (g!=NULL)							//´®Î´½áÊø£¬¼ÌĞø¹¹ÔìĞÖµİ½Úµã
-		if (ch==',')						//µ±Ç°×Ö·ûÎª','
-			g->link=CreateGL(s);			//µİ¹é¹¹ÔìĞÖµİ½Úµã
-		else								//Ã»ÓĞĞÖµÜÁË,½«ĞÖµÜÖ¸ÕëÖÃÎªNULL
+	ch=*s++;								//å–ä¸‹ä¸€ä¸ªå­—ç¬¦
+	if (g!=NULL)							//ä¸²æœªç»“æŸï¼Œç»§ç»­æ„é€ å…„é€’èŠ‚ç‚¹
+		if (ch==',')						//å½“å‰å­—ç¬¦ä¸º','
+			g->link=CreateGL(s);			//é€’å½’æ„é€ å…„é€’èŠ‚ç‚¹
+		else								//æ²¡æœ‰å…„å¼Ÿäº†,å°†å…„å¼ŸæŒ‡é’ˆç½®ä¸ºNULL
 			g->link=NULL;
-	return g;								//·µ»Ø¹ãÒå±íg
+	return g;								//è¿”å›å¹¿ä¹‰è¡¨g
 }
-int GLLength(GLNode *g)    					//Çó¹ãÒå±ígµÄ³¤¶È
+int GLLength(GLNode *g)    					//æ±‚å¹¿ä¹‰è¡¨gçš„é•¿åº¦
 {
 	int n=0;
-	g=g->val.sublist;						//gÖ¸Ïò¹ãÒå±íµÄµÚÒ»¸öÔªËØ
+	g=g->val.sublist;						//gæŒ‡å‘å¹¿ä¹‰è¡¨çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
     while (g!=NULL) 
 	{	
 		n++;
@@ -50,45 +50,45 @@ int GLLength(GLNode *g)    					//Çó¹ãÒå±ígµÄ³¤¶È
 	}
     return n;
 }
-int GLDepth(GLNode *g) 					//Çó¹ãÒå±ígµÄÉî¶È
+int GLDepth(GLNode *g) 					//æ±‚å¹¿ä¹‰è¡¨gçš„æ·±åº¦
 {
    	int max=0,dep;
 	if (g->tag==0)
 		return 0;
-	g=g->val.sublist;					//gÖ¸ÏòµÚÒ»¸öÔªËØ
-	if  (g==NULL)						//Îª¿Õ±íÊ±·µ»Ø1
+	g=g->val.sublist;					//gæŒ‡å‘ç¬¬ä¸€ä¸ªå…ƒç´ 
+	if  (g==NULL)						//ä¸ºç©ºè¡¨æ—¶è¿”å›1
 		return 1;
-	while (g!=NULL)     				//±éÀú±íÖĞµÄÃ¿Ò»¸öÔªËØ
+	while (g!=NULL)     				//éå†è¡¨ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ 
 	{	
-		if (g->tag==1)   				//ÔªËØÎª×Ó±íµÄÇé¿ö
+		if (g->tag==1)   				//å…ƒç´ ä¸ºå­è¡¨çš„æƒ…å†µ
 		{	
-			dep=GLDepth(g);				//µİ¹éµ÷ÓÃÇó³ö×Ó±íµÄÉî¶È
-            if (dep>max) max=dep;		//maxÎªÍ¬Ò»²ãËùÇó¹ıµÄ×Ó±íÖĞÉî¶ÈµÄ×î´óÖµ
+			dep=GLDepth(g);				//é€’å½’è°ƒç”¨æ±‚å‡ºå­è¡¨çš„æ·±åº¦
+            if (dep>max) max=dep;		//maxä¸ºåŒä¸€å±‚æ‰€æ±‚è¿‡çš„å­è¡¨ä¸­æ·±åº¦çš„æœ€å¤§å€¼
 		}
-        g=g->link;  					//Ê¹gÖ¸ÏòÏÂÒ»¸öÔªËØ
+        g=g->link;  					//ä½¿gæŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
 	}
-    return(max+1);    					//·µ»Ø±íµÄÉî¶È
+    return(max+1);    					//è¿”å›è¡¨çš„æ·±åº¦
 }
-void DispGL(GLNode *g)					//Êä³ö¹ãÒå±íg
-{	if (g!=NULL)						//±í²»Îª¿ÕÅĞ¶Ï
-	{									//ÏÈÊä³ögµÄÔªËØ
-		if (g->tag==0)					//gµÄÔªËØÎªÔ­×ÓÊ±
-			printf("%c", g->val.data);	//Êä³öÔ­×ÓÖµ
-		else							//gµÄÔªËØÎª×Ó±íÊ±
-		{	printf("(");				//Êä³ö'('
-			if (g->val.sublist==NULL)	//Îª¿Õ±íÊ±
+void DispGL(GLNode *g)					//è¾“å‡ºå¹¿ä¹‰è¡¨g
+{	if (g!=NULL)						//è¡¨ä¸ä¸ºç©ºåˆ¤æ–­
+	{									//å…ˆè¾“å‡ºgçš„å…ƒç´ 
+		if (g->tag==0)					//gçš„å…ƒç´ ä¸ºåŸå­æ—¶
+			printf("%c", g->val.data);	//è¾“å‡ºåŸå­å€¼
+		else							//gçš„å…ƒç´ ä¸ºå­è¡¨æ—¶
+		{	printf("(");				//è¾“å‡º'('
+			if (g->val.sublist==NULL)	//ä¸ºç©ºè¡¨æ—¶
 				printf("#");
-			else						//Îª·Ç¿Õ×Ó±íÊ±
-				DispGL(g->val.sublist);	//µİ¹éÊä³ö×Ó±í
-			printf(")");				//Êä³ö')'
+			else						//ä¸ºéç©ºå­è¡¨æ—¶
+				DispGL(g->val.sublist);	//é€’å½’è¾“å‡ºå­è¡¨
+			printf(")");				//è¾“å‡º')'
 		}
 		if (g->link!=NULL)
 		{	printf(",");
-			DispGL(g->link);			//µİ¹éÊä³ögµÄĞÖµÜ
+			DispGL(g->link);			//é€’å½’è¾“å‡ºgçš„å…„å¼Ÿ
 		}
 	}
 }
-ElemType maxatom(GLNode *g)				//Çó¹ãÒå±ígÖĞ×î´óÔ­×Ó
+ElemType maxatom(GLNode *g)				//æ±‚å¹¿ä¹‰è¡¨gä¸­æœ€å¤§åŸå­
 {
 	ElemType max1,max2;
 	if (g!=NULL)
@@ -108,32 +108,32 @@ ElemType maxatom(GLNode *g)				//Çó¹ãÒå±ígÖĞ×î´óÔ­×Ó
 	else
 		return 0;
 }
-void DestroyGL(GLNode *&g)		//Ïú»Ù¹ãÒå±íg
+void DestroyGL(GLNode *&g)		//é”€æ¯å¹¿ä¹‰è¡¨g
 {	GLNode *g1,*g2;
-	g1=g->val.sublist;			//g1Ö¸Ïò¹ãÒå±íµÄµÚÒ»¸öÔªËØ
-	while (g1!=NULL)			//±éÀúËùÓĞÔªËØ
-	{	if (g1->tag==0)			//ÈôÎªÔ­×Ó½Úµã
-		{	g2=g1->link;		//g2ÁÙÊ±±£´æĞÖµÜ½Úµã
-			free(g1);			//ÊÍ·Åg1ËùÖ¸Ô­×Ó½Úµã
-			g1=g2;				//g1Ö¸Ïòºó¼ÌĞÖµÜ½Úµã
+	g1=g->val.sublist;			//g1æŒ‡å‘å¹¿ä¹‰è¡¨çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
+	while (g1!=NULL)			//éå†æ‰€æœ‰å…ƒç´ 
+	{	if (g1->tag==0)			//è‹¥ä¸ºåŸå­èŠ‚ç‚¹
+		{	g2=g1->link;		//g2ä¸´æ—¶ä¿å­˜å…„å¼ŸèŠ‚ç‚¹
+			free(g1);			//é‡Šæ”¾g1æ‰€æŒ‡åŸå­èŠ‚ç‚¹
+			g1=g2;				//g1æŒ‡å‘åç»§å…„å¼ŸèŠ‚ç‚¹
 		}
-		else					//ÈôÎª×Ó±í
-		{	g2=g1->link;		//g2ÁÙÊ±±£´æĞÖµÜ½Úµã
-			DestroyGL(g1);		//µİ¹éÊÍ·Åg1ËùÖ¸×Ó±íµÄ¿Õ¼ä
-			g1=g2;				//g1Ö¸Ïòºó¼ÌĞÖµÜ½Úµã
+		else					//è‹¥ä¸ºå­è¡¨
+		{	g2=g1->link;		//g2ä¸´æ—¶ä¿å­˜å…„å¼ŸèŠ‚ç‚¹
+			DestroyGL(g1);		//é€’å½’é‡Šæ”¾g1æ‰€æŒ‡å­è¡¨çš„ç©ºé—´
+			g1=g2;				//g1æŒ‡å‘åç»§å…„å¼ŸèŠ‚ç‚¹
 		}
 	}
-	free(g);					//ÊÍ·ÅÍ·½Úµã¿Õ¼ä
+	free(g);					//é‡Šæ”¾å¤´èŠ‚ç‚¹ç©ºé—´
 }
 int main()
 {
 	GLNode *g;
 	char *str="(b,(b,a,(#),d),((a,b),c,((#))))";
 	g=CreateGL(str);
-	printf("¹ãÒå±íg:");DispGL(g);printf("\n");
-	printf("¹ãÒå±ígµÄ³¤¶È:%d\n",GLLength(g));
-	printf("¹ãÒå±ígµÄÉî¶È:%d\n",GLDepth(g));
-	printf("×î´óÔ­×Ó:%c\n",maxatom(g));
+	printf("å¹¿ä¹‰è¡¨g:");DispGL(g);printf("\n");
+	printf("å¹¿ä¹‰è¡¨gçš„é•¿åº¦:%d\n",GLLength(g));
+	printf("å¹¿ä¹‰è¡¨gçš„æ·±åº¦:%d\n",GLDepth(g));
+	printf("æœ€å¤§åŸå­:%c\n",maxatom(g));
 	DestroyGL(g);
 	return 1;
 }

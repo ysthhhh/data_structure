@@ -1,20 +1,20 @@
-//ÎÄ¼şÃû:exp8-13.cpp
-#include "graph.cpp"			//°üº¬Í¼µÄ´æ´¢½á¹¹¼°»ù±¾ÔËËãËã·¨
-void Dispapath(int path[][MAXV],int i,int j)	//Êä³ö¶¥µãiµ½jµÄÒ»Ìõ×î¶ÌÂ·¾¶
+//æ–‡ä»¶å:exp8-13.cpp
+#include "graph.cpp"			//åŒ…å«å›¾çš„å­˜å‚¨ç»“æ„åŠåŸºæœ¬è¿ç®—ç®—æ³•
+void Dispapath(int path[][MAXV],int i,int j)	//è¾“å‡ºé¡¶ç‚¹iåˆ°jçš„ä¸€æ¡æœ€çŸ­è·¯å¾„
 {
-	int apath[MAXV],d;			//´æ·ÅÒ»Ìõ×î¶ÌÂ·¾¶ÖĞ¼ä¶¥µã(·´Ïò)¼°Æä¶¥µã¸öÊı
+	int apath[MAXV],d;			//å­˜æ”¾ä¸€æ¡æœ€çŸ­è·¯å¾„ä¸­é—´é¡¶ç‚¹(åå‘)åŠå…¶é¡¶ç‚¹ä¸ªæ•°
 	int k=path[i][j];
-	d=0; apath[d]=j;			//Â·¾¶ÉÏÌí¼ÓÖÕµã
-	while (k!=-1 && k!=i)		//Â·¾¶ÉÏÌí¼ÓÖĞ¼äµã
+	d=0; apath[d]=j;			//è·¯å¾„ä¸Šæ·»åŠ ç»ˆç‚¹
+	while (k!=-1 && k!=i)		//è·¯å¾„ä¸Šæ·»åŠ ä¸­é—´ç‚¹
 	{	
 		d++; apath[d]=k;
 		k=path[i][k];
 	}
-	d++; apath[d]=i;			//Â·¾¶ÉÏÌí¼ÓÆğµã
-	for (int s=d;s>=0;s--)		//Êä³öÂ·¾¶ÉÏµÄÖĞ¼ä¶¥µã
-		printf("%d¡ú",apath[s]);
+	d++; apath[d]=i;			//è·¯å¾„ä¸Šæ·»åŠ èµ·ç‚¹
+	for (int s=d;s>=0;s--)		//è¾“å‡ºè·¯å¾„ä¸Šçš„ä¸­é—´é¡¶ç‚¹
+		printf("%dâ†’",apath[s]);
 }
-int Mincycle(MatGraph g,int A[MAXV][MAXV],int &mini,int &minj)	//ÔÚÍ¼gºÍAÖĞµÄ²éÕÒÒ»¸ö×îĞ¡»·
+int Mincycle(MatGraph g,int A[MAXV][MAXV],int &mini,int &minj)	//åœ¨å›¾gå’ŒAä¸­çš„æŸ¥æ‰¾ä¸€ä¸ªæœ€å°ç¯
 {
 	int i,j,min=INF;
 	for (i=0;i<g.n;i++)
@@ -30,34 +30,34 @@ int Mincycle(MatGraph g,int A[MAXV][MAXV],int &mini,int &minj)	//ÔÚÍ¼gºÍAÖĞµÄ²éÕ
 	return min;
 }
 
-void Floyd(MatGraph g)						//FloydËã·¨ÇóÍ¼gÖĞµÄÒ»¸ö×îĞ¡»·
+void Floyd(MatGraph g)						//Floydç®—æ³•æ±‚å›¾gä¸­çš„ä¸€ä¸ªæœ€å°ç¯
 {	int A[MAXV][MAXV],path[MAXV][MAXV];
 	int i,j,k,min,mini,minj;
 	for (i=0;i<g.n;i++)
 		for (j=0;j<g.n;j++) 
 		{	A[i][j]=g.edges[i][j];
 			if (i!=j && g.edges[i][j]<INF)
-				path[i][j]=i;				//¶¥µãiµ½jÓĞ±ßÊ±
+				path[i][j]=i;				//é¡¶ç‚¹iåˆ°jæœ‰è¾¹æ—¶
 			else
-				path[i][j]=-1;				//¶¥µãiµ½jÃ»ÓĞ±ßÊ±
+				path[i][j]=-1;				//é¡¶ç‚¹iåˆ°jæ²¡æœ‰è¾¹æ—¶
 		}
-	for (k=0;k<g.n;k++)						//ÒÀ´Î¿¼²ìËùÓĞ¶¥µã
+	for (k=0;k<g.n;k++)						//ä¾æ¬¡è€ƒå¯Ÿæ‰€æœ‰é¡¶ç‚¹
 	{	for (i=0;i<g.n;i++)
 			for (j=0;j<g.n;j++)
 				if (A[i][j]>A[i][k]+A[k][j])
-				{	A[i][j]=A[i][k]+A[k][j];	//ĞŞ¸Ä×î¶ÌÂ·¾¶³¤¶È
-					path[i][j]=path[k][j];		//ĞŞ¸Ä×î¶ÌÂ·¾¶
+				{	A[i][j]=A[i][k]+A[k][j];	//ä¿®æ”¹æœ€çŸ­è·¯å¾„é•¿åº¦
+					path[i][j]=path[k][j];		//ä¿®æ”¹æœ€çŸ­è·¯å¾„
 				}
 	}
 	min=Mincycle(g,A,mini,minj);
 	if (min!=INF)
 	{
-		printf("  Í¼ÖĞ×îĞ¡»·£º");
-		Dispapath(path,mini,minj);	//Êä³öÒ»Ìõ×î¶ÌÂ·¾¶
-		printf("%d, ³¤¶È£º%d\n",mini,min);
+		printf("  å›¾ä¸­æœ€å°ç¯ï¼š");
+		Dispapath(path,mini,minj);	//è¾“å‡ºä¸€æ¡æœ€çŸ­è·¯å¾„
+		printf("%d, é•¿åº¦ï¼š%d\n",mini,min);
 	}
 	else
-		printf("  Í¼ÖĞÃ»ÓĞÈÎºÎ»·\n");
+		printf("  å›¾ä¸­æ²¡æœ‰ä»»ä½•ç¯\n");
 
 
 }
@@ -70,9 +70,9 @@ int main()
 		{INF,1,0,INF},
 		{5,INF,INF,0} };
 	int n=4, e=6;
-	CreateMat(g,A,n,e);		//½¨Á¢Í¼µÄÁÚ½Ó¾ØÕó
-	printf("ÓĞÏòÍ¼GµÄÁÚ½Ó¾ØÕó:\n"); DispMat(g);
-	printf("Çó½â½á¹û:\n");
+	CreateMat(g,A,n,e);		//å»ºç«‹å›¾çš„é‚»æ¥çŸ©é˜µ
+	printf("æœ‰å‘å›¾Gçš„é‚»æ¥çŸ©é˜µ:\n"); DispMat(g);
+	printf("æ±‚è§£ç»“æœ:\n");
 	Floyd(g);
 	return 1;
 }

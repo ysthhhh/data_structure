@@ -1,4 +1,4 @@
-//ÎÄ¼şÃû:exp2-12.cpp
+//æ–‡ä»¶å:exp2-12.cpp
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
@@ -8,7 +8,7 @@ typedef struct node
 	int data;
 	struct node *next;
 } NodeType;
-void CreateLink(NodeType *&h,char a[],int n)	//´´½¨ÕûÊıµ¥Á´±í
+void CreateLink(NodeType *&h,char a[],int n)	//åˆ›å»ºæ•´æ•°å•é“¾è¡¨
 {
 	NodeType *p,*r;
 	int i=0;
@@ -23,7 +23,7 @@ void CreateLink(NodeType *&h,char a[],int n)	//´´½¨ÕûÊıµ¥Á´±í
 	}
 	r->next=NULL;
 }
-void DestroyLink(NodeType *&h)	//ÊÍ·ÅÕûÊıµ¥Á´±í
+void DestroyLink(NodeType *&h)	//é‡Šæ”¾æ•´æ•°å•é“¾è¡¨
 {
 	NodeType *pre=h,*p=pre->next;
 	while (p!=NULL)
@@ -34,7 +34,7 @@ void DestroyLink(NodeType *&h)	//ÊÍ·ÅÕûÊıµ¥Á´±í
 	}
 	free(pre);
 }
-void DispLink(NodeType *h)	//Êä³öÕûÊıµ¥Á´±í
+void DispLink(NodeType *h)	//è¾“å‡ºæ•´æ•°å•é“¾è¡¨
 {
 	NodeType *p=h->next;
 	while (p!=NULL)
@@ -44,7 +44,7 @@ void DispLink(NodeType *h)	//Êä³öÕûÊıµ¥Á´±í
 	}
 	printf("\n");
 }
-void Add(NodeType *h1,NodeType *h2,NodeType *&h)  //Á½ÕûÊıÖµµ¥Á´±íh1ºÍh2Ïà¼ÓµÃµ½h	
+void Add(NodeType *h1,NodeType *h2,NodeType *&h)  //ä¸¤æ•´æ•°å€¼å•é“¾è¡¨h1å’Œh2ç›¸åŠ å¾—åˆ°h	
 {
 	NodeType *p1=h1->next,*p2=h2->next,*p,*r;
 	int carry=0;
@@ -69,7 +69,7 @@ void Add(NodeType *h1,NodeType *h2,NodeType *&h)  //Á½ÕûÊıÖµµ¥Á´±íh1ºÍh2Ïà¼ÓµÃµ½
 		carry=(p1->data+carry) /10;
 		p1=p1->next;
 	}
-	if (carry>0)			//×îºócarry²»Îª0Ê±£¬´´½¨Ò»¸ö½áµã´æ·ÅËü
+	if (carry>0)			//æœ€åcarryä¸ä¸º0æ—¶ï¼Œåˆ›å»ºä¸€ä¸ªç»“ç‚¹å­˜æ”¾å®ƒ
 	{
 		p=(NodeType *)malloc(sizeof(NodeType));
 		p->data=carry;
@@ -77,7 +77,7 @@ void Add(NodeType *h1,NodeType *h2,NodeType *&h)  //Á½ÕûÊıÖµµ¥Á´±íh1ºÍh2Ïà¼ÓµÃµ½
 	}
 	r->next=NULL;
 }
-void Reverse(NodeType *&h)	//ÄæÖÃÕûÊıµ¥Á´±íh
+void Reverse(NodeType *&h)	//é€†ç½®æ•´æ•°å•é“¾è¡¨h
 {
 	NodeType *p=h->next,*q;
 	h->next=NULL;
@@ -88,7 +88,7 @@ void Reverse(NodeType *&h)	//ÄæÖÃÕûÊıµ¥Á´±íh
 		p=q;
 	}
 }
-int Mid(NodeType *h)		//ÇóÕûÊıµ¥Á´±íhµÄÖĞ¼äÎ»
+int Mid(NodeType *h)		//æ±‚æ•´æ•°å•é“¾è¡¨hçš„ä¸­é—´ä½
 {
 	NodeType *slow=h,*quick=h;
 	while (quick!=NULL && quick->next!=NULL)
@@ -102,18 +102,18 @@ int main()
 {
 	NodeType *h1,*h2,*h;
 	char s[MaxSize],t[MaxSize];
-	printf("²Ù×÷²½Öè:\n");
-	printf("  (1)ÊäÈëÕûÊı1: ");scanf("%s",s);
-	printf("  (2)ÊäÈëÕûÊı2: ");scanf("%s",t);
+	printf("æ“ä½œæ­¥éª¤:\n");
+	printf("  (1)è¾“å…¥æ•´æ•°1: ");scanf("%s",s);
+	printf("  (2)è¾“å…¥æ•´æ•°2: ");scanf("%s",t);
 	CreateLink(h1,s,strlen(s));
 	CreateLink(h2,t,strlen(t));
-	printf("  (3)ÕûÊıµ¥Á´±í1: "); DispLink(h1);
-	printf("  (4)ÕûÊıµ¥Á´±í2: "); DispLink(h2);
+	printf("  (3)æ•´æ•°å•é“¾è¡¨1: "); DispLink(h1);
+	printf("  (4)æ•´æ•°å•é“¾è¡¨2: "); DispLink(h2);
 	Add(h1,h2,h);
-	printf("  (5)½á¹ûµ¥Á´±í:  "); DispLink(h);
+	printf("  (5)ç»“æœå•é“¾è¡¨:  "); DispLink(h);
 	Reverse(h);
-	printf("  (6)¶ÔÓ¦µÄÕûÊı:  "); DispLink(h);
-	printf("  (7)ÖĞ¼äÎ»:%d\n",Mid(h));
+	printf("  (6)å¯¹åº”çš„æ•´æ•°:  "); DispLink(h);
+	printf("  (7)ä¸­é—´ä½:%d\n",Mid(h));
 	DestroyLink(h);
 	DestroyLink(h1);
 	DestroyLink(h2);

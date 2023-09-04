@@ -1,68 +1,68 @@
-//ÎÄ¼şÃû:exp9-16.cpp
+//æ–‡ä»¶å:exp9-16.cpp
 #include<stdio.h>
 #define MaxSize 1005
-int ht[MaxSize];				//¹şÏ£±í
+int ht[MaxSize];				//å“ˆå¸Œè¡¨
 int a[MaxSize]; 
 int n;
-//-----¹şÏ£±í²Ù×÷Ëã·¨¿ªÊ¼-------
-void insertht(int x,int no)		//½«<x,no>²åÈëµ½¹şÏ£±íhtÖĞ 
+//-----å“ˆå¸Œè¡¨æ“ä½œç®—æ³•å¼€å§‹-------
+void insertht(int x,int no)		//å°†<x,no>æ’å…¥åˆ°å“ˆå¸Œè¡¨htä¸­ 
 {
 	ht[x]=no;
 }
-void deleteht(int x)			//´Ó¹şÏ£±íhtÖĞÉ¾³ı<x,*> 
+void deleteht(int x)			//ä»å“ˆå¸Œè¡¨htä¸­åˆ é™¤<x,*> 
 {
 	ht[x]=-1;
 }
-//-----¹şÏ£±í²Ù×÷Ëã·¨½áÊø-------
-void dispa()					//Êä³öĞòÁĞ 
+//-----å“ˆå¸Œè¡¨æ“ä½œç®—æ³•ç»“æŸ-------
+void dispa()					//è¾“å‡ºåºåˆ— 
 {
 	printf("a: ");
 	for(int i=0;i<n;i++)
 		printf("%d ",a[i]);
 	printf("\n");
 }
-void inserta(int x)				//²åÈëx 
+void inserta(int x)				//æ’å…¥x 
 {
-	a[n]=x;						//ÔÚaµÄÄ©Î²Ìí¼Óx 
-	insertht(x,n); 				//½«<x,n>²åÈëµ½¹şÏ£±íhtÖĞ 
+	a[n]=x;						//åœ¨açš„æœ«å°¾æ·»åŠ x 
+	insertht(x,n); 				//å°†<x,n>æ’å…¥åˆ°å“ˆå¸Œè¡¨htä¸­ 
 	n++;	
 }
-void deletea(int x)				//É¾³ıx
+void deletea(int x)				//åˆ é™¤x
 {
-	int no=ht[x];				//ÇóÕûÊıxµÄĞòºÅno 
-	deleteht(x);				//´Ó¹şÏ£±íhtÖĞÉ¾³ıx
-	a[no]=a[n-1];				//½«zÖĞÄ©Î²ÔªËØÒÆµ½noÎ»ÖÃ
-	deleteht(a[n-1]); 			//´Ó¹şÏ£±íhtÖĞÉ¾³ıa[n-1]
-	insertht(a[n-1],no); 		//½«<a[n-1],no>ÖØĞÂ²åÈëµ½¹şÏ£±íhtÖĞ 
+	int no=ht[x];				//æ±‚æ•´æ•°xçš„åºå·no 
+	deleteht(x);				//ä»å“ˆå¸Œè¡¨htä¸­åˆ é™¤x
+	a[no]=a[n-1];				//å°†zä¸­æœ«å°¾å…ƒç´ ç§»åˆ°noä½ç½®
+	deleteht(a[n-1]); 			//ä»å“ˆå¸Œè¡¨htä¸­åˆ é™¤a[n-1]
+	insertht(a[n-1],no); 		//å°†<a[n-1],no>é‡æ–°æ’å…¥åˆ°å“ˆå¸Œè¡¨htä¸­ 
 	n--;
 }
-int search(int no)				//·µ»ØĞòºÅÎªnoµÄÕûÊı
+int search(int no)				//è¿”å›åºå·ä¸ºnoçš„æ•´æ•°
 {
 	return a[no-1];
 }
 int main()
 {
 	int op[]={1,5,1,4,1,3,2,4,1,7,1,6,3,2,2,5,3,1,3,2};
-	int m=sizeof(op)/sizeof(op[0]);		//²Ù×÷´ÎÊıÎªm/2 
-	for(int i=0;i<MaxSize;i++)		//³õÊ¼»¯¹şÏ£±íht 
+	int m=sizeof(op)/sizeof(op[0]);		//æ“ä½œæ¬¡æ•°ä¸ºm/2 
+	for(int i=0;i<MaxSize;i++)		//åˆå§‹åŒ–å“ˆå¸Œè¡¨ht 
 		ht[i]=-1;
 	n=0;
 	for(int i=0;i<m;i+=2)
 	{
 		switch(op[i])
 		{
-			case 1:					//²åÈë²Ù×÷ 
-				printf("²åÈë%d\t\t",op[i+1]); 
+			case 1:					//æ’å…¥æ“ä½œ 
+				printf("æ’å…¥%d\t\t",op[i+1]); 
 				inserta(op[i+1]);
 				dispa();
 				break;
-			case 2:					//É¾³ı²Ù×÷	
-				printf("É¾³ı%d\t\t",op[i+1]); 
+			case 2:					//åˆ é™¤æ“ä½œ	
+				printf("åˆ é™¤%d\t\t",op[i+1]); 
 				deletea(op[i+1]);
 				dispa();
 				break;
-			case 3:					//°´µ±Ç°ĞòºÅ²éÕÒ 
-				printf("ĞòºÅ%dµÄÕûÊı: %d\n",op[i+1],search(op[i+1])); 
+			case 3:					//æŒ‰å½“å‰åºå·æŸ¥æ‰¾ 
+				printf("åºå·%dçš„æ•´æ•°: %d\n",op[i+1],search(op[i+1])); 
 				break;
 		}
 	}		

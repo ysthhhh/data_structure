@@ -1,18 +1,18 @@
-//ÎÄ¼şÃû£ºexp1-2.cpp
+//æ–‡ä»¶åï¼šexp1-2.cpp
 #include <stdio.h>
 #include <math.h>
-double log2(double x)	//Çólog2(x)
+double log2(double x)	//æ±‚log2(x)
 {
 	return log10(x)/log10(2);
 }
-long exponent(int n)	//Çó2^n
+long exponent(int n)	//æ±‚2^n
 {
 	long s=1;
 	for (int i=1;i<=n;i++)
 		s*=2;
 	return s;
 }
-long factorial(int n)	//Çón!
+long factorial(int n)	//æ±‚n!
 {
 	long s=1;
 	for (int i=1;i<=n;i++)

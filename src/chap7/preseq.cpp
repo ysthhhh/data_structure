@@ -1,8 +1,8 @@
-//ÎÄ¼şÃû:exp7-11.cpp
-#include "btree.cpp"				//°üº¬¶ş²æÊ÷µÄ»ù±¾ÔËËãËã·¨
-#include "sqstring.cpp"				//°üº¬Ë³Ğò´®µÄ»ù±¾ÔËËãËã·¨
-int i=0;							//È«¾Ö±äÁ¿
-SqString PreOrderSeq(BTNode *b)  	//ÓÉ¶ş²æÁ´b²úÉúÏÈĞòĞòÁĞ»¯ĞòÁĞstr
+//æ–‡ä»¶å:exp7-11.cpp
+#include "btree.cpp"				//åŒ…å«äºŒå‰æ ‘çš„åŸºæœ¬è¿ç®—ç®—æ³•
+#include "sqstring.cpp"				//åŒ…å«é¡ºåºä¸²çš„åŸºæœ¬è¿ç®—ç®—æ³•
+int i=0;							//å…¨å±€å˜é‡
+SqString PreOrderSeq(BTNode *b)  	//ç”±äºŒå‰é“¾bäº§ç”Ÿå…ˆåºåºåˆ—åŒ–åºåˆ—str
 {
 	SqString str,str1,leftstr,rightstr;
 	if (b==NULL)
@@ -10,25 +10,25 @@ SqString PreOrderSeq(BTNode *b)  	//ÓÉ¶ş²æÁ´b²úÉúÏÈĞòĞòÁĞ»¯ĞòÁĞstr
 		StrAssign(str,"#");
 		return str;
 	}
-	str.data[0]=b->data; str.length=1;	//¹¹ÔìÖ»ÓĞb->data×Ö·ûµÄ×Ö·û´®str
+	str.data[0]=b->data; str.length=1;	//æ„é€ åªæœ‰b->dataå­—ç¬¦çš„å­—ç¬¦ä¸²str
 	leftstr=PreOrderSeq(b->lchild);
 	str1=Concat(str,leftstr);
 	rightstr=PreOrderSeq(b->rchild);
 	str=Concat(str1,rightstr);
 	return str;
 }
-BTNode *CreatePreSeq(SqString str)		//ÓÉÏÈĞòĞòÁĞ»¯ĞòÁĞstr´´½¨¶ş²æÁ´²¢·µ»Ø¸ù½áµã
+BTNode *CreatePreSeq(SqString str)		//ç”±å…ˆåºåºåˆ—åŒ–åºåˆ—stråˆ›å»ºäºŒå‰é“¾å¹¶è¿”å›æ ¹ç»“ç‚¹
 {
 	BTNode *b;
 	char value;
-	if (i>=str.length)					//i³¬½ç·µ»Ø¿Õ
+	if (i>=str.length)					//iè¶…ç•Œè¿”å›ç©º
 		return NULL;
-	value=str.data[i]; i++;				//´ÓstrÖĞÈ¡³öÒ»¸ö×Ö·ûvalue
-	if (value=='#')						//ÈôvalueÎª'#'£¬·µ»Ø¿Õ
+	value=str.data[i]; i++;				//ä»strä¸­å–å‡ºä¸€ä¸ªå­—ç¬¦value
+	if (value=='#')						//è‹¥valueä¸º'#'ï¼Œè¿”å›ç©º
 		return NULL;
-	b=(BTNode *)malloc(sizeof(BTNode));	//´´½¨¸ù½áµã
+	b=(BTNode *)malloc(sizeof(BTNode));	//åˆ›å»ºæ ¹ç»“ç‚¹
 	b->data=value;
-	b->lchild=CreatePreSeq(str);		//µİ¹é¹¹Ôì×ó×ÓÊ÷
-	b->rchild=CreatePreSeq(str);		//µİ¹é¹¹ÔìÓÒ×ÓÊ÷
-	return b;							//·µ»Ø¸ù½áµã
+	b->lchild=CreatePreSeq(str);		//é€’å½’æ„é€ å·¦å­æ ‘
+	b->rchild=CreatePreSeq(str);		//é€’å½’æ„é€ å³å­æ ‘
+	return b;							//è¿”å›æ ¹ç»“ç‚¹
 }

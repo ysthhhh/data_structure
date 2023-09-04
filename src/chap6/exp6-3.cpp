@@ -1,10 +1,10 @@
-//ÎÄ¼şÃû:exp6-3.cpp
+//æ–‡ä»¶å:exp6-3.cpp
 #include <stdio.h>
 #define MaxLen 10
 void fun(int a[MaxLen][MaxLen],int n)
 {
 	int i,j,k=0,m;
-	if (n%2==0)    //m=¨¦n/2¨´
+	if (n%2==0)    //m=Ã©n/2Ã¹
 		m=n/2;
 	else
 		m=n/2+1;
@@ -36,10 +36,10 @@ int main()
 {
 	int n,i,j;
 	int a[MaxLen][MaxLen];
-	printf("ÊäÈën(n<10):");
+	printf("è¾“å…¥n(n<10):");
 	scanf("%d",&n);
     fun(a,n);
-	printf("%d½×Êı×Ö·½ÕóÈçÏÂ:\n",n);
+	printf("%dé˜¶æ•°å­—æ–¹é˜µå¦‚ä¸‹:\n",n);
 	for (i=0;i<n;i++)
 	{
 		for (j=0;j<n;j++)

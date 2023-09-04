@@ -1,4 +1,4 @@
-//ÎÄ¼şÃû:exp6-4.cpp
+//æ–‡ä»¶å:exp6-4.cpp
 #include <stdio.h>
 #define M 4
 #define N 4
@@ -6,38 +6,38 @@ void MinMax(int A[M][N])
 {	int i,j;
 	bool have=false;
 	int min[M],max[N];
-	for (i=0;i<M;i++)		//¼ÆËã³öÃ¿ĞĞµÄ×îĞ¡ÖµÔªËØ,·ÅÈëmin[0..M-1]Ö®ÖĞ
+	for (i=0;i<M;i++)		//è®¡ç®—å‡ºæ¯è¡Œçš„æœ€å°å€¼å…ƒç´ ,æ”¾å…¥min[0..M-1]ä¹‹ä¸­
 	{
 		min[i]=A[i][0];
 		for (j=1;j<N;j++)
 			if (A[i][j]<min[i])
 				min[i]=A[i][j];
 	}
-	for (j=0;j<N;j++)		//¼ÆËã³öÃ¿ÁĞµÄ×î´óÖµÔªËØ,·ÅÈëmax[0..N-1]Ö®ÖĞ
+	for (j=0;j<N;j++)		//è®¡ç®—å‡ºæ¯åˆ—çš„æœ€å¤§å€¼å…ƒç´ ,æ”¾å…¥max[0..N-1]ä¹‹ä¸­
 	{	max[j]=A[0][j];
 		for (i=1;i<M;i++)
 			if (A[i][j]>max[j]) 
 				max[j]=A[i][j];
 	}
-	for (i=0;i<M;i++)		//ÅĞ¶¨ÊÇ·ñÎªÂí°°µã
+	for (i=0;i<M;i++)		//åˆ¤å®šæ˜¯å¦ä¸ºé©¬éç‚¹
 		for (j=0;j<N;j++)
 			if (min[i]==max[j])
-			{	printf("  A[%d][%d]=%d\n",i,j,A[i][j]);	//ÏÔÊ¾Âí°°µã
+			{	printf("  A[%d][%d]=%d\n",i,j,A[i][j]);	//æ˜¾ç¤ºé©¬éç‚¹
 				have=true;
 			}
 	if (!have)
-		printf("Ã»ÓĞ°°µã\n");
+		printf("æ²¡æœ‰éç‚¹\n");
 }
 int main()
 {	int i,j;
 	int A[M][N]={{9, 7, 6, 8},{20,26,22,25},{28,36,25,30},{12,4, 2, 6}};
-	printf("A¾ØÕó:\n");
+	printf("AçŸ©é˜µ:\n");
 	for (i=0;i<M;i++)
 	{	for (j=0;j<N;j++)
 			printf("%4d",A[i][j]);
 		printf("\n");
 	}
-	printf("A¾ØÕóÖĞµÄÂí°°µã:\n");
-	MinMax(A);			//µ÷ÓÃMinMax()ÕÒÂí°°µã
+	printf("AçŸ©é˜µä¸­çš„é©¬éç‚¹:\n");
+	MinMax(A);			//è°ƒç”¨MinMax()æ‰¾é©¬éç‚¹
 	return 1;
 }

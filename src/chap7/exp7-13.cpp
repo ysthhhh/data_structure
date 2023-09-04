@@ -1,33 +1,33 @@
-//ÎÄ¼şÃû:exp7-13.cpp
-#include "preseq.cpp"				//°üº¬ĞòÁĞ»¯ºÍ·´ĞòÁĞ»¯Ëã·¨
-void GetNext(SqString t,int next[])	//ÓÉÄ£Ê½´®tÇó³önextÖµ
+//æ–‡ä»¶å:exp7-13.cpp
+#include "preseq.cpp"				//åŒ…å«åºåˆ—åŒ–å’Œååºåˆ—åŒ–ç®—æ³•
+void GetNext(SqString t,int next[])	//ç”±æ¨¡å¼ä¸²tæ±‚å‡ºnextå€¼
 {	int j,k;
 	j=0;k=-1;next[0]=-1;
 	while (j<t.length-1)
-	{	if (k==-1 || t.data[j]==t.data[k]) 	//kÎª-1»ò±È½ÏµÄ×Ö·ûÏàµÈÊ±
+	{	if (k==-1 || t.data[j]==t.data[k]) 	//kä¸º-1æˆ–æ¯”è¾ƒçš„å­—ç¬¦ç›¸ç­‰æ—¶
 		{	j++;k++;
 			next[j]=k;
 		}
 		else  k=next[k];
 	}
 }
-int KMPIndex(SqString s,SqString t)	//KMPËã·¨
+int KMPIndex(SqString s,SqString t)	//KMPç®—æ³•
 {
 	int next[MaxSize],i=0,j=0;
 	GetNext(t,next);
 	while (i<s.length && j<t.length) 
 	{	if (j==-1 || s.data[i]==t.data[j]) 
 		{	i++;
-			j++;				//i,j¸÷Ôö1
+			j++;				//i,jå„å¢1
 		}
-		else j=next[j]; 		//i²»±ä,jºóÍË
+		else j=next[j]; 		//iä¸å˜,jåé€€
 	}
 	if (j>=t.length)
-		return(i-t.length);		//·µ»ØÆ¥ÅäÄ£Ê½´®µÄÊ××Ö·ûÏÂ±ê
+		return(i-t.length);		//è¿”å›åŒ¹é…æ¨¡å¼ä¸²çš„é¦–å­—ç¬¦ä¸‹æ ‡
 	else
-		return(-1);				//·µ»Ø²»Æ¥Åä±êÖ¾
+		return(-1);				//è¿”å›ä¸åŒ¹é…æ ‡å¿—
 }
-SqString PreOrderSeq1(BTNode *b)  	//ÓÉ¶ş²æÁ´b²úÉúÏÈĞòĞòÁĞ»¯ĞòÁĞstr
+SqString PreOrderSeq1(BTNode *b)  	//ç”±äºŒå‰é“¾bäº§ç”Ÿå…ˆåºåºåˆ—åŒ–åºåˆ—str
 {
 	SqString str,str1,leftstr,rightstr;
 	if (b==NULL)
@@ -35,34 +35,34 @@ SqString PreOrderSeq1(BTNode *b)  	//ÓÉ¶ş²æÁ´b²úÉúÏÈĞòĞòÁĞ»¯ĞòÁĞstr
 		StrAssign(str,"#");
 		return str;
 	}
-	str.data[0]='@'; str.length=1;	//¹¹ÔìÖ»ÓĞÌØÊâ×Ö·û'@'µÄ×Ö·û´®str
+	str.data[0]='@'; str.length=1;	//æ„é€ åªæœ‰ç‰¹æ®Šå­—ç¬¦'@'çš„å­—ç¬¦ä¸²str
 	leftstr=PreOrderSeq1(b->lchild);
 	str1=Concat(str,leftstr);
 	rightstr=PreOrderSeq1(b->rchild);
 	str=Concat(str1,rightstr);
 	return str;
 }
-bool isSubtree1(BTNode *b1,BTNode *b2)	//ÅĞ¶Ïb1ÖĞÊÇ·ñÓĞÓëb2Ê÷ĞÎ½á¹¹ÏàÍ¬µÄ×ÓÊ÷
+bool isSubtree1(BTNode *b1,BTNode *b2)	//åˆ¤æ–­b1ä¸­æ˜¯å¦æœ‰ä¸b2æ ‘å½¢ç»“æ„ç›¸åŒçš„å­æ ‘
 {
-	SqString s1=PreOrderSeq1(b1);	//Çób1µÄÏÈĞòĞòÁĞ»¯ĞòÁĞs1
-	SqString s2=PreOrderSeq1(b2);	//Çób2µÄÏÈĞòĞòÁĞ»¯ĞòÁĞs2
-	if (KMPIndex(s1,s2)!=-1)		//Èôs2ÊÇs1µÄ×Ó´®£¬·µ»ØÕæ
+	SqString s1=PreOrderSeq1(b1);	//æ±‚b1çš„å…ˆåºåºåˆ—åŒ–åºåˆ—s1
+	SqString s2=PreOrderSeq1(b2);	//æ±‚b2çš„å…ˆåºåºåˆ—åŒ–åºåˆ—s2
+	if (KMPIndex(s1,s2)!=-1)		//è‹¥s2æ˜¯s1çš„å­ä¸²ï¼Œè¿”å›çœŸ
 		return true;
-	else							//Èôs2²»ÊÇs1µÄ×Ó´®£¬·µ»Ø¼Ù
+	else							//è‹¥s2ä¸æ˜¯s1çš„å­ä¸²ï¼Œè¿”å›å‡
 		return false;
 }
 int main()
 {
 	BTNode *b1,*b2;
 	CreateBTree(b1,"A(B(D,E(,G)),C(,F(H,I)))"); 
-	printf("¶ş²æÊ÷b1:");DispBTree(b1);printf("\n");
+	printf("äºŒå‰æ ‘b1:");DispBTree(b1);printf("\n");
 	CreateBTree(b2,"c(,f(h,i))"); 
-	printf("¶ş²æÊ÷b2:");DispBTree(b2);printf("\n");
+	printf("äºŒå‰æ ‘b2:");DispBTree(b2);printf("\n");
 
 	if (isSubtree1(b1,b2))
-		printf("½á¹û£ºb1ÖĞÓĞÓëb2Ê÷ĞÎ½á¹¹ÏàÍ¬µÄ×ÓÊ÷\n");
+		printf("ç»“æœï¼šb1ä¸­æœ‰ä¸b2æ ‘å½¢ç»“æ„ç›¸åŒçš„å­æ ‘\n");
 	else
-		printf("½á¹û£ºb1ÖĞÃ»ÓĞÓëb2Ê÷ĞÎ½á¹¹ÏàÍ¬µÄ×ÓÊ÷\n");
+		printf("ç»“æœï¼šb1ä¸­æ²¡æœ‰ä¸b2æ ‘å½¢ç»“æ„ç›¸åŒçš„å­æ ‘\n");
 	DestroyBTree(b1); DestroyBTree(b2);
 	return 1;
 }

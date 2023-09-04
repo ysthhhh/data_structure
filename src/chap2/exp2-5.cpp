@@ -1,34 +1,34 @@
-//ÎÄ¼şÃû:exp2-5.cpp
+//æ–‡ä»¶å:exp2-5.cpp
 #include "cdlinklist.cpp"
 int main()
 {
 	DLinkNode *h;
 	ElemType e;
-	printf("Ñ­»·Ë«Á´±íµÄ»ù±¾ÔËËãÈçÏÂ:\n");
-	printf("  (1)³õÊ¼»¯Ñ­»·Ë«Á´±íh\n");
+	printf("å¾ªç¯åŒé“¾è¡¨çš„åŸºæœ¬è¿ç®—å¦‚ä¸‹:\n");
+	printf("  (1)åˆå§‹åŒ–å¾ªç¯åŒé“¾è¡¨h\n");
 	InitList(h);
-	printf("  (2)ÒÀ´Î²ÉÓÃÎ²²å·¨²åÈëa,b,c,d,eÔªËØ\n");
+	printf("  (2)ä¾æ¬¡é‡‡ç”¨å°¾æ’æ³•æ’å…¥a,b,c,d,eå…ƒç´ \n");
 	ListInsert(h,1,'a');
 	ListInsert(h,2,'b');
 	ListInsert(h,3,'c');
 	ListInsert(h,4,'d');
 	ListInsert(h,5,'e');
-	printf("  (3)Êä³öÑ­»·Ë«Á´±íh:");
+	printf("  (3)è¾“å‡ºå¾ªç¯åŒé“¾è¡¨h:");
 	DispList(h);
-	printf("  (4)Ñ­»·Ë«Á´±íh³¤¶È:%d\n",ListLength(h));
-	printf("  (5)Ñ­»·Ë«Á´±íhÎª%s\n",(ListEmpty(h)?"¿Õ":"·Ç¿Õ"));
+	printf("  (4)å¾ªç¯åŒé“¾è¡¨hé•¿åº¦:%d\n",ListLength(h));
+	printf("  (5)å¾ªç¯åŒé“¾è¡¨hä¸º%s\n",(ListEmpty(h)?"ç©º":"éç©º"));
 	GetElem(h,3,e);
-	printf("  (6)Ñ­»·Ë«Á´±íhµÄµÚ3¸öÔªËØ:%c\n",e);
-	printf("  (7)ÔªËØaµÄÎ»ÖÃ:%d\n",LocateElem(h,'a'));
-	printf("  (8)ÔÚµÚ4¸öÔªËØÎ»ÖÃÉÏ²åÈëfÔªËØ\n");
+	printf("  (6)å¾ªç¯åŒé“¾è¡¨hçš„ç¬¬3ä¸ªå…ƒç´ :%c\n",e);
+	printf("  (7)å…ƒç´ açš„ä½ç½®:%d\n",LocateElem(h,'a'));
+	printf("  (8)åœ¨ç¬¬4ä¸ªå…ƒç´ ä½ç½®ä¸Šæ’å…¥få…ƒç´ \n");
 	ListInsert(h,4,'f');
-	printf("  (9)Êä³öÑ­»·Ë«Á´±íh:");
+	printf("  (9)è¾“å‡ºå¾ªç¯åŒé“¾è¡¨h:");
 	DispList(h);
-	printf("  (10)É¾³ıhµÄµÚ3¸öÔªËØ\n");
+	printf("  (10)åˆ é™¤hçš„ç¬¬3ä¸ªå…ƒç´ \n");
     	ListDelete(h,3,e);
-	printf("  (11)Êä³öÑ­»·Ë«Á´±íh:");
+	printf("  (11)è¾“å‡ºå¾ªç¯åŒé“¾è¡¨h:");
 	DispList(h);
-	printf("  (12)ÊÍ·ÅÑ­»·Ë«Á´±íh\n");
+	printf("  (12)é‡Šæ”¾å¾ªç¯åŒé“¾è¡¨h\n");
 	DestroyList(h);
 	return 1;
 }

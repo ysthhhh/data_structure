@@ -1,4 +1,4 @@
-//ÎÄ¼şÃû£ºexp1-4.cpp
+//æ–‡ä»¶åï¼šexp1-4.cpp
 #include <stdio.h>
 long Sum(int n)
 {
@@ -17,6 +17,6 @@ int main()
 	printf("n(3-20):");
 	scanf("%d",&n);
 	if (n<3 || n>20) return 0;
-	printf("1!+2!+¡­+%d!=%ld\n",n,Sum(n));
+	printf("1!+2!+â€¦+%d!=%ld\n",n,Sum(n));
 	return 1;
 }

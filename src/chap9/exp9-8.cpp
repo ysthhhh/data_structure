@@ -1,12 +1,12 @@
-//ÎÄ¼şÃû:exp9-8.cpp
-#include "bst.cpp"   //¶ş²æÅÅĞòÊ÷»ù±¾ÔËËãËã·¨
+//æ–‡ä»¶å:exp9-8.cpp
+#include "bst.cpp"   //äºŒå‰æ’åºæ ‘åŸºæœ¬è¿ç®—ç®—æ³•
 
-BSTNode *CreateBST1(KeyType a[],int start,int end) //´´½¨Ò»¿Ã¶ş²æÅÅĞòÊ÷
+BSTNode *CreateBST1(KeyType a[],int start,int end) //åˆ›å»ºä¸€æ£µäºŒå‰æ’åºæ ‘
 {
 	int mid;
 	BSTNode * bt;
 	if (end<start)
-		return NULL;		//·µ»Ø¿ÕÊ÷
+		return NULL;		//è¿”å›ç©ºæ ‘
 	mid=(start+end)/2;
 	bt=(BSTNode *)malloc(sizeof(BSTNode));
 	bt->key=a[mid];
